@@ -1,7 +1,7 @@
 #+TITLE:       基于隐马尔科夫模型的中文分词方法
 #+AUTHOR:      Astropeak
 #+EMAIL:       astropeak@sc.10086.com
-#+DATE:        2017-07-06 四
+#+DATE:        2015-07-06 四
 #+URI:         /blog/%y/%m/%d/hmm-word-segmentation
 #+KEYWORDS:    hmm, nlp
 #+TAGS:        hmm, nlp
