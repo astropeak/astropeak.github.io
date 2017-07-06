@@ -43,9 +43,9 @@
 第五，嗯，不足及后续改进
 </p>
 
-<div id="outline-container-org9c9ac64" class="outline-2">
-<h2 id="org9c9ac64">一，隐马尔科夫模型介绍。</h2>
-<div class="outline-text-2" id="text-org9c9ac64">
+<div id="outline-container-org7592211" class="outline-2">
+<h2 id="org7592211">一，隐马尔科夫模型介绍。</h2>
+<div class="outline-text-2" id="text-org7592211">
 <p>
 隐马尔科夫模型中包括两个序列，其中一个是观测序列，另一个是隐藏序列。模型要解决的一个问题是，嗯，给定观测序列，求其对应的隐藏序列。比如对于语音识别，这里的观测序列就是，语音的每一个序列，隐藏序列就是，这一这一串语音对应的文字。或者对于嗯发机器翻译，观测序列是嗯，带翻译的语言，而隐藏训练呢则是，嗯，目标语言。嗯，在解决这类问题时，我们的已知条件是，第一隐藏序列中，某一个元素到观测序列中，嗯，某一个元素之间的映射关系。第二是隐藏，序列中，恩美俩每个元素转变到另一个元素，之间的关系。并且会有两个假设，第一式，嗯每个，每个隐藏元素中的元素，只依赖于他前面一个，嗯元素。嗯，并且，每一个隐藏元素能够直接确定另一个观测元素。
 其中以上两个已知条件可以分别表示为两个矩阵，这个矩阵可以通过分次语料库，根据，统计的方法求得。
@@ -53,6 +53,7 @@
 
 <p>
 要理解隐马尔科夫模型需要有一些概率论的知识，主要是，条件概率的知识。
+<a href="/assets/blog/2017/01/06/hmm-word-segmentation/hmm.svg">hmm graph</a>
 </p>
 
 <p>
@@ -92,9 +93,9 @@ y_1=3a+4b
 </div>
 </div>
 
-<div id="outline-container-org1409f84" class="outline-2">
-<h2 id="org1409f84">第二，中文分词的隐马尔科夫模型。</h2>
-<div class="outline-text-2" id="text-org1409f84">
+<div id="outline-container-orga60ec02" class="outline-2">
+<h2 id="orga60ec02">第二，中文分词的隐马尔科夫模型。</h2>
+<div class="outline-text-2" id="text-orga60ec02">
 <p>
 中文分词要解决的问题是，给定，一段儿，中文文字，将其划分为，一个个单独的词或者，单字。中文分词是所有后续自然语言处理，的基础。
 如果将，连续的中文文字看作是观测序列，将每个文字所对应的分词状态看作是隐藏序列，每个字的分子状态可能有两个值，一个只表示这个字是，某一个词的词尾，用字母一表示，另一个状态是，这个字不是某一个词的词尾，用字母b表示。则中文分词问题可以看作是一个标准的隐马尔科夫模型。实际中将每个字的分子状态表示为四个可选的值。词的开始，词的中间，词的结尾，单字成词。分别用bmes表示。
@@ -102,9 +103,9 @@ y_1=3a+4b
 </div>
 </div>
 
-<div id="outline-container-orge79b60b" class="outline-2">
-<h2 id="orge79b60b">第三。中文分词语料库。</h2>
-<div class="outline-text-2" id="text-orge79b60b">
+<div id="outline-container-org87d502e" class="outline-2">
+<h2 id="org87d502e">第三。中文分词语料库。</h2>
+<div class="outline-text-2" id="text-org87d502e">
 <p>
 在网上可以免费下载，北京大学，和香港大学提供的中文分词语料库。这个语料库实际上是一个txt的文档，文档中，每个单独的词用两个空格隔开。
 根据分次语料库，我们可以求得隐马尔科夫模型中的两个参数矩阵，根据大数定理，概率等于次数的比值。因此为了，模型的准确性，我们必须有大量的，语料数据来计算模型，的参数。如果数据量比较小怎么行？将的准确率将会受到损伤。
@@ -116,9 +117,9 @@ y_1=3a+4b
 </div>
 </div>
 
-<div id="outline-container-org9db477d" class="outline-2">
-<h2 id="org9db477d">第四，使用维特比算法，进行求解。</h2>
-<div class="outline-text-2" id="text-org9db477d">
+<div id="outline-container-org7df435a" class="outline-2">
+<h2 id="org7df435a">第四，使用维特比算法，进行求解。</h2>
+<div class="outline-text-2" id="text-org7df435a">
 <p>
 给定马尔科夫模型中的两个参数，已知以及一个观测序列，求结，隐藏序列的问题，可以看作是一个类似于图论中的最短路径问题，如下图所示
 </p>
@@ -134,12 +135,12 @@ y_1=3a+4b
 </div>
 </div>
 
-<div id="outline-container-orgdf0a4ba" class="outline-2">
-<h2 id="orgdf0a4ba">第五，代码实现</h2>
+<div id="outline-container-org31d3a91" class="outline-2">
+<h2 id="org31d3a91">第五，代码实现</h2>
 </div>
 
-<div id="outline-container-org05b5dcf" class="outline-2">
-<h2 id="org05b5dcf">第六，嗯，不足及后续改进</h2>
+<div id="outline-container-orgde77cc8" class="outline-2">
+<h2 id="orgde77cc8">第六，嗯，不足及后续改进</h2>
 </div>
 
 </div>
