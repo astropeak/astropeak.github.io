@@ -1,0 +1,17 @@
+#+TITLE:       词袋模型和N-gram模型
+#+AUTHOR:      Astropeak
+#+EMAIL:       astropeak@gmail.com
+#+DATE:        2017-01-13
+#+URI:         /blog/%y/%m/%d/bag-of-words-and-ngram-model
+#+KEYWORDS:    nlp, bag of words, ngram, language model
+#+TAGS:        nlp, language model
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: bag of words and ngram model
+
+词袋模型和N-gram模型是常用的语言模型，将文档看作文档中所有词的集合，而忽略词的顺序。尽管丢失了词的顺序这一属性，
+但这两个模型任然能够有效用于一些自然处理任务中，如文本分类。
+* 含义
+  
+* 应用
+
