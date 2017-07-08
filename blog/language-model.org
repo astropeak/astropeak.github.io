@@ -1,7 +1,7 @@
 #+TITLE:       语言模型
 #+AUTHOR:      Astropeak
 #+EMAIL:       astropeak@gmail.com
-#+DATE:        2017-02-3
+#+DATE:        2017-02-03
 #+KEYWORDS:    nlp, language model
 #+TAGS:        nlp, language model
 #+LANGUAGE:    en
