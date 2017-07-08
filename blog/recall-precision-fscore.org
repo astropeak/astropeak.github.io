@@ -22,15 +22,40 @@
   - NF： 模型结果为负类且真实为正类的数目
 
 
-  | Recall    | $PT / PT + NF$                 |
-  | Precision | $PT/ PT + PF$                  |
+  | Recall    | $\frac{PT}{PT + NF}$           |
+  | Precision | $\frac{PT}{PT + PF}$           |
   | F-score   | $\frac{Recall + Precision}{2}$ |
 
 * 在信息检索中的应用
   aaaa
     #+begin_src python :results output
-        from nltk.book import *
-        text1.concordance("dance")
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+         from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
+from nltk.book import *
+        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
+
     #+end_src
     bbbb
  
