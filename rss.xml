@@ -4,23 +4,30 @@
     <title>自然语言处理</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>五, 07  7 2017 00:49:02 CST</pubDate>
-    <lastBuildDate>五, 07  7 2017 00:49:02 CST</lastBuildDate>
+    <pubDate>六, 08  7 2017 10:39:16 CST</pubDate>
+    <lastBuildDate>六, 08  7 2017 10:39:16 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>基于隐马尔科夫模型的中文分词方法</title>
-      <link>http://astropeak.github.io/blog/2017/01/06/hmm-word-segmentation</link>
-      <description><![CDATA[aaaa]]></description>
-      <pubDate>2017-07-07</pubDate>
-      <guid>http://astropeak.github.io/blog/2017/01/06/hmm-word-segmentation</guid>
+      <link>http://astropeak.github.io/blog/2017/07/06/hmm-word-segmentation</link>
+      <description><![CDATA[]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/07/06/hmm-word-segmentation</guid>
     </item>
     <item>
       <title>Python描述符简介</title>
       <link>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</link>
       <description><![CDATA[]]></description>
-      <pubDate>2017-07-07</pubDate>
+      <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</guid>
+    </item>
+    <item>
+      <title>Recall, Precision and F-score</title>
+      <link>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</link>
+      <description><![CDATA[]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</guid>
     </item>
   </channel>
 </rss>
