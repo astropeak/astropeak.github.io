@@ -29,7 +29,7 @@
 
 * 在信息检索中的应用
     aaaa
-    #+begin_src python :results output :export both
+    #+begin_src python :results output :exports both
       from nltk.book import *
       text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
     #+end_src
