@@ -28,7 +28,7 @@
   #+TBLFM: 
 
 * 在信息检索中的应用
-    aaaa
+    aaaabb
     #+begin_src python :results output :exports both
       from nltk.book import *
       text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
