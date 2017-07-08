@@ -5,7 +5,7 @@
 #+TAGS:        python
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
-#+DESCRIPTION: aaaa
+#+DESCRIPTION: 
 
 使用描述符控制python对象属性的访问。
 

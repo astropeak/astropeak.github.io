@@ -1,0 +1,12 @@
+#+TITLE:       Recall, Precision, F-score
+#+AUTHOR:      Astropeak
+#+EMAIL:       astropeak@gmail.com
+#+DATE:        2017-01-06
+#+URI:         /blog/%y/%m/%d/recall-precision-fscore
+#+KEYWORDS:    nlp, recall, precision, fscore
+#+TAGS:        nlp
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: 
+
+这个三个数据用于描述一个模型的好坏程度。
