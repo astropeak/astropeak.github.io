@@ -25,39 +25,17 @@
   | Recall    | $\frac{PT}{PT + NF}$           |
   | Precision | $\frac{PT}{PT + PF}$           |
   | F-score   | $\frac{Recall + Precision}{2}$ |
+  #+TBLFM: 
 
 * 在信息检索中的应用
-  aaaa
-    #+begin_src python :results output
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-         from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
-from nltk.book import *
-        text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
-
+    aaaa
+    #+begin_src python :results output :export both
+      from nltk.book import *
+      text1.concordance("dance ssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssss")
     #+end_src
-    bbbb
+
+    #+RESULTS:
+    : aaaa
  
   
 * 好处
