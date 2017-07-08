@@ -1,6 +1,6 @@
 #+TITLE:       Python描述符简介
 #+AUTHOR:      Astropeak
-#+EMAIL:       astropeak@sc.10086.com
+#+EMAIL:       astropeak@gmail.com
 #+DATE:        2016-03-06
 #+TAGS:        python
 #+LANGUAGE:    en
