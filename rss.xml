@@ -4,10 +4,17 @@
     <title>自然语言处理</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>六, 08  7 2017 10:39:16 CST</pubDate>
-    <lastBuildDate>六, 08  7 2017 10:39:16 CST</lastBuildDate>
+    <pubDate>六, 08  7 2017 11:48:29 CST</pubDate>
+    <lastBuildDate>六, 08  7 2017 11:48:29 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>词袋模型和N-gram模型</title>
+      <link>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</link>
+      <description><![CDATA[bag of words and ngram model]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</guid>
+    </item>
     <item>
       <title>基于隐马尔科夫模型的中文分词方法</title>
       <link>http://astropeak.github.io/blog/2017/07/06/hmm-word-segmentation</link>
@@ -23,11 +30,18 @@
       <guid>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</guid>
     </item>
     <item>
-      <title>Recall, Precision and F-score</title>
+      <title>Recall，Precision 和 F-score</title>
       <link>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</link>
       <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</guid>
+    </item>
+    <item>
+      <title>Resume</title>
+      <link>http://astropeak.github.io/blog/2017/07/08/resume/</link>
+      <description><![CDATA[]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/07/08/resume/</guid>
     </item>
   </channel>
 </rss>
