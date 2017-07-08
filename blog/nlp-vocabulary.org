@@ -1,4 +1,4 @@
-#+TITLE:       自然语言处理名词汇总
+#+TITLE:       自然语言处理名词表
 #+AUTHOR:      Astropeak
 #+EMAIL:       astropeak@gmail.com
 #+DATE:        2017-03-13
