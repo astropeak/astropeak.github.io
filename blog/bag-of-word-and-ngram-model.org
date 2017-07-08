@@ -25,11 +25,6 @@ N-gram模型是对词袋模型的扩展，N为一个数字，以N＝2为例，2-
      (The, brown, fox, jump, up, the, rog)
    #+end_example
 
-   
-:aaa:
-     (The, brown, fox, jump, up, the, rog)
-:END:
-
    对应的2-gram模型为：
    #+begin_src text
      ((The, brown), (brown, fox), (fox, jump), (jump, up), (up, the), (the, rog))
