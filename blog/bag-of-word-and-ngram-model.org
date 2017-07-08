@@ -14,7 +14,21 @@
 
 N-gram模型是对词袋模型的扩展，N为一个数字，以N＝2为例，2-gram模型将文档看作文档中所有相邻两个词这些词对的集合，
 也忽略这些词对在文档中出现的顺序。词袋模型是当N＝1时的特例。
-* 含义
+* 例子
+  对于如下文档：
+   #+begin_src text
+     The brown fox jump up the rog.
+   #+end_src
   
+   对应的词袋模型为：
+   #+begin_src text
+     (The, brown, fox, jump, up, the, rog)
+   #+end_src
+
+   对应的2-gram模型为：
+   #+begin_src text
+     ((The, brown), (brown, fox), (fox, jump), (jump, up), (up, the), (the, rog))
+   #+end_src
+
 * 应用
 
