@@ -4,14 +4,14 @@
     <title>自然语言处理</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>六, 08  7 2017 11:48:29 CST</pubDate>
-    <lastBuildDate>六, 08  7 2017 11:48:29 CST</lastBuildDate>
+    <pubDate>六, 08  7 2017 23:14:26 CST</pubDate>
+    <lastBuildDate>六, 08  7 2017 23:14:26 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>词袋模型和N-gram模型</title>
       <link>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</link>
-      <description><![CDATA[bag of words and ngram model]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</guid>
     </item>
@@ -21,6 +21,20 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/07/06/hmm-word-segmentation</guid>
+    </item>
+    <item>
+      <title>语言模型</title>
+      <link>http://astropeak.github.io/blog/2017/02/03/language-model</link>
+      <description><![CDATA[language model]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/02/03/language-model</guid>
+    </item>
+    <item>
+      <title>自然语言处理名词表</title>
+      <link>http://astropeak.github.io/blog/2017/03/13/nlp-vocabulary</link>
+      <description><![CDATA[]]></description>
+      <pubDate>2017-07-08</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/03/13/nlp-vocabulary</guid>
     </item>
     <item>
       <title>Python描述符简介</title>

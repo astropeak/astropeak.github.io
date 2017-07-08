@@ -40,9 +40,9 @@
 N-gram模型是对词袋模型的扩展，N为一个数字，以N＝2为例，2-gram模型将文档看作文档中所有相邻两个词这些词对的集合，
 也忽略这些词对在文档中出现的顺序。词袋模型是当N＝1时的特例。
 </p>
-<div id="outline-container-orge727c64" class="outline-2">
-<h2 id="orge727c64">例子</h2>
-<div class="outline-text-2" id="text-orge727c64">
+<div id="outline-container-org504b5d8" class="outline-2">
+<h2 id="org504b5d8">例子</h2>
+<div class="outline-text-2" id="text-org504b5d8">
 <p>
 对于如下文档：
 </p>
@@ -67,8 +67,25 @@ The brown fox jump up the rog.
 </div>
 </div>
 
-<div id="outline-container-orgb361d30" class="outline-2">
-<h2 id="orgb361d30">应用</h2>
+<div id="outline-container-orge2f8f4e" class="outline-2">
+<h2 id="orge2f8f4e">与语言模型的关系</h2>
+<div class="outline-text-2" id="text-orge2f8f4e">
+<p>
+词袋模型是语音模型的一种简化形式。语言模型是给定一个词汇表，然后求所有的词的序列的概率。
+词袋模型则是将这个词的序列的范围大大缩小，词的序列只包含由单个词所组成的序列，则每个序列的概率则等于词频率。
+</p>
+
+
+<p>
+语言模型的详细介绍见<a href="language-model.html">这里</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org1aea4d7" class="outline-2">
+<h2 id="org1aea4d7">在信息检索中的应用</h2>
+</div>
+<div id="outline-container-org3762c68" class="outline-2">
+<h2 id="org3762c68">在文本分类的应用</h2>
 </div>
 
 </div>
