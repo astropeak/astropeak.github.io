@@ -1,4 +1,4 @@
-#+TITLE:       Recall, Precision and F-score
+#+TITLE:       Recall，Precision 和 F-score
 #+AUTHOR:      Astropeak
 #+EMAIL:       astropeak@gmail.com
 #+DATE:        2017-01-06
