@@ -4,8 +4,8 @@
     <title>自然语言处理</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>日, 09  7 2017 13:22:44 CST</pubDate>
-    <lastBuildDate>日, 09  7 2017 13:22:44 CST</lastBuildDate>
+    <pubDate>日, 09  7 2017 18:57:44 CST</pubDate>
+    <lastBuildDate>日, 09  7 2017 18:57:44 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
@@ -18,9 +18,16 @@
     <item>
       <title>Emacs Lisp 编程笔记</title>
       <link>http://astropeak.github.io/blog/2015/09/24/emacs-lisp</link>
-      <description><![CDATA[emacs lisp programming]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-07-09</pubDate>
       <guid>http://astropeak.github.io/blog/2015/09/24/emacs-lisp</guid>
+    </item>
+    <item>
+      <title>语言模型</title>
+      <link>http://astropeak.github.io/blog/2017/02/03/language-model</link>
+      <description><![CDATA[language model]]></description>
+      <pubDate>2017-07-09</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/02/03/language-model</guid>
     </item>
     <item>
       <title>基于隐马尔科夫模型的中文分词方法</title>
@@ -28,13 +35,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/07/06/hmm-word-segmentation</guid>
-    </item>
-    <item>
-      <title>语言模型</title>
-      <link>http://astropeak.github.io/blog/2017/02/03/language-model</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-07-08</pubDate>
-      <guid>http://astropeak.github.io/blog/2017/02/03/language-model</guid>
     </item>
     <item>
       <title>自然语言处理名词表</title>

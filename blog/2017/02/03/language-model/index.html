@@ -39,12 +39,217 @@
 <li>概率函数 \(P(s)\), 其中 \(s\) 中所有句子组成的集合, 也即为由词汇表 \(V\) 中所有词 \(w_i\) 组成的任意长度的序列.</li>
 </ol>
 
+<p>
+语言模型对句子的可能性进行建模。假设语言是由所有可能句子组成的集合,其中句子定义为由任意词语, 以任意顺序, 
+以任意长度组成的有序序列。用 \(s\) 表示这样一个句子,则语言模型建模为一个概率分布函数 \(P(s)\), 函数值是这个句子的概率。
+</p>
+
+<div id="outline-container-org2d40238" class="outline-2">
+<h2 id="org2d40238">例子</h2>
+<div class="outline-text-2" id="text-org2d40238">
+<p>
+假设一个语言的词汇表只包含三个单词:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">[you, are, ok]
+</pre>
+</div>
+
+<p>
+由这个词汇表所产生的所有的句子如下所示.
+</p>
+
+<p>
+长度为一的有3个:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">you
+are
+OK
+</pre>
+</div>
+
+<p>
+长度为二的有9个:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">you you
+you are
+you OK
+are you
+are are
+are OK
+OK you
+OK are
+OK OK
+</pre>
+</div>
+
+<p>
+长度为三的有27个:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">you you you
+you you are
+you you OK
+you are you
+you are are
+you are OK
+...
+are you OK
+...
+OK OK OK
+</pre>
+</div>
+
+<p>
+长度为四的，有3×3×3×3个. 长度为五的，有3×3×3×3x3个. 这个序列是无穷的。
+</p>
+
+<p>
+然后我们有一个概率分布函数 \(P(s)\) 来计算每一个句子 \(s\) 的概率, 以下是这个函数的一些可能结果的例子:
+</p>
+\begin{equation}
+P(are\ you\ OK) = 0.008 \\
+P(you\ are\ OK) = 0.002\\
+P(you\ you) = 0 \\
+P(OK) = 0.01 \\
+P(you) = 0\\
+\end{equation}
+<p>
+例子中表示句子 \("are\ you\ OK"\) 的概率为 \(0.008\) , 句子 \("you\ you"\) 的概率为 \(0\). 
+</p>
+
+<p>
+这样的一个函数 \(P(s)\) 就是这个语言的语言模型.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7b4cf17" class="outline-2">
+<h2 id="org7b4cf17">语言模型的建立</h2>
+<div class="outline-text-2" id="text-org7b4cf17">
+<p>
+给定一个句子 \(s = w_1w_2w_3...w_n\), 其中 \(w_i\) 是一个词. 语言模型就是要求以下函数
+</p>
+
+   \begin{equation}
+    P(s)=P(w_1w_2w_3...w_n) \\
+  = P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\\
+= \prod_i{P(w_i|w_1w_2...w_{i-1})}
+   \end{equation}
+
+<p>
+其中
+</p>
+<ul class="org-ul">
+<li>\(P(w_1w_2w_3...w_n)\) 为 词序列 \(w_1w_2w_3...w_n\) 的联合概率分布</li>
+<li>\(P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\) 是使用的链式法则后的结果</li>
+</ul>
+
+<p>
+这个公式可以理解为一个句子的概率是其所有单词概率的乘积, 一个单词的概率取决于他前面的所有的单词. 如果单词表的数目为5000, 
+句子的长度为3，那么有1250亿种可能性, 这个在实际情况下是无法计算的.
+</p>
+
+<p>
+因此，为了使模型能够实际可计算，需要做出一个假设。语言模型中假设一个词只取决于它前面的一个词，与更之前的所有单词无关,
+则上式可以转变为
+</p>
+\begin{equation}
+ P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1})}
+\end{equation}
+
+
+<p>
+这便是语言模型的简化形式: 二元语法模型(bigram model). 相应的也有三元语法模型(trigram model)，
+每个词依赖于他前面的两个字。 定义如下:
+</p>
+\begin{equation}
+ P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1}w_{i-2})}
+\end{equation}
+
+<p>
+三元语法模型是实际中通常使用的语言模型。
+</p>
+
+<p>
+通常使用一个语料库来计算每个词的概率。语料库可以由任意文档组成。以二元模型为例，每个词的概率的计算的方法为
+</p>
+\begin{equation}
+ P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i)} {\sum_w{c(w_{i-1}w)}}
+\end{equation}
+
+<p>
+其中 
+</p>
+<ul class="org-ul">
+<li>\(c(w_{i-1}w_i)\) 为所有以 \(w_{i-1}\) 开头，并且以 \(w_i\) 结束的二元组的数目.</li>
+<li>\(\sum_w{c(w_{i-1}w)}\) 表示所有以 \(w_{i-1}\) 开头, 并且以任意词结束的二元组的数目.</li>
+</ul>
+
+<p>
+概率就是这两个数目的比值.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3b446c0" class="outline-2">
+<h2 id="org3b446c0">参数平滑方法</h2>
+<div class="outline-text-2" id="text-org3b446c0">
+<p>
+以上计算过程中有一个问题，比如计算以下这个句子的时候，句子的概率将为零。
+</p>
+
+
+<p>
+这里的问题是:语料库中不可能包括所有可能出现的词序列, 当某个词的组合在语料库中不存在的时候，便会导致概率为零。
+此时需要使用平滑方法来解决这个问题。最简单的一种方法是加法平滑方法.
+</p>
+
+<p>
+加法平滑方法的基本原理是在统计每一个二元组的数目的时候总是为统计出的数目加个一，如下式所示
+</p>
+\begin{equation}
+ P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i) + 1} {\sum_w{(c(w_{i-1}w) + 1)}} 
+\end{equation}
+
+
+<p>
+这样计算后,每个词的概率的计算结果总是大于0. 
+</p>
+
+<p>
+还有很多种平滑方法，如 <a href="https://en.wikipedia.org/wiki/Good%E2%80%93Turing_frequency_estimation">古德图灵方法</a>，katz平滑方法等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgde89994" class="outline-2">
+<h2 id="orgde89994">语音识别中应用的例子</h2>
+<div class="outline-text-2" id="text-orgde89994">
+<p>
+语音识别中,包含以下两个步骤
+</p>
+<ol class="org-ol">
+<li>根据语音数据, 计算出出几种可能的句子. 因为有同音词的存在, 所以这一步可能有多个结果</li>
+<li>根据语言模型, 计算每个句子的概率，选取概率最大的那个句子作为语音识别的结果</li>
+</ol>
+
+<p>
+语言模型在第二步发挥了作用.
+</p>
+</div>
+</div>
+
 </div>
 </div>
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2017-02-03</span>
-        <span title="last modification date" class="post-info">2017-07-08</span>
+        <span title="last modification date" class="post-info">2017-07-09</span>
         <span title="tags" class="post-info"><a href="/tags/nlp/">nlp</a>, <a href="/tags/language-model/">language model</a></span>
         <span title="author" class="post-info">Astropeak</span>
       </div>
