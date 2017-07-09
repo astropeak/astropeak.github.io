@@ -8,6 +8,7 @@
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: language model
+#+HTML_MATHJAX: align: left mathml: t indent: 5em tagside: left font: Neo-Euler
 
 语言模型的定义包含两部分
 1. 词汇表 $V$, 这个语言所有词的集合, 每个词表示为 $w_i$
@@ -60,15 +61,17 @@
 
 长度为四的，有3×3×3×3个. 这个序列是无穷的。
 
-然后我们有一个概率分布函数 $P(s)$ 来计算每一个句子 $s$ 的概率, 以下是一些例子:
+然后我们有一个概率分布函数 $P(s)$ 来计算每一个句子 $s$ 的概率, 以下是这个函数的一些可能结果的例子:
     \begin{equation}
-    P(are you OK) = 0.008 \\
-    P(you are OK) = 0.002\\
-    P(you you) = 0 \\
+    P(are\ you\ OK) = 0.008 \\
+    P(you\ are\ OK) = 0.002\\
+    P(you\ you) = 0 \\
     P(OK) = 0.01 \\
     P(you) = 0\\
     \end{equation}
-例子中表示句子 "are you OK" 的概率为0.008, 句子 "you you" 的概率为0. 这样的一个函数 $P(s)$ 就是这个语言的语言模型.
+例子中表示句子 "are you OK" 的概率为0.008, 句子 "you you" 的概率为0. 
+
+这样的一个函数 $P(s)$ 就是这个语言的语言模型.
 
 * 语言模型的建立
 给定一个句子 $s = w_1w_2w_3...w_n$, 其中 $w_i$ 是一个词. 其联合分布概率为表示为
@@ -76,7 +79,7 @@
     \begin{equation}
      P(s)=P(w_1w_2w_3...w_n) \\
    = P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\\
- = \prod_i{P(w_i|w_1w_2...w_{i-1}}
+ = \prod_i{P(w_i|w_1w_2...w_{i-1})}
     \end{equation}
 
 这个公式可以理解为一个句子的概率是其所有单词概率的乘积, 一个单词的概率取决于他前面的所有的单词. 如果单词表的数目为5000, 
@@ -85,7 +88,7 @@
 因此，为了使模型能够实际可计算，需要做出一个假设。语言模型中假设一个词只取决于它前面的一个词，与更之前的所有单词无关,
 则式1可以转变为
     \begin{equation}
-     P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1}}
+     P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1})}
     \end{equation}
 
 
