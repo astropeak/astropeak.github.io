@@ -27,7 +27,8 @@ When invoked without prefix argument then PATH defaults to
     ('git-error  (message "Error is %s" error)))
 
   (httpd-serve-directory path)
-  (browse-url (format "http://%s:%d" system-name httpd-port)))
+  ;;(browse-url (format "http://%s:%d" system-name httpd-port)))
+  (browse-url (format "http://%s:%d" "127.0.0.1" httpd-port)))
 
 (defun op/my-do-publication ()
   (interactive)
