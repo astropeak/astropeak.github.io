@@ -20,7 +20,7 @@ When invoked without prefix argument then PATH defaults to
       (progn
         (op/git-change-branch op/repository-directory "source")
         (op/git-commit-changes op/repository-directory "Changes")
-        (op/do-publication t nil path)
+        (op/do-publication nil "HEAD~1" path)
 
         ;;change index to blog index
         (copy-file (concat path "/blog/index.html") (concat path "/index.html") t t))
