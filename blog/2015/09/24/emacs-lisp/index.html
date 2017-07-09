@@ -35,23 +35,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org88d58ad">错误处理</a>
+<li><a href="#orga8a89f1">错误处理</a>
 <ul>
-<li><a href="#org5bf488d">抛出错误</a></li>
-<li><a href="#org59c232a">捕获错误</a></li>
-<li><a href="#org8a3564d">忽略错误</a></li>
+<li><a href="#org05136b2">抛出错误</a></li>
+<li><a href="#orgc3373c7">捕获错误</a></li>
+<li><a href="#org53f9e51">忽略错误</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org88d58ad" class="outline-2">
-<h2 id="org88d58ad">错误处理</h2>
-<div class="outline-text-2" id="text-org88d58ad">
-</div><div id="outline-container-org5bf488d" class="outline-3">
-<h3 id="org5bf488d">抛出错误</h3>
-<div class="outline-text-3" id="text-org5bf488d">
+<div id="outline-container-orga8a89f1" class="outline-2">
+<h2 id="orga8a89f1">错误处理</h2>
+<div class="outline-text-2" id="text-orga8a89f1">
+</div><div id="outline-container-org05136b2" class="outline-3">
+<h3 id="org05136b2">抛出错误</h3>
+<div class="outline-text-3" id="text-org05136b2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(signal 'my-error '("This is a demo error"))
 (error "This is another error")
@@ -63,9 +63,9 @@ What's the difference between the two?
 </div>
 </div>
 
-<div id="outline-container-org59c232a" class="outline-3">
-<h3 id="org59c232a">捕获错误</h3>
-<div class="outline-text-3" id="text-org59c232a">
+<div id="outline-container-orgc3373c7" class="outline-3">
+<h3 id="orgc3373c7">捕获错误</h3>
+<div class="outline-text-3" id="text-orgc3373c7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(progn
   (condition-case err
@@ -86,9 +86,9 @@ What's the difference between the two?
 </div>
 </div>
 </div>
-<div id="outline-container-org8a3564d" class="outline-3">
-<h3 id="org8a3564d">忽略错误</h3>
-<div class="outline-text-3" id="text-org8a3564d">
+<div id="outline-container-org53f9e51" class="outline-3">
+<h3 id="org53f9e51">忽略错误</h3>
+<div class="outline-text-3" id="text-org53f9e51">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(progn
   (ignore-errors
