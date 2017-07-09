@@ -4,7 +4,7 @@
 #+DATE:        2017-02-01
 #+URI:         /blog/%y/%m/%d/gradient-descend
 #+KEYWORDS:    machine learning, gradient descend
-#+TAGS:        machine learning, gradient descend
+#+TAGS:        machine learning
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: gradient descend algorithm
