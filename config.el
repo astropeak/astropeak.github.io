@@ -20,13 +20,11 @@ When invoked without prefix argument then PATH defaults to
       (progn
         (op/git-change-branch op/repository-directory "source")
         (op/git-commit-changes op/repository-directory "Changes")
-        )
+        (op/do-publication t nil path)
+
+        ;;change index to blog index
+        (copy-file (concat path "/blog/index.html") (concat path "/index.html") t t))
     ('git-error  (message "Error is %s" error)))
-
-  (op/do-publication t nil path)
-
-  ;;change index to blog index
-  (copy-file (concat path "/blog/index.html") (concat path "/index.html") t t)
 
   (httpd-serve-directory path)
   (browse-url (format "http://%s:%d" system-name httpd-port)))
