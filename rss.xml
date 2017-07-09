@@ -4,16 +4,23 @@
     <title>自然语言处理</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>六, 08  7 2017 23:14:26 CST</pubDate>
-    <lastBuildDate>六, 08  7 2017 23:14:26 CST</lastBuildDate>
+    <pubDate>日, 09  7 2017 13:22:44 CST</pubDate>
+    <lastBuildDate>日, 09  7 2017 13:22:44 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>词袋模型和N-gram模型</title>
       <link>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</link>
       <description><![CDATA[]]></description>
-      <pubDate>2017-07-08</pubDate>
+      <pubDate>2017-07-09</pubDate>
       <guid>http://astropeak.github.io/blog/2017/01/13/bag-of-words-and-ngram-model</guid>
+    </item>
+    <item>
+      <title>Emacs Lisp 编程笔记</title>
+      <link>http://astropeak.github.io/blog/2015/09/24/emacs-lisp</link>
+      <description><![CDATA[emacs lisp programming]]></description>
+      <pubDate>2017-07-09</pubDate>
+      <guid>http://astropeak.github.io/blog/2015/09/24/emacs-lisp</guid>
     </item>
     <item>
       <title>基于隐马尔科夫模型的中文分词方法</title>
@@ -25,7 +32,7 @@
     <item>
       <title>语言模型</title>
       <link>http://astropeak.github.io/blog/2017/02/03/language-model</link>
-      <description><![CDATA[language model]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/02/03/language-model</guid>
     </item>
@@ -52,10 +59,10 @@
     </item>
     <item>
       <title>Resume</title>
-      <link>http://astropeak.github.io/blog/2017/07/08/resume/</link>
+      <link>http://astropeak.github.io/blog/2017/07/09/resume/</link>
       <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
-      <guid>http://astropeak.github.io/blog/2017/07/08/resume/</guid>
+      <guid>http://astropeak.github.io/blog/2017/07/09/resume/</guid>
     </item>
   </channel>
 </rss>
