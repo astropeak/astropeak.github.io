@@ -28,3 +28,8 @@ When invoked without prefix argument then PATH defaults to
 
   (httpd-serve-directory path)
   (browse-url (format "http://%s:%d" system-name httpd-port)))
+
+(defun op/my-do-publication ()
+  (interactive)
+  (op/do-publication nil "HEAD~1" nil t t))
+
