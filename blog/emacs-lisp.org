@@ -25,14 +25,15 @@
          ('my-error (message "my error handled, %s" err)))
        (message "end"))
 
+     (defun aaa ()
+       (interactive)
+       (condition-case error
+           (progn
+             (op/git-change-branch op/repository-directory "source")
+             (op/git-commit-changes op/repository-directory "Changes"))
+         '('git-error  (message "Error is %s" error))))
 
-     (condition-case error
-         (progn
-           (op/git-change-branch op/repository-directory "source")
-           (op/git-commit-changes op/repository-directory "Changes")
-       ('git-error  (message "Error is %s" error)))
-
-
+     (aaa)
    #+end_src
 ** 忽略错误
    #+begin_src emacs-lisp
