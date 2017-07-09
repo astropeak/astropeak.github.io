@@ -16,8 +16,13 @@ When invoked without prefix argument then PATH defaults to
      (list op/site-preview-directory)))
 
   ;; commit all changes
-  (op/git-change-branch op/repository-directory "source")
-  (op/git-commit-changes op/repository-directory "Changes")
+  (condition-case error
+      (progn
+        (op/git-change-branch op/repository-directory "source")
+        (op/git-commit-changes op/repository-directory "Changes")
+        )
+    '('git-error  (message "Error is %s" error)))
+
 
   (op/do-publication t nil path)
 
@@ -26,4 +31,3 @@ When invoked without prefix argument then PATH defaults to
 
   (httpd-serve-directory path)
   (browse-url (format "http://%s:%d" system-name httpd-port)))
-
