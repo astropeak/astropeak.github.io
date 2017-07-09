@@ -98,9 +98,9 @@ f(x_2) = 2*1.96^2-4*1.96+3 = 2.843
 (对于这个例子, 最优值对应的 \(x = 1\)). 那么只要迭代的次数足够多，我们总会达到这个最优点，由此便求得函数的最小值.
 </p>
 
-<div id="outline-container-orgdc58c7f" class="outline-2">
-<h2 id="orgdc58c7f">梯度的概念</h2>
-<div class="outline-text-2" id="text-orgdc58c7f">
+<div id="outline-container-org26cff26" class="outline-2">
+<h2 id="org26cff26">梯度的概念</h2>
+<div class="outline-text-2" id="text-org26cff26">
 <p>
 以上提到对于一元函数, 其梯度就是函数的导数,梯度值为一个数值。梯度概念是对导数的扩展, 当函数有多于一个自变量的时候.
 只是梯度此时是一个向量,向量的每一维分别是对于每一个自变量求偏导数。
@@ -130,9 +130,9 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 </div>
 </div>
 
-<div id="outline-container-org19022de" class="outline-2">
-<h2 id="org19022de">函数的等值线</h2>
-<div class="outline-text-2" id="text-org19022de">
+<div id="outline-container-org04aac00" class="outline-2">
+<h2 id="org04aac00">函数的等值线</h2>
+<div class="outline-text-2" id="text-org04aac00">
 <p>
 梯度总是垂直于函数的等值线。从等值线中可以更加形象地看出梯度下降的原理. 当自变量沿着梯度的方向变化时, 
 函数值将增加, 等值线所对应的值会增加. 因此，当我们将自变量沿着梯度的反方向变化时，函数的值将会减小. 
@@ -141,9 +141,9 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 </div>
 </div>
 
-<div id="outline-container-orgc7c6e50" class="outline-2">
-<h2 id="orgc7c6e50">步长值</h2>
-<div class="outline-text-2" id="text-orgc7c6e50">
+<div id="outline-container-orgf0575fc" class="outline-2">
+<h2 id="orgf0575fc">步长值</h2>
+<div class="outline-text-2" id="text-orgf0575fc">
 <p>
   梯度给出了自变量变化的方向, 而步长值指定了每次变化的幅度. 如果步长值选得过大，则可能会导致在一次更新自变量后,
 错过极值点，从而造成震荡, 无法求得函数的极值. 因此我们要保证步长值足够小，避免震荡现象的出现.
@@ -152,9 +152,9 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 </div>
 
 
-<div id="outline-container-orga8c612f" class="outline-2">
-<h2 id="orga8c612f">收敛准则</h2>
-<div class="outline-text-2" id="text-orga8c612f">
+<div id="outline-container-org68600ac" class="outline-2">
+<h2 id="org68600ac">收敛准则</h2>
+<div class="outline-text-2" id="text-org68600ac">
 <p>
 由于是通过迭代的方式一步一步的改变自变量的值来求函数的极值, 那么怎样判断函数已经达到一个极值了呢? 
 此时需要有一个收敛准则, 即判断一次迭代后,函数是否达到极值点. 一般使用的收敛准则为:指定一个精确率, 
@@ -164,9 +164,9 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 </div>
 
 
-<div id="outline-container-org43b72f3" class="outline-2">
-<h2 id="org43b72f3">在机器学习算法中的应用</h2>
-<div class="outline-text-2" id="text-org43b72f3">
+<div id="outline-container-orgd2c02a1" class="outline-2">
+<h2 id="orgd2c02a1">在机器学习算法中的应用</h2>
+<div class="outline-text-2" id="text-orgd2c02a1">
 <p>
 对于一个机器学习算法，如果其目标函数可以表示成连续可微的凸函数，则我们可以用梯度下降算法进行求解其最小值或者最大值.
 </p>
@@ -184,7 +184,7 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
       <div class="post-meta">
         <span title="post date" class="post-info">2017-02-01</span>
         <span title="last modification date" class="post-info">2017-07-09</span>
-        <span title="tags" class="post-info"><a href="/tags/machine-learning/">machine learning</a>, <a href="/tags/gradient-descend/">gradient descend</a></span>
+        <span title="tags" class="post-info"><a href="/tags/machine-learning/">machine learning</a></span>
         <span title="author" class="post-info">Astropeak</span>
       </div>
       <section>
