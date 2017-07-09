@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>梯度下降算法 - 自然语言处理</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Astropeak" />
+    <meta name="description" content="gradient descend algorithm" />
+    <meta name="keywords" content="machine learning, gradient descend" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">自然语言处理</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/astropeak">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="astropeak.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>梯度下降算法</h1>
+<p>
+梯度下降算法是一种用于求解函数最小值的数值计算方法。求解函数的极值一般有两种方法，第一种是解析法, 
+即函数的极值可以用公式直接计算出来。如对于1元2次方程，我们可以直接求出这个函数的最大值或者最小值。
+但对于更高次的方程或者非线性函数, 大多无法求出解析解，此时需要使用数值方法.
+</p>
+
+<p>
+对于一元函数来说, 函数的梯度就是其导数. 假设函数为
+</p>
+
+
+\begin{equation}
+f(x) = 2x^2-4x+3
+\end{equation}
+
+<p>
+则函数的梯度函数，也即导数为
+</p>
+
+\begin{equation}
+Grad(x) = 4x-4
+\end{equation}
+
+<p>
+梯度下降算法的基本原理如下:
+</p>
+
+<p>
+对于任意一个自变量 \(x\) 的值 \(x_1\), 我们可以计算此时函数的梯度为 \(Grad(x_1)\), 用当前的 \(x\) 的值 \(x_1\)
+减去梯度值的一个比例, 得到一个新的自变量 \(x\) 的值 \(x_2 = x_1 - 0.01*Grad(x_1)\). 则函数在这个新的自变量 \(x\)
+的值的地方肯定是小于原来的值的地方, 即
+</p>
+\begin{equation}
+f(x_2) < f(x_1)
+\end{equation}
+<p>
+其中 \(0.01\) 为步长值.
+</p>
+
+
+<p>
+比如我们取 \(x_1 = 2\), 此时梯度值为 \(4*2-4=4\), 则 \(x_2 = 2 - 0.01*(4) = 1.96\),
+</p>
+
+\begin{equation}
+f(x_1) = 2*2^2-4*2+3 = 3\\
+f(x_2) = 2*1.96^2-4*1.96+3 = 2.843
+\end{equation}
+
+<p>
+可见 \(f(x_2) < f(x_1)\)
+</p>
+
+<p>
+其中
+</p>
+<ul class="org-ul">
+<li>\(x_1=2\) 中的 \(2\) 为自变量的初值. 初值可以随机选择, 如果函数是凸的, 不管初值为何,总能找到相同的极值点</li>
+<li>\(0.01\) 为每次迭代的步长值</li>
+</ul>
+
+
+<p>
+重复以上步骤, 选定初值后,根据以上方法不断变化自变量的值, 随着我们每一次的迭代，自变量的值将慢慢向最优值所对应的 \(x\) 值逼近
+(对于这个例子, 最优值对应的 \(x = 1\)). 那么只要迭代的次数足够多，我们总会达到这个最优点，由此便求得函数的最小值.
+</p>
+
+<div id="outline-container-orgdc58c7f" class="outline-2">
+<h2 id="orgdc58c7f">梯度的概念</h2>
+<div class="outline-text-2" id="text-orgdc58c7f">
+<p>
+以上提到对于一元函数, 其梯度就是函数的导数,梯度值为一个数值。梯度概念是对导数的扩展, 当函数有多于一个自变量的时候.
+只是梯度此时是一个向量,向量的每一维分别是对于每一个自变量求偏导数。
+</p>
+
+<p>
+以一个二元函数为例
+</p>
+\begin{equation}
+f(x_1, x_2) = (x_1-2)^2 + 3x_2
+\end{equation}
+
+<p>
+函数的梯度函数为
+</p>
+\begin{equation}
+Grad(x_1) = \frac{\partial f}{\partial x_1} = 2x_1-4\\
+Grad(x_2) = \frac{\partial f}{\partial x_2}=3\\
+Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
+\end{equation}
+
+
+<p>
+以上讲到的关于自变量沿梯度反方向变化时, 函数值将减小的规则同样适用于二元及更高元的函数. 梯度下降算法的原理也一样,
+不同点为此时更新自变量时,是向量操作.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org19022de" class="outline-2">
+<h2 id="org19022de">函数的等值线</h2>
+<div class="outline-text-2" id="text-org19022de">
+<p>
+梯度总是垂直于函数的等值线。从等值线中可以更加形象地看出梯度下降的原理. 当自变量沿着梯度的方向变化时, 
+函数值将增加, 等值线所对应的值会增加. 因此，当我们将自变量沿着梯度的反方向变化时，函数的值将会减小. 
+由此我们可以求出函数的一个极小值, 通过让自变量不断的向梯度的反方向变化.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc7c6e50" class="outline-2">
+<h2 id="orgc7c6e50">步长值</h2>
+<div class="outline-text-2" id="text-orgc7c6e50">
+<p>
+  梯度给出了自变量变化的方向, 而步长值指定了每次变化的幅度. 如果步长值选得过大，则可能会导致在一次更新自变量后,
+错过极值点，从而造成震荡, 无法求得函数的极值. 因此我们要保证步长值足够小，避免震荡现象的出现.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orga8c612f" class="outline-2">
+<h2 id="orga8c612f">收敛准则</h2>
+<div class="outline-text-2" id="text-orga8c612f">
+<p>
+由于是通过迭代的方式一步一步的改变自变量的值来求函数的极值, 那么怎样判断函数已经达到一个极值了呢? 
+此时需要有一个收敛准则, 即判断一次迭代后,函数是否达到极值点. 一般使用的收敛准则为:指定一个精确率, 
+当函数值的变化率小于这个精确率时，我们就认为收敛了，此时函数的极值已经被找到.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org43b72f3" class="outline-2">
+<h2 id="org43b72f3">在机器学习算法中的应用</h2>
+<div class="outline-text-2" id="text-org43b72f3">
+<p>
+对于一个机器学习算法，如果其目标函数可以表示成连续可微的凸函数，则我们可以用梯度下降算法进行求解其最小值或者最大值.
+</p>
+
+<p>
+例如在对数几率回归算法中, 可以将目标函数写成一个连续可微的凸函数, 然后用梯度下降算法求函数的最小值, 
+从而求得模型的参数。
+</p>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2017-02-01</span>
+        <span title="last modification date" class="post-info">2017-07-09</span>
+        <span title="tags" class="post-info"><a href="/tags/machine-learning/">machine learning</a>, <a href="/tags/gradient-descend/">gradient descend</a></span>
+        <span title="author" class="post-info">Astropeak</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:astropeak &lt;at&gt; gmail &lt;dot&gt; com">Astropeak</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
