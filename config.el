@@ -21,8 +21,7 @@ When invoked without prefix argument then PATH defaults to
         (op/git-change-branch op/repository-directory "source")
         (op/git-commit-changes op/repository-directory "Changes")
         )
-    '('git-error  (message "Error is %s" error)))
-
+    ('git-error  (message "Error is %s" error)))
 
   (op/do-publication t nil path)
 
