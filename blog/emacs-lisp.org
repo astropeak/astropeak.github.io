@@ -25,6 +25,7 @@
          ('my-error (message "my error handled, %s" err)))
        (message "end"))
 
+
      (condition-case error
          (progn
            (op/git-change-branch op/repository-directory "source")
