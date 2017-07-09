@@ -19,14 +19,19 @@
 
 ** 捕获错误
    #+begin_src emacs-lisp
-     (condition-case err
-         (signal 'my-error '("This is a demo error"))
-       ('my-error (message "my error handled")))
+     (progn
+       (condition-case err
+           (signal 'my-error '("This is a demo error"))
+         ('my-error (message "my error handled, %s" err)))
+       (message "end"))
    #+end_src
 ** 忽略错误
    #+begin_src emacs-lisp
      (progn
        (ignore-errors
-         (signal 'my-error '("This is a demo error")))
+         ;;(signal 'my-error '("This is a demo error"))
+         (error "This is another error")
+         )
        (message "end"))
+
    #+end_src
