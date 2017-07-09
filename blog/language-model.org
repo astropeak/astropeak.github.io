@@ -132,7 +132,7 @@
 
 加法平滑方法的基本原理是在统计每一个二元组的数目的时候总是为统计出的数目加个一，如下式所示
     \begin{equation}
-     P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i) + 1} {\sum_w{c(w_{i-1}w) + 1}} 
+     P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i) + 1} {\sum_w{(c(w_{i-1}w) + 1)}} 
     \end{equation}
 
 
