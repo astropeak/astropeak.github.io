@@ -1,4 +1,5 @@
 #+TITLE: About
+#+EMAIL:       astropeak@gmail.com
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
 热爱技术，专注自然语言处理及机器学习
