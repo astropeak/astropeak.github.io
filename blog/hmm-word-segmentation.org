@@ -3,12 +3,12 @@
 #+EMAIL:       astropeak@gmail.com
 #+DATE:        2017-07-06
 #+URI:         /blog/%y/%m/%d/hmm-word-segmentation
-#+KEYWORDS:    hmm, nlp
-#+TAGS:        hmm, nlp
+#+KEYWORDS:    hmm, nlp, machine learning
+#+TAGS:        hmm, nlp, machine learning
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: 
-AAA本文主要讲述隐马尔科夫模，模型及其在中文分词方法中的应用。 基于中文分词的语料库，建立中文分词的，隐马尔可夫模型。最后用维特比方法，进行求解。嗯，所有的门是用python实现。
+本文主要讲述隐马尔科夫模，模型及其在中文分词方法中的应用。 基于中文分词的语料库，建立中文分词的，隐马尔可夫模型。最后用维特比方法，进行求解。嗯，所有的门是用python实现。
 
 一，隐马尔科夫模型介绍。
 第二。中文分词语料库。
