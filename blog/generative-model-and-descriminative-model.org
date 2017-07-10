@@ -24,7 +24,9 @@ $P(y|x) = \frac{P(x, y)}{P(x)}$ 。
 * 为什么叫生成模型
   生成模型的中的生成表示: 跟据训练数据, 模型学习给定 $y$ 生成 $x$ 的概率，即学习 $P(x|y)$ 。以朴素贝叶斯为例
   \begin{equation}
-y = \underset{y}{\operatorname{argmax}} P(y|x) = 
+\upperset{^}y = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{argmax}} P(x|y)P(y)
 \end{equation}
+
+
 
 
