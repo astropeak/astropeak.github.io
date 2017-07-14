@@ -7,7 +7,7 @@
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: 
 
-* TODO 以下为语音笔记，待整理
+NOTE: 以下为语音笔记，待整理
 
 
 使用描述符控制python对象属性的访问。
