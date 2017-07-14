@@ -6,7 +6,7 @@
 #+KEYWORDS:    python, cookbook, reading notes
 #+TAGS:        python, reading notes
 #+LANGUAGE:    en
-#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+OPTIONS:     H:3 num:nil toc:2 \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: Python coookbook reading notes
 
 《[[http://shop.oreilly.com/product/0636920027072.do][Python Cookbook]]》读书笔记.
