@@ -9,6 +9,7 @@
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: Python coookbook reading notes
 
+
 《[[http://shop.oreilly.com/product/0636920027072.do][Python Cookbook]]》读书笔记.
 * chapter 1: Data Structures and Algorithms
 ** 1.6 Mapping Keys to Multiple Values in a Dictionary, by list value and defaultdict
