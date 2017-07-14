@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <title>Python Cookbook 读书笔记 - 自然语言处理</title>
+    <title>Python Cookbook 读书笔记 - Astropeak 的编程笔记</title>
     <meta charset="utf-8" />
     <meta name="author" content="Astropeak" />
     <meta name="description" content="Python coookbook reading notes" />
@@ -12,7 +12,7 @@
   <body class="container">
     <div>
       <header class="masthead">
-        <h1 class="masthead-title"><a href="/">自然语言处理</a></h1>
+        <h1 class="masthead-title"><a href="/">Astropeak 的编程笔记</a></h1>
         <p></p>
         <ul>
           <li><a href="/blog/">Blog</a></li>
@@ -34,12 +34,12 @@
 <p>
 《<a href="http://shop.oreilly.com/product/0636920027072.do">Python Cookbook</a>》读书笔记.
 </p>
-<div id="outline-container-orgd677523" class="outline-2">
-<h2 id="orgd677523">chapter 1: Data Structures and Algorithms</h2>
-<div class="outline-text-2" id="text-orgd677523">
-</div><div id="outline-container-org3d0744d" class="outline-3">
-<h3 id="org3d0744d">1.6 Mapping Keys to Multiple Values in a Dictionary, by list value and defaultdict</h3>
-<div class="outline-text-3" id="text-org3d0744d">
+<div id="outline-container-org3e33dc5" class="outline-2">
+<h2 id="org3e33dc5">chapter 1: Data Structures and Algorithms</h2>
+<div class="outline-text-2" id="text-org3e33dc5">
+</div><div id="outline-container-org1400acd" class="outline-3">
+<h3 id="org1400acd">1.6 Mapping Keys to Multiple Values in a Dictionary, by list value and defaultdict</h3>
+<div class="outline-text-3" id="text-org1400acd">
 <p>
 example: create a dictionary with default value, by defaultdict
 </p>
@@ -63,9 +63,9 @@ $0
 </div>
 </div>
 
-<div id="outline-container-orgea48b24" class="outline-3">
-<h3 id="orgea48b24">1.6 example</h3>
-<div class="outline-text-3" id="text-orgea48b24">
+<div id="outline-container-orge7b906a" class="outline-3">
+<h3 id="orge7b906a">1.6 example</h3>
+<div class="outline-text-3" id="text-orge7b906a">
 <div class="org-src-container">
 <pre class="src src-python">from collections import defaultdict
 frequency = defaultdict(int)
@@ -87,9 +87,9 @@ my_dictionary[item_key] is updated with information about item
 </div>
 </div>
 </div>
-<div id="outline-container-orgf168d88" class="outline-3">
-<h3 id="orgf168d88">1.7 Keeping Dictionaries in Order, OrderedDict</h3>
-<div class="outline-text-3" id="text-orgf168d88">
+<div id="outline-container-orgf6af971" class="outline-3">
+<h3 id="orgf6af971">1.7 Keeping Dictionaries in Order, OrderedDict</h3>
+<div class="outline-text-3" id="text-orgf6af971">
 <div class="org-src-container">
 <pre class="src src-python">form collections import OrderedDict
 d = OrderedDict()
@@ -103,12 +103,12 @@ An typical application is when for serilization.
 </div>
 </div>
 
-<div id="outline-container-org4da81e7" class="outline-3">
-<h3 id="org4da81e7">1.8. Calculating with Dictionaries</h3>
-<div class="outline-text-3" id="text-org4da81e7">
-</div><div id="outline-container-orgd9c18eb" class="outline-4">
-<h4 id="orgd9c18eb">get max key/value in a dictionary, based on the value, by inverting the dict</h4>
-<div class="outline-text-4" id="text-orgd9c18eb">
+<div id="outline-container-orga193cdf" class="outline-3">
+<h3 id="orga193cdf">1.8. Calculating with Dictionaries</h3>
+<div class="outline-text-3" id="text-orga193cdf">
+</div><div id="outline-container-orgce1c01b" class="outline-4">
+<h4 id="orgce1c01b">get max key/value in a dictionary, based on the value, by inverting the dict</h4>
+<div class="outline-text-4" id="text-orgce1c01b">
 <div class="org-src-container">
 <pre class="src src-python">max(zip(`dict`.values(), `dict`.keys()))
 # another solution
@@ -120,18 +120,18 @@ first convert the dict to list of (value, key) pairs, then max function will fir
 </p>
 </div>
 </div>
-<div id="outline-container-org49f418e" class="outline-4">
-<h4 id="org49f418e">result of the max value for many  things</h4>
-<div class="outline-text-4" id="text-org49f418e">
+<div id="outline-container-orgad4d7b6" class="outline-4">
+<h4 id="orgad4d7b6">result of the max value for many  things</h4>
+<div class="outline-text-4" id="text-orgad4d7b6">
 <p>
 for tuple and list, it just the element.
 but for a dict, it returns only the key. Why? Because it accept a iterable as first parameter, and for a dictionary, the iterable value is the key.
 </p>
 </div>
 </div>
-<div id="outline-container-org75926f4" class="outline-4">
-<h4 id="org75926f4">understanding of multi value bind</h4>
-<div class="outline-text-4" id="text-org75926f4">
+<div id="outline-container-orgc4b9c60" class="outline-4">
+<h4 id="orgc4b9c60">understanding of multi value bind</h4>
+<div class="outline-text-4" id="text-orgc4b9c60">
 <p>
 ---&gt;  (b11, b12) = 1
 TypeError: 'int' object is not iterable
@@ -156,17 +156,17 @@ I find python much simpler and funny than java.
 </div>
 </div>
 </div>
-<div id="outline-container-org7c16fbb" class="outline-3">
-<h3 id="org7c16fbb">1.9. Finding Commonalities in Two Dictionaries</h3>
-<div class="outline-text-3" id="text-org7c16fbb">
+<div id="outline-container-orgf5cc5f7" class="outline-3">
+<h3 id="orgf5cc5f7">1.9. Finding Commonalities in Two Dictionaries</h3>
+<div class="outline-text-3" id="text-orgf5cc5f7">
 <p>
 a dictionary's d.keys() and d.items() support set operations
 So to find the common part keys/items in two dictionaries, just use the set operation '|' or 'union' function.
 </p>
 </div>
-<div id="outline-container-orgef06534" class="outline-4">
-<h4 id="orgef06534">get all keys as a iterable in a dictionary, by keys()</h4>
-<div class="outline-text-4" id="text-orgef06534">
+<div id="outline-container-org184b7ec" class="outline-4">
+<h4 id="org184b7ec">get all keys as a iterable in a dictionary, by keys()</h4>
+<div class="outline-text-4" id="text-org184b7ec">
 <div class="org-src-container">
 <pre class="src src-python">`dict`.keys()
 </pre>
@@ -174,9 +174,9 @@ So to find the common part keys/items in two dictionaries, just use the set oper
 </div>
 </div>
 
-<div id="outline-container-org6e3b077" class="outline-4">
-<h4 id="org6e3b077">get all values as a iterable in a dictionary, by values()</h4>
-<div class="outline-text-4" id="text-org6e3b077">
+<div id="outline-container-org8c1099d" class="outline-4">
+<h4 id="org8c1099d">get all values as a iterable in a dictionary, by values()</h4>
+<div class="outline-text-4" id="text-org8c1099d">
 <div class="org-src-container">
 <pre class="src src-python">`dict`.values()
 </pre>
@@ -184,9 +184,9 @@ So to find the common part keys/items in two dictionaries, just use the set oper
 </div>
 </div>
 
-<div id="outline-container-org4c65240" class="outline-4">
-<h4 id="org4c65240">get all key, value pairs as a iterable in a dictionary, by items()</h4>
-<div class="outline-text-4" id="text-org4c65240">
+<div id="outline-container-orgf608e18" class="outline-4">
+<h4 id="orgf608e18">get all key, value pairs as a iterable in a dictionary, by items()</h4>
+<div class="outline-text-4" id="text-orgf608e18">
 <div class="org-src-container">
 <pre class="src src-python">`dict`.items()
 </pre>
@@ -194,9 +194,9 @@ So to find the common part keys/items in two dictionaries, just use the set oper
 </div>
 </div>
 
-<div id="outline-container-orgfdf3f3c" class="outline-4">
-<h4 id="orgfdf3f3c">set operations</h4>
-<div class="outline-text-4" id="text-orgfdf3f3c">
+<div id="outline-container-org8106e17" class="outline-4">
+<h4 id="org8106e17">set operations</h4>
+<div class="outline-text-4" id="text-org8106e17">
 <p>
 '|': union
 '&amp;': intersection
@@ -228,12 +228,12 @@ Out[104]: {9, 4, 'a'}
 </div>
 </div>
 
-<div id="outline-container-org010315d" class="outline-3">
-<h3 id="org010315d">1.10. Removing Duplicates from a Sequence while Maintaining Order</h3>
-<div class="outline-text-3" id="text-org010315d">
-</div><div id="outline-container-org29d2864" class="outline-4">
-<h4 id="org29d2864">problem: what is hashable(and the link to python glossary)</h4>
-<div class="outline-text-4" id="text-org29d2864">
+<div id="outline-container-org02746ff" class="outline-3">
+<h3 id="org02746ff">1.10. Removing Duplicates from a Sequence while Maintaining Order</h3>
+<div class="outline-text-3" id="text-org02746ff">
+</div><div id="outline-container-org37e67bc" class="outline-4">
+<h4 id="org37e67bc">problem: what is hashable(and the link to python glossary)</h4>
+<div class="outline-text-4" id="text-org37e67bc">
 <p>
 From the python glossary: 
 <a href="https://docs.python.org/3/glossary.html">https://docs.python.org/3/glossary.html</a>
@@ -252,9 +252,9 @@ All of Python’s immutable built-in objects are hashable, while no mutable cont
 </p>
 </div>
 </div>
-<div id="outline-container-org1250874" class="outline-4">
-<h4 id="org1250874">how yield/generator iterator is implemented</h4>
-<div class="outline-text-4" id="text-org1250874">
+<div id="outline-container-org344c907" class="outline-4">
+<h4 id="org344c907">how yield/generator iterator is implemented</h4>
+<div class="outline-text-4" id="text-org344c907">
 <p>
 From the glossary, it works by suspends the function and  return the value, and save the current status. Then if it was called  next time, it will start execute from the place last time it was suspended. Great!! I understanded this.
 </p>
@@ -273,9 +273,9 @@ Each yield temporarily suspends processing, remembering the location execution s
 </div>
 </div>
 
-<div id="outline-container-org2af8abd" class="outline-4">
-<h4 id="org2af8abd">file object is also an iterable, the element is a line</h4>
-<div class="outline-text-4" id="text-org2af8abd">
+<div id="outline-container-orgce6eb47" class="outline-4">
+<h4 id="orgce6eb47">file object is also an iterable, the element is a line</h4>
+<div class="outline-text-4" id="text-orgce6eb47">
 <div class="org-src-container">
 <pre class="src src-python">with open(somefile,'r') as f:
     for line in f:
@@ -285,9 +285,9 @@ Each yield temporarily suspends processing, remembering the location execution s
 </div>
 </div>
 
-<div id="outline-container-org1238885" class="outline-4">
-<h4 id="org1238885">a function that delete all duplicates in a list, with order preserved</h4>
-<div class="outline-text-4" id="text-org1238885">
+<div id="outline-container-org78a780b" class="outline-4">
+<h4 id="org78a780b">a function that delete all duplicates in a list, with order preserved</h4>
+<div class="outline-text-4" id="text-org78a780b">
 <div class="org-src-container">
 <pre class="src src-python">def dedupe(items, key=None):
     seen = set()
@@ -314,9 +314,9 @@ examples:
 </div>
 </div>
 
-<div id="outline-container-org338401d" class="outline-4">
-<h4 id="org338401d">delete all duplicates in a list, don't preserve order, by set</h4>
-<div class="outline-text-4" id="text-org338401d">
+<div id="outline-container-org1ec1b72" class="outline-4">
+<h4 id="org1ec1b72">delete all duplicates in a list, don't preserve order, by set</h4>
+<div class="outline-text-4" id="text-org1ec1b72">
 <div class="org-src-container">
 <pre class="src src-python">set(`list`)
 </pre>
@@ -327,9 +327,9 @@ Then all duplicate elements in list will be removed.
 </div>
 </div>
 
-<div id="outline-container-org876fcd8" class="outline-4">
-<h4 id="org876fcd8">the a?b:c expression in python, if else in one line</h4>
-<div class="outline-text-4" id="text-org876fcd8">
+<div id="outline-container-org665e692" class="outline-4">
+<h4 id="org665e692">the a?b:c expression in python, if else in one line</h4>
+<div class="outline-text-4" id="text-org665e692">
 <div class="org-src-container">
 <pre class="src src-python">val = b if a else c
 </pre>
@@ -341,12 +341,12 @@ looks good
 </div>
 </div>
 
-<div id="outline-container-orge54a0e2" class="outline-3">
-<h3 id="orge54a0e2">1.11. Naming a Slice</h3>
-<div class="outline-text-3" id="text-orge54a0e2">
-</div><div id="outline-container-orgdf796df" class="outline-4">
-<h4 id="orgdf796df">the slice object</h4>
-<div class="outline-text-4" id="text-orgdf796df">
+<div id="outline-container-org05286ba" class="outline-3">
+<h3 id="org05286ba">1.11. Naming a Slice</h3>
+<div class="outline-text-3" id="text-org05286ba">
+</div><div id="outline-container-orgff5c901" class="outline-4">
+<h4 id="orgff5c901">the slice object</h4>
+<div class="outline-text-4" id="text-orgff5c901">
 <p>
 create a  slice
 </p>
@@ -374,9 +374,9 @@ print(s.start, s.stop, s.step)
 </div>
 
 
-<div id="outline-container-orgc55762d" class="outline-3">
-<h3 id="orgc55762d">1.12. Determining the Most Frequently Occurring Items in a Sequence</h3>
-<div class="outline-text-3" id="text-orgc55762d">
+<div id="outline-container-orgb536467" class="outline-3">
+<h3 id="orgb536467">1.12. Determining the Most Frequently Occurring Items in a Sequence</h3>
+<div class="outline-text-3" id="text-orgb536467">
 <p>
 A method by me
 </p>
@@ -395,9 +395,9 @@ print(r[1])
 </div>
 
 
-<div id="outline-container-org04ecc59" class="outline-4">
-<h4 id="org04ecc59">the collections.Counter class: change a list to a list of tuple of (element, count)</h4>
-<div class="outline-text-4" id="text-org04ecc59">
+<div id="outline-container-org08979ab" class="outline-4">
+<h4 id="org08979ab">the collections.Counter class: change a list to a list of tuple of (element, count)</h4>
+<div class="outline-text-4" id="text-org08979ab">
 <div class="org-src-container">
 <pre class="src src-python">a = [1, 2, 1, 3, 2,3,3]
 from collections import Counter
@@ -424,12 +424,12 @@ When you need to count data, use Counter class. This is a so little class, in pr
 </div>
 </div>
 
-<div id="outline-container-orgdb04abe" class="outline-3">
-<h3 id="orgdb04abe">1.13. Sorting a List of Dictionaries by a Common Key</h3>
-<div class="outline-text-3" id="text-orgdb04abe">
-</div><div id="outline-container-orgfa53b53" class="outline-4">
-<h4 id="orgfa53b53">the operator.itemgetter function</h4>
-<div class="outline-text-4" id="text-orgfa53b53">
+<div id="outline-container-org1842959" class="outline-3">
+<h3 id="org1842959">1.13. Sorting a List of Dictionaries by a Common Key</h3>
+<div class="outline-text-3" id="text-org1842959">
+</div><div id="outline-container-orgb04ec6c" class="outline-4">
+<h4 id="orgb04ec6c">the operator.itemgetter function</h4>
+<div class="outline-text-4" id="text-orgb04ec6c">
 <p>
 it will return a callable that can be passed to 'sorted':s key  parameter, for list  or dictionary
 </p>
@@ -450,12 +450,12 @@ lambda r:r["name"]
 </div>
 </div>
 
-<div id="outline-container-orgb597edc" class="outline-3">
-<h3 id="orgb597edc">1.14. Sorting Objects Without Native Comparison Support</h3>
-<div class="outline-text-3" id="text-orgb597edc">
-</div><div id="outline-container-org2ec4450" class="outline-4">
-<h4 id="org2ec4450">the operator.attrgetter function</h4>
-<div class="outline-text-4" id="text-org2ec4450">
+<div id="outline-container-orgeb221b9" class="outline-3">
+<h3 id="orgeb221b9">1.14. Sorting Objects Without Native Comparison Support</h3>
+<div class="outline-text-3" id="text-orgeb221b9">
+</div><div id="outline-container-org4215b48" class="outline-4">
+<h4 id="org4215b48">the operator.attrgetter function</h4>
+<div class="outline-text-4" id="text-org4215b48">
 <p>
 it will return a callable that can be passed to 'sorted':s key  parameter, for user defined class
 </p>
@@ -477,12 +477,12 @@ lambda o:o.name
 </div>
 </div>
 </div>
-<div id="outline-container-org16c9917" class="outline-3">
-<h3 id="org16c9917">1.15. Grouping Records(a sequence of dictionaries) Together Based on a Field</h3>
-<div class="outline-text-3" id="text-org16c9917">
-</div><div id="outline-container-orge47006c" class="outline-4">
-<h4 id="orge47006c">the itertools.groupby function: group sequencially the list as tuple (key, items)</h4>
-<div class="outline-text-4" id="text-orge47006c">
+<div id="outline-container-orgf847675" class="outline-3">
+<h3 id="orgf847675">1.15. Grouping Records(a sequence of dictionaries) Together Based on a Field</h3>
+<div class="outline-text-3" id="text-orgf847675">
+</div><div id="outline-container-orgf753e35" class="outline-4">
+<h4 id="orgf753e35">the itertools.groupby function: group sequencially the list as tuple (key, items)</h4>
+<div class="outline-text-4" id="text-orgf753e35">
 <div class="org-src-container">
 <pre class="src src-python">import itertools
 rows =  [{1:2}, {1: 4},  {1: 3}]
@@ -504,16 +504,16 @@ another way is just use a default list dictionary to group, then no sort is need
 
 
 
-<div id="outline-container-org1b21e38" class="outline-3">
-<h3 id="org1b21e38">1.16. Filtering Sequence Elements</h3>
-<div class="outline-text-3" id="text-org1b21e38">
+<div id="outline-container-org4b4f9b5" class="outline-3">
+<h3 id="org4b4f9b5">1.16. Filtering Sequence Elements</h3>
+<div class="outline-text-3" id="text-org4b4f9b5">
 <p>
 To fitering, just use list comprehension with an if condition
 </p>
 </div>
-<div id="outline-container-orgd8a6797" class="outline-4">
-<h4 id="orgd8a6797">itertools.compress function, a filtering tool</h4>
-<div class="outline-text-4" id="text-orgd8a6797">
+<div id="outline-container-orgc46cbba" class="outline-4">
+<h4 id="orgc46cbba">itertools.compress function, a filtering tool</h4>
+<div class="outline-text-4" id="text-orgc46cbba">
 <p>
 it takse two parameters:
 </p>
@@ -554,12 +554,12 @@ print(a)
 
 
 
-<div id="outline-container-org6b01702" class="outline-3">
-<h3 id="org6b01702">1.17. Extracting a Subset of a Dictionary</h3>
-<div class="outline-text-3" id="text-org6b01702">
-</div><div id="outline-container-orgd981288" class="outline-4">
-<h4 id="orgd981288">dictionary comprehension, just like list comprehension, but use '{' instead of '['</h4>
-<div class="outline-text-4" id="text-orgd981288">
+<div id="outline-container-orgaa15553" class="outline-3">
+<h3 id="orgaa15553">1.17. Extracting a Subset of a Dictionary</h3>
+<div class="outline-text-3" id="text-orgaa15553">
+</div><div id="outline-container-orgbe82dcb" class="outline-4">
+<h4 id="orgbe82dcb">dictionary comprehension, just like list comprehension, but use '{' instead of '['</h4>
+<div class="outline-text-4" id="text-orgbe82dcb">
 <div class="org-src-container">
 <pre class="src src-python">prices = {
     'ACME': 45.23,
@@ -578,12 +578,12 @@ p2 = { key:value for key,value in prices.items() if key in tech_names }
 </div>
 </div>
 </div>
-<div id="outline-container-org712e451" class="outline-3">
-<h3 id="org712e451">1.18. Mapping Names to Sequence Elements</h3>
-<div class="outline-text-3" id="text-org712e451">
-</div><div id="outline-container-org11dc920" class="outline-4">
-<h4 id="org11dc920">the collections.nametuple function, map an index to a name, and access to an element with that name</h4>
-<div class="outline-text-4" id="text-org11dc920">
+<div id="outline-container-orgc5f91ee" class="outline-3">
+<h3 id="orgc5f91ee">1.18. Mapping Names to Sequence Elements</h3>
+<div class="outline-text-3" id="text-orgc5f91ee">
+</div><div id="outline-container-org6dfb7ab" class="outline-4">
+<h4 id="org6dfb7ab">the collections.nametuple function, map an index to a name, and access to an element with that name</h4>
+<div class="outline-text-4" id="text-org6dfb7ab">
 <p>
 example:
 </p>
@@ -624,9 +624,9 @@ dict_to_stock(a)
 </div>
 </div>
 
-<div id="outline-container-org7a5dc92" class="outline-3">
-<h3 id="org7a5dc92">1.19. Transforming and Reducing Data at the Same Time</h3>
-<div class="outline-text-3" id="text-org7a5dc92">
+<div id="outline-container-org20384d0" class="outline-3">
+<h3 id="org20384d0">1.19. Transforming and Reducing Data at the Same Time</h3>
+<div class="outline-text-3" id="text-org20384d0">
 <p>
 use generator-expression argument
 </p>
@@ -636,12 +636,12 @@ The reducing function means: given a list, return a value.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf20758a" class="outline-3">
-<h3 id="orgf20758a">the any function, check if any of an element is True in a iterable</h3>
-<div class="outline-text-3" id="text-orgf20758a">
-</div><div id="outline-container-org8afb108" class="outline-4">
-<h4 id="org8afb108">check if  any .py files exist in a directory</h4>
-<div class="outline-text-4" id="text-org8afb108">
+<div id="outline-container-orgd3cc70a" class="outline-3">
+<h3 id="orgd3cc70a">the any function, check if any of an element is True in a iterable</h3>
+<div class="outline-text-3" id="text-orgd3cc70a">
+</div><div id="outline-container-orgdde511e" class="outline-4">
+<h4 id="orgdde511e">check if  any .py files exist in a directory</h4>
+<div class="outline-text-4" id="text-orgdde511e">
 <div class="org-src-container">
 <pre class="src src-python"># Determine if any .py files exist in a directory
 import os
@@ -654,9 +654,9 @@ else:
 </div>
 </div>
 </div>
-<div id="outline-container-orge08e76e" class="outline-4">
-<h4 id="orge08e76e">get all files in a directory as a list</h4>
-<div class="outline-text-4" id="text-orge08e76e">
+<div id="outline-container-orgbc5bbc3" class="outline-4">
+<h4 id="orgbc5bbc3">get all files in a directory as a list</h4>
+<div class="outline-text-4" id="text-orgbc5bbc3">
 <div class="org-src-container">
 <pre class="src src-python">import os
 files = os.listdir('dirname')
@@ -664,9 +664,9 @@ files = os.listdir('dirname')
 </div>
 </div>
 </div>
-<div id="outline-container-org7b9bf10" class="outline-4">
-<h4 id="org7b9bf10">change a tuple/list/iterable to a csv line</h4>
-<div class="outline-text-4" id="text-org7b9bf10">
+<div id="outline-container-orgc371c1a" class="outline-4">
+<h4 id="orgc371c1a">change a tuple/list/iterable to a csv line</h4>
+<div class="outline-text-4" id="text-orgc371c1a">
 <p>
 This is much better than the string format method
 </p>
@@ -680,12 +680,12 @@ print(','.join(str(x) for x in s))# Output a tuple as CSV
 </div>
 </div>
 
-<div id="outline-container-orga5f7cf6" class="outline-3">
-<h3 id="orga5f7cf6">1.20. Combining Multiple Mappings into a Single Mapping</h3>
-<div class="outline-text-3" id="text-orga5f7cf6">
-</div><div id="outline-container-org9ff4028" class="outline-4">
-<h4 id="org9ff4028">the collections.ChainMap</h4>
-<div class="outline-text-4" id="text-org9ff4028">
+<div id="outline-container-org4c77de6" class="outline-3">
+<h3 id="org4c77de6">1.20. Combining Multiple Mappings into a Single Mapping</h3>
+<div class="outline-text-3" id="text-org4c77de6">
+</div><div id="outline-container-org3aae743" class="outline-4">
+<h4 id="org3aae743">the collections.ChainMap</h4>
+<div class="outline-text-4" id="text-org3aae743">
 <p>
 combining many maps/dictionaries, then when get an element, it will try to get from the first map, then the second, ...
 </p>
@@ -704,7 +704,7 @@ Difference from the dict.update function:
 ChainMap use a link to the original dictionary, while dict.update create a new one.
 </p>
 </div>
-<ul class="org-ul"><li><a id="org54bc205"></a>check if an element exists in many dictionaries/maps, sequencially<br /><div class="outline-text-5" id="text-org54bc205">
+<ul class="org-ul"><li><a id="org73418fe"></a>check if an element exists in many dictionaries/maps, sequencially<br /><div class="outline-text-5" id="text-org73418fe">
 <div class="org-src-container">
 <pre class="src src-python">a = {'x': 1, 'z': 3 }
 b = {'y': 2, 'z': 4 }
@@ -721,25 +721,25 @@ print(c['z']) # Outputs 3 (from a)
 </div></li></ul>
 </div>
 </div>
-<div id="outline-container-org4ceb625" class="outline-3">
-<h3 id="org4ceb625">2.1. Splitting Strings on Any of Multiple Delimiters</h3>
-<div class="outline-text-3" id="text-org4ceb625">
+<div id="outline-container-org928f112" class="outline-3">
+<h3 id="org928f112">2.1. Splitting Strings on Any of Multiple Delimiters</h3>
+<div class="outline-text-3" id="text-org928f112">
 <p>
 By us re.split and the regexp is r'[,;\s]\s*'
 </p>
 </div>
-<div id="outline-container-orga89dde9" class="outline-4">
-<h4 id="orga89dde9">difference between str.split and re.split</h4>
-<div class="outline-text-4" id="text-orga89dde9">
+<div id="outline-container-org9ccec78" class="outline-4">
+<h4 id="org9ccec78">difference between str.split and re.split</h4>
+<div class="outline-text-4" id="text-org9ccec78">
 <p>
 str.split only accept simple seperator
 re.split accept regulare expression.
 </p>
 </div>
 </div>
-<div id="outline-container-org4ea95d9" class="outline-4">
-<h4 id="org4ea95d9">return value of re.split</h4>
-<div class="outline-text-4" id="text-org4ea95d9">
+<div id="outline-container-orgae2a1d7" class="outline-4">
+<h4 id="orgae2a1d7">return value of re.split</h4>
+<div class="outline-text-4" id="text-orgae2a1d7">
 <ol class="org-ol">
 <li>if there are no capture group, then the same as str.split</li>
 <li><p>
@@ -760,9 +760,9 @@ print(a, a[::2], a[1::2])
 </div>
 </div>
 
-<div id="outline-container-orgd4520b3" class="outline-4">
-<h4 id="orgd4520b3">iterate on two lists, by first zip the two to one</h4>
-<div class="outline-text-4" id="text-orgd4520b3">
+<div id="outline-container-orgaa6c5d6" class="outline-4">
+<h4 id="orgaa6c5d6">iterate on two lists, by first zip the two to one</h4>
+<div class="outline-text-4" id="text-orgaa6c5d6">
 <p>
 looks nice!
 </p>
@@ -776,14 +776,14 @@ looks nice!
 </div>
 
 
-<div id="outline-container-org1a0643d" class="outline-4">
-<h4 id="org1a0643d">regexp noncapture group, by r'(?:...)'</h4>
+<div id="outline-container-org31232a7" class="outline-4">
+<h4 id="org31232a7">regexp noncapture group, by r'(?:...)'</h4>
 </div>
 </div>
 
-<div id="outline-container-org7e6ad33" class="outline-3">
-<h3 id="org7e6ad33">2.2. Matching Text at the Start or End of a String, by str.startswith() or str.endswith() method</h3>
-<div class="outline-text-3" id="text-org7e6ad33">
+<div id="outline-container-org224eed8" class="outline-3">
+<h3 id="org224eed8">2.2. Matching Text at the Start or End of a String, by str.startswith() or str.endswith() method</h3>
+<div class="outline-text-3" id="text-org224eed8">
 <div class="org-src-container">
 <pre class="src src-python">filename = "aaaa.txt"
 filename.endswith(".txt")
@@ -813,9 +813,9 @@ Compared to re.match, str.startswith looks nice.
 </div>
 </div>
 
-<div id="outline-container-org5c26df1" class="outline-3">
-<h3 id="org5c26df1">2.3. Matching Strings Using Shell Wildcard Patterns, with fnmatch.fnmatch(), fnmatch.fnmatchcase()</h3>
-<div class="outline-text-3" id="text-org5c26df1">
+<div id="outline-container-orgd5381f3" class="outline-3">
+<h3 id="orgd5381f3">2.3. Matching Strings Using Shell Wildcard Patterns, with fnmatch.fnmatch(), fnmatch.fnmatchcase()</h3>
+<div class="outline-text-3" id="text-orgd5381f3">
 <p>
 Shell wildcard:
 </p>
@@ -842,17 +842,17 @@ print(fnmatch("data 1.txt", "*[0-9]*"))
 </div>
 
 
-<div id="outline-container-org9be1e2d" class="outline-3">
-<h3 id="org9be1e2d">2.4. Matching and Searching for Text Patterns</h3>
-<div class="outline-text-3" id="text-org9be1e2d">
+<div id="outline-container-orgb345221" class="outline-3">
+<h3 id="orgb345221">2.4. Matching and Searching for Text Patterns</h3>
+<div class="outline-text-3" id="text-orgb345221">
 <p>
 What's  the difference between matching and searching
 </p>
 </div>
 
-<div id="outline-container-org1f746fa" class="outline-4">
-<h4 id="org1f746fa">the str.find() function: find the start index of a substring</h4>
-<div class="outline-text-4" id="text-org1f746fa">
+<div id="outline-container-org03865c0" class="outline-4">
+<h4 id="org03865c0">the str.find() function: find the start index of a substring</h4>
+<div class="outline-text-4" id="text-org03865c0">
 <div class="org-src-container">
 <pre class="src src-python">s = "Hello xxx bbbb"
 print(s.find("xx"))
@@ -862,18 +862,18 @@ print(s.find("xx"))
 </div>
 
 
-<div id="outline-container-orgf8008fd" class="outline-4">
-<h4 id="orgf8008fd">re.compile() function: compile a regexp strinng to a regexp object, for performance</h4>
-<div class="outline-text-4" id="text-orgf8008fd">
+<div id="outline-container-orgb008785" class="outline-4">
+<h4 id="orgb008785">re.compile() function: compile a regexp strinng to a regexp object, for performance</h4>
+<div class="outline-text-4" id="text-orgb008785">
 <p>
 If you use the regexp many times, then first compile it is good. But if you only use it for one time, then don't use the compile function
 </p>
 </div>
 </div>
 
-<div id="outline-container-org9019bfb" class="outline-4">
-<h4 id="org9019bfb">difference between r'\d' and '\d'</h4>
-<div class="outline-text-4" id="text-org9019bfb">
+<div id="outline-container-org8d5578c" class="outline-4">
+<h4 id="org8d5578c">difference between r'\d' and '\d'</h4>
+<div class="outline-text-4" id="text-org8d5578c">
 <p>
 if the string is prefixed by  a 'r', then the '\' in the string will not be intepreted by the string parser.
 So the second regexp is actually r'd'.
@@ -881,9 +881,9 @@ So the second regexp is actually r'd'.
 </div>
 </div>
 
-<div id="outline-container-org3fcc886" class="outline-4">
-<h4 id="org3fcc886">re.findall() function, find all matched data as a list</h4>
-<div class="outline-text-4" id="text-org3fcc886">
+<div id="outline-container-orgdccbf1c" class="outline-4">
+<h4 id="orgdccbf1c">re.findall() function, find all matched data as a list</h4>
+<div class="outline-text-4" id="text-orgdccbf1c">
 <div class="org-src-container">
 <pre class="src src-python">text = 'Today is 11/27/2012. PyCon starts 3/13/2013.'
 import re
@@ -903,9 +903,9 @@ if  no capture groups, then the return value is all matched  data.
 </div>
 </div>
 
-<div id="outline-container-orgac30ee5" class="outline-4">
-<h4 id="orgac30ee5">re.finditer(), find all matched data as a iterater</h4>
-<div class="outline-text-4" id="text-orgac30ee5">
+<div id="outline-container-org64b17ff" class="outline-4">
+<h4 id="org64b17ff">re.finditer(), find all matched data as a iterater</h4>
+<div class="outline-text-4" id="text-org64b17ff">
 <p>
 Seems the return value is different from re.findall(), it will return a  matched object , the same as re.match()
 Seems strange, and highly inconsistent.
@@ -913,12 +913,12 @@ Seems strange, and highly inconsistent.
 </div>
 </div>
 
-<div id="outline-container-org0254985" class="outline-4">
-<h4 id="org0254985">re.match() function, always match at the start of a string</h4>
+<div id="outline-container-orgad26c58" class="outline-4">
+<h4 id="orgad26c58">re.match() function, always match at the start of a string</h4>
 </div>
-<div id="outline-container-org74ced06" class="outline-4">
-<h4 id="org74ced06">re.match() function, return value</h4>
-<div class="outline-text-4" id="text-org74ced06">
+<div id="outline-container-org188af14" class="outline-4">
+<h4 id="org188af14">re.match() function, return value</h4>
+<div class="outline-text-4" id="text-org188af14">
 <p>
 rst.group(0): the matched data
 rst.group(1): the first captured data
@@ -928,12 +928,12 @@ rst.groups(): all captured data as a tuple
 </div>
 </div>
 
-<div id="outline-container-org98677cb" class="outline-3">
-<h3 id="org98677cb">2.5. Searching and Replacing Text</h3>
-<div class="outline-text-3" id="text-org98677cb">
-</div><div id="outline-container-org35f6f8d" class="outline-4">
-<h4 id="org35f6f8d">the str.replace function, replace all occurence in a string</h4>
-<div class="outline-text-4" id="text-org35f6f8d">
+<div id="outline-container-org40e1aae" class="outline-3">
+<h3 id="org40e1aae">2.5. Searching and Replacing Text</h3>
+<div class="outline-text-3" id="text-org40e1aae">
+</div><div id="outline-container-orgc426346" class="outline-4">
+<h4 id="orgc426346">the str.replace function, replace all occurence in a string</h4>
+<div class="outline-text-4" id="text-orgc426346">
 <p>
 str.replcae(pattern, replacement)
 </p>
@@ -946,9 +946,9 @@ print(text.replace('yeah', 'yep'))
 </div>
 </div>
 
-<div id="outline-container-org7699c26" class="outline-4">
-<h4 id="org7699c26">the re.sub(pattern, replacement, text) function, will also replace all occurence in a string</h4>
-<div class="outline-text-4" id="text-org7699c26">
+<div id="outline-container-org4a0822f" class="outline-4">
+<h4 id="org4a0822f">the re.sub(pattern, replacement, text) function, will also replace all occurence in a string</h4>
+<div class="outline-text-4" id="text-org4a0822f">
 <p>
 use r'\1' to refer to the first captured group
 </p>
@@ -962,9 +962,9 @@ print(re.sub(r'(\d+)/(\d+)/(\d+)', r'\3-\1-\2', text))
 </div>
 </div>
 
-<div id="outline-container-org1d3c669" class="outline-4">
-<h4 id="org1d3c669">the re.sub(pattern, callback, text) function, will also replace all occurence in a string</h4>
-<div class="outline-text-4" id="text-org1d3c669">
+<div id="outline-container-org122d0ac" class="outline-4">
+<h4 id="org122d0ac">the re.sub(pattern, callback, text) function, will also replace all occurence in a string</h4>
+<div class="outline-text-4" id="text-org122d0ac">
 <p>
 The second parameter can also be a function, the parameter to this function is a match object(the  same returned by re.match function).
 </p>
@@ -986,21 +986,21 @@ print(re.sub(r'(\d+)/(\d+)/(\d+)', foo, text))
 </div>
 
 
-<div id="outline-container-orgbe1524d" class="outline-4">
-<h4 id="orgbe1524d">the re.subn(...) function, same as re.sub, but also return subsitution counts also</h4>
+<div id="outline-container-orgfbc428a" class="outline-4">
+<h4 id="orgfbc428a">the re.subn(...) function, same as re.sub, but also return subsitution counts also</h4>
 </div>
 </div>
-<div id="outline-container-org8827540" class="outline-3">
-<h3 id="org8827540">2.6. Searching and Replacing Case-Insensitive Text</h3>
-<div class="outline-text-3" id="text-org8827540">
+<div id="outline-container-orgfd59790" class="outline-3">
+<h3 id="orgfd59790">2.6. Searching and Replacing Case-Insensitive Text</h3>
+<div class="outline-text-3" id="text-orgfd59790">
 <p>
 To do case-insensitive operations, you must use regexp with the re.IGNORECASE flags keyword parameter
 </p>
 </div>
 
-<div id="outline-container-org57fcb2e" class="outline-4">
-<h4 id="org57fcb2e">replace words in a string with original case preserved</h4>
-<div class="outline-text-4" id="text-org57fcb2e">
+<div id="outline-container-orgddfa01a" class="outline-4">
+<h4 id="orgddfa01a">replace words in a string with original case preserved</h4>
+<div class="outline-text-4" id="text-orgddfa01a">
 <p>
 a excenlent example of replacing with 原始的大小写规则. 并且是一个很好的高阶函数的例子。
 </p>
@@ -1029,9 +1029,9 @@ print(re.sub('python', matchcase('snake'), text, flags=re.IGNORECASE))
 </div>
 </div>
 
-<div id="outline-container-org322bc6a" class="outline-3">
-<h3 id="org322bc6a">2.7. Specifying a Regular Expression(regexp) for the Shortest Match, by using modifier '?', no-greedy match</h3>
-<div class="outline-text-3" id="text-org322bc6a">
+<div id="outline-container-orgee3c6f4" class="outline-3">
+<h3 id="orgee3c6f4">2.7. Specifying a Regular Expression(regexp) for the Shortest Match, by using modifier '?', no-greedy match</h3>
+<div class="outline-text-3" id="text-orgee3c6f4">
 <p>
 By default, * will match longest data. if appended with a '?' then it will match the shortest
 </p>
@@ -1054,9 +1054,9 @@ print(r)
 </div>
 </div>
 
-<div id="outline-container-org7fc9f45" class="outline-3">
-<h3 id="org7fc9f45">2.8. Writing a Regular Expression for Multiline Patterns</h3>
-<div class="outline-text-3" id="text-org7fc9f45">
+<div id="outline-container-org8cf4c3c" class="outline-3">
+<h3 id="org8cf4c3c">2.8. Writing a Regular Expression for Multiline Patterns</h3>
+<div class="outline-text-3" id="text-org8cf4c3c">
 <p>
 By default, '.' will not match a new line character. 
 there are two choices to let '.' match a new line character:
@@ -1080,27 +1080,27 @@ print(r)
 </ol>
 </div>
 
-<div id="outline-container-orgd37b4c2" class="outline-4">
-<h4 id="orgd37b4c2">the re.DOTALL flag: let '.' match a newline character</h4>
+<div id="outline-container-org18e538f" class="outline-4">
+<h4 id="org18e538f">the re.DOTALL flag: let '.' match a newline character</h4>
 </div>
 </div>
-<div id="outline-container-org7ba6472" class="outline-3">
-<h3 id="org7ba6472">2.9. Normalizing Unicode Text to a Standard Representation, by unicodedata.normalize('NFC', str)</h3>
-<div class="outline-text-3" id="text-org7ba6472">
+<div id="outline-container-orgbdd14e1" class="outline-3">
+<h3 id="orgbdd14e1">2.9. Normalizing Unicode Text to a Standard Representation, by unicodedata.normalize('NFC', str)</h3>
+<div class="outline-text-3" id="text-orgbdd14e1">
 <p>
 unicode may have more than one representation, see example in the book
 </p>
 </div>
-<div id="outline-container-org1257462" class="outline-4">
-<h4 id="org1257462">normalizing means make sth. has the uniform format/type</h4>
+<div id="outline-container-org328b2d6" class="outline-4">
+<h4 id="org328b2d6">normalizing means make sth. has the uniform format/type</h4>
 </div>
 </div>
-<div id="outline-container-org534909a" class="outline-3">
-<h3 id="org534909a">2.11. Stripping Unwanted Characters from Strings</h3>
-<div class="outline-text-3" id="text-org534909a">
-</div><div id="outline-container-orga74dd52" class="outline-4">
-<h4 id="orga74dd52">str.strip() function. lstrip(), rstrip(), delete whitespaces characters at begining or ending</h4>
-<div class="outline-text-4" id="text-orga74dd52">
+<div id="outline-container-orgbe094b4" class="outline-3">
+<h3 id="orgbe094b4">2.11. Stripping Unwanted Characters from Strings</h3>
+<div class="outline-text-3" id="text-orgbe094b4">
+</div><div id="outline-container-org2831f9e" class="outline-4">
+<h4 id="org2831f9e">str.strip() function. lstrip(), rstrip(), delete whitespaces characters at begining or ending</h4>
+<div class="outline-text-4" id="text-org2831f9e">
 <div class="org-src-container">
 <pre class="src src-python">s = "    a b c \n ";
 print(s.strip())
@@ -1141,20 +1141,20 @@ for s in s1:
 </div>
 </div>
 
-<div id="outline-container-orgcf12bf3" class="outline-3">
-<h3 id="orgcf12bf3">2.12. Sanitizing and Cleaning Up Text</h3>
-<div class="outline-text-3" id="text-orgcf12bf3">
-</div><div id="outline-container-orgaf1e4ce" class="outline-4">
-<h4 id="orgaf1e4ce">str.translate() function, change characters given a table/dictionary, the book given much unicode examples</h4>
+<div id="outline-container-orgf2a9242" class="outline-3">
+<h3 id="orgf2a9242">2.12. Sanitizing and Cleaning Up Text</h3>
+<div class="outline-text-3" id="text-orgf2a9242">
+</div><div id="outline-container-org6b5319f" class="outline-4">
+<h4 id="org6b5319f">str.translate() function, change characters given a table/dictionary, the book given much unicode examples</h4>
 </div>
 </div>
 
-<div id="outline-container-org1453db2" class="outline-3">
-<h3 id="org1453db2">2.13. Aligning Text Strings</h3>
-<div class="outline-text-3" id="text-org1453db2">
-</div><div id="outline-container-org043d9a0" class="outline-4">
-<h4 id="org043d9a0">the str.ljust(), str.rjust(), str.center() functions</h4>
-<div class="outline-text-4" id="text-org043d9a0">
+<div id="outline-container-orga4b5812" class="outline-3">
+<h3 id="orga4b5812">2.13. Aligning Text Strings</h3>
+<div class="outline-text-3" id="text-orga4b5812">
+</div><div id="outline-container-org87b5b0e" class="outline-4">
+<h4 id="org87b5b0e">the str.ljust(), str.rjust(), str.center() functions</h4>
+<div class="outline-text-4" id="text-org87b5b0e">
 <p>
 accept a number, and an optionall character
 </p>
@@ -1168,9 +1168,9 @@ print("aaa".center(20))
 </div>
 </div>
 
-<div id="outline-container-orgd207914" class="outline-4">
-<h4 id="orgd207914">the format function and the str.format methods</h4>
-<div class="outline-text-4" id="text-orgd207914">
+<div id="outline-container-org8cd829b" class="outline-4">
+<h4 id="org8cd829b">the format function and the str.format methods</h4>
+<div class="outline-text-4" id="text-org8cd829b">
 <div class="org-src-container">
 <pre class="src src-python">print(format("aaa", "&gt;20")) # same as rjust
 print(format("aaa", "=&lt;20")) # same as ljust
@@ -1195,28 +1195,28 @@ print(format("aaa", "^20")) # same as center
 </div>
 
 
-<div id="outline-container-org13485e9" class="outline-3">
-<h3 id="org13485e9">2.14. Combining and Concatenating Strings</h3>
-<div class="outline-text-3" id="text-org13485e9">
-</div><div id="outline-container-orga39a257" class="outline-4">
-<h4 id="orga39a257">by str.join</h4>
+<div id="outline-container-org2e01831" class="outline-3">
+<h3 id="org2e01831">2.14. Combining and Concatenating Strings</h3>
+<div class="outline-text-3" id="text-org2e01831">
+</div><div id="outline-container-org264a37f" class="outline-4">
+<h4 id="org264a37f">by str.join</h4>
 </div>
 
-<div id="outline-container-org9cd6554" class="outline-4">
-<h4 id="org9cd6554">by + operator</h4>
+<div id="outline-container-org1a38ad4" class="outline-4">
+<h4 id="org1a38ad4">by + operator</h4>
 </div>
 
-<div id="outline-container-orgd0923b8" class="outline-4">
-<h4 id="orgd0923b8">by print function's 'sep' parameter</h4>
+<div id="outline-container-org54ec4e6" class="outline-4">
+<h4 id="org54ec4e6">by print function's 'sep' parameter</h4>
 </div>
 
-<div id="outline-container-org1c5f347" class="outline-4">
-<h4 id="org1c5f347">by format function</h4>
+<div id="outline-container-org714601a" class="outline-4">
+<h4 id="org714601a">by format function</h4>
 </div>
 </div>
-<div id="outline-container-orgab55e19" class="outline-3">
-<h3 id="orgab55e19">2.15. Interpolating Variables in Strings, by str.format() or str.format_map() method</h3>
-<div class="outline-text-3" id="text-orgab55e19">
+<div id="outline-container-org5c17208" class="outline-3">
+<h3 id="org5c17208">2.15. Interpolating Variables in Strings, by str.format() or str.format_map() method</h3>
+<div class="outline-text-3" id="text-org5c17208">
 <p>
 Note: format_map doesn't exist in python 2.7
 </p>
@@ -1234,9 +1234,9 @@ age = 18
 format_map accept a dictionay, while format accept keywords parameters
 </p>
 </div>
-<div id="outline-container-orgcda80a9" class="outline-4">
-<h4 id="orgcda80a9">the vars() function, the same as locals() if no parameter</h4>
-<div class="outline-text-4" id="text-orgcda80a9">
+<div id="outline-container-org3b589ad" class="outline-4">
+<h4 id="org3b589ad">the vars() function, the same as locals() if no parameter</h4>
+<div class="outline-text-4" id="text-org3b589ad">
 <p>
 if pass one parameter, then it is the same as obj.__dict__
 </p>
@@ -1250,9 +1250,9 @@ print(locals())
 </div>
 </div>
 </div>
-<div id="outline-container-org6c46bd5" class="outline-4">
-<h4 id="org6c46bd5">the dict.__missing__(self, key) method will be called when a key not exists, then KeyError will not be raised.</h4>
-<div class="outline-text-4" id="text-org6c46bd5">
+<div id="outline-container-orgb0be68b" class="outline-4">
+<h4 id="orgb0be68b">the dict.__missing__(self, key) method will be called when a key not exists, then KeyError will not be raised.</h4>
+<div class="outline-text-4" id="text-orgb0be68b">
 <p>
 If this method is defined, then when a key not exists, it will be called and return the value. Else a KeyError will be raised.
 </p>
@@ -1269,9 +1269,9 @@ d1 = dict();
 </div>
 </div>
 </div>
-<div id="outline-container-org435ad45" class="outline-4">
-<h4 id="org435ad45">a function that will do variable interpolating from env, just like $var in perl, by str.format_map</h4>
-<div class="outline-text-4" id="text-org435ad45">
+<div id="outline-container-org8b92d60" class="outline-4">
+<h4 id="org8b92d60">a function that will do variable interpolating from env, just like $var in perl, by str.format_map</h4>
+<div class="outline-text-4" id="text-org8b92d60">
 <div class="org-src-container">
 <pre class="src src-python">class safedict(dict):
     def __missing__(self, key):
@@ -1301,9 +1301,9 @@ for i in range(2):
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc667c1" class="outline-4">
-<h4 id="orgdc667c1">sys._getframe([depth]): like calls in perl, get the stack frame</h4>
-<div class="outline-text-4" id="text-orgdc667c1">
+<div id="outline-container-orgf0f29a9" class="outline-4">
+<h4 id="orgf0f29a9">sys._getframe([depth]): like calls in perl, get the stack frame</h4>
+<div class="outline-text-4" id="text-orgf0f29a9">
 <p>
 depth default to 0, means current stack frame. 
 f_locals attribute is used to get all local variabls.
@@ -1323,9 +1323,9 @@ print(sys._getframe().f_lineno)
 </div>
 
 
-<div id="outline-container-org234220b" class="outline-3">
-<h3 id="org234220b">2.16. Reformatting Text to a Fixed Number of Columns, by textwrap.fill(astr, columns, initial_indent='', subsquent_indent='')</h3>
-<div class="outline-text-3" id="text-org234220b">
+<div id="outline-container-orga5736dd" class="outline-3">
+<h3 id="orga5736dd">2.16. Reformatting Text to a Fixed Number of Columns, by textwrap.fill(astr, columns, initial_indent='', subsquent_indent='')</h3>
+<div class="outline-text-3" id="text-orga5736dd">
 <div class="org-src-container">
 <pre class="src src-python">import textwrap
 s = "Look into my eyes, look into my eyes, the eyes, the eyes, \
@@ -1338,9 +1338,9 @@ print(textwrap.fill(s, 60))
 </div>
 </div>
 
-<div id="outline-container-org7909241" class="outline-4">
-<h4 id="org7909241">get terminal column size, by os.get_terminal_size().columns</h4>
-<div class="outline-text-4" id="text-org7909241">
+<div id="outline-container-orgd6d5cb3" class="outline-4">
+<h4 id="orgd6d5cb3">get terminal column size, by os.get_terminal_size().columns</h4>
+<div class="outline-text-4" id="text-orgd6d5cb3">
 <div class="org-src-container">
 <pre class="src src-python">import os
 print(os.get_terminal_size().columns)
@@ -1351,12 +1351,12 @@ print(os.get_terminal_size().columns)
 </div>
 
 
-<div id="outline-container-org31ac359" class="outline-3">
-<h3 id="org31ac359">2.17. Handling HTML and XML Entities in Text</h3>
-<div class="outline-text-3" id="text-org31ac359">
-</div><div id="outline-container-org17af5f6" class="outline-4">
-<h4 id="org17af5f6">the html.escape(astr, quote=True) function:</h4>
-<div class="outline-text-4" id="text-org17af5f6">
+<div id="outline-container-org649bca3" class="outline-3">
+<h3 id="org649bca3">2.17. Handling HTML and XML Entities in Text</h3>
+<div class="outline-text-3" id="text-org649bca3">
+</div><div id="outline-container-org074cc0b" class="outline-4">
+<h4 id="org074cc0b">the html.escape(astr, quote=True) function:</h4>
+<div class="outline-text-4" id="text-org074cc0b">
 <p>
 escape means convert special characters to 
 </p>
@@ -1368,9 +1368,9 @@ print(html.escape(s))
 </div>
 </div>
 </div>
-<div id="outline-container-orgc10601d" class="outline-4">
-<h4 id="orgc10601d">the str.encode('ascii', errors='xmlcharrefreplace') function: encode a string to ascii</h4>
-<div class="outline-text-4" id="text-orgc10601d">
+<div id="outline-container-org5688323" class="outline-4">
+<h4 id="org5688323">the str.encode('ascii', errors='xmlcharrefreplace') function: encode a string to ascii</h4>
+<div class="outline-text-4" id="text-org5688323">
 <div class="org-src-container">
 <pre class="src src-python">s = 'Spicy Jalapeño'
 print(s.encode('ascii', errors='xmlcharrefreplace'))
@@ -1381,12 +1381,12 @@ print(s.encode('ascii', errors='xmlcharrefreplace'))
 </div>
 </div>
 
-<div id="outline-container-orgd766c26" class="outline-2">
-<h2 id="orgd766c26">chapter 4: Iterators and Generators</h2>
-<div class="outline-text-2" id="text-orgd766c26">
-</div><div id="outline-container-org5e731c1" class="outline-3">
-<h3 id="org5e731c1">4.1. Manually Consuming an Iterator, by next(iterator[, default]) function</h3>
-<div class="outline-text-3" id="text-org5e731c1">
+<div id="outline-container-orgc7a67f2" class="outline-2">
+<h2 id="orgc7a67f2">chapter 4: Iterators and Generators</h2>
+<div class="outline-text-2" id="text-orgc7a67f2">
+</div><div id="outline-container-org589c74e" class="outline-3">
+<h3 id="org589c74e">4.1. Manually Consuming an Iterator, by next(iterator[, default]) function</h3>
+<div class="outline-text-3" id="text-org589c74e">
 <div class="org-src-container">
 <pre class="src src-python">with open('python-cookbook-3rd.org') as f:
     print(next(f))
@@ -1394,22 +1394,22 @@ print(s.encode('ascii', errors='xmlcharrefreplace'))
 </div>
 </div>
 
-<div id="outline-container-org46f6981" class="outline-4">
-<h4 id="org46f6981">open(filename, ...) function will return a iterator of lines in that file</h4>
+<div id="outline-container-org560d5a3" class="outline-4">
+<h4 id="org560d5a3">open(filename, ...) function will return a iterator of lines in that file</h4>
 </div>
-<div id="outline-container-orgb7d1e60" class="outline-4">
-<h4 id="orgb7d1e60">a list object is not an iterator</h4>
+<div id="outline-container-org7ccd7f7" class="outline-4">
+<h4 id="org7ccd7f7">a list object is not an iterator</h4>
 </div>
-<div id="outline-container-orgb5e554d" class="outline-4">
-<h4 id="orgb5e554d">use the iter(iterable) function to create an iterator given an iterable</h4>
+<div id="outline-container-org2ef04bf" class="outline-4">
+<h4 id="org2ef04bf">use the iter(iterable) function to create an iterator given an iterable</h4>
 </div>
-<div id="outline-container-org7faf2d0" class="outline-4">
-<h4 id="org7faf2d0">the for x in X syntax works both for iterator and list object</h4>
+<div id="outline-container-org0ad7fca" class="outline-4">
+<h4 id="org0ad7fca">the for x in X syntax works both for iterator and list object</h4>
 </div>
 </div>
-<div id="outline-container-org6315ae2" class="outline-3">
-<h3 id="org6315ae2">iterator and iterable</h3>
-<div class="outline-text-3" id="text-org6315ae2">
+<div id="outline-container-org423182e" class="outline-3">
+<h3 id="org423182e">iterator and iterable</h3>
+<div class="outline-text-3" id="text-org423182e">
 <p>
 An object is said to be iterable if it has the <span class="underline"><span class="underline">iter</span></span> method defined.
 The __iter__() will reutrn the iterator object.
@@ -1460,9 +1460,9 @@ if obja is iterator, then iter(obja) and obja is the same object.
 A good ref: <a href="http://www.shutupandship.com/2012/01/understanding-python-iterables-and.html">http://www.shutupandship.com/2012/01/understanding-python-iterables-and.html</a>
 </p>
 </div>
-<div id="outline-container-org972141f" class="outline-4">
-<h4 id="org972141f">a example of create a iterable class</h4>
-<div class="outline-text-4" id="text-org972141f">
+<div id="outline-container-org5e82dcc" class="outline-4">
+<h4 id="org5e82dcc">a example of create a iterable class</h4>
+<div class="outline-text-4" id="text-org5e82dcc">
 <div class="org-src-container">
 <pre class="src src-python">class MyList(list):
     def __iter__(self):
@@ -1497,9 +1497,9 @@ if __name__ == '__main__':
 </div>
 </div>
 
-<div id="outline-container-orgd0af598" class="outline-3">
-<h3 id="orgd0af598">how does the for in loop works</h3>
-<div class="outline-text-3" id="text-orgd0af598">
+<div id="outline-container-orgb993845" class="outline-3">
+<h3 id="orgb993845">how does the for in loop works</h3>
+<div class="outline-text-3" id="text-orgb993845">
 <ol class="org-ol">
 <li>it first get the iterable's iterator object, by calling its __iter__() method</li>
 <li>get the element by invoke the iterator's __next__() method, and bind the value to the variable.</li>
@@ -1507,45 +1507,45 @@ if __name__ == '__main__':
 </ol>
 </div>
 </div>
-<div id="outline-container-org31a0a59" class="outline-3">
-<h3 id="org31a0a59">the next(iterator) function</h3>
-<div class="outline-text-3" id="text-org31a0a59">
+<div id="outline-container-org0bc1170" class="outline-3">
+<h3 id="org0bc1170">the next(iterator) function</h3>
+<div class="outline-text-3" id="text-org0bc1170">
 <p>
 it just return iterator.__next__()
 </p>
 </div>
 </div>
-<div id="outline-container-org1655ecc" class="outline-3">
-<h3 id="org1655ecc">the iter(iterable) function</h3>
-<div class="outline-text-3" id="text-org1655ecc">
+<div id="outline-container-org7537a8f" class="outline-3">
+<h3 id="org7537a8f">the iter(iterable) function</h3>
+<div class="outline-text-3" id="text-org7537a8f">
 <p>
 it just return iterable.__iter__()
 </p>
 </div>
 </div>
-<div id="outline-container-org91a6a2b" class="outline-3">
-<h3 id="org91a6a2b">the len(obj) function</h3>
-<div class="outline-text-3" id="text-org91a6a2b">
+<div id="outline-container-orge7f9707" class="outline-3">
+<h3 id="orge7f9707">the len(obj) function</h3>
+<div class="outline-text-3" id="text-orge7f9707">
 <p>
 it just return obj.__len__()
 </p>
 </div>
 </div>
-<div id="outline-container-orgd17ab67" class="outline-3">
-<h3 id="orgd17ab67">4.2. Delegating Iteration</h3>
-<div class="outline-text-3" id="text-orgd17ab67">
+<div id="outline-container-org32ddfce" class="outline-3">
+<h3 id="org32ddfce">4.2. Delegating Iteration</h3>
+<div class="outline-text-3" id="text-org32ddfce">
 <p>
 When create a class the with a underline container, just define an __iter__() method that forward the request to the underlineing container object.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org570f277" class="outline-3">
-<h3 id="org570f277">4.3. Creating New Iteration Patterns with Generators</h3>
+<div id="outline-container-org2755ff1" class="outline-3">
+<h3 id="org2755ff1">4.3. Creating New Iteration Patterns with Generators</h3>
 </div>
-<div id="outline-container-org163ab6d" class="outline-3">
-<h3 id="org163ab6d">what is a generator?</h3>
-<div class="outline-text-3" id="text-org163ab6d">
+<div id="outline-container-org90381b3" class="outline-3">
+<h3 id="org90381b3">what is a generator?</h3>
+<div class="outline-text-3" id="text-org90381b3">
 <p>
 a generator is a function that contains at lease one 'yeild' statement.
 </p>
@@ -1555,9 +1555,9 @@ Unlike normal function, it's boyd will not be executed when it is be called, ins
 </p>
 </div>
 </div>
-<div id="outline-container-org3df5954" class="outline-3">
-<h3 id="org3df5954">4.4. Implementing the Iterator Protocol</h3>
-<div class="outline-text-3" id="text-org3df5954">
+<div id="outline-container-org63711a7" class="outline-3">
+<h3 id="org63711a7">4.4. Implementing the Iterator Protocol</h3>
+<div class="outline-text-3" id="text-org63711a7">
 <p>
 use the generator instead of the <span class="underline"><span class="underline">next</span></span> method, which will be much simple.
 </p>
@@ -1571,9 +1571,9 @@ yeild from syntax.
 </p>
 </div>
 </div>
-<div id="outline-container-org7efe462" class="outline-3">
-<h3 id="org7efe462">4.5. Iterating in Reverse, by the reversed(obj) function</h3>
-<div class="outline-text-3" id="text-org7efe462">
+<div id="outline-container-orgdc2f2e6" class="outline-3">
+<h3 id="orgdc2f2e6">4.5. Iterating in Reverse, by the reversed(obj) function</h3>
+<div class="outline-text-3" id="text-orgdc2f2e6">
 <p>
 reversed only  works if the obj
 </p>
@@ -1598,9 +1598,9 @@ For example, a file handler returned by the 'open()' function can't be used with
 </div>
 </div>
 </div>
-<div id="outline-container-orgdf69855" class="outline-3">
-<h3 id="orgdf69855">defined a customized  reversed iterator, by define the __reversed__() method</h3>
-<div class="outline-text-3" id="text-orgdf69855">
+<div id="outline-container-org72b5912" class="outline-3">
+<h3 id="org72b5912">defined a customized  reversed iterator, by define the __reversed__() method</h3>
+<div class="outline-text-3" id="text-org72b5912">
 <div class="org-src-container">
 <pre class="src src-python">class CountDown():
     def __init__(self, start):
@@ -1679,12 +1679,12 @@ for a in reversed(cd):
 </div>
 
 
-<div id="outline-container-orgaa9cb8a" class="outline-3">
-<h3 id="orgaa9cb8a">4.6. Defining Generator Functions with Extra State</h3>
-<div class="outline-text-3" id="text-orgaa9cb8a">
-</div><div id="outline-container-org4b78742" class="outline-4">
-<h4 id="org4b78742">print the surrounding previous lines if pattern matched, by use a generator, implemented by a class</h4>
-<div class="outline-text-4" id="text-org4b78742">
+<div id="outline-container-orgaaed3d7" class="outline-3">
+<h3 id="orgaaed3d7">4.6. Defining Generator Functions with Extra State</h3>
+<div class="outline-text-3" id="text-orgaaed3d7">
+</div><div id="outline-container-org2d580c9" class="outline-4">
+<h4 id="org2d580c9">print the surrounding previous lines if pattern matched, by use a generator, implemented by a class</h4>
+<div class="outline-text-4" id="text-org2d580c9">
 <p>
 Here previous lines are states.
 </p>
@@ -1716,12 +1716,12 @@ Good practice: if you need save some states, then don't use a function to create
 </div>
 </div>
 
-<div id="outline-container-org00223e7" class="outline-3">
-<h3 id="org00223e7">4.7. Taking a Slice of an Iterator</h3>
-<div class="outline-text-3" id="text-org00223e7">
-</div><div id="outline-container-org2c3c89d" class="outline-4">
-<h4 id="org2c3c89d">by use of the itertools.islice(start, end, step) functon</h4>
-<div class="outline-text-4" id="text-org2c3c89d">
+<div id="outline-container-orgdb9b193" class="outline-3">
+<h3 id="orgdb9b193">4.7. Taking a Slice of an Iterator</h3>
+<div class="outline-text-3" id="text-orgdb9b193">
+</div><div id="outline-container-org30c7f50" class="outline-4">
+<h4 id="org30c7f50">by use of the itertools.islice(start, end, step) functon</h4>
+<div class="outline-text-4" id="text-org30c7f50">
 <p>
 Because we don't know the size of a iterator or a generator, so we can't slice it directly.
 </p>
@@ -1743,9 +1743,9 @@ The result is the  same as my impllemented one.
 </div>
 </div>
 
-<div id="outline-container-orgea19d09" class="outline-4">
-<h4 id="orgea19d09">a try by me,  works</h4>
-<div class="outline-text-4" id="text-orgea19d09">
+<div id="outline-container-orge31b240" class="outline-4">
+<h4 id="orge31b240">a try by me,  works</h4>
+<div class="outline-text-4" id="text-orge31b240">
 <div class="org-src-container">
 <pre class="src src-python">def slice_iter(aiter, start, end, step):
     n = 0
@@ -1768,9 +1768,9 @@ with open('1.txt') as f:
 </div>
 </div>
 
-<div id="outline-container-org271e401" class="outline-3">
-<h3 id="org271e401">4.8. Skipping the First Part of an Iterable, by itertools.dropwhile(test_func, iterable)</h3>
-<div class="outline-text-3" id="text-org271e401">
+<div id="outline-container-org7f97dac" class="outline-3">
+<h3 id="org7f97dac">4.8. Skipping the First Part of an Iterable, by itertools.dropwhile(test_func, iterable)</h3>
+<div class="outline-text-3" id="text-org7f97dac">
 <div class="org-src-container">
 <pre class="src src-python">import itertools
 with open('1.txt') as f:
@@ -1790,17 +1790,17 @@ if the position is known, then we can use itertools.islice(iterable, start, None
 </div>
 
 
-<div id="outline-container-org8fd92b4" class="outline-3">
-<h3 id="org8fd92b4">4.9. Iterating Over All Possible Combinations or Permutations</h3>
-<div class="outline-text-3" id="text-org8fd92b4">
+<div id="outline-container-org08314c9" class="outline-3">
+<h3 id="org08314c9">4.9. Iterating Over All Possible Combinations or Permutations</h3>
+<div class="outline-text-3" id="text-org08314c9">
 <p>
 An important aspect  of itertools module: for complex iteration tasks, it is very likely there is an exist solution.
 </p>
 </div>
 
-<div id="outline-container-org0929ed4" class="outline-4">
-<h4 id="org0929ed4">create permutations from a iterable collection of items, by itertools.permutations(iterable[, len])</h4>
-<div class="outline-text-4" id="text-org0929ed4">
+<div id="outline-container-org6937c7a" class="outline-4">
+<h4 id="org6937c7a">create permutations from a iterable collection of items, by itertools.permutations(iterable[, len])</h4>
+<div class="outline-text-4" id="text-org6937c7a">
 <p>
 The return value is an iterator
 </p>
@@ -1814,9 +1814,9 @@ for b in permutations(a, 2):
 </div>
 </div>
 
-<div id="outline-container-orga9bc129" class="outline-4">
-<h4 id="orga9bc129">create combinations from a iterable collection of items, by itertools.combinations(iterable, len)</h4>
-<div class="outline-text-4" id="text-orga9bc129">
+<div id="outline-container-orgc3cdf77" class="outline-4">
+<h4 id="orgc3cdf77">create combinations from a iterable collection of items, by itertools.combinations(iterable, len)</h4>
+<div class="outline-text-4" id="text-orgc3cdf77">
 <p>
 The order of items does not matter
 </p>
@@ -1830,9 +1830,9 @@ for b in combinations(a, 2):
 </div>
 </div>
 
-<div id="outline-container-org2f924a7" class="outline-4">
-<h4 id="org2f924a7">create combinations from a iterable collection of items, by itertools.combinations_with_replacement(iterable, len), same item can exist more than one times.</h4>
-<div class="outline-text-4" id="text-org2f924a7">
+<div id="outline-container-orgc4ee9a7" class="outline-4">
+<h4 id="orgc4ee9a7">create combinations from a iterable collection of items, by itertools.combinations_with_replacement(iterable, len), same item can exist more than one times.</h4>
+<div class="outline-text-4" id="text-orgc4ee9a7">
 <p>
 The order of items does not matter
 </p>
@@ -1847,9 +1847,9 @@ for b in combinations_with_replacement(a, 4):
 </div>
 </div>
 
-<div id="outline-container-org4549318" class="outline-3">
-<h3 id="org4549318">4.10. Iterating Over the Index-Value Pairs of a Sequence, by enumerate(iterable[, start_index])</h3>
-<div class="outline-text-3" id="text-org4549318">
+<div id="outline-container-org887eac3" class="outline-3">
+<h3 id="org887eac3">4.10. Iterating Over the Index-Value Pairs of a Sequence, by enumerate(iterable[, start_index])</h3>
+<div class="outline-text-3" id="text-org887eac3">
 <div class="org-src-container">
 <pre class="src src-python">a = ['a', 'b', 'c']
 for i, v in enumerate(a, 1):
@@ -1859,9 +1859,9 @@ for i, v in enumerate(a, 1):
 </div>
 </div>
 
-<div id="outline-container-orgecd7569" class="outline-3">
-<h3 id="orgecd7569">4.11. Iterating Over Multiple Sequences Simultaneously, by zip(iterable1, iterable2, ...), shortest</h3>
-<div class="outline-text-3" id="text-orgecd7569">
+<div id="outline-container-org2c8935b" class="outline-3">
+<h3 id="org2c8935b">4.11. Iterating Over Multiple Sequences Simultaneously, by zip(iterable1, iterable2, ...), shortest</h3>
+<div class="outline-text-3" id="text-org2c8935b">
 <p>
 The zip function will create an iterator that return tuples: first element from iterable1, second element from iterable2, ...
 Should the size of all iterables be the same? =&gt; No, it can be different. the returned size is the same as the shortest size of all iterables.
@@ -1878,9 +1878,9 @@ for v in zip(a, b):
 
 
 
-<div id="outline-container-orgb818cdb" class="outline-3">
-<h3 id="orgb818cdb">Iterating Over Multiple Sequences Simultaneously, by itertools.zip_longest(iterable1, iterable2, ...), longest</h3>
-<div class="outline-text-3" id="text-orgb818cdb">
+<div id="outline-container-orgafe668e" class="outline-3">
+<h3 id="orgafe668e">Iterating Over Multiple Sequences Simultaneously, by itertools.zip_longest(iterable1, iterable2, ...), longest</h3>
+<div class="outline-text-3" id="text-orgafe668e">
 <p>
 If you want the returned iterator take the longest size, then use zip_longest. The element value will be None if that  iterable is exzasted.
 </p>
@@ -1899,9 +1899,9 @@ for v in zip_longest(a, b):
 </div>
 </div>
 
-<div id="outline-container-org6a299f0" class="outline-3">
-<h3 id="org6a299f0">4.12. Iterating on Items in Separate Containers, by itertools.chain(iterable1, iterable2, ...), concat iterables</h3>
-<div class="outline-text-3" id="text-org6a299f0">
+<div id="outline-container-org4310b1c" class="outline-3">
+<h3 id="org4310b1c">4.12. Iterating on Items in Separate Containers, by itertools.chain(iterable1, iterable2, ...), concat iterables</h3>
+<div class="outline-text-3" id="text-org4310b1c">
 <div class="org-src-container">
 <pre class="src src-python">from itertools import chain
 a =  [1,  2, 3]
@@ -1915,9 +1915,9 @@ for v in chain(a, b):
 
 
 
-<div id="outline-container-org7e0a67a" class="outline-3">
-<h3 id="org7e0a67a">4.13. Creating Data Processing Pipelines</h3>
-<div class="outline-text-3" id="text-org7e0a67a">
+<div id="outline-container-org0da8a12" class="outline-3">
+<h3 id="org0da8a12">4.13. Creating Data Processing Pipelines</h3>
+<div class="outline-text-3" id="text-org0da8a12">
 <p>
 This section is about divide  a task to many small pipelines(steps), by use of generator
 Generator is a  producer, for loop is a comsumer.
@@ -1925,9 +1925,9 @@ Generator is a  producer, for loop is a comsumer.
 </div>
 
 
-<div id="outline-container-orgcad3a90" class="outline-4">
-<h4 id="orgcad3a90">example: iterate all matched lines from all files in a directory, recursively</h4>
-<div class="outline-text-4" id="text-orgcad3a90">
+<div id="outline-container-org478a561" class="outline-4">
+<h4 id="org478a561">example: iterate all matched lines from all files in a directory, recursively</h4>
+<div class="outline-text-4" id="text-org478a561">
 <p>
 相当于把多重QIAN TAO循环给扁平化了。但执行的顺序完全相同。generator确实比较好用。
 </p>
@@ -1966,9 +1966,9 @@ for v in matched_lines:
 </div>
 </div>
 
-<div id="outline-container-org012ff7c" class="outline-4">
-<h4 id="org012ff7c">[not work]change two embeded for loop to two seperate one by generator</h4>
-<div class="outline-text-4" id="text-org012ff7c">
+<div id="outline-container-org1028931" class="outline-4">
+<h4 id="org1028931">[not work]change two embeded for loop to two seperate one by generator</h4>
+<div class="outline-text-4" id="text-org1028931">
 <div class="org-src-container">
 <pre class="src src-python">a = [1, 2, 3]
 b = ['a', 'b']
@@ -1989,9 +1989,9 @@ def gen_b(aiter, biter):
 </div>
 </div>
 
-<div id="outline-container-org1325569" class="outline-3">
-<h3 id="org1325569">4.14. Flattening a Nested Sequence, by generator, recursively</h3>
-<div class="outline-text-3" id="text-org1325569">
+<div id="outline-container-orgc07549f" class="outline-3">
+<h3 id="orgc07549f">4.14. Flattening a Nested Sequence, by generator, recursively</h3>
+<div class="outline-text-3" id="text-orgc07549f">
 <p>
 Why this function is not included in itertools module?
 </p>
@@ -2017,9 +2017,9 @@ for v in flatten(a):
 </div>
 
 
-<div id="outline-container-org6faf014" class="outline-3">
-<h3 id="org6faf014">yield from just like a for loop</h3>
-<div class="outline-text-3" id="text-org6faf014">
+<div id="outline-container-orgcf7804f" class="outline-3">
+<h3 id="orgcf7804f">yield from just like a for loop</h3>
+<div class="outline-text-3" id="text-orgcf7804f">
 <div class="org-src-container">
 <pre class="src src-python">def gen_a():
     for v in range(3):
@@ -2044,9 +2044,9 @@ for v in for_b(gen_a()):
 </div>
 </div>
 
-<div id="outline-container-org52935b9" class="outline-3">
-<h3 id="org52935b9">4.15. Iterating in Sorted Order Over Merged Sorted Iterables, by heapq.merge(iterable1, iterable2, ...)</h3>
-<div class="outline-text-3" id="text-org52935b9">
+<div id="outline-container-orgc70f8d7" class="outline-3">
+<h3 id="orgc70f8d7">4.15. Iterating in Sorted Order Over Merged Sorted Iterables, by heapq.merge(iterable1, iterable2, ...)</h3>
+<div class="outline-text-3" id="text-orgc70f8d7">
 <p>
 the input iterables should in sorted order. then it will create an new iterable of sorted items from all input.
 </p>
@@ -2069,9 +2069,9 @@ Similar  to <code>sorted(itertools.chain(*iterables))</code>, but will not read 
 </p>
 </div>
 </div>
-<div id="outline-container-org35b2463" class="outline-3">
-<h3 id="org35b2463">4.16. Replacing Infinite conditional while Loops with an Iterator, by iter(callable, sentinel) function</h3>
-<div class="outline-text-3" id="text-org35b2463">
+<div id="outline-container-orgf739acd" class="outline-3">
+<h3 id="orgf739acd">4.16. Replacing Infinite conditional while Loops with an Iterator, by iter(callable, sentinel) function</h3>
+<div class="outline-text-3" id="text-orgf739acd">
 <p>
 invoke the callable UNTIL it returns the sentinel
 </p>
@@ -2095,20 +2095,20 @@ for v in iter(foo, 3):
 </div>
 </div>
 
-<div id="outline-container-orgcce2a90" class="outline-2">
-<h2 id="orgcce2a90">chapter 8: Classes and Objects</h2>
-<div class="outline-text-2" id="text-orgcce2a90">
-</div><div id="outline-container-org6808b44" class="outline-3">
-<h3 id="org6808b44">8.1. Changing the String Representation of Instances</h3>
-<div class="outline-text-3" id="text-org6808b44">
+<div id="outline-container-org893fb6f" class="outline-2">
+<h2 id="org893fb6f">chapter 8: Classes and Objects</h2>
+<div class="outline-text-2" id="text-org893fb6f">
+</div><div id="outline-container-org20b32b0" class="outline-3">
+<h3 id="org20b32b0">8.1. Changing the String Representation of Instances</h3>
+<div class="outline-text-3" id="text-org20b32b0">
 <p>
 It's good practice to define both __repr__() and __str__()
 </p>
 </div>
 
-<div id="outline-container-orgb62986b" class="outline-4">
-<h4 id="orgb62986b">the __repr__() method of a class: the literal representation of a object</h4>
-<div class="outline-text-4" id="text-orgb62986b">
+<div id="outline-container-orgf985aa8" class="outline-4">
+<h4 id="orgf985aa8">the __repr__() method of a class: the literal representation of a object</h4>
+<div class="outline-text-4" id="text-orgf985aa8">
 <p>
 eval(repr(x)) = x
 It it not possiable to create an object from the repr(x) results, then the repr(x) result should be enclosed in '&lt;&gt;' 
@@ -2116,9 +2116,9 @@ It it not possiable to create an object from the repr(x) results, then the repr(
 </div>
 </div>
 
-<div id="outline-container-org0414281" class="outline-4">
-<h4 id="org0414281">the __str__() method of a class: the toString method  of a object</h4>
-<div class="outline-text-4" id="text-org0414281">
+<div id="outline-container-org870ef6d" class="outline-4">
+<h4 id="org870ef6d">the __str__() method of a class: the toString method  of a object</h4>
+<div class="outline-text-4" id="text-org870ef6d">
 <p>
 The method will be called  when the object is passed to print() function
 If __str__() is not provided, then __repr__() will be used.
@@ -2126,9 +2126,9 @@ If __str__() is not provided, then __repr__() will be used.
 </div>
 </div>
 
-<div id="outline-container-org30a29e7" class="outline-4">
-<h4 id="org30a29e7">the format function: positional field, by {N}, N means the nth parameter</h4>
-<div class="outline-text-4" id="text-org30a29e7">
+<div id="outline-container-org2ac9bf7" class="outline-4">
+<h4 id="org2ac9bf7">the format function: positional field, by {N}, N means the nth parameter</h4>
+<div class="outline-text-4" id="text-org2ac9bf7">
 <p>
 ValueError: cannot switch from manual field specification to automatic field numbering
 If you put a numbers to a field, then you should put numbers to all field.
@@ -2156,12 +2156,12 @@ for {0!r} or {0!s}, '!r' means use __repr__(), '!s' means use __str__(). '!s' is
 </div>
 </div>
 
-<div id="outline-container-org9c09329" class="outline-3">
-<h3 id="org9c09329">8.2. Customizing String Formatting</h3>
-<div class="outline-text-3" id="text-org9c09329">
-</div><div id="outline-container-orga8ecce3" class="outline-4">
-<h4 id="orga8ecce3">the format(aobj[, format_spec]) builtin function</h4>
-<div class="outline-text-4" id="text-orga8ecce3">
+<div id="outline-container-org3157c91" class="outline-3">
+<h3 id="org3157c91">8.2. Customizing String Formatting</h3>
+<div class="outline-text-3" id="text-org3157c91">
+</div><div id="outline-container-orge035683" class="outline-4">
+<h4 id="orge035683">the format(aobj[, format_spec]) builtin function</h4>
+<div class="outline-text-4" id="text-orge035683">
 <p>
 The function is equal to: aobj.__format__(format_spec)
 而一般的aobj.__format__(spec) 的实现是调用 str.format(...) 函数来实现。
@@ -2207,9 +2207,9 @@ print(p)
 </div>
 </div>
 
-<div id="outline-container-orga662006" class="outline-3">
-<h3 id="orga662006">[NOT FINISHED]8.3. Making Objects Support the Context-Management Protocol, that is, the with statement</h3>
-<div class="outline-text-3" id="text-orga662006">
+<div id="outline-container-orga1363f4" class="outline-3">
+<h3 id="orga1363f4">[NOT FINISHED]8.3. Making Objects Support the Context-Management Protocol, that is, the with statement</h3>
+<div class="outline-text-3" id="text-orga1363f4">
 <p>
 To provide with statement support, just define two methods:
 </p>
@@ -2229,12 +2229,12 @@ To provide with statement support, just define two methods:
 </div>
 </div>
 
-<div id="outline-container-orgce8e34d" class="outline-3">
-<h3 id="orgce8e34d">8.5. Encapsulating Names in a Class</h3>
-<div class="outline-text-3" id="text-orgce8e34d">
-</div><div id="outline-container-org7b21f58" class="outline-4">
-<h4 id="org7b21f58">one underscore _ means private variable, just convention, you can still access that  variable outside  of a class</h4>
-<div class="outline-text-4" id="text-org7b21f58">
+<div id="outline-container-org81f18d8" class="outline-3">
+<h3 id="org81f18d8">8.5. Encapsulating Names in a Class</h3>
+<div class="outline-text-3" id="text-org81f18d8">
+</div><div id="outline-container-orgcae4b5b" class="outline-4">
+<h4 id="orgcae4b5b">one underscore _ means private variable, just convention, you can still access that  variable outside  of a class</h4>
+<div class="outline-text-4" id="text-orgcae4b5b">
 <div class="org-src-container">
 <pre class="src src-python">class Person:
     def __init__(self, name, age):
@@ -2251,9 +2251,9 @@ print(p._name, p._age)
 </div>
 </div>
 
-<div id="outline-container-org4c15a74" class="outline-4">
-<h4 id="org4c15a74">two underscore __ means name mangling, when used for inheritance</h4>
-<div class="outline-text-4" id="text-org4c15a74">
+<div id="outline-container-orgf4dfffa" class="outline-4">
+<h4 id="orgf4dfffa">two underscore __ means name mangling, when used for inheritance</h4>
+<div class="outline-text-4" id="text-orgf4dfffa">
 <p>
 the variable will be renamed to _C__name. Then it will not override the super class's variable.
 Because it is also has one leading underscore, so the rules for one underscore also applies.
@@ -2280,9 +2280,9 @@ print(p._name, p._Person__age)
 </div>
 </div>
 
-<div id="outline-container-orga0a3ccb" class="outline-3">
-<h3 id="orga0a3ccb">8.6. Creating Managed Attributes, with @property decorator/annotation, add a setter, getter, deleter to a field</h3>
-<div class="outline-text-3" id="text-orga0a3ccb">
+<div id="outline-container-org7a7b8bc" class="outline-3">
+<h3 id="org7a7b8bc">8.6. Creating Managed Attributes, with @property decorator/annotation, add a setter, getter, deleter to a field</h3>
+<div class="outline-text-3" id="text-org7a7b8bc">
 <p>
 Steps:
 </p>
@@ -2328,9 +2328,9 @@ print(type(Person.name), dir(Person.name))
 </div>
 </div>
 
-<div id="outline-container-org4b9a2c7" class="outline-3">
-<h3 id="org4b9a2c7">create caculate attribute by @property, getter, setter, then the attribute works like a attribute,  not a method</h3>
-<div class="outline-text-3" id="text-org4b9a2c7">
+<div id="outline-container-org7bb9131" class="outline-3">
+<h3 id="org7bb9131">create caculate attribute by @property, getter, setter, then the attribute works like a attribute,  not a method</h3>
+<div class="outline-text-3" id="text-org7bb9131">
 <p>
 Seems a good application of @property.
 </p>
@@ -2353,9 +2353,9 @@ print(p.area)
 </div>
 </div>
 
-<div id="outline-container-orge4fcbbd" class="outline-3">
-<h3 id="orge4fcbbd">8.7. Calling a Method on a Parent Class, by super() function</h3>
-<div class="outline-text-3" id="text-orge4fcbbd">
+<div id="outline-container-org9dea7e4" class="outline-3">
+<h3 id="org9dea7e4">8.7. Calling a Method on a Parent Class, by super() function</h3>
+<div class="outline-text-3" id="text-org9dea7e4">
 <p>
 There are many format
 </p>
@@ -2367,9 +2367,9 @@ super(type, type2) # issubclass(type2, type). issubclass(object, object) is True
 </div>
 </div>
 </div>
-<div id="outline-container-orge960494" class="outline-3">
-<h3 id="orge960494">8.9. Creating a New Kind of Class or Instance Attribute, by creating a descriptor class for the type</h3>
-<div class="outline-text-3" id="text-orge960494">
+<div id="outline-container-org94bd498" class="outline-3">
+<h3 id="org94bd498">8.9. Creating a New Kind of Class or Instance Attribute, by creating a descriptor class for the type</h3>
+<div class="outline-text-3" id="text-org94bd498">
 <p>
 如果一个类定义了三个函数： <span class="underline"><span class="underline">get</span></span>, <span class="underline"><span class="underline">set</span></span>, <span class="underline"><span class="underline">delete</span></span>, 则它是一个descriptor, 可能通过它来为一个instance的attribute添加一些get, set时的函数。
 </p>
@@ -2425,12 +2425,12 @@ print(p.__dict__)
 </div>
 </div>
 
-<div id="outline-container-orgd59edb4" class="outline-3">
-<h3 id="orgd59edb4">8.10. Using Lazily Computed Properties, an application of descriptor</h3>
+<div id="outline-container-org10f04d1" class="outline-3">
+<h3 id="org10f04d1">8.10. Using Lazily Computed Properties, an application of descriptor</h3>
 </div>
-<div id="outline-container-orgcae63b0" class="outline-3">
-<h3 id="orgcae63b0">8.11. Simplifying the Initialization of Data Structures, by define a common base class</h3>
-<div class="outline-text-3" id="text-orgcae63b0">
+<div id="outline-container-orgc368d58" class="outline-3">
+<h3 id="orgc368d58">8.11. Simplifying the Initialization of Data Structures, by define a common base class</h3>
+<div class="outline-text-3" id="text-orgc368d58">
 <div class="org-src-container">
 <pre class="src src-python"># python  is very flexiable
 class Structure:
@@ -2462,9 +2462,9 @@ print(p)
 </div>
 </div>
 
-<div id="outline-container-orga64efd8" class="outline-3">
-<h3 id="orga64efd8">class attributes can also be accessed by instance object, such as self, but only when the same instance attribute not exists</h3>
-<div class="outline-text-3" id="text-orga64efd8">
+<div id="outline-container-orge843857" class="outline-3">
+<h3 id="orge843857">class attributes can also be accessed by instance object, such as self, but only when the same instance attribute not exists</h3>
+<div class="outline-text-3" id="text-orge843857">
 <div class="org-src-container">
 <pre class="src src-python">class Foo:
     class_attr = "ABC"
@@ -2489,12 +2489,12 @@ print(b.class_attr is Bar.class_attr)
 </div>
 </div>
 
-<div id="outline-container-org5342f68" class="outline-3">
-<h3 id="org5342f68">8.12. Defining an Interface or Abstract Base Class</h3>
-<div class="outline-text-3" id="text-org5342f68">
-</div><div id="outline-container-orgce104bf" class="outline-4">
-<h4 id="orgce104bf">create an abstract base class, or interface, by abc.ABCMeta, abc.abstractmethod</h4>
-<div class="outline-text-4" id="text-orgce104bf">
+<div id="outline-container-org5d33fe1" class="outline-3">
+<h3 id="org5d33fe1">8.12. Defining an Interface or Abstract Base Class</h3>
+<div class="outline-text-3" id="text-org5d33fe1">
+</div><div id="outline-container-org959fcb1" class="outline-4">
+<h4 id="org959fcb1">create an abstract base class, or interface, by abc.ABCMeta, abc.abstractmethod</h4>
+<div class="outline-text-4" id="text-org959fcb1">
 <p>
 A abstract class can't be initialized.
 </p>
@@ -2520,9 +2520,9 @@ a = IStream()
 </div>
 </div>
 
-<div id="outline-container-orgde673a1" class="outline-4">
-<h4 id="orgde673a1">register another class to a 'sub class ' of a abstract base class, by abc.register(cls) function</h4>
-<div class="outline-text-4" id="text-orgde673a1">
+<div id="outline-container-org14f8fb6" class="outline-4">
+<h4 id="org14f8fb6">register another class to a 'sub class ' of a abstract base class, by abc.register(cls) function</h4>
+<div class="outline-text-4" id="text-org14f8fb6">
 <p>
 Then isinstance(obj, AbstractBaseClass) will be  True. This let another class which is not a subclass of a base class, but can still pass the isinstance() test, which means implementing a interface.
 </p>
@@ -2540,17 +2540,17 @@ isinstance(f, IStream) # Returns True
 </div>
 </div>
 
-<div id="outline-container-org204209f" class="outline-3">
-<h3 id="org204209f">8.13. Implementing a Data Model or Type System, by descriptor</h3>
-<div class="outline-text-3" id="text-org204209f">
+<div id="outline-container-orgfdcc896" class="outline-3">
+<h3 id="orgfdcc896">8.13. Implementing a Data Model or Type System, by descriptor</h3>
+<div class="outline-text-3" id="text-orgfdcc896">
 <p>
 感觉根之前小节讲到的descriptor相同，只不过用了继承的方式写了很多细小的descriptor。
 </p>
 </div>
 </div>
-<div id="outline-container-orga15da62" class="outline-3">
-<h3 id="orga15da62">what is a descriptor? and its usage</h3>
-<div class="outline-text-3" id="text-orga15da62">
+<div id="outline-container-org9d12d96" class="outline-3">
+<h3 id="org9d12d96">what is a descriptor? and its usage</h3>
+<div class="outline-text-3" id="text-org9d12d96">
 <p>
 A descriptor is  a class attribute object, which has <span class="underline"><span class="underline">get</span></span>, <span class="underline"><span class="underline">set</span></span>, or <span class="underline"><span class="underline">delete</span></span> method, is used to define how a instance attribute is get, set, and delete. When an  instance attribute is get, the descriptor's <span class="underline"><span class="underline">get</span></span> method will be called. The same thing applys to <span class="underline"><span class="underline">set</span></span> and <span class="underline"><span class="underline">delete</span></span>
 </p>
@@ -2602,9 +2602,9 @@ print(c.radius)
 </div>
 </div>
 
-<div id="outline-container-orgeb47f8f" class="outline-3">
-<h3 id="orgeb47f8f">8.16. Defining More Than One Constructor in a Class, use a class method</h3>
-<div class="outline-text-3" id="text-orgeb47f8f">
+<div id="outline-container-orgbceee7c" class="outline-3">
+<h3 id="orgbceee7c">8.16. Defining More Than One Constructor in a Class, use a class method</h3>
+<div class="outline-text-3" id="text-orgbceee7c">
 <p>
 GP: Always only assign values in the default  constructor(<span class="underline"><span class="underline">init</span></span>), and do other things by other constructors
 </p>
@@ -2634,12 +2634,12 @@ print(d1, d2)
 </div>
 </div>
 
-<div id="outline-container-org36237da" class="outline-3">
-<h3 id="org36237da">8.17. Creating an Instance Without Invoking init</h3>
-<div class="outline-text-3" id="text-org36237da">
-</div><div id="outline-container-org1beccf5" class="outline-4">
-<h4 id="org1beccf5">the object.__new__(*args, **kwargs) method: create a bare object</h4>
-<div class="outline-text-4" id="text-org1beccf5">
+<div id="outline-container-orgf08812c" class="outline-3">
+<h3 id="orgf08812c">8.17. Creating an Instance Without Invoking init</h3>
+<div class="outline-text-3" id="text-orgf08812c">
+</div><div id="outline-container-org8fec581" class="outline-4">
+<h4 id="org8fec581">the object.__new__(*args, **kwargs) method: create a bare object</h4>
+<div class="outline-text-4" id="text-org8fec581">
 <p>
 Every object has a <span class="underline"><span class="underline">new__method, which is inheritantanted from type.__new</span></span>.
 </p>
@@ -2668,9 +2668,9 @@ print(dir(g))
 </div>
 </div>
 </div>
-<div id="outline-container-org0add6eb" class="outline-4">
-<h4 id="org0add6eb">Problem: how an object is constructed?</h4>
-<div class="outline-text-4" id="text-org0add6eb">
+<div id="outline-container-org32525e4" class="outline-4">
+<h4 id="org32525e4">Problem: how an object is constructed?</h4>
+<div class="outline-text-4" id="text-org32525e4">
 <p>
 I guess first create a bare object by  calling the <span class="underline"><span class="underline">new</span></span> method, then call the object's <span class="underline"><span class="underline">init</span></span> method.
 </p>
@@ -2678,12 +2678,12 @@ I guess first create a bare object by  calling the <span class="underline"><span
 </div>
 </div>
 
-<div id="outline-container-org8641130" class="outline-3">
-<h3 id="org8641130">8.18. Extending Classes with Mixins</h3>
-<div class="outline-text-3" id="text-org8641130">
-</div><div id="outline-container-org18d9912" class="outline-4">
-<h4 id="org18d9912">mixin classes, used to extend function of a class, class customization, by multiple inheritance</h4>
-<div class="outline-text-4" id="text-org18d9912">
+<div id="outline-container-orgc96a25e" class="outline-3">
+<h3 id="orgc96a25e">8.18. Extending Classes with Mixins</h3>
+<div class="outline-text-3" id="text-orgc96a25e">
+</div><div id="outline-container-org4208663" class="outline-4">
+<h4 id="org4208663">mixin classes, used to extend function of a class, class customization, by multiple inheritance</h4>
+<div class="outline-text-4" id="text-org4208663">
 <p>
 SOLVED, see another comment. How below codes works? For 'super().__getitem__(key)', why dict.__getitem__ method will be called?
 </p>
@@ -2734,9 +2734,9 @@ print(d['x'])
 </div>
 </div>
 
-<div id="outline-container-org4004fca" class="outline-3">
-<h3 id="org4004fca">mutiple inheritance: how method/attribue are resolved if they exists in more than one  super classes</h3>
-<div class="outline-text-3" id="text-org4004fca">
+<div id="outline-container-org7d0b161" class="outline-3">
+<h3 id="org7d0b161">mutiple inheritance: how method/attribue are resolved if they exists in more than one  super classes</h3>
+<div class="outline-text-3" id="text-org7d0b161">
 <p>
 A method/attribute is resolved in the order of all parent class given.
 e.g: 
@@ -2746,9 +2746,9 @@ if a method 'aaa' is defined in  both A and B, then A.aaa will be used.
 </div>
 </div>
 
-<div id="outline-container-org6233c5c" class="outline-3">
-<h3 id="org6233c5c">python multiple inheritance, super and MRO(method resolution order)</h3>
-<div class="outline-text-3" id="text-org6233c5c">
+<div id="outline-container-org3824642" class="outline-3">
+<h3 id="org3824642">python multiple inheritance, super and MRO(method resolution order)</h3>
+<div class="outline-text-3" id="text-org3824642">
 <p>
 Guoid's words:
 <a href="http://python-history.blogspot.fi/2010/06/method-resolution-order.html">http://python-history.blogspot.fi/2010/06/method-resolution-order.html</a>
@@ -2794,9 +2794,9 @@ print("MRO() of C: ", C.__class__.mro(C))
 </div>
 </div>
 
-<div id="outline-container-orgae0ff13" class="outline-3">
-<h3 id="orgae0ff13">8.19. Implementing Stateful Objects or State Machines</h3>
-<div class="outline-text-3" id="text-orgae0ff13">
+<div id="outline-container-orgc61723c" class="outline-3">
+<h3 id="orgc61723c">8.19. Implementing Stateful Objects or State Machines</h3>
+<div class="outline-text-3" id="text-orgc61723c">
 <p>
 Implementing the state pattern, by creating class for each state. In a class for one state, only define the method  use to handle the current state, all other methods should raise a 'NotImplementedError'.
 Will see this latter
@@ -2804,9 +2804,9 @@ Will see this latter
 </div>
 </div>
 
-<div id="outline-container-orgc13f35b" class="outline-3">
-<h3 id="orgc13f35b">8.20. Calling a Method on an Object Given the Name As a String, by getattr</h3>
-<div class="outline-text-3" id="text-orgc13f35b">
+<div id="outline-container-orgb110ce9" class="outline-3">
+<h3 id="orgb110ce9">8.20. Calling a Method on an Object Given the Name As a String, by getattr</h3>
+<div class="outline-text-3" id="text-orgb110ce9">
 <p>
 A method is just an attribute of an object, so first get the method by 'getattr' given string name
 </p>
@@ -2822,9 +2822,9 @@ getattr(f, 'foo')()
 </div>
 </div>
 
-<div id="outline-container-org4601573" class="outline-3">
-<h3 id="org4601573">8.20. Calling a Method on an Object Given the Name As a String, by operator.methodcaller(name, *args)</h3>
-<div class="outline-text-3" id="text-org4601573">
+<div id="outline-container-org498afd6" class="outline-3">
+<h3 id="org498afd6">8.20. Calling a Method on an Object Given the Name As a String, by operator.methodcaller(name, *args)</h3>
+<div class="outline-text-3" id="text-org498afd6">
 <p>
 The benifit of methodcaller is that it will fix all parameters of the method. So if the method will be  called given same parameters for many differenntt object, this method might be better
 </p>
@@ -2841,9 +2841,9 @@ operator.methodcaller('foo', 3, 4)(f)
 </div>
 </div>
 
-<div id="outline-container-org955516e" class="outline-3">
-<h3 id="org955516e">8.21. Implementing the Visitor Pattern</h3>
-<div class="outline-text-3" id="text-org955516e">
+<div id="outline-container-org1c849d3" class="outline-3">
+<h3 id="org1c849d3">8.21. Implementing the Visitor Pattern</h3>
+<div class="outline-text-3" id="text-org1c849d3">
 <p>
 感觉这里所说的vistor pattern主要是对用于处理包含不同类型对象的list. 用于通用处理。
 基于类型系统的visitor pattern, 是通过在不同的基础类中的accept函数来实现 dispatch table的。相当于把dispatch table也耦合在基础类定义中了。
@@ -2911,9 +2911,9 @@ for file in files:
 </div>
 </div>
 
-<div id="outline-container-orgb8abf76" class="outline-3">
-<h3 id="orgb8abf76">dispatch table in python, decided by object type</h3>
-<div class="outline-text-3" id="text-orgb8abf76">
+<div id="outline-container-orgdb38c5f" class="outline-3">
+<h3 id="orgdb38c5f">dispatch table in python, decided by object type</h3>
+<div class="outline-text-3" id="text-orgdb38c5f">
 <p>
 将所有处理函数写在一个类中， 提供一个根据待处理对象类型分发的函数。 这个作为dispatch 基类。然后再定义针对每种类型的visit函数就行了。
 这里类有两个目的：
@@ -2946,9 +2946,9 @@ class FooDispatcher(Dispatcher):
 </div>
 </div>
 </div>
-<div id="outline-container-org7448646" class="outline-3">
-<h3 id="org7448646">8.23. Managing Memory in Cyclic Data Structures, by weakref.ref(aobject)</h3>
-<div class="outline-text-3" id="text-org7448646">
+<div id="outline-container-org63ef428" class="outline-3">
+<h3 id="org63ef428">8.23. Managing Memory in Cyclic Data Structures, by weakref.ref(aobject)</h3>
+<div class="outline-text-3" id="text-org63ef428">
 <p>
 When cyclic reference exists, the some  object will never be deleted, because its reference coutns is  large than 0.
 A weakref is just a reference that don't increase the reference count. To dereference, just call it like a function. If the referenced object still exists, the object will be returne, otherwise None will be returned.
@@ -2977,12 +2977,12 @@ print(b())
 </div>
 </div>
 
-<div id="outline-container-org6ef8943" class="outline-3">
-<h3 id="org6ef8943">8.24. Making Classes Support Comparison Operations, by define many comparision builtin method: <span class="underline"><span class="underline">eq</span></span>, <span class="underline"><span class="underline">lt</span></span>, <span class="underline"><span class="underline">le</span></span>, <span class="underline"><span class="underline">gt</span></span>, <span class="underline"><span class="underline">ge</span></span>, <span class="underline"><span class="underline">ne</span></span></h3>
+<div id="outline-container-org29cce0e" class="outline-3">
+<h3 id="org29cce0e">8.24. Making Classes Support Comparison Operations, by define many comparision builtin method: <span class="underline"><span class="underline">eq</span></span>, <span class="underline"><span class="underline">lt</span></span>, <span class="underline"><span class="underline">le</span></span>, <span class="underline"><span class="underline">gt</span></span>, <span class="underline"><span class="underline">ge</span></span>, <span class="underline"><span class="underline">ne</span></span></h3>
 </div>
-<div id="outline-container-orgb884d4f" class="outline-3">
-<h3 id="orgb884d4f">8.25. Creating Cached Instances, by  create a factory method(a class method)</h3>
-<div class="outline-text-3" id="text-orgb884d4f">
+<div id="outline-container-org3ea71e7" class="outline-3">
+<h3 id="org3ea71e7">8.25. Creating Cached Instances, by  create a factory method(a class method)</h3>
+<div class="outline-text-3" id="text-org3ea71e7">
 <p>
 If the parameter are the same, then return an existing object.
 </p>
@@ -2990,15 +2990,15 @@ If the parameter are the same, then return an existing object.
 </div>
 </div>
 
-<div id="outline-container-orge869cd2" class="outline-2">
-<h2 id="orge869cd2">chapter 5: Files and I/O</h2>
-<div class="outline-text-2" id="text-orge869cd2">
-</div><div id="outline-container-org8f923db" class="outline-3">
-<h3 id="org8f923db">5.1. Reading and Writing Text Data</h3>
-<div class="outline-text-3" id="text-org8f923db">
-</div><div id="outline-container-org421d789" class="outline-4">
-<h4 id="org421d789">open a file</h4>
-<div class="outline-text-4" id="text-org421d789">
+<div id="outline-container-orga8b4429" class="outline-2">
+<h2 id="orga8b4429">chapter 5: Files and I/O</h2>
+<div class="outline-text-2" id="text-orga8b4429">
+</div><div id="outline-container-org3ca874c" class="outline-3">
+<h3 id="org3ca874c">5.1. Reading and Writing Text Data</h3>
+<div class="outline-text-3" id="text-org3ca874c">
+</div><div id="outline-container-orgef39640" class="outline-4">
+<h4 id="orgef39640">open a file</h4>
+<div class="outline-text-4" id="text-orgef39640">
 <p>
 the 't' in mode means text.
 </p>
@@ -3023,9 +3023,9 @@ f = open('1.txt', 'rt', errors='ignore') #just ignore the char that can't be dec
 </div>
 
 
-<div id="outline-container-org63b6bce" class="outline-4">
-<h4 id="org63b6bce">read whole content of a file as a string</h4>
-<div class="outline-text-4" id="text-org63b6bce">
+<div id="outline-container-org25131e9" class="outline-4">
+<h4 id="org25131e9">read whole content of a file as a string</h4>
+<div class="outline-text-4" id="text-org25131e9">
 <div class="org-src-container">
 <pre class="src src-python">with open('1.txt', 'rt') as f:
     s = f.read()
@@ -3035,9 +3035,9 @@ f = open('1.txt', 'rt', errors='ignore') #just ignore the char that can't be dec
 </div>
 </div>
 
-<div id="outline-container-org6ba3b66" class="outline-4">
-<h4 id="org6ba3b66">read/iterate each line of a file, by just treat the file object as a generator</h4>
-<div class="outline-text-4" id="text-org6ba3b66">
+<div id="outline-container-orgb126cf3" class="outline-4">
+<h4 id="orgb126cf3">read/iterate each line of a file, by just treat the file object as a generator</h4>
+<div class="outline-text-4" id="text-orgb126cf3">
 <div class="org-src-container">
 <pre class="src src-python">with open('1.txt', 'rt') as f:
     for line in f:
@@ -3047,9 +3047,9 @@ f = open('1.txt', 'rt', errors='ignore') #just ignore the char that can't be dec
 </div>
 </div>
 
-<div id="outline-container-org163efc3" class="outline-4">
-<h4 id="org163efc3">write str to a file, by file.write(text) method</h4>
-<div class="outline-text-4" id="text-org163efc3">
+<div id="outline-container-orgfffad23" class="outline-4">
+<h4 id="orgfffad23">write str to a file, by file.write(text) method</h4>
+<div class="outline-text-4" id="text-orgfffad23">
 <div class="org-src-container">
 <pre class="src src-python">with open('2.txt', 'wt') as f:
     f.write('abced')
@@ -3059,9 +3059,9 @@ f = open('1.txt', 'rt', errors='ignore') #just ignore the char that can't be dec
 </div>
 </div>
 
-<div id="outline-container-orgb536eac" class="outline-3">
-<h3 id="orgb536eac">get system's default encoding</h3>
-<div class="outline-text-3" id="text-orgb536eac">
+<div id="outline-container-orgc1c8b30" class="outline-3">
+<h3 id="orgc1c8b30">get system's default encoding</h3>
+<div class="outline-text-3" id="text-orgc1c8b30">
 <div class="org-src-container">
 <pre class="src src-python">import sys
 print(sys.getdefaultencoding())
@@ -3070,9 +3070,9 @@ print(sys.getdefaultencoding())
 </div>
 </div>
 
-<div id="outline-container-org4ba20d5" class="outline-3">
-<h3 id="org4ba20d5">5.2. Printing to a File, redirect stdout to a file, by use print(file=...) option</h3>
-<div class="outline-text-3" id="text-org4ba20d5">
+<div id="outline-container-orge2ec329" class="outline-3">
+<h3 id="orge2ec329">5.2. Printing to a File, redirect stdout to a file, by use print(file=...) option</h3>
+<div class="outline-text-3" id="text-orge2ec329">
 <div class="org-src-container">
 <pre class="src src-python">with open('2.txt', 'wt') as f:
     print("aaaaa", file=f)
@@ -3081,13 +3081,13 @@ print(sys.getdefaultencoding())
 </div>
 </div>
 
-<div id="outline-container-org74ae149" class="outline-3">
-<h3 id="org74ae149">Question: how to redirect stdout to a file system widely.</h3>
+<div id="outline-container-org2c39da5" class="outline-3">
+<h3 id="org2c39da5">Question: how to redirect stdout to a file system widely.</h3>
 </div>
 
-<div id="outline-container-orgad9f542" class="outline-3">
-<h3 id="orgad9f542">5.3. Printing with a Different Separator or Line Ending, by use print(sep=..., end=...) options</h3>
-<div class="outline-text-3" id="text-orgad9f542">
+<div id="outline-container-org4551a37" class="outline-3">
+<h3 id="org4551a37">5.3. Printing with a Different Separator or Line Ending, by use print(sep=..., end=...) options</h3>
+<div class="outline-text-3" id="text-org4551a37">
 <div class="org-src-container">
 <pre class="src src-python">print(1, 'abc')
 print(1, 'abc', sep=', ', end='##')
@@ -3102,9 +3102,9 @@ print(*row, sep=', ')
 </div>
 </div>
 
-<div id="outline-container-org604cab9" class="outline-3">
-<h3 id="org604cab9">pass a sequence/list object to a function as N parameters instead of one, by using *list_name</h3>
-<div class="outline-text-3" id="text-org604cab9">
+<div id="outline-container-orgc84d3f7" class="outline-3">
+<h3 id="orgc84d3f7">pass a sequence/list object to a function as N parameters instead of one, by using *list_name</h3>
+<div class="outline-text-3" id="text-orgc84d3f7">
 <div class="org-src-container">
 <pre class="src src-python">row = (45, 'Hello', 'List', 4)
 print(row)
@@ -3116,9 +3116,9 @@ print(*row, sep=', ')
 </div>
 </div>
 
-<div id="outline-container-org54a2a36" class="outline-3">
-<h3 id="org54a2a36">5.4. Reading and Writing Binary Data(such as image, sound files)</h3>
-<div class="outline-text-3" id="text-org54a2a36">
+<div id="outline-container-org56c666e" class="outline-3">
+<h3 id="org56c666e">5.4. Reading and Writing Binary Data(such as image, sound files)</h3>
+<div class="outline-text-3" id="text-org56c666e">
 <p>
 By saying binary data, it means that there will no encoding/decoding works during writing/reading process.
 Use mode such as 'rb', 'wb', 'ab'.
@@ -3138,9 +3138,9 @@ Use mode such as 'rb', 'wb', 'ab'.
 </div>
 
 
-<div id="outline-container-orgc1fbd1a" class="outline-3">
-<h3 id="orgc1fbd1a">what is text string and byte string in python</h3>
-<div class="outline-text-3" id="text-orgc1fbd1a">
+<div id="outline-container-org590f090" class="outline-3">
+<h3 id="org590f090">what is text string and byte string in python</h3>
+<div class="outline-text-3" id="text-org590f090">
 <p>
 Each element in a text string is also a text string, 
 Each element in a byte string is a int
@@ -3160,9 +3160,9 @@ for c in s:
 </div>
 </div>
 
-<div id="outline-container-org5f1dd0f" class="outline-3">
-<h3 id="org5f1dd0f">5.5. Writing to a File That Doesn't Already Exist, by set mode of open(...) function to 'x'</h3>
-<div class="outline-text-3" id="text-org5f1dd0f">
+<div id="outline-container-org8a818ba" class="outline-3">
+<h3 id="org8a818ba">5.5. Writing to a File That Doesn't Already Exist, by set mode of open(...) function to 'x'</h3>
+<div class="outline-text-3" id="text-org8a818ba">
 <p>
 If the file already exists, then don't write, and will raise a FileExistsError exception
 </p>
@@ -3179,27 +3179,27 @@ If the file already exists, then don't write, and will raise a FileExistsError e
 </div>
 </div>
 
-<div id="outline-container-org0d71417" class="outline-3">
-<h3 id="org0d71417">5.6. Performing I/O Operations on a String, by io.StringIO() or io.BytesIO()</h3>
-<div class="outline-text-3" id="text-org0d71417">
+<div id="outline-container-orgf641c09" class="outline-3">
+<h3 id="orgf641c09">5.6. Performing I/O Operations on a String, by io.StringIO() or io.BytesIO()</h3>
+<div class="outline-text-3" id="text-orgf641c09">
 <p>
 a typecal application can be simulate a file when do unit testing.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgd139397" class="outline-3">
-<h3 id="orgd139397">5.7. Reading and Writing Compressed Datafiles, by use gzip.open(...), or bz2.open(...)</h3>
-<div class="outline-text-3" id="text-orgd139397">
+<div id="outline-container-org8f93646" class="outline-3">
+<h3 id="org8f93646">5.7. Reading and Writing Compressed Datafiles, by use gzip.open(...), or bz2.open(...)</h3>
+<div class="outline-text-3" id="text-org8f93646">
 <p>
 After open the file, other operations are just the same as normal file.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga9f899e" class="outline-3">
-<h3 id="orga9f899e">5.8. Iterating Over Fixed-Sized Records, by iter(callable, sentinel)</h3>
-<div class="outline-text-3" id="text-orga9f899e">
+<div id="outline-container-org38c8e21" class="outline-3">
+<h3 id="org38c8e21">5.8. Iterating Over Fixed-Sized Records, by iter(callable, sentinel)</h3>
+<div class="outline-text-3" id="text-org38c8e21">
 <div class="org-src-container">
 <pre class="src src-python">import functools
 RECORD_SIZE = 2
@@ -3213,9 +3213,9 @@ with open('1.txt', 'rt') as f:
 
 
 
-<div id="outline-container-orgc499cc4" class="outline-3">
-<h3 id="orgc499cc4">the functools.partial(func, *args, **kwargs) function: create a new callable from a given callable with some(partial) arguments fixed. Currying</h3>
-<div class="outline-text-3" id="text-orgc499cc4">
+<div id="outline-container-org2a0fa16" class="outline-3">
+<h3 id="org2a0fa16">the functools.partial(func, *args, **kwargs) function: create a new callable from a given callable with some(partial) arguments fixed. Currying</h3>
+<div class="outline-text-3" id="text-org2a0fa16">
 <div class="org-src-container">
 <pre class="src src-python">from functools import partial
 
@@ -3236,13 +3236,13 @@ print(mm())
 </div>
 </div>
 
-<div id="outline-container-orge23d644" class="outline-3">
-<h3 id="orge23d644">5.9. Reading Binary Data into a Mutable Buffer</h3>
+<div id="outline-container-org5e02684" class="outline-3">
+<h3 id="org5e02684">5.9. Reading Binary Data into a Mutable Buffer</h3>
 </div>
 
-<div id="outline-container-org0cb2503" class="outline-3">
-<h3 id="org0cb2503">5.10. Memory Mapping Binary Files, map a binary file to memory(byte array), my mmap.mmap(...) method</h3>
-<div class="outline-text-3" id="text-org0cb2503">
+<div id="outline-container-org47ab84e" class="outline-3">
+<h3 id="org47ab84e">5.10. Memory Mapping Binary Files, map a binary file to memory(byte array), my mmap.mmap(...) method</h3>
+<div class="outline-text-3" id="text-org47ab84e">
 <p>
 This is a general method to map file to memory, then you can random access the content of the file, such as by using slicing
 </p>
