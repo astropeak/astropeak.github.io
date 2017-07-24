@@ -4,23 +4,30 @@
     <title>Astropeak 的编程笔记</title>
     <link>http://astropeak.github.io/</link>
     <description></description>
-    <pubDate>Fri, 14 Jul 2017 13:52:10 CST</pubDate>
-    <lastBuildDate>Fri, 14 Jul 2017 13:52:10 CST</lastBuildDate>
+    <pubDate>Mon, 24 Jul 2017 16:02:13 CST</pubDate>
+    <lastBuildDate>Mon, 24 Jul 2017 16:02:13 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>Python描述符简介</title>
+      <link>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</link>
+      <description><![CDATA[]]></description>
+      <pubDate>2017-07-24</pubDate>
+      <guid>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</guid>
+    </item>
+    <item>
+      <title>为什么不需要为Python对象添加 getter 和 setter</title>
+      <link>http://astropeak.github.io/blog/2017/07/24/python-why-not-use-getter-setter</link>
+      <description><![CDATA[Python: don't use getter and setter]]></description>
+      <pubDate>2017-07-24</pubDate>
+      <guid>http://astropeak.github.io/blog/2017/07/24/python-why-not-use-getter-setter</guid>
+    </item>
     <item>
       <title>Python Cookbook 读书笔记</title>
       <link>http://astropeak.github.io/blog/2017/07/10/python-cookbook-readnote</link>
       <description><![CDATA[]]></description>
       <pubDate>2017-07-14</pubDate>
       <guid>http://astropeak.github.io/blog/2017/07/10/python-cookbook-readnote</guid>
-    </item>
-    <item>
-      <title>Python描述符简介</title>
-      <link>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-07-14</pubDate>
-      <guid>http://astropeak.github.io/blog/2016/03/06/python描述符简介/</guid>
     </item>
     <item>
       <title>生成模型和判定模型</title>
@@ -70,13 +77,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-07-08</pubDate>
       <guid>http://astropeak.github.io/blog/2017/03/13/nlp-vocabulary</guid>
-    </item>
-    <item>
-      <title>Recall，Precision 和 F-score</title>
-      <link>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-07-08</pubDate>
-      <guid>http://astropeak.github.io/blog/2017/01/06/recall-precision-fscore</guid>
     </item>
   </channel>
 </rss>
