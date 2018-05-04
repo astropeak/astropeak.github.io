@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://example.com/</link><description>This is a demo site for Nikola.</description><atom:link href="https://example.com/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:n.tesla@example.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 09:58:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs Lisp 编程笔记</title><link>https://example.com/posts/emacs-lisp/</link><dc:creator>Astropeak</dc:creator><description>&lt;div id="table-of-contents"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 11:54:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs Lisp 编程笔记</title><link>https://astropeak.github.io/posts/emacs-lisp/</link><dc:creator>Astropeak</dc:creator><description>&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://example.com/posts/emacs-lisp/#sec-1"&gt;错误处理&lt;/a&gt;
+&lt;li&gt;&lt;a href="https://astropeak.github.io/posts/emacs-lisp/#sec-1"&gt;错误处理&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://example.com/posts/emacs-lisp/#sec-1-1"&gt;抛出错误&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://example.com/posts/emacs-lisp/#sec-1-2"&gt;捕获错误&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://example.com/posts/emacs-lisp/#sec-1-3"&gt;忽略错误&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://astropeak.github.io/posts/emacs-lisp/#sec-1-1"&gt;抛出错误&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://astropeak.github.io/posts/emacs-lisp/#sec-1-2"&gt;捕获错误&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://astropeak.github.io/posts/emacs-lisp/#sec-1-3"&gt;忽略错误&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -62,7 +62,7 @@ What's the difference between the two?
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/emacs-lisp/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Org test</title><link>https://example.com/posts/org-test/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/emacs-lisp/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Org test</title><link>https://astropeak.github.io/posts/org-test/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 Write your post here.
 &lt;/p&gt;
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
@@ -88,7 +88,7 @@ This is a line
 &lt;p&gt;
 End of the line&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/org-test/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python Cookbook 读书笔记</title><link>https://example.com/posts/python-cookbook-readnote/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/org-test/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python Cookbook 读书笔记</title><link>https://astropeak.github.io/posts/python-cookbook-readnote/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 《&lt;a href="http://shop.oreilly.com/product/0636920027072.do"&gt;Python Cookbook&lt;/a&gt;》读书笔记.
 &lt;/p&gt;
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
@@ -252,23 +252,23 @@ So to find the common part keys/items in two dictionaries, just use the set oper
 
 &lt;p&gt;
 Example:
-In &lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;: e.keys(), d.keys()
-Out&lt;sup&gt;&lt;a id="fnr.1.100" name="fnr.1.100" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;: (dict_keys([1, 4, 'a', 9]), dict_keys([1, 3, 5]))
+In &lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;: e.keys(), d.keys()
+Out&lt;sup&gt;&lt;a id="fnr.1.100" name="fnr.1.100" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;: (dict_keys([1, 4, 'a', 9]), dict_keys([1, 3, 5]))
 &lt;/p&gt;
 
 &lt;p&gt;
-In &lt;sup&gt;&lt;a id="fnr.2" name="fnr.2" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;: e.keys() &amp;amp; d.keys()
-Out&lt;sup&gt;&lt;a id="fnr.2.100" name="fnr.2.100" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;: {1}
+In &lt;sup&gt;&lt;a id="fnr.2" name="fnr.2" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;: e.keys() &amp;amp; d.keys()
+Out&lt;sup&gt;&lt;a id="fnr.2.100" name="fnr.2.100" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;: {1}
 &lt;/p&gt;
 
 &lt;p&gt;
-In &lt;sup&gt;&lt;a id="fnr.3" name="fnr.3" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.3"&gt;3&lt;/a&gt;&lt;/sup&gt;: e.keys() | d.keys()
-Out&lt;sup&gt;&lt;a id="fnr.3.100" name="fnr.3.100" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.3"&gt;3&lt;/a&gt;&lt;/sup&gt;: {1, 3, 4, 5, 'a', 9}
+In &lt;sup&gt;&lt;a id="fnr.3" name="fnr.3" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.3"&gt;3&lt;/a&gt;&lt;/sup&gt;: e.keys() | d.keys()
+Out&lt;sup&gt;&lt;a id="fnr.3.100" name="fnr.3.100" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.3"&gt;3&lt;/a&gt;&lt;/sup&gt;: {1, 3, 4, 5, 'a', 9}
 &lt;/p&gt;
 
 &lt;p&gt;
-In &lt;sup&gt;&lt;a id="fnr.4" name="fnr.4" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.4"&gt;4&lt;/a&gt;&lt;/sup&gt;: e.keys() - d.keys()
-Out&lt;sup&gt;&lt;a id="fnr.4.100" name="fnr.4.100" class="footref" href="https://example.com/posts/python-cookbook-readnote/#fn.4"&gt;4&lt;/a&gt;&lt;/sup&gt;: {9, 4, 'a'}
+In &lt;sup&gt;&lt;a id="fnr.4" name="fnr.4" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.4"&gt;4&lt;/a&gt;&lt;/sup&gt;: e.keys() - d.keys()
+Out&lt;sup&gt;&lt;a id="fnr.4.100" name="fnr.4.100" class="footref" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fn.4"&gt;4&lt;/a&gt;&lt;/sup&gt;: {9, 4, 'a'}
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3122,17 +3122,17 @@ Below is a general function that map a file to a byte array.
 &lt;h2 class="footnotes"&gt;Footnotes: &lt;/h2&gt;
 &lt;div id="text-footnotes"&gt;
 
-&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://example.com/posts/python-cookbook-readnote/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
 
-&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.2" name="fn.2" class="footnum" href="https://example.com/posts/python-cookbook-readnote/#fnr.2"&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.2" name="fn.2" class="footnum" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fnr.2"&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
 
-&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.3" name="fn.3" class="footnum" href="https://example.com/posts/python-cookbook-readnote/#fnr.3"&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.3" name="fn.3" class="footnum" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fnr.3"&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
 
-&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.4" name="fn.4" class="footnum" href="https://example.com/posts/python-cookbook-readnote/#fnr.4"&gt;4&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.4" name="fn.4" class="footnum" href="https://astropeak.github.io/posts/python-cookbook-readnote/#fnr.4"&gt;4&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;DEFINITION NOT FOUND.&lt;/p&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/python-cookbook-readnote/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python 对象属性（一）：基础</title><link>https://example.com/posts/python-object-attribute/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/python-cookbook-readnote/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python 对象属性（一）：基础</title><link>https://astropeak.github.io/posts/python-object-attribute/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 所有的Python 对象都有属性，可以通过 &lt;code&gt;obj.name&lt;/code&gt; 这样的语法来获取属性，通过  &lt;code&gt;obj.name = 'Tom'~  这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 ~del obj.name&lt;/code&gt; 删除一个属性。
 &lt;/p&gt;
 
@@ -3350,7 +3350,7 @@ __dict__属性是一个语言定义属性，它用来保存所有的用户自定
 x.name 等价于 getattr(x, 'name')，
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/python-object-attribute/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python描述符简介</title><link>https://example.com/posts/python-descriptor/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/python-object-attribute/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Python描述符简介</title><link>https://astropeak.github.io/posts/python-descriptor/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 NOTE: 以下为语音笔记，待整理
 &lt;/p&gt;
 
@@ -3410,7 +3410,7 @@ NOTE: 以下为语音笔记，待整理
 累本身应该不是苗舒服。
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/python-descriptor/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Recall，Precision 和 F-score</title><link>https://example.com/posts/recall-precision-fscore/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/python-descriptor/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>Recall，Precision 和 F-score</title><link>https://astropeak.github.io/posts/recall-precision-fscore/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 这个三个数据用于描述一个模型的好坏程度，分别为召回率、准确度和F值。
 &lt;/p&gt;
 
@@ -3502,7 +3502,7 @@ NOTE: 以下为语音笔记，待整理
 好的模型应该做到召回率和准确率都较高，也即F值较高。
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/recall-precision-fscore/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>为什么不需要为Python对象添加 getter 和 setter</title><link>https://example.com/posts/python-why-not-use-getter-setter/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/recall-precision-fscore/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>为什么不需要为Python对象添加 getter 和 setter</title><link>https://astropeak.github.io/posts/python-why-not-use-getter-setter/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 Getter 和 setter在java中被广泛使用。一个好的java编程准则为：将所有属性设置为私有的，同时为属性写getter和setter函数以供外部使用。 这样做的好处是属性的具体实现被隐藏，当未来需要修改时，只需要修改getter 和 setter即可，而不用修改代码中所有引用这个属性的地方。可能做的修改为：
 &lt;/p&gt;
 &lt;ul class="org-ul"&gt;
@@ -3595,7 +3595,7 @@ Getter 和 setter在java中被广泛使用。一个好的java编程准则为：�
 Python中对象访问的语法即可能是直接访问这个属性，也可能是调用一个函数，这取决于类的实现方式。我们可以在不修改调用者代码的前提下，轻松切换这两种方式。可见python原生就提供了添加额外getter和setter所带来的好处。因此没有必要一开始就为对象属性编写getter和setter函数，而是在需要时切换到函数调用式属性。
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/python-why-not-use-getter-setter/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>基于隐马尔科夫模型的中文分词方法</title><link>https://example.com/posts/hmm-word-segmentation/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/python-why-not-use-getter-setter/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>基于隐马尔科夫模型的中文分词方法</title><link>https://astropeak.github.io/posts/hmm-word-segmentation/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 本文主要讲述隐马尔科夫模及其在中文分词中的应用。 基于中文分词语料库，建立中文分词的隐马尔科夫模型，最后用维特比方法进行求解。
 &lt;/p&gt;
 
@@ -3627,7 +3627,7 @@ Python中对象访问的语法即可能是直接访问这个属性，也可能�
 
 &lt;p&gt;
 下图为隐马尔科夫模型的概率图，其中 \(x\) 代表隐藏序列， \(y\) 代表观察序列。
-&lt;img src="https://example.com/posts/hmm-word-segmentation/img/hmm.png" alt="hmm.png"&gt;
+&lt;img src="https://astropeak.github.io/posts/hmm-word-segmentation/img/hmm.png" alt="hmm.png"&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -3696,7 +3696,7 @@ Python中对象访问的语法即可能是直接访问这个属性，也可能�
 &lt;a href="https://github.com/astropeak/nlp-word-segmentation"&gt;nlp-word-segmentation&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/hmm-word-segmentation/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>梯度下降算法</title><link>https://example.com/posts/gradient-descend/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/hmm-word-segmentation/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>梯度下降算法</title><link>https://astropeak.github.io/posts/gradient-descend/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 梯度下降算法是一种用于求解函数最小值的数值计算方法。求解函数的极值一般有两种方法，第一种是解析法, 
 即函数的极值可以用公式直接计算出来。如对于1元2次方程，我们可以直接求出这个函数的最大值或者最小值。
 但对于更高次的方程或者非线性函数, 大多无法求出解析解，此时需要使用数值方法.
@@ -3844,7 +3844,7 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 从而求得模型的参数。
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/gradient-descend/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>生成模型和判定模型</title><link>https://example.com/posts/generative-model-and-descriminative-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/gradient-descend/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item><item><title>生成模型和判定模型</title><link>https://astropeak.github.io/posts/generative-model-and-descriminative-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 统计概率模型的作用是给定输入 \(x\) ， 预测输出 \(y\) 的概率，也即求解条件概率 \(P(y|x)\) 。统计概率模型分为两种：生成模型（Generative Model）和判定模型（Descriminative Model）。
 &lt;/p&gt;
 &lt;ul class="org-ul"&gt;
@@ -3918,4 +3918,4 @@ y^* = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{ar
 生成模型的功能更加强大。
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://example.com/posts/generative-model-and-descriminative-model/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><guid>https://astropeak.github.io/posts/generative-model-and-descriminative-model/</guid><pubDate>Fri, 04 May 2018 08:29:35 GMT</pubDate></item></channel></rss>

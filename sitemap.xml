@@ -6,215 +6,171 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https://example.com/</loc>
+  <loc>https://astropeak.github.io/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/2012/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/2017/</loc>
+  <loc>https://astropeak.github.io/2017/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/2018/</loc>
+  <loc>https://astropeak.github.io/2018/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/archive.html</loc>
+  <loc>https://astropeak.github.io/archive.html</loc>
+  <lastmod>2018-05-04T11:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/categories/</loc>
+  <lastmod>2018-05-04T10:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/categories/cat_nlp-bag-of-words-ngram-language-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/authors/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/authors/astropeak/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/authors/roberto-alsina/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/</loc>
+  <loc>https://astropeak.github.io/categories/language-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/blog/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/cat_nikola/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/cat_nlp-bag-of-words-ngram-language-model/</loc>
+  <loc>https://astropeak.github.io/categories/nlp/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/demo/</loc>
+  <loc>https://astropeak.github.io/galleries/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/language-model/</loc>
+  <loc>https://astropeak.github.io/galleries/demo/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/index-1.html</loc>
+  <lastmod>2018-05-04T11:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/listings/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/listings/__pycache__/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/listings/hello.py.html</loc>
+  <lastmod>2018-05-04T11:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/about-nikola/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/bootstrap-demo/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/charts/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/creating-a-theme/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/dr-nikolas-vendetta/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/extending/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/handbook/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/internals/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/listings-demo/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/path-handlers/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/quickref/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/quickstart/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/slides-demo/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/social_buttons/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/pages/theming/</loc>
+  <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/nikola/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/nlp/</loc>
+  <loc>https://astropeak.github.io/posts/emacs-lisp/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/python/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/galleries/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/galleries/demo/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/index-1.html</loc>
+  <loc>https://astropeak.github.io/posts/generative-model-and-descriminative-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/listings/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/listings/__pycache__/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/listings/hello.py.html</loc>
+  <loc>https://astropeak.github.io/posts/gradient-descend/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/pages/about-nikola/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/bootstrap-demo/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/charts/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/creating-a-theme/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/dr-nikolas-vendetta/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/extending/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/handbook/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/internals/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/listings-demo/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/path-handlers/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/quickref/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/quickstart/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/slides-demo/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/social_buttons/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/theming/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/bag-of-words-and-ngram-model/</loc>
+  <loc>https://astropeak.github.io/posts/hmm-word-segmentation/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/emacs-lisp/</loc>
+  <loc>https://astropeak.github.io/posts/language-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/generative-model-and-descriminative-model/</loc>
+  <loc>https://astropeak.github.io/posts/nlp-vocabulary/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/gradient-descend/</loc>
-  <lastmod>2018-05-04T09:58:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/hmm-word-segmentation/</loc>
-  <lastmod>2018-05-04T09:58:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/language-model/</loc>
-  <lastmod>2018-05-04T09:58:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/nlp-vocabulary/</loc>
-  <lastmod>2018-05-04T09:58:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/org-test/</loc>
+  <loc>https://astropeak.github.io/posts/org-test/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/python-cookbook-readnote/</loc>
+  <loc>https://astropeak.github.io/posts/python-cookbook-readnote/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/python-descriptor/</loc>
+  <loc>https://astropeak.github.io/posts/python-descriptor/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/python-object-attribute/</loc>
+  <loc>https://astropeak.github.io/posts/python-object-attribute/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/python-why-not-use-getter-setter/</loc>
+  <loc>https://astropeak.github.io/posts/python-why-not-use-getter-setter/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/recall-precision-fscore/</loc>
+  <loc>https://astropeak.github.io/posts/recall-precision-fscore/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/test/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/welcome-to-nikola/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
 </urlset>

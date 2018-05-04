@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about language model)</title><link>https://example.com/</link><description></description><atom:link href="https://example.com/categories/language-model.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:n.tesla@example.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 09:58:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>词袋模型和N-gram模型</title><link>https://example.com/posts/bag-of-words-and-ngram-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about language model)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/language-model.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 11:54:14 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>词袋模型和N-gram模型</title><link>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 词袋模型(bag of words)是常用的语言模型，将文档看作文档中所有词的集合，而忽略词的顺序。尽管丢失了词的顺序这一属性，
 但这个模型仍然能够有效用于一些自然处理任务中，如文本分类。
 &lt;/p&gt;
@@ -134,7 +134,7 @@ The brown fox jump up the rog.
 
 
 &lt;p&gt;
-语言模型的详细介绍见&lt;a href="https://example.com/posts/bag-of-words-and-ngram-model/language-model.html"&gt;这里&lt;/a&gt;.
+语言模型的详细介绍见&lt;a href="https://astropeak.github.io/posts/bag-of-words-and-ngram-model/language-model.html"&gt;这里&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -159,4 +159,4 @@ The brown fox jump up the rog.
 使用词袋模型的向量表示将每个文档表示为数学的形式,然后再输入到具体机器学习算法中.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><category>language model</category><category>nlp</category><guid>https://example.com/posts/bag-of-words-and-ngram-model/</guid><pubDate>Fri, 13 Jan 2017 08:29:35 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>language model</category><category>nlp</category><guid>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</guid><pubDate>Fri, 13 Jan 2017 08:29:35 GMT</pubDate></item></channel></rss>
