@@ -7,11 +7,15 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://example.com/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/2012/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/2017/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/2018/</loc>
@@ -19,7 +23,7 @@
  </url>
  <url>
   <loc>https://example.com/archive.html</loc>
-  <lastmod>2018-05-04T09:42:00Z</lastmod>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/authors/</loc>
@@ -35,7 +39,7 @@
  </url>
  <url>
   <loc>https://example.com/categories/</loc>
-  <lastmod>2018-05-04T09:40:00Z</lastmod>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/blog/</loc>
@@ -46,12 +50,24 @@
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/categories/cat_nlp-bag-of-words-ngram-language-model/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/categories/demo/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/categories/language-model/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/categories/nikola/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/categories/nlp/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/python/</loc>
@@ -66,6 +82,10 @@
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/index-1.html</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/listings/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
@@ -75,7 +95,7 @@
  </url>
  <url>
   <loc>https://example.com/listings/hello.py.html</loc>
-  <lastmod>2018-05-04T09:42:00Z</lastmod>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/pages/about-nikola/</loc>
@@ -138,8 +158,56 @@
   <lastmod>2018-05-04T09:40:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/posts/bag-of-words-and-ngram-model/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/emacs-lisp/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/generative-model-and-descriminative-model/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/gradient-descend/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/hmm-word-segmentation/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/language-model/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/nlp-vocabulary/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/posts/org-test/</loc>
   <lastmod>2018-05-04T09:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/python-cookbook-readnote/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/python-descriptor/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/python-object-attribute/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/python-why-not-use-getter-setter/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/recall-precision-fscore/</loc>
+  <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/test/</loc>

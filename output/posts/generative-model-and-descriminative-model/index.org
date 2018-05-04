@@ -1,0 +1,52 @@
+#+BEGIN_COMMENT
+.. title: 生成模型和判定模型
+.. slug: generative-model-and-descriminative-model
+.. date: 2018-05-04 16:29:35 UTC+08:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+
+#+TITLE:       生成模型和判定模型
+#+AUTHOR:      Astropeak
+#+EMAIL:       astropeak@gmail.com
+#+DATE:        2017-04-23
+#+URI:         /blog/%y/%m/%d/generative-model-and-descriminative-model
+#+KEYWORDS:    machine learning, generative model, descriminative model
+#+TAGS:        machine learning
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: generative-model-and-descriminative-model
+
+统计概率模型的作用是给定输入 $x$ ， 预测输出 $y$ 的概率，也即求解条件概率 $P(y|x)$ 。统计概率模型分为两种：生成模型（Generative Model）和判定模型（Descriminative Model）。
+- 如果模型学习的是 $P(x, y)$ 的联合概率分布，则这个模型是生成模型。求得 $P(x, y)$ 后，根据贝叶斯定律，可间接求得 
+$P(y|x) = \frac{P(x, y)}{P(x)}$ 。
+- 如果模型学习的是 $P(y|x)$ 的条件概率分布，则这个模型是判定模型。此时是直接求解。
+
+
+常见的生成模型和判定模型如下
+| 生成模型       | 判定模型     |
+|----------------+--------------|
+| 朴素贝叶斯     | 罗辑斯谛回归 |
+| 隐马尔科夫模型 | 条件随机场   |
+
+* 为什么叫生成模型
+  生成模型的中的生成表示: 根据训练数据, 模型学习给定 $y$ 生成 $x$ 的概率，即学习 $P(x|y)$ 。以朴素贝叶斯为例，
+求解公式为
+  \begin{equation}
+y^* = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{argmax}} P(x|y)P(y)
+\end{equation}
+
+$P(x|y)$ 表示给定分类 $y$ ，来预测可能的 $x$ 值，或者生成 $x$ 的值。
+
+* 区别
+  判定模型由于是直接学习 $P(y|x)$ ，因此在相同数目的训练数据条件下，通常其预测效果要好于生成模型。
+  
+  生成模型的功能更加强大。
+
+
+
+

@@ -1,0 +1,59 @@
+#+BEGIN_COMMENT
+.. title: Emacs Lisp 编程笔记
+.. slug: emacs-lisp
+.. date: 2018-05-04 16:29:35 UTC+08:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+
+#+TITLE:       Emacs Lisp 编程笔记
+#+AUTHOR:      Astropeak
+#+EMAIL:       astropeak@gmail.com
+#+DATE:        2015-09-24
+#+URI:         /blog/%y/%m/%d/emacs-lisp
+#+KEYWORDS:    emacs lisp
+#+TAGS:        emacs
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:2 \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: emacs lisp programming
+
+* 错误处理
+** 抛出错误
+   #+begin_src emacs-lisp
+     (signal 'my-error '("This is a demo error"))
+     (error "This is another error")
+   #+end_src
+   What's the difference between the two?
+
+** 捕获错误
+   #+begin_src emacs-lisp
+     (progn
+       (condition-case err
+           (signal 'my-error '("This is a demo error"))
+         ('my-error (message "my error handled, %s" err)))
+       (message "end"))
+
+     (defun aaa ()
+       (interactive)
+       (condition-case error
+           (progn
+             (op/git-change-branch op/repository-directory "source")
+             (op/git-commit-changes op/repository-directory "Changes"))
+         '('git-error  (message "Error is %s" error))))
+
+     (aaa)
+   #+end_src
+** 忽略错误
+   #+begin_src emacs-lisp
+     (progn
+       (ignore-errors
+         ;;(signal 'my-error '("This is a demo error"))
+         (error "This is another error")
+         )
+       (message "end"))
+
+   #+end_src
