@@ -1,4 +1,0 @@
-#+TITLE: Index
-#+EMAIL:       astropeak@gmail.com
-
-This is the home page of Astropeak.
