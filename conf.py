@@ -21,12 +21,12 @@ BLOG_AUTHOR = "Astropeak"  # (translatable)
 BLOG_TITLE = "Astropeak"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "https://example.com/"
+SITE_URL = "https://astropeak.github.io/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://example.com/"
-BLOG_EMAIL = "n.tesla@example.com"
-BLOG_DESCRIPTION = "This is a demo site for Nikola."  # (translatable)
+BLOG_EMAIL = "astropeak@gmail.com"
+BLOG_DESCRIPTION = "Astropeak's blogs."  # (translatable)
 
 # Nikola is multilingual!
 #
