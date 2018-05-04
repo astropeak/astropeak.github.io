@@ -3,42 +3,63 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Org test | Astropeak</title>
+<title>自然语言处理名词表 | Astropeak</title>
 <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
-<link rel="canonical" href="https://example.com/posts/org-test/">
+<link rel="canonical" href="https://example.com/posts/nlp-vocabulary/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Astropeak">
-<link rel="prev" href="../python-cookbook-readnote/" title="Python Cookbook 读书笔记" type="text/html">
-<link rel="next" href="../nlp-vocabulary/" title="自然语言处理名词表" type="text/html">
+<link rel="prev" href="../org-test/" title="Org test" type="text/html">
+<link rel="next" href="../language-model/" title="语言模型" type="text/html">
 <meta property="og:site_name" content="Astropeak">
-<meta property="og:title" content="Org test">
-<meta property="og:url" content="https://example.com/posts/org-test/">
-<meta property="og:description" content="Write your post here.
-
-
-ssss
-
-
-This is a line
-
-with open(file, &quot;w&quot;) as f:
-  print &quot;Write to file %s&quot; % file
-  f.write(str.encode('utf8', 'replace'))
+<meta property="og:title" content="自然语言处理名词表">
+<meta property="og:url" content="https://example.com/posts/nlp-vocabulary/">
+<meta property="og:description" content="名词
+英文
+含义
 
 
 
 
-sub title
+词性标注
+part of speech, tagging, POS
+给定一个句子，为每个词标注词性
 
 
 
 
-bbbb
+ 
+N－gram
+一种文档表示模型，详见 这里
 
 
-End of the line">
+
+
+词袋
+bag of words
+一种文档表示模型
+
+
+
+
+停止词
+stop word
+常用词，如 the， a， of
+
+
+
+
+词根
+steming
+一个词的词根
+
+
+
+
+命名实体识别
+NER
+从一个句子中识别">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2018-05-04T16:29:35+08:00">
 </head>
@@ -93,7 +114,7 @@ End of the line">
         <div class="row">
             
             
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Org test</a></h1>
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">自然语言处理名词表</a></h1>
 
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
@@ -107,40 +128,56 @@ End of the line">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <p>
-Write your post here.
-</p>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">ssss</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-This is a line
-</p>
-<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-  <span class="k">print</span> <span class="s2">"Write to file </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">file</span>
-  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">,</span> <span class="s1">'replace'</span><span class="p">))</span>
-</pre></div>
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">名词</th>
+<th scope="col" class="left">英文</th>
+<th scope="col" class="left">含义</th>
+</tr></thead>
+<tbody><tr>
+<td class="left">词性标注</td>
+<td class="left">part of speech, tagging, POS</td>
+<td class="left">给定一个句子，为每个词标注词性</td>
+</tr></tbody>
+<tbody><tr>
+<td class="left"> </td>
+<td class="left">N－gram</td>
+<td class="left">一种文档表示模型，详见 <a href="bag-of-word-and-ngram-model.html">这里</a>
+</td>
+</tr></tbody>
+<tbody><tr>
+<td class="left">词袋</td>
+<td class="left">bag of words</td>
+<td class="left">一种文档表示模型</td>
+</tr></tbody>
+<tbody><tr>
+<td class="left">停止词</td>
+<td class="left">stop word</td>
+<td class="left">常用词，如 the， a， of</td>
+</tr></tbody>
+<tbody><tr>
+<td class="left">词根</td>
+<td class="left">steming</td>
+<td class="left">一个词的词根</td>
+</tr></tbody>
+<tbody><tr>
+<td class="left">命名实体识别</td>
+<td class="left">NER</td>
+<td class="left">从一个句子中识别人名、地名、机构名等</td>
+</tr></tbody>
+</table>
 </div>
-
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">sub title</h3>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">bbbb</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-End of the line</p>
-</div>
-</div>
-    </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
-                <a href="../python-cookbook-readnote/" rel="prev" title="Python Cookbook 读书笔记">Previous post</a>
+                <a href="../org-test/" rel="prev" title="Org test">Previous post</a>
             </li>
             <li class="next">
-                <a href="../nlp-vocabulary/" rel="next" title="自然语言处理名词表">Next post</a>
+                <a href="../language-model/" rel="next" title="语言模型">Next post</a>
             </li>
         </ul></nav></aside></article>
 </div>
