@@ -7,7 +7,15 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://astropeak.github.io/</loc>
-  <lastmod>2018-05-04T09:58:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/2015/</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/2016/</loc>
+  <lastmod>2018-05-04T12:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/2017/</loc>
@@ -19,23 +27,43 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/archive.html</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:09:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/</loc>
-  <lastmod>2018-05-04T10:01:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/cat_nlp-bag-of-words-ngram-language-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
+  <loc>https://astropeak.github.io/categories/emacs/</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/categories/gradient-descend/</loc>
+  <lastmod>2018-05-04T12:07:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/categories/hmm/</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://astropeak.github.io/categories/language-model/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
  </url>
  <url>
+  <loc>https://astropeak.github.io/categories/machine-learning/</loc>
+  <lastmod>2018-05-04T12:07:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://astropeak.github.io/categories/nlp/</loc>
   <lastmod>2018-05-04T09:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/categories/python/</loc>
+  <lastmod>2018-05-04T12:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/galleries/</loc>
@@ -47,7 +75,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/index-1.html</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/</loc>
@@ -59,7 +87,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/hello.py.html</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/pages/about-nikola/</loc>

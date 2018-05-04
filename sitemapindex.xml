@@ -10,27 +10,47 @@
   <lastmod>2018-05-04T11:54:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://astropeak.github.io/categories/emacs.xml</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://astropeak.github.io/categories/gradient-descend.xml</loc>
+  <lastmod>2018-05-04T12:07:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://astropeak.github.io/categories/hmm.xml</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://astropeak.github.io/categories/language-model.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://astropeak.github.io/categories/machine-learning.xml</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/categories/nlp.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://astropeak.github.io/categories/python.xml</loc>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/galleries/demo/rss.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:06:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/galleries/rss.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:06:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/rss.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/sitemap.xml</loc>
-  <lastmod>2018-05-04T11:54:00Z</lastmod>
+  <lastmod>2018-05-04T12:10:00Z</lastmod>
  </sitemap>
 </sitemapindex>

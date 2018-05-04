@@ -1,9 +1,9 @@
 #+BEGIN_COMMENT
 .. title: 词袋模型和N-gram模型
 .. slug: bag-of-words-and-ngram-model
-.. date: 2017-01-13 16:29:35 UTC+08:00
+.. date: 2017-01-13
 .. tags: nlp, language model
-.. category: nlp, bag of words, ngram, language model
+.. category: 
 .. link: 
 .. description: bag of words and ngram model
 .. type: text
