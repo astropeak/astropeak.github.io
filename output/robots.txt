@@ -1,4 +1,0 @@
-Sitemap: https://astropeak.github.io/sitemapindex.xml
-
-User-Agent: *
-Host: astropeak.github.io
