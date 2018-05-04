@@ -1,5 +1,5 @@
 #+BEGIN_COMMENT
-.. title: 无需为Python对象添加 getter 和 setter
+.. title: 无需为Python类添加 getter 和 setter
 .. slug: python-why-not-use-getter-setter
 .. date: 2017-07-24
 .. tags: python
