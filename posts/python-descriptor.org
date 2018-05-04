@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: Python描述符简介
 .. slug: python-descriptor
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2016-03-06
+.. tags: python
 .. category: 
 .. link: 
 .. description: 

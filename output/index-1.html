@@ -64,378 +64,148 @@
 
     
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/language-model/" class="u-url">语言模型</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/python-descriptor/" class="u-url">Python描述符简介</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Astropeak
             </span></p>
-            <p class="dateline"><a href="posts/language-model/" rel="bookmark"><time class="published dt-published" datetime="2018-05-04T16:29:35+08:00" title="2018-05-04 16:29">2018-05-04 16:29</time></a></p>
+            <p class="dateline"><a href="posts/python-descriptor/" rel="bookmark"><time class="published dt-published" datetime="2016-03-06T00:00:00+08:00" title="2016-03-06">2016-03-06</time></a></p>
         </div>
     </header><div class="e-content entry-content">
     <p>
-语言模型的定义包含两部分
+NOTE: 以下为语音笔记，待整理
 </p>
-<ol class="org-ol">
-<li>词汇表 \(V\), 这个语言所有词的集合, 每个词表示为 \(w_i\)
-</li>
-<li>概率函数 \(P(s)\), 其中 \(s\) 中所有句子组成的集合, 也即为由词汇表 \(V\) 中所有词 \(w_i\) 组成的任意长度的序列.
-</li>
-</ol>
+
+
 <p>
-语言模型对句子的可能性进行建模。假设语言是由所有可能句子组成的集合,其中句子定义为由任意词语, 以任意顺序, 
-以任意长度组成的有序序列。用 \(s\) 表示这样一个句子,则语言模型建模为一个概率分布函数 \(P(s)\), 函数值是这个句子的概率。
+使用描述符控制python对象属性的访问。
+</p>
+
+<p>
+蟒蛇中定义的所有，数据都可以，称之为，属性。比如函数和变量都是这个类的属性。具体细分一下函数是，非数据属性。而变量是数据属性。描述符用于控制变量的，获取设置和删除。根据属性的不同。描述符也可以进一步细分为数据描述，符合非数据描述符，分别用于控制，数据属性和函数属性。
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">例子</h2>
+<h2 id="sec-1">描述符协议</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-假设一个语言的词汇表只包含三个单词:
-</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">you</span><span class="p">,</span> <span class="n">are</span><span class="p">,</span> <span class="n">ok</span><span class="p">]</span>
-</pre></div>
-
-<p>
-由这个词汇表所产生的所有的句子如下所示.
-</p>
-
-<p>
-长度为一的有3个:
-</p>
-<div class="highlight"><pre><span></span><span class="n">you</span>
-<span class="n">are</span>
-<span class="n">OK</span>
-</pre></div>
-
-<p>
-长度为二的有9个:
-</p>
-<div class="highlight"><pre><span></span><span class="n">you</span> <span class="n">you</span>
-<span class="n">you</span> <span class="n">are</span>
-<span class="n">you</span> <span class="n">OK</span>
-<span class="n">are</span> <span class="n">you</span>
-<span class="n">are</span> <span class="n">are</span>
-<span class="n">are</span> <span class="n">OK</span>
-<span class="n">OK</span> <span class="n">you</span>
-<span class="n">OK</span> <span class="n">are</span>
-<span class="n">OK</span> <span class="n">OK</span>
-</pre></div>
-
-<p>
-长度为三的有27个:
-</p>
-<div class="highlight"><pre><span></span><span class="n">you</span> <span class="n">you</span> <span class="n">you</span>
-<span class="n">you</span> <span class="n">you</span> <span class="n">are</span>
-<span class="n">you</span> <span class="n">you</span> <span class="n">OK</span>
-<span class="n">you</span> <span class="n">are</span> <span class="n">you</span>
-<span class="n">you</span> <span class="n">are</span> <span class="n">are</span>
-<span class="n">you</span> <span class="n">are</span> <span class="n">OK</span>
-<span class="o">...</span>
-<span class="n">are</span> <span class="n">you</span> <span class="n">OK</span>
-<span class="o">...</span>
-<span class="n">OK</span> <span class="n">OK</span> <span class="n">OK</span>
-</pre></div>
-
-<p>
-长度为四的，有3×3×3×3个. 长度为五的，有3×3×3×3x3个. 这个序列是无穷的。
-</p>
-
-<p>
-然后我们有一个概率分布函数 \(P(s)\) 来计算每一个句子 \(s\) 的概率, 以下是这个函数的一些可能结果的例子:
-</p>
-\begin{equation}
-P(are\ you\ OK) = 0.008 \\
-P(you\ are\ OK) = 0.002\\
-P(you\ you) = 0 \\
-P(OK) = 0.01 \\
-P(you) = 0\\
-\end{equation}
-<p>
-例子中表示句子 \("are\ you\ OK"\) 的概率为 \(0.008\) , 句子 \("you\ you"\) 的概率为 \(0\). 
-</p>
-
-<p>
-这样的一个函数 \(P(s)\) 就是这个语言的语言模型.
+任何一个对象只要提包含了get，set delete这三个函数，中的任意一个，那么它就是一个描述符.这三个函数分别控制，属性的获取设置和删除。
 </p>
 </div>
 </div>
+
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">语言模型的建立</h2>
+<h2 id="sec-2">第一数据属性以及数据描述符。</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-给定一个句子 \(s = w_1w_2w_3...w_n\), 其中 \(w_i\) 是一个词. 语言模型就是要求以下函数
-</p>
-
-   \begin{equation}
-    P(s)=P(w_1w_2w_3...w_n) \\
-  = P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\\
-= \prod_i{P(w_i|w_1w_2...w_{i-1})}
-   \end{equation}
-
-<p>
-其中
-</p>
-<ul class="org-ul">
-<li>\(P(w_1w_2w_3...w_n)\) 为 词序列 \(w_1w_2w_3...w_n\) 的联合概率分布
-</li>
-<li>\(P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\) 是使用的链式法则后的结果
-</li>
-</ul>
-<p>
-这个公式可以理解为一个句子的概率是其所有单词概率的乘积, 一个单词的概率取决于他前面的所有的单词. 如果单词表的数目为5000, 
-句子的长度为3，那么有1250亿种可能性, 这个在实际情况下是无法计算的.
-</p>
-
-<p>
-因此，为了使模型能够实际可计算，需要做出一个假设。语言模型中假设一个词只取决于它前面的一个词，与更之前的所有单词无关,
-则上式可以转变为
-</p>
-\begin{equation}
- P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1})}
-\end{equation}
-
-
-<p>
-这便是语言模型的简化形式: 二元语法模型(bigram model). 相应的也有三元语法模型(trigram model)，
-每个词依赖于他前面的两个字。 定义如下:
-</p>
-\begin{equation}
- P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1}w_{i-2})}
-\end{equation}
-
-<p>
-三元语法模型是实际中通常使用的语言模型。
-</p>
-
-<p>
-通常使用一个语料库来计算每个词的概率。语料库可以由任意文档组成。以二元模型为例，每个词的概率的计算的方法为
-</p>
-\begin{equation}
- P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i)} {\sum_w{c(w_{i-1}w)}}
-\end{equation}
-
-<p>
-其中 
-</p>
-<ul class="org-ul">
-<li>\(c(w_{i-1}w_i)\) 为所有以 \(w_{i-1}\) 开头，并且以 \(w_i\) 结束的二元组的数目. 
-</li>
-<li>\(\sum_w{c(w_{i-1}w)}\) 表示所有以 \(w_{i-1}\) 开头, 并且以任意词结束的二元组的数目. 
-</li>
-</ul>
-<p>
-概率就是这两个数目的比值.
+默认情况下，数据属性的获取顺序为，第一从对象的字典中获取，第二从类字典中获取
+。
+该如果定义了一个类属性对象，并且这个对象是一个描述符，则获取这个属性是会优先从这个描述符，的各个方法中获取。
 </p>
 </div>
 </div>
-
 
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">参数平滑方法</h2>
+<h2 id="sec-3">第二非数据属性。</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-以上计算过程中有一个问题，比如计算以下这个句子的时候，句子的概率将为零。
-</p>
-
-
-<p>
-这里的问题是:语料库中不可能包括所有可能出现的词序列, 当某个词的组合在语料库中不存在的时候，便会导致概率为零。
-此时需要使用平滑方法来解决这个问题。最简单的一种方法是加法平滑方法.
-</p>
-
-<p>
-加法平滑方法的基本原理是在统计每一个二元组的数目的时候总是为统计出的数目加个一，如下式所示
-</p>
-\begin{equation}
- P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i) + 1} {\sum_w{(c(w_{i-1}w) + 1)}} 
-\end{equation}
-
-
-<p>
-这样计算后,每个词的概率的计算结果总是大于0. 
-</p>
-
-<p>
-还有很多种平滑方法，如 <a href="https://en.wikipedia.org/wiki/Good%E2%80%93Turing_frequency_estimation">古德图灵方法</a>，katz平滑方法等。
+静态函数，类函数都是通过描述符的方式实现的。在函数定义的时候，函数被保存在类的字典里，以一个普通的函数。函数的调用过程可以分为两个两个步骤。第一个是将函数获取出来，第二个是进行实际的调用。描述符是在第一个步骤中发挥作用。它会将，函数从类的字典中取出来，然后将类对象绑定为，第一个，参数。及成员函数的第一个参数及c f变量，都是在描述符中的钙函数中绑定的。
+如果将函数的获取与调用看作两个不同的过程，则已向过则以上过程会，简化。函数本身就是一个描述符，他会返回一个新的函数，这个函数哪和原来的函数一样，但是，第一个参数会被设置为，会被设置为，对象本身。因此心身的函数，将接受的参数比原来的函数，少一个。因为函数本身也是一个描述符。
 </p>
 </div>
 </div>
+
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">语音识别中应用的例子</h2>
-<div class="outline-text-2" id="text-4">
+<h2 id="sec-4">第三描述符的一些应用。</h2>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">其他的一些。</h2>
+<div class="outline-text-2" id="text-5">
 <p>
-语音识别中,包含以下两个步骤
-</p>
-<ol class="org-ol">
-<li>根据语音数据, 计算出出几种可能的句子. 因为有同音词的存在, 所以这一步可能有多个结果
-</li>
-<li>根据语言模型, 计算每个句子的概率，选取概率最大的那个句子作为语音识别的结果
-</li>
-</ol>
-<p>
-语言模型在第二步发挥了作用.
+描述服务提供了一个抽象城。这个层次控制性的，访问与设置。
+所有函数是一个描述服。
+累本身应该不是苗舒服。
 </p>
 </div>
 </div>
     </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/bag-of-words-and-ngram-model/" class="u-url">词袋模型和N-gram模型</a></h1>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/emacs-lisp/" class="u-url">Emacs Lisp 编程笔记</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Astropeak
             </span></p>
-            <p class="dateline"><a href="posts/bag-of-words-and-ngram-model/" rel="bookmark"><time class="published dt-published" datetime="2017-01-13T16:29:35+08:00" title="2017-01-13 16:29">2017-01-13 16:29</time></a></p>
+            <p class="dateline"><a href="posts/emacs-lisp/" rel="bookmark"><time class="published dt-published" datetime="2015-09-24T00:00:00+08:00" title="2015-09-24">2015-09-24</time></a></p>
         </div>
     </header><div class="e-content entry-content">
-    <p>
-词袋模型(bag of words)是常用的语言模型，将文档看作文档中所有词的集合，而忽略词的顺序。尽管丢失了词的顺序这一属性，
-但这个模型仍然能够有效用于一些自然处理任务中，如文本分类。
-</p>
+    <div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li>
+<a href="posts/emacs-lisp/#sec-1">错误处理</a>
+<ul>
+<li><a href="posts/emacs-lisp/#sec-1-1">抛出错误</a></li>
+<li><a href="posts/emacs-lisp/#sec-1-2">捕获错误</a></li>
+<li><a href="posts/emacs-lisp/#sec-1-3">忽略错误</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
-<p>
-N-gram模型是对词袋模型的扩展，N为一个数字，以N＝2为例，2-gram模型将文档看作文档中所有相邻两个词这些词对的集合，
-也忽略这些词对在文档中出现的顺序。词袋模型是当N＝1时的特例。
-</p>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">例子</h2>
+<h2 id="sec-1">错误处理</h2>
 <div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">抛出错误</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">signal</span> <span class="ss">'my-error</span> <span class="o">'</span><span class="p">(</span><span class="s">"This is a demo error"</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">error</span> <span class="s">"This is another error"</span><span class="p">)</span>
+</pre></div>
 <p>
-对于如下文档：
+What's the difference between the two?
 </p>
-<pre class="example">
-The brown fox jump up the rog.
-</pre>
+</div>
+</div>
 
-<p>
-对应的词袋模型为：
-</p>
-<pre class="example">
-(The, brown, fox, jump, up, the, rog)
-</pre>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">捕获错误</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">progn</span>
+  <span class="p">(</span><span class="nf">condition-case</span> <span class="nv">err</span>
+      <span class="p">(</span><span class="nf">signal</span> <span class="ss">'my-error</span> <span class="o">'</span><span class="p">(</span><span class="s">"This is a demo error"</span><span class="p">))</span>
+    <span class="p">(</span><span class="ss">'my-error</span> <span class="p">(</span><span class="nf">message</span> <span class="s">"my error handled, %s"</span> <span class="nv">err</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nf">message</span> <span class="s">"end"</span><span class="p">))</span>
 
-<p>
-对应的2-gram模型为：
-</p>
-<div class="highlight"><pre><span></span>((The, brown), (brown, fox), (fox, jump), (jump, up), (up, the), (the, rog))
+<span class="p">(</span><span class="nf">defun</span> <span class="nv">aaa</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nf">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">condition-case</span> <span class="nv">error</span>
+      <span class="p">(</span><span class="nf">progn</span>
+	<span class="p">(</span><span class="nf">op/git-change-branch</span> <span class="nv">op/repository-directory</span> <span class="s">"source"</span><span class="p">)</span>
+	<span class="p">(</span><span class="nf">op/git-commit-changes</span> <span class="nv">op/repository-directory</span> <span class="s">"Changes"</span><span class="p">))</span>
+    <span class="o">'</span><span class="p">(</span><span class="ss">'git-error</span>  <span class="p">(</span><span class="nf">message</span> <span class="s">"Error is %s"</span> <span class="nv">error</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nf">aaa</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">文档表示</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-将文档表示成词袋模型后,就可以进行定量的分析。一种简单的方式是判断这个文档中是否出现词汇表中某一个词，因此可以将文档表示成一个由0和1组成的向量。
-</p>
-
-<p>
-如果语言的词汇表如下:
-</p>
-<pre class="example">
-(a, boy, the, cute, likes, dog, little, girl)
-</pre>
-
-<p>
-则文档与向量表示的对应关系如下.
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup>
-<col class="left">
-<col class="left">
-</colgroup>
-<thead><tr>
-<th scope="col" class="left">文档</th>
-<th scope="col" class="left">向量表示</th>
-</tr></thead>
-<tbody>
-<tr>
-<td class="left">a little girl</td>
-<td class="left">[1, 0, 0, 0, 0, 0, 1, 1]</td>
-</tr>
-<tr>
-<td class="left">the body likes the dog</td>
-<td class="left">[0, 1, 1, 0, 1, 1, 0, 0]</td>
-</tr>
-</tbody>
-</table>
-<p>
-其中向量中的每个元素表示这个文档中是否包含某个词. 如第一向量, 最后一个 1 表示它包含 girl这个词.
-</p>
-
-<p>
-进一步的可以考虑词语频率(term frequency, TF)的影响，相当于是在前一个表示的模型新增了词语频率这一信息。
-词的频率此时可以作为某种度量的权重.
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup>
-<col class="left">
-<col class="left">
-</colgroup>
-<thead><tr>
-<th scope="col" class="left">文档</th>
-<th scope="col" class="left">向量表示</th>
-</tr></thead>
-<tbody>
-<tr>
-<td class="left">a little girl</td>
-<td class="left">[1, 0, 0, 0, 0, 0, 1, 1]</td>
-</tr>
-<tr>
-<td class="left">the body likes the dog</td>
-<td class="left">[0, 1, 2, 0, 1, 1, 0, 0]</td>
-</tr>
-</tbody>
-</table>
-<p>
-第二个向量的第三元素值为2,表示 the 在这个文档中出现了两次.
-</p>
-
-
-<p>
-有些词出现的频率非常高，可能在每一篇文档中都会出现，因此引入文档频率(doc frequency, DF)，
-也即一个词在所有文档中出现的频率。 如果这个频率很高，那么这个词可能是一个停止词， 需要将其移除，
-因为它对文档分类没有帮助。
-</p>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">忽略错误</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">progn</span>
+  <span class="p">(</span><span class="nf">ignore-errors</span>
+    <span class="c1">;;(signal 'my-error '("This is a demo error"))</span>
+    <span class="p">(</span><span class="nf">error</span> <span class="s">"This is another error"</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">(</span><span class="nf">message</span> <span class="s">"end"</span><span class="p">))</span>
+</pre></div>
 </div>
-</div>
-
-
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">与语言模型的关系</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-词袋模型是语音模型的一种简化形式。语言模型是给定一个词汇表，然后求所有的词的序列的概率。
-词袋模型则是将这个词的序列的范围大大缩小，词的序列只包含由单个词所组成的序列，则每个序列的概率则等于词频率。
-</p>
-
-
-<p>
-语言模型的详细介绍见<a href="posts/bag-of-words-and-ngram-model/language-model.html">这里</a>.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">在信息检索中的应用</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-信息检索要解决的问题是:给定一组关键字, 在所有的文档集合中, 返回与关键字相关的所有文档, 并对所有文档根据相关性进行排序.
-</p>
-
-<p>
-基本的处理方法为: 首先将所有文档表示为词袋模型,表示为一个向量,然后查询搜索关键字是否包含在这个向量里,
-这样便可以计算出所有与给定关键字相关的文档. 排序文档时,可能根据词频-逆文档频率(TF-IDF)进行排序.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">在文本分类的应用</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-使用词袋模型的向量表示将每个文档表示为数学的形式,然后再输入到具体机器学习算法中.
-</p>
 </div>
 </div>
     </div>

@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: Emacs Lisp 编程笔记
 .. slug: emacs-lisp
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2015-09-24
+.. tags: emacs
 .. category: 
 .. link: 
 .. description: 

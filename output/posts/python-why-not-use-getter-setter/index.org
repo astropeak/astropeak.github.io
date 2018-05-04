@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: 为什么不需要为Python对象添加 getter 和 setter
 .. slug: python-why-not-use-getter-setter
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2017-07-24
+.. tags: python
 .. category: 
 .. link: 
 .. description: 

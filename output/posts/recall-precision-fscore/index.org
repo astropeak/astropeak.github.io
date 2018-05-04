@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: Recall，Precision 和 F-score
 .. slug: recall-precision-fscore
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2017-01-07
+.. tags: nlp
 .. category: 
 .. link: 
 .. description: 

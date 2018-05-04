@@ -1,5 +1,376 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about nlp)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/nlp.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 11:54:14 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>词袋模型和N-gram模型</title><link>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about nlp)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/nlp.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 May 2018 12:10:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>基于隐马尔科夫模型的中文分词方法</title><link>https://astropeak.github.io/posts/hmm-word-segmentation/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+本文主要讲述隐马尔科夫模及其在中文分词中的应用。 基于中文分词语料库，建立中文分词的隐马尔科夫模型，最后用维特比方法进行求解。
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;一、隐马尔科夫模型介绍&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+隐马尔科夫模型中包括两个序列，其中一个是观测序列，另一个是隐藏序列。模型要解决的一个问题是，给定观测序列，
+求其对应的隐藏序列。比如对于语音识别，这里的观测序列是语音的每一个序列，隐藏序列是这一串语音对应的文字。
+或者对于机器翻译，观测序列是待翻译的语言，而隐藏序列则是目标语言。在解决这类问题时，我们的已知条件是，
+第一，隐藏序列中某一个元素到观测序列中某一个元素之间的映射关系。第二是隐藏序列中每个元素转变到另一个元素之间的关系。
+并且会有两个假设，第一是每个隐藏元素中的元素，只依赖于它前面一个元素。第二是每一个隐藏元素能够直接确定另一个观测元素。
+其中以上两个已知条件可以分别表示为两个矩阵，这个矩阵可以通过分词语料库，根据统计的方法求得。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+从数学上理解，给定观测序列求解隐藏序列。一个观测序列可能对应无数个隐藏序列，而我们的目标隐藏序列就是，
+概率最大的那一个隐藏序列，也就是说最有可能的那个序列。即求给定隐藏序列这个条件下观测序列概率最大的那个序列的条件概率问题。
+&lt;/p&gt;
+
+&lt;p&gt;
+虽然隐马尔科夫模型中做了比较强的假设，这里比较强的意思是，现实生活中，可能根本无法满足这种假设条件，
+但是它的应用范围却是比较广泛，能够非常简单有效的解决复杂的问题。这个也是统计学方法的一个特点, 
+基于大量的数据，使用简单的方法便可以解决复杂的问题。这可能是大数据的一种威力吧，如果我们有足够多的数据，
+那么我们的模型可以做简化。而如果我们只有少量的数据，则我们必须用非常精确的模型，才可以得到我们想要的结果。
+数据模型以及数据量也是一种此消彼长的关系。
+&lt;/p&gt;
+
+&lt;p&gt;
+下图为隐马尔科夫模型的概率图，其中 \(x\) 代表隐藏序列， \(y\) 代表观察序列。
+&lt;img src="https://astropeak.github.io/posts/hmm-word-segmentation/img/hmm.png" alt="hmm.png"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+其中这里的隐藏序列，又称为一个马尔科夫链。马尔科夫链的定义是，序列中每一个元素，只依赖于他前面的一个元素而与其他所有元素不相关。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+为了使用隐马尔科夫模型，我们必须知道两个矩阵。第一个矩阵式表示隐藏序列中, 一个元素转变到另一个元素的概率.
+如果总的序列的元素数目为n，则这个是一个n乘n的矩阵。 
+第二个矩阵表示隐藏序列中某个元素转变到观测序列中某个元素的概率. 如果隐藏序列中元素个数为n，观测序列中元素的数目为m，
+则这个矩阵的维数为n乘m。 这两个矩阵都可以通过大量的统计数据来求得。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;第二、中文分词的隐马尔科夫模型&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+中文分词要解决的问题是，给定一段中文文字，将其划分为一个个单独的词或者单字。中文分词是所有后续自然语言处理的基础。
+如果将连续的中文文字看作是观测序列，将每个文字所对应的分词状态看作是隐藏序列，每个字的分子状态可能有两个值，
+一个表示这个字是某一个词的词尾，用字母E表示。另一个表示这个字不是某一个词的词尾，用字母B表示。
+则中文分词问题可以看作是一个标准的隐马尔科夫模型。实际中将每个字的分子状态表示为四个可选的值。
+词的开始，词的中间，词的结尾，单字成词。分别用bmes表示。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;第三、中文分词语料库&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+在网上可以免费下载，北京大学和香港大学提供的中文分词语料库。这个语料库实际上是一个txt的文档，
+文档中每个单独的词用两个空格隔开。
+根据分词语料库，我们可以求得隐马尔科夫模型中的两个参数矩阵. 根据大数定理，概率等于次数的比值。因此为了模型的准确性，
+我们必须有大量的语料数据来计算模型的参数。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h2 id="sec-4"&gt;第四、使用维特比算法进行求解&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+给定马尔科夫模型中的两个参数以及一个观测序列，求解隐藏序列的问题，可以看作是一个类似于图论中的最短路径问题.
+&lt;/p&gt;
+
+&lt;p&gt;
+维特比算法使用动态规划的方法进行求解。动态规划的子问题是，对于第 \(i\) 列的每一个元素 \(A_j\), 
+以这个元素为最后一个节点的最短路径。如果知道第 \(i\) 列的每一个元素的最短路径，那么第 \(i+1\) 列的每个元素的最短路径变可求得.
+&lt;/p&gt;
+
+&lt;p&gt;
+最终的结果就是第 \(n\) 列中每一个元素的最短路径中值最小的那一个元素所对应的最短路径。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h2 id="sec-5"&gt;第五、代码实现&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+&lt;a href="https://github.com/astropeak/nlp-word-segmentation"&gt;nlp-word-segmentation&lt;/a&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>hmm</category><category>machine learning</category><category>nlp</category><guid>https://astropeak.github.io/posts/hmm-word-segmentation/</guid><pubDate>Fri, 05 May 2017 16:00:00 GMT</pubDate></item><item><title>自然语言处理名词表</title><link>https://astropeak.github.io/posts/nlp-vocabulary/</link><dc:creator>Astropeak</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="left"&gt;名词&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;英文&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;词性标注&lt;/td&gt;
+&lt;td class="left"&gt;part of speech, tagging, POS&lt;/td&gt;
+&lt;td class="left"&gt;给定一个句子，为每个词标注词性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;td class="left"&gt;N－gram&lt;/td&gt;
+&lt;td class="left"&gt;一种文档表示模型，详见 &lt;a href="https://astropeak.github.io/posts/nlp-vocabulary/bag-of-word-and-ngram-model.html"&gt;这里&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;词袋&lt;/td&gt;
+&lt;td class="left"&gt;bag of words&lt;/td&gt;
+&lt;td class="left"&gt;一种文档表示模型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;停止词&lt;/td&gt;
+&lt;td class="left"&gt;stop word&lt;/td&gt;
+&lt;td class="left"&gt;常用词，如 the， a， of&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;词根&lt;/td&gt;
+&lt;td class="left"&gt;steming&lt;/td&gt;
+&lt;td class="left"&gt;一个词的词根&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;命名实体识别&lt;/td&gt;
+&lt;td class="left"&gt;NER&lt;/td&gt;
+&lt;td class="left"&gt;从一个句子中识别人名、地名、机构名等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description><category>nlp</category><guid>https://astropeak.github.io/posts/nlp-vocabulary/</guid><pubDate>Sun, 12 Mar 2017 16:00:00 GMT</pubDate></item><item><title>语言模型</title><link>https://astropeak.github.io/posts/language-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+语言模型的定义包含两部分
+&lt;/p&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;词汇表 \(V\), 这个语言所有词的集合, 每个词表示为 \(w_i\)
+&lt;/li&gt;
+&lt;li&gt;概率函数 \(P(s)\), 其中 \(s\) 中所有句子组成的集合, 也即为由词汇表 \(V\) 中所有词 \(w_i\) 组成的任意长度的序列.
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+语言模型对句子的可能性进行建模。假设语言是由所有可能句子组成的集合,其中句子定义为由任意词语, 以任意顺序, 
+以任意长度组成的有序序列。用 \(s\) 表示这样一个句子,则语言模型建模为一个概率分布函数 \(P(s)\), 函数值是这个句子的概率。
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;例子&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+假设一个语言的词汇表只包含三个单词:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ok&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+由这个词汇表所产生的所有的句子如下所示.
+&lt;/p&gt;
+
+&lt;p&gt;
+长度为一的有3个:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+长度为二的有9个:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+长度为三的有27个:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+长度为四的，有3×3×3×3个. 长度为五的，有3×3×3×3x3个. 这个序列是无穷的。
+&lt;/p&gt;
+
+&lt;p&gt;
+然后我们有一个概率分布函数 \(P(s)\) 来计算每一个句子 \(s\) 的概率, 以下是这个函数的一些可能结果的例子:
+&lt;/p&gt;
+\begin{equation}
+P(are\ you\ OK) = 0.008 \\
+P(you\ are\ OK) = 0.002\\
+P(you\ you) = 0 \\
+P(OK) = 0.01 \\
+P(you) = 0\\
+\end{equation}
+&lt;p&gt;
+例子中表示句子 \("are\ you\ OK"\) 的概率为 \(0.008\) , 句子 \("you\ you"\) 的概率为 \(0\). 
+&lt;/p&gt;
+
+&lt;p&gt;
+这样的一个函数 \(P(s)\) 就是这个语言的语言模型.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;语言模型的建立&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+给定一个句子 \(s = w_1w_2w_3...w_n\), 其中 \(w_i\) 是一个词. 语言模型就是要求以下函数
+&lt;/p&gt;
+
+   \begin{equation}
+    P(s)=P(w_1w_2w_3...w_n) \\
+  = P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\\
+= \prod_i{P(w_i|w_1w_2...w_{i-1})}
+   \end{equation}
+
+&lt;p&gt;
+其中
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;\(P(w_1w_2w_3...w_n)\) 为 词序列 \(w_1w_2w_3...w_n\) 的联合概率分布
+&lt;/li&gt;
+&lt;li&gt;\(P(w_1)P(w_2|w_1)P(w_3|w_1w_2)...P(w_n|w_1w_2...w_{n-1})\) 是使用的链式法则后的结果
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+这个公式可以理解为一个句子的概率是其所有单词概率的乘积, 一个单词的概率取决于他前面的所有的单词. 如果单词表的数目为5000, 
+句子的长度为3，那么有1250亿种可能性, 这个在实际情况下是无法计算的.
+&lt;/p&gt;
+
+&lt;p&gt;
+因此，为了使模型能够实际可计算，需要做出一个假设。语言模型中假设一个词只取决于它前面的一个词，与更之前的所有单词无关,
+则上式可以转变为
+&lt;/p&gt;
+\begin{equation}
+ P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1})}
+\end{equation}
+
+
+&lt;p&gt;
+这便是语言模型的简化形式: 二元语法模型(bigram model). 相应的也有三元语法模型(trigram model)，
+每个词依赖于他前面的两个字。 定义如下:
+&lt;/p&gt;
+\begin{equation}
+ P(s)=P(w_1w_2w_3...w_n) = \prod_i{P(w_i|w_{i-1}w_{i-2})}
+\end{equation}
+
+&lt;p&gt;
+三元语法模型是实际中通常使用的语言模型。
+&lt;/p&gt;
+
+&lt;p&gt;
+通常使用一个语料库来计算每个词的概率。语料库可以由任意文档组成。以二元模型为例，每个词的概率的计算的方法为
+&lt;/p&gt;
+\begin{equation}
+ P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i)} {\sum_w{c(w_{i-1}w)}}
+\end{equation}
+
+&lt;p&gt;
+其中 
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;\(c(w_{i-1}w_i)\) 为所有以 \(w_{i-1}\) 开头，并且以 \(w_i\) 结束的二元组的数目. 
+&lt;/li&gt;
+&lt;li&gt;\(\sum_w{c(w_{i-1}w)}\) 表示所有以 \(w_{i-1}\) 开头, 并且以任意词结束的二元组的数目. 
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+概率就是这两个数目的比值.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;参数平滑方法&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+以上计算过程中有一个问题，比如计算以下这个句子的时候，句子的概率将为零。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+这里的问题是:语料库中不可能包括所有可能出现的词序列, 当某个词的组合在语料库中不存在的时候，便会导致概率为零。
+此时需要使用平滑方法来解决这个问题。最简单的一种方法是加法平滑方法.
+&lt;/p&gt;
+
+&lt;p&gt;
+加法平滑方法的基本原理是在统计每一个二元组的数目的时候总是为统计出的数目加个一，如下式所示
+&lt;/p&gt;
+\begin{equation}
+ P(w_i|w_{i-1})= \frac{c(w_{i-1}w_i) + 1} {\sum_w{(c(w_{i-1}w) + 1)}} 
+\end{equation}
+
+
+&lt;p&gt;
+这样计算后,每个词的概率的计算结果总是大于0. 
+&lt;/p&gt;
+
+&lt;p&gt;
+还有很多种平滑方法，如 &lt;a href="https://en.wikipedia.org/wiki/Good%E2%80%93Turing_frequency_estimation"&gt;古德图灵方法&lt;/a&gt;，katz平滑方法等。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h2 id="sec-4"&gt;语音识别中应用的例子&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+语音识别中,包含以下两个步骤
+&lt;/p&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;根据语音数据, 计算出出几种可能的句子. 因为有同音词的存在, 所以这一步可能有多个结果
+&lt;/li&gt;
+&lt;li&gt;根据语言模型, 计算每个句子的概率，选取概率最大的那个句子作为语音识别的结果
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+语言模型在第二步发挥了作用.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>language model</category><category>nlp</category><guid>https://astropeak.github.io/posts/language-model/</guid><pubDate>Thu, 02 Feb 2017 16:00:00 GMT</pubDate></item><item><title>词袋模型和N-gram模型</title><link>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 词袋模型(bag of words)是常用的语言模型，将文档看作文档中所有词的集合，而忽略词的顺序。尽管丢失了词的顺序这一属性，
 但这个模型仍然能够有效用于一些自然处理任务中，如文本分类。
 &lt;/p&gt;
@@ -159,4 +530,96 @@ The brown fox jump up the rog.
 使用词袋模型的向量表示将每个文档表示为数学的形式,然后再输入到具体机器学习算法中.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><category>language model</category><category>nlp</category><guid>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</guid><pubDate>Fri, 13 Jan 2017 08:29:35 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>language model</category><category>nlp</category><guid>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</guid><pubDate>Thu, 12 Jan 2017 16:00:00 GMT</pubDate></item><item><title>Recall，Precision 和 F-score</title><link>https://astropeak.github.io/posts/recall-precision-fscore/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+这个三个数据用于描述一个模型的好坏程度，分别为召回率、准确度和F值。
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;定义&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+在二分类模型中，对于任意一个输入数据，结果只用两个：正类或者负类。对于一个输入数据集，假定该模型产生如下结果：
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;PT： 模型结果为正类且真实为正类的数目
+&lt;/li&gt;
+&lt;li&gt;PF： 模型结果为正类且真实为负类的数目
+&lt;/li&gt;
+&lt;li&gt;NT： 模型结果为负类且真实为负类的数目
+&lt;/li&gt;
+&lt;li&gt;NF： 模型结果为负类且真实为正类的数目
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;
+则召回率、准确度和F值的定义分别为：
+&lt;/p&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;Recall&lt;/td&gt;
+&lt;td class="left"&gt;\(\frac{PT}{PT + NF}\)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;Precision&lt;/td&gt;
+&lt;td class="left"&gt;\(\frac{PT}{PT + PF}\)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;F-score&lt;/td&gt;
+&lt;td class="left"&gt;\(\frac{Recall + Precision}{2}\)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+召回率和准确度具有相同的分子，分母不同。F值是二者的算数平均数。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;搜索引擎的例子&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+假设给定一个关键字， 搜索引擎返回了100个文档，其中80个是正确的，也即符合关键字，
+剩余20个是错误的，也即和给定的关键字没有关系。则此时准确度为： \(80/100 = 80\%\)
+&lt;/p&gt;
+
+&lt;p&gt;
+假设还有40篇文档也符合这个关键字，但搜索引擎并没有返回这40篇文档，则召回率为： \(80 / (80 + 40) = 67\%\)
+&lt;/p&gt;
+
+&lt;p&gt;
+由此可见， 召回率表示了搜索引擎从所有符合条件的文档中“召回”正确文档的比例， 而准确度表示了搜索引擎返回文档中正确文档的比例。
+所有符合条件的文档和返回文档这两个概念是不同的。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;进一步思考&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+召回率描述了是否有遗漏，准确度描述了是否正确，F值综合了二者。
+&lt;/p&gt;
+
+&lt;p&gt;
+  如果一个模型如果准确率很高，但召回率很低，即使结果中大多数数据是正确的，但却遗漏了很多正确的数据。如果一个模型召回率很高，
+但准确率很低，则表示这个模型可能返回所有正确的数据，但返回的数据中，错误的数据也很多。
+&lt;/p&gt;
+
+&lt;p&gt;
+好的模型应该做到召回率和准确率都较高，也即F值较高。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>nlp</category><guid>https://astropeak.github.io/posts/recall-precision-fscore/</guid><pubDate>Fri, 06 Jan 2017 16:00:00 GMT</pubDate></item></channel></rss>

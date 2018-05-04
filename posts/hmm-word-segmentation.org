@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: 基于隐马尔科夫模型的中文分词方法
 .. slug: hmm-word-segmentation
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2017-05-06
+.. tags: hmm, nlp, machine learning
 .. category: 
 .. link: 
 .. description: 

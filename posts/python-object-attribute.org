@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: Python 对象属性（一）：基础
 .. slug: python-object-attribute
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2017-07-26
+.. tags: python
 .. category: 
 .. link: 
 .. description: 

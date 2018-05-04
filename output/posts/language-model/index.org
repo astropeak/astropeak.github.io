@@ -1,8 +1,8 @@
 #+BEGIN_COMMENT
 .. title: 语言模型
 .. slug: language-model
-.. date: 2018-05-04 16:29:35 UTC+08:00
-.. tags: 
+.. date: 2017-02-03
+.. tags: nlp, language model
 .. category: 
 .. link: 
 .. description: 
