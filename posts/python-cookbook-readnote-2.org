@@ -1,0 +1,507 @@
+#+BEGIN_COMMENT
+.. title: Python Cookbook 读书笔记（二）
+.. slug: python-cookbook-readnote-2
+.. date: 2017-07-15
+.. tags: python
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+
+《[[http://shop.oreilly.com/product/0636920027072.do][Python Cookbook]]》读书笔记.
+* chapter 2: Strings and Text
+** 2.1. Splitting Strings on Any of Multiple Delimiters
+   By us re.split and the regexp is r'[,;\s]\s*'
+*** difference between str.split and re.split
+    str.split only accept simple seperator
+    re.split accept regulare expression.
+*** return value of re.split
+    1. if there are no capture group, then the same as str.split
+    2. if there are capture group, then all matched data will also be returned.
+       then the value will be rst[::2], the seperator will be rst[1::2]
+       #+begin_src python :results output
+       s = "I, you; a  seperater.   haha"
+       import re
+       a = re.split(r'[,;.\s]\s*', s)
+       print(a)
+
+       a = re.split(r'([,;.\s]\s*)',s)
+       print(a, a[::2], a[1::2])
+       #+end_src
+       
+       #+RESULTS:
+       : ['I', 'you', 'a', 'seperater', 'haha']
+       : ['I', ', ', 'you', '; ', 'a', '  ', 'seperater', '.   ', 'haha'] ['I', 'you', 'a', 'seperater', 'haha'] [', ', '; ', '  ', '.   ']
+       
+*** iterate on two lists, by first zip the two to one
+    looks nice!
+    #+begin_src python
+    # Reform the line using the same delimiters
+    ''.join(v+d for v,d in zip(values, delimiters))
+    'asdf fjdk;afed,fjek,asdf,foo'
+    #+end_src
+    
+    
+*** regexp noncapture group, by r'(?:...)'
+    
+** 2.2. Matching Text at the Start or End of a String, by str.startswith() or str.endswith() method
+   #+begin_src python
+   filename = "aaaa.txt"
+   filename.endswith(".txt")
+   # pass a tuple to check against multiple choices
+   filename.endswith((".c", ".h"))
+   #+end_src
+   
+   #+begin_src python
+   from urllib.request import urlopen
+   def read_data(name):
+       if name.startswith(('http:', 'https:', 'ftp:')):
+           return urlopen(name).read()
+       else:
+           with open(name) as f:
+               return f.read()
+   #+end_src
+   
+   The parameter is simple string.
+   
+   Compared to re.match, str.startswith looks nice.
+   
+** 2.3. Matching Strings Using Shell Wildcard Patterns, with fnmatch.fnmatch(), fnmatch.fnmatchcase()
+   Shell wildcard:
+   - [] : a charset
+   - * : match any length of chars
+   - ? : match only one char
+     
+   #+begin_src python :results output
+   from fnmatch import fnmatch
+   print(fnmatch("data 1.txt", "*[0-9]*"))
+   #+end_src
+   
+   #+RESULTS:
+   : False
+   
+   1. the pattern must match the whole string
+   2. compares to startswith(), fnmatch can match at any position
+   3. compares to regexp, fnmatch looks nice
+   4. fnmatch will use the same case-sensitive rule as the OS, fnmatchcase will always respect case.
+   5. between simpe string and full power of regexp
+      
+      
+** 2.4. Matching and Searching for Text Patterns
+   What's  the difference between matching and searching
+   
+*** the str.find() function: find the start index of a substring
+    #+begin_src python :results output
+    s = "Hello xxx bbbb"
+    print(s.find("xx"))
+    #+end_src
+    
+    #+RESULTS:
+    : 6
+    
+    
+*** re.compile() function: compile a regexp strinng to a regexp object, for performance
+    If you use the regexp many times, then first compile it is good. But if you only use it for one time, then don't use the compile function
+    
+*** difference between r'\d' and '\d'
+    if the string is prefixed by  a 'r', then the '\' in the string will not be intepreted by the string parser.
+    So the second regexp is actually r'd'.
+    
+*** re.findall() function, find all matched data as a list
+    #+begin_src python :results output
+    text = 'Today is 11/27/2012. PyCon starts 3/13/2013.'
+    import re
+    rg = r'\d+/(?:\d+)/(?:\d+)'
+    a = re.match('Today', text)
+    print(a.group(0))
+    a = re.findall(rg, text)
+    print(a)
+    print(type(a[0]))
+    #+end_src
+    
+    #+RESULTS:
+    : Today
+    : ['11/27/2012', '3/13/2013']
+    : <class 'str'>
+    
+    The return value: if there are capture groups, then the return value is the captured data, and if the capture group number is one, it will be  a string, else be  a tuple of strings.
+    if  no capture groups, then the return value is all matched  data.
+    
+*** re.finditer(), find all matched data as a iterater
+    Seems the return value is different from re.findall(), it will return a  matched object , the same as re.match()
+    Seems strange, and highly inconsistent.
+    
+*** re.match() function, always match at the start of a string
+*** re.match() function, return value
+    rst.group(0): the matched data
+    rst.group(1): the first captured data
+    rst.groups(): all captured data as a tuple
+    
+** 2.5. Searching and Replacing Text
+*** the str.replace function, replace all occurence in a string
+    str.replcae(pattern, replacement)
+    #+begin_src python :results output
+    text = 'yeah, but no, but yeah, but no, but yeah'
+    print(text.replace('yeah', 'yep'))
+    # 'yep, but no, but yep, but no, but yep'
+    #+end_src
+    
+    #+RESULTS:
+    : yep, but no, but yep, but no, but yep
+    
+*** the re.sub(pattern, replacement, text) function, will also replace all occurence in a string
+    use r'\1' to refer to the first captured group
+    #+begin_src python :results output
+    text = 'Today is 11/27/2012. PyCon starts 3/13/2013.'
+    import re
+    print(re.sub(r'(\d+)/(\d+)/(\d+)', r'\3-\1-\2', text))
+    # 'Today is 2012-11-27. PyCon starts 2013-3-13.'
+    #+end_src
+    
+    #+RESULTS:
+    : Today is 2012-11-27. PyCon starts 2013-3-13.
+    
+*** the re.sub(pattern, callback, text) function, will also replace all occurence in a string
+    The second parameter can also be a function, the parameter to this function is a match object(the  same returned by re.match function).
+    
+    The same example as the above one:
+    #+begin_src python :results output
+    text = 'Today is 11/27/2012. PyCon starts 3/13/2013.'
+    import re
+    def foo(m):
+        (m, d, y) = m.groups()
+        return '-'.join([y,m,d])
+
+    print(re.sub(r'(\d+)/(\d+)/(\d+)', foo, text))
+    #+end_src
+    
+    #+RESULTS:
+    : Today is 2012-11-27. PyCon starts 2013-3-13.
+    
+    
+*** the re.subn(...) function, same as re.sub, but also return subsitution counts also
+** 2.6. Searching and Replacing Case-Insensitive Text
+   To do case-insensitive operations, you must use regexp with the re.IGNORECASE flags keyword parameter
+   
+*** replace words in a string with original case preserved
+    a excenlent example of replacing with 原始的大小写规则. 并且是一个很好的高阶函数的例子。
+    #+begin_src python :results output
+    def matchcase(word):
+        def replace(m):
+            text = m.group()
+            if text.isupper():
+                return word.upper()
+            elif text.islower():
+                return word.lower()
+            elif text[0].isupper():
+                return word.capitalize()
+            else:
+                return word
+
+        return replace
+
+    text = 'UPPER PYTHON, lower python, Mixed Python'
+    import re
+    print(re.sub('python', matchcase('snake'), text, flags=re.IGNORECASE))
+    # 'UPPER SNAKE, lower snake, Mixed Snake'
+    #+end_src
+    
+    #+RESULTS:
+    : UPPER SNAKE, lower snake, Mixed Snake
+    
+** 2.7. Specifying a Regular Expression(regexp) for the Shortest Match, by using modifier '?', no-greedy match
+   By default, * will match longest data. if appended with a '?' then it will match the shortest
+   
+   #+begin_src python :results output
+   import re
+   text1 = 'Computer says "no."'
+   r= re.findall(r'"(.*)"', text1)
+   print(r)
+
+   text2 = 'Computer says "no." Phone says "yes."'
+   r= re.findall(r'"(.*)"', text2)
+   print(r)
+
+   # Now add a '?' after '*', no greedy match
+   r= re.findall(r'"(.*?)"', text2)
+   print(r)
+   #+end_src
+   
+   #+RESULTS:
+   : ['no.']
+   : ['no." Phone says "yes.']
+   : ['no.', 'yes.']
+   
+** 2.8. Writing a Regular Expression for Multiline Patterns
+   By default, '.' will not match a new line character. 
+   there are two choices to let '.' match a new line character:
+   1. by alternative.
+      change r'.*' to r'(?:.|\n)*'
+   2. by use the re.DOTALL flag
+      #+begin_src python :results output
+      s = '''/* aaaa
+      bbbb
+      cccc */'''
+      import re
+      r = re.findall(r'/\*.*\*/', s, flags=re.DOTALL)
+      r = re.findall(r'/\*(?:.|\n)*\*/', s, flags=re.DOTALL)
+      print(r)
+      #+end_src
+      
+      #+RESULTS:
+      : ['/* aaaa\nbbbb\ncccc */']
+      
+*** the re.DOTALL flag: let '.' match a newline character
+** 2.9. Normalizing Unicode Text to a Standard Representation, by unicodedata.normalize('NFC', str)
+   unicode may have more than one representation, see example in the book
+*** normalizing means make sth. has the uniform format/type
+** 2.11. Stripping Unwanted Characters from Strings
+*** str.strip() function. lstrip(), rstrip(), delete whitespaces characters at begining or ending
+    #+begin_src python :results output
+    s = "    a b c \n ";
+    print(s.strip())
+    print(s.lstrip())
+    print(s.rstrip())
+    #+end_src
+    
+    #+RESULTS:
+    : a b c
+    : a b c 
+    :  
+    :     a b c
+*** delete characters in middle of string, by str.replace(), or re.sub()
+    #+begin_src python :results output
+    s = "   hello     word    ";
+    print(s.replace(" ", ""))
+    import re
+    print(re.sub("\s+", " ", s))
+    #+end_src
+    
+    #+RESULTS:
+    : helloword
+    :  hello word 
+*** create a generator object  by an expression, by '(' instead of '[', like lazy evaluation on other languages
+    #+begin_src python :results output
+    s = '''
+    import os.path
+    rst = ""
+    if os.path.isfile(""):
+        with open("", "r") as f:
+            rst = f.read()
+    '''
+    ss = s.split("\n")
+
+    s1 = (s.strip() for s in ss)
+    print(s1)
+    for s in s1:
+        print(s)
+    #+end_src
+    
+    #+RESULTS:
+    : <generator object <genexpr> at 0x00000048B4AAF0F8>
+    : 
+    : import os.path
+    : rst = ""
+    : if os.path.isfile(""): 
+    : with open("", "r") as f: 
+    : rst = f.read()
+    : 
+    
+** 2.12. Sanitizing and Cleaning Up Text
+*** str.translate() function, change characters given a table/dictionary, the book given much unicode examples
+    
+** 2.13. Aligning Text Strings
+   
+*** the str.ljust(), str.rjust(), str.center() functions
+    accept a number, and an optionall character
+    #+begin_src python :results output
+print("aaa".ljust(20, "b"))
+print("aaa".rjust(20, "-"))
+print("aaa".center(20, "="))
+print("aaa".center(20))
+    #+end_src
+    
+    #+RESULTS:
+    : aaabbbbbbbbbbbbbbbbb
+    : -----------------aaa
+    : ========aaa=========
+    :         aaa         
+    
+*** the format function and the str.format methods
+    #+begin_src python :results output
+print(format("aaa", ">20")) # same as rjust
+print(format("aaa", "=<20")) # same as ljust
+print(format("aaa", "^20")) # same as center
+    #+end_src
+    
+    #+RESULTS:
+    :                  aaa
+    : aaa=================
+    :         aaa         
+    
+    #+begin_src python :results output
+print("{} {:=^10}".format("abc", 123))
+    #+end_src
+    
+    #+RESULTS:
+    : abc ===123====
+    
+    
+    
+    
+    
+    "%s %s" % (a, b) is old way, now should use the new way.
+    
+    
+** 2.14. Combining and Concatenating Strings
+   
+*** by str.join
+    
+*** by + operator
+    
+*** by print function's 'sep' parameter
+    
+*** by format function
+** 2.15. Interpolating Variables in Strings, by str.format() or str.format_map() method
+   Note: format_map doesn't exist in python 2.7
+   #+begin_src python :results output
+   print("{name} is {age} years old".format(name="Tom", age=16))
+
+   name = "Jim"
+   age = 18
+   # print("{name} is {age} years old".format_map(vars()))
+   #+end_src
+   
+   #+RESULTS:
+   : Tom is 16 years old
+
+
+   format_map accept a dictionay, while format accept keywords parameters
+*** the vars() function, the same as locals() if no parameter
+    if pass one parameter, then it is the same as obj.__dict__
+    #+begin_src python :results output
+    s = 'abc'
+    d = 123
+    print(vars())
+    print(locals())
+    # print(vars(s))
+    #+end_src
+
+    #+RESULTS:
+*** the dict.__missing__(self, key) method will be called when a key not exists, then KeyError will not be raised.
+    If this method is defined, then when a key not exists, it will be called and return the value. Else a KeyError will be raised.
+    #+begin_src python :results output
+    class safedict(dict):
+        def __missing__(self, key):
+            return '{'+key+'}'
+
+    d = safedict();
+    print(d['name'])
+    d1 = dict();
+    # print(d1['name'])
+    #+end_src
+
+    #+RESULTS:
+    : {name}
+*** a function that will do variable interpolating from env, just like $var in perl, by str.format_map
+    #+begin_src python :results output
+    class safedict(dict):
+        def __missing__(self, key):
+            return '{'+key+'}'
+
+
+    import sys
+    def sub(text):
+        return text.format_map(safedict(sys._getframe(1).f_locals))
+
+    name="Jim"
+    age=18
+    print(sub("{name} is {age} years old"))
+    #+end_src
+
+    #+RESULTS:
+    : Jim is 18 years old
+
+
+    #+begin_src python :results output
+    people = {
+       'name': ['John', 'Peter'],
+       'age': [56, 64]
+    }
+
+    for i in range(2):
+        print('My name is {{name[{0}]}}, I am {{age[{0}]}} years old.'.format(i).format_map(people))
+    #+end_src
+
+    #+RESULTS:
+    : My name is John, I am 56 years old.
+    : My name is Peter, I am 64 years old.
+*** sys._getframe([depth]): like calls in perl, get the stack frame
+    depth default to 0, means current stack frame. 
+    f_locals attribute is used to get all local variabls.
+    f_lineno attribute is the line number.
+    #+begin_src python :results output
+    import sys
+    print(sys._getframe().f_locals)
+    print(sys._getframe().f_globals)
+    print(dir(sys._getframe().f_code))
+    print(sys._getframe().f_code.co_filename)
+    print(sys._getframe().f_lineno)
+    #+end_src
+
+    #+RESULTS:
+    : {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'sys': <module 'sys' (built-in)>}
+    : {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'sys': <module 'sys' (built-in)>}
+    : ['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'co_argcount', 'co_cellvars', 'co_code', 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_kwonlyargcount', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_stacksize', 'co_varnames']
+    : <stdin>
+    : 6
+
+    
+** 2.16. Reformatting Text to a Fixed Number of Columns, by textwrap.fill(astr, columns, initial_indent='', subsquent_indent='')
+   #+begin_src python :results output
+   import textwrap
+   s = "Look into my eyes, look into my eyes, the eyes, the eyes, \
+   the eyes, not around the eyes, don't look around the eyes, \
+   look into my eyes, you're under."
+
+   print(s)
+   print(textwrap.fill(s, 60))
+   #+end_src
+
+   #+RESULTS:
+   : Look into my eyes, look into my eyes, the eyes, the eyes, the eyes, not around the eyes, don't look around the eyes, look into my eyes, you're under.
+   : Look into my eyes, look into my eyes, the eyes, the eyes,
+   : the eyes, not around the eyes, don't look around the eyes,
+   : look into my eyes, you're under.
+
+*** get terminal column size, by os.get_terminal_size().columns
+    #+begin_src python :results output
+    import os
+    print(os.get_terminal_size().columns)
+    #+end_src
+
+    #+RESULTS:
+
+
+** 2.17. Handling HTML and XML Entities in Text
+*** the html.escape(astr, quote=True) function: 
+    escape means convert special characters to 
+    #+begin_src python :results output
+    s = '<a>this is </a>'
+    import html
+    print(html.escape(s))
+    #+end_src
+
+    #+RESULTS:
+    : &lt;a&gt;this is = &lt;/a&gt;
+*** the str.encode('ascii', errors='xmlcharrefreplace') function: encode a string to ascii
+    #+begin_src python :results output
+    s = 'Spicy Jalapeño'
+    print(s.encode('ascii', errors='xmlcharrefreplace'))
+    #+end_src
+
+    #+RESULTS:
+    : b'Spicy Jalape&#241;o'
+
