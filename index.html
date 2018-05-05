@@ -1,78 +1,49 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="description" content="Astropeak's blogs.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Astropeak</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<meta name="theme-color" content="#5670d4">
-<meta name="generator" content="Nikola (getnikola.com)">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<link rel="canonical" href="https://astropeak.github.io/">
-<link rel="next" href="index-1.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/python-object-attribute/" type="text/html">
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(assets/fonts/libretto-icons.eot);
+            src:url(assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(assets/fonts/libretto-icons.woff) format("woff"),
+            url(assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="assets/css/libretto_styles.css">
 </head>
 <body>
-<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
-
-<!-- Menubar -->
-
-<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
-<!-- This keeps the margins nice -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="https://astropeak.github.io/">
-
-                <span id="blog-title">Astropeak</span>
-            </a>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
         </div>
-<!-- /.navbar-header -->
-        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
-            <ul class="nav navbar-nav">
-<li>
-<a href="archive.html">Archive</a>
-                </li>
-<li>
-<a href="categories/">Tags</a>
-                </li>
-<li>
-<a href="rss.xml">RSS feed</a>
-
-                
-            </li>
-</ul>
-<ul class="nav navbar-nav navbar-right"></ul>
-</div>
-<!-- /.navbar-collapse -->
-    </div>
-<!-- /.container -->
-</nav><!-- End of Menubar --><div class="container" id="content" role="main">
-    <div class="body-content">
-        <!--Body content-->
-        <div class="row">
-            
-            
-
-    
-
-
-    
-<div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/python-object-attribute/" class="u-url">Python 对象属性（一）</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/python-object-attribute/" rel="bookmark"><time class="published dt-published" datetime="2017-07-26T00:00:00+08:00" title="2017-07-26">2017-07-26</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="archive.html">Archive</a></li>
+                    <li><a href="categories/">Tags</a></li>
+                    <li><a href="rss.xml">RSS feed</a></li>
+            </ul></nav></header><div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/python-object-attribute/" rel="bookmark">July 26, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/python-object-attribute/">Python 对象属性（一）</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 所有的Python 对象都有属性，可以通过 <code>obj.name</code> 这样的语法来获取属性，通过  <code>obj.name = 'Tom'~  这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 ~del obj.name</code> 删除一个属性。
 </p>
 
@@ -271,16 +242,20 @@ x.name 等价于 getattr(x, 'name')，
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/python-why-not-use-getter-setter/" class="u-url">无需为Python类添加 getter 和 setter</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/python-why-not-use-getter-setter/" rel="bookmark"><time class="published dt-published" datetime="2017-07-24T00:00:00+08:00" title="2017-07-24">2017-07-24</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/python-why-not-use-getter-setter/" rel="bookmark">July 24, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/python-why-not-use-getter-setter/">无需为Python类添加 getter 和 setter</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 Getter 和 setter在java中被广泛使用。一个好的java编程准则为：将所有属性设置为私有的，同时为属性写getter和setter函数以供外部使用。 这样做的好处是属性的具体实现被隐藏，当未来需要修改时，只需要修改getter 和 setter即可，而不用修改代码中所有引用这个属性的地方。可能做的修改为：
 </p>
 <ul class="org-ul">
@@ -372,16 +347,20 @@ Python中对象访问的语法即可能是直接访问这个属性，也可能�
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/python-cookbook-readnote/" class="u-url">Python Cookbook 读书笔记</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/python-cookbook-readnote/" rel="bookmark"><time class="published dt-published" datetime="2017-07-10T00:00:00+08:00" title="2017-07-10">2017-07-10</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/python-cookbook-readnote/" rel="bookmark">July 10, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/python-cookbook-readnote/">Python Cookbook 读书笔记</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 《<a href="http://shop.oreilly.com/product/0636920027072.do">Python Cookbook</a>》读书笔记.
 </p>
 <div id="outline-container-sec-1" class="outline-2">
@@ -3456,16 +3435,20 @@ Below is a general function that map a file to a byte array.
 
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/hmm-word-segmentation/" class="u-url">基于隐马尔科夫模型的中文分词方法</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/hmm-word-segmentation/" rel="bookmark"><time class="published dt-published" datetime="2017-05-06T00:00:00+08:00" title="2017-05-06">2017-05-06</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/hmm-word-segmentation/" rel="bookmark">May 6, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/hmm-word-segmentation/">基于隐马尔科夫模型的中文分词方法</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 本文主要讲述隐马尔科夫模及其在中文分词中的应用。 基于中文分词语料库，建立中文分词的隐马尔科夫模型，最后用维特比方法进行求解。
 </p>
 
@@ -3566,16 +3549,20 @@ Below is a general function that map a file to a byte array.
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/generative-model-and-descriminative-model/" class="u-url">生成模型和判定模型</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/generative-model-and-descriminative-model/" rel="bookmark"><time class="published dt-published" datetime="2017-04-23T00:00:00+08:00" title="2017-04-23">2017-04-23</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/generative-model-and-descriminative-model/" rel="bookmark">April 23, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/generative-model-and-descriminative-model/">生成模型和判定模型</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 统计概率模型的作用是给定输入 \(x\) ， 预测输出 \(y\) 的概率，也即求解条件概率 \(P(y|x)\) 。统计概率模型分为两种：生成模型（Generative Model）和判定模型（Descriminative Model）。
 </p>
 <ul class="org-ul">
@@ -3641,16 +3628,20 @@ y^* = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{ar
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/nlp-vocabulary/" class="u-url">自然语言处理名词表</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/nlp-vocabulary/" rel="bookmark"><time class="published dt-published" datetime="2017-03-13T00:00:00+08:00" title="2017-03-13">2017-03-13</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/nlp-vocabulary/" rel="bookmark">March 13, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/nlp-vocabulary/">自然语言处理名词表</a></h1>
+                </div>
+                <div class="entry-content">
+                        <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="left">
 <col class="left">
@@ -3694,15 +3685,19 @@ y^* = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{ar
 </tr></tbody>
 </table>
 </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/language-model/" class="u-url">语言模型</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/language-model/" rel="bookmark"><time class="published dt-published" datetime="2017-02-03T00:00:00+08:00" title="2017-02-03">2017-02-03</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/language-model/" rel="bookmark">February 3, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/language-model/">语言模型</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 语言模型的定义包含两部分
 </p>
 <ol class="org-ol">
@@ -3910,16 +3905,20 @@ P(you) = 0\\
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/gradient-descend/" class="u-url">梯度下降算法</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/gradient-descend/" rel="bookmark"><time class="published dt-published" datetime="2017-02-01T00:00:00+08:00" title="2017-02-01">2017-02-01</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/gradient-descend/" rel="bookmark">February 1, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/gradient-descend/">梯度下降算法</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 梯度下降算法是一种用于求解函数最小值的数值计算方法。求解函数的极值一般有两种方法，第一种是解析法, 
 即函数的极值可以用公式直接计算出来。如对于1元2次方程，我们可以直接求出这个函数的最大值或者最小值。
 但对于更高次的方程或者非线性函数, 大多无法求出解析解，此时需要使用数值方法.
@@ -4066,16 +4065,20 @@ Grad(x_1, x_2) = [Grad(x_1), Grad(x_2)] = [2x_1-4, 3]
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/bag-of-words-and-ngram-model/" class="u-url">词袋模型和N-gram模型</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/bag-of-words-and-ngram-model/" rel="bookmark"><time class="published dt-published" datetime="2017-01-13T00:00:00+08:00" title="2017-01-13">2017-01-13</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/bag-of-words-and-ngram-model/" rel="bookmark">January 13, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/bag-of-words-and-ngram-model/">词袋模型和N-gram模型</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 词袋模型(bag of words)是常用的语言模型，将文档看作文档中所有词的集合，而忽略词的顺序。尽管丢失了词的顺序这一属性，
 但这个模型仍然能够有效用于一些自然处理任务中，如文本分类。
 </p>
@@ -4224,16 +4227,20 @@ The brown fox jump up the rog.
 </p>
 </div>
 </div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/recall-precision-fscore/" class="u-url">Recall，Precision 和 F-score</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Astropeak
-            </span></p>
-            <p class="dateline"><a href="posts/recall-precision-fscore/" rel="bookmark"><time class="published dt-published" datetime="2017-01-07T00:00:00+08:00" title="2017-01-07">2017-01-07</time></a></p>
-        </div>
-    </header><div class="e-content entry-content">
-    <p>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/recall-precision-fscore/" rel="bookmark">January 7, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/recall-precision-fscore/">Recall，Precision 和 F-score</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
 这个三个数据用于描述一个模型的好坏程度，分别为召回率、准确度和F值。
 </p>
 
@@ -4318,29 +4325,26 @@ The brown fox jump up the rog.
 </p>
 </div>
 </div>
-    </div>
-    </article>
+                </div>
+            </article>
 </div>
-
-        <nav class="postindexpager"><ul class="pager">
-<li class="next">
-                <a href="index-1.html" rel="next">Older posts</a>
-            </li>
-        </ul></nav>
+    <!-- Lower Navigation links -->
+    <nav class="site-content navigation-post" role="navigation"><div class="previous">
+                <a href="index-1.html" rel="prev">
+                    <span class="meta-nav">Older Entries</span>                </a>
+            </div>
+    </nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
 </div>
-        <!--End of body content-->
-
-        <footer id="footer">
-            Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
-            
-        </footer>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Powered by <a href="https://getnikola.com/">Nikola</a> using the <a href="https://note2self.abraham-v.com/libretto-theme-for-nikola/">Libretto theme</a>.</p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
 </div>
-</div>
-
-
-            <script src="assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
-    moment.locale("en");
-    fancydates(0, "YYYY-MM-DD HH:mm");
-    </script><!-- end fancy dates -->
+    </footer>
 </body>
 </html>
