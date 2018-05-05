@@ -21,7 +21,7 @@
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: Python object attribute
 
-所有的Python 对象都有属性，可以通过 ~obj.name~ 这样的语法来获取属性，通过  ~obj.name = 'Tom'~  这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 ~del obj.name~ 删除一个属性。
+所有的Python 对象都有属性，可以通过 _obj.name_ 这样的语法来获取属性，通过 obj.name = 'Tom' 这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 ~del obj.name~ 删除一个属性。
 
 * 特殊属性和自定义属性
   根据属性保存位置的不同，可以将属性分类为特殊属性和自定义属性。先来看一个例子。
