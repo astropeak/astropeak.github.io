@@ -20,6 +20,14 @@
 <link rel="stylesheet" href="assets/css/libretto_styles.css">
 </head>
 <body>
+<p>
+    %if has_custom_css:
+       <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+    %endif
+
+
+
+</p>
     <!-- Navigation bar -->
     <header class="nav-bar"><div class="site-branding">
             <h1 class="site-title">
@@ -44,7 +52,7 @@
                 </div>
                 <div class="entry-content">
                         <p>
-所有的Python 对象都有属性，可以通过 <code>obj.name</code> 这样的语法来获取属性，通过  <code>obj.name = 'Tom'~  这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 ~del obj.name</code> 删除一个属性。
+所有的Python 对象都有属性，可以通过 <span class="underline">obj.name</span> 这样的语法来获取属性，通过 obj.name = 'Tom' 这样的语法添加一个属性或更新属性的值（如果这个属性已存在），通过 <code>del obj.name</code> 删除一个属性。
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
