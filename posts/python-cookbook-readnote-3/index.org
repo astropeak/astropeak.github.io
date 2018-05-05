@@ -1,0 +1,650 @@
+#+BEGIN_COMMENT
+.. title: Python Cookbook 读书笔记（三）
+.. slug: python-cookbook-readnote-3
+.. date: 2017-07-20
+.. tags: python
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+* chapter 4: Iterators and Generators
+** 4.1. Manually Consuming an Iterator, by next(iterator[, default]) function
+   #+begin_src python :results output
+   with open('python-cookbook-3rd.org') as f:
+       print(next(f))
+   #+end_src
+
+   #+RESULTS:
+   : * chapter 1: Data Structures and Algorithms
+   : 
+
+*** open(filename, ...) function will return a iterator of lines in that file
+*** a list object is not an iterator
+*** use the iter(iterable) function to create an iterator given an iterable
+*** the for x in X syntax works both for iterator and list object
+** iterator and iterable
+   An object is said to be iterable if it has the __iter__ method defined.
+   The __iter__() will reutrn the iterator object.
+   
+   An object is said to be a iterator if it has following method defined:
+   1. __iter__: which return itself
+      Can be tested the it.__iter__() == it is true
+   2. __next__: return the next value every time it is invoked. 
+   
+
+   So an iterator is an iterable,  call iter(iterable) to get an iterator.
+
+   
+   The iter(iterable) function: 
+   it will return 'iterable.__iter__()'
+
+
+   So if obja is an iterable, then iter(obja) equal obja.__iter() 
+   #+begin_src python :results output
+   obja = [1, 2, 3]
+   ia = obja.__iter__()
+   ib = iter(obja)
+   ic = iter(ib)
+   print(ia)
+   print(ib)
+   print(ib is ic)
+   print(next(ia), next(ib))
+   #+end_src
+
+   #+RESULTS:
+   : <list_iterator object at 0x0000001303C5CF98>
+   : <list_iterator object at 0x0000001303C5CF28>
+   : True
+   : 1 1
+
+   if obja is iterator, then iter(obja) and obja is the same object.
+
+
+   A good ref: http://www.shutupandship.com/2012/01/understanding-python-iterables-and.html
+*** a example of create a iterable class
+    #+begin_src python :results output
+    class MyList(list):
+        def __iter__(self):
+            return MyListIter(self)
+        
+    class MyListIter(object):
+        """ A sample implementation of a list iterator. NOTE: This is just a 
+        demonstration of concept!!! YOU SHOULD NEVER IMPLEMENT SOMETHING LIKE THIS!
+        Even if you have to (for any reason), there are many better ways to 
+        implement this."""
+        def __init__(self, lst):
+            self.lst = lst
+            self.i = -1
+        def __iter__(self):
+            return self
+        def __next__(self):
+            if self.i<len(self.lst)-1:
+                self.i += 1         
+                return self.lst[self.i]
+            else:
+                raise StopIteration
+
+    if __name__ == '__main__':
+        a = MyList([1, 2, 3, 4])
+        ia = iter(a)
+        print('type(a): %r, type(ia): %r' %(type(a), type(ia)))
+        for i in a: 
+            print (i)
+    #+end_src
+
+    #+RESULTS:
+    : type(a): <class '__main__.MyList'>, type(ia): <class '__main__.MyListIter'>
+    : 1
+    : 2
+    : 3
+    : 4
+
+** how does the for in loop works
+   1. it first get the iterable's iterator object, by calling its __iter__() method
+   2. get the element by invoke the iterator's __next__() method, and bind the value to the variable.
+   3. stop when an 'StopIteration' exception happens.
+** the next(iterator) function
+   it just return iterator.__next__()
+** the iter(iterable) function
+   it just return iterable.__iter__()
+** the len(obj) function
+   it just return obj.__len__()
+** 4.2. Delegating Iteration
+   When create a class the with a underline container, just define an __iter__() method that forward the request to the underlineing container object.
+
+** 4.3. Creating New Iteration Patterns with Generators
+** what is a generator?
+   a generator is a function that contains at lease one 'yeild' statement.
+
+   Unlike normal function, it's boyd will not be executed when it is be called, instead, it will return a generator object.
+** 4.4. Implementing the Iterator Protocol
+   use the generator instead of the __next__ method, which will be much simple.
+
+   使用yeild 创建一个Tree Node,比使用__next__函数简单多了。
+
+   yeild from syntax.
+** 4.5. Iterating in Reverse, by the reversed(obj) function
+   reversed only  works if the obj
+   - the obj defined a __reversed__() method. or
+   - the obj's size can be determined.
+     
+
+   It returns an iterator.
+
+   For example, a file handler returned by the 'open()' function can't be used with the reversed function. to use it, first convert it to a list, then pass it to the reversed() function.
+   #+begin_src python :results output
+   with open("1.txt") as f:
+       a = reversed(list(f))
+       print(next(a), next(a))
+   #+end_src
+
+   #+RESULTS:
+   : cccc 
+   : 
+** defined a customized  reversed iterator, by define the __reversed__() method
+   #+begin_src python :results output
+   class CountDown():
+       def __init__(self, start):
+           self._start = start
+
+       def __iter__(self):
+           return self
+
+       def __next__(self):
+           if self._start >=0:
+               n = self._start
+               self._start -= 1
+               return n
+           else:
+               raise StopIteration
+
+       def __reversed__(self):
+           return ReversedCountDown(self)
+
+   class ReversedCountDown():
+       def __init__(self, orig):
+           self._orig = orig
+           self._n = -1
+       def  __iter__(self):
+           return self
+       def __next__(self):
+           if self._n <= self._orig._start:
+               self._n += 1
+               return self._n
+           else:
+               raise StopIteration
+
+   # if __name__ == '__main__':
+   cd = CountDown(2)
+   # for a in cd:
+   #     print(a)
+
+   print("reversed")
+   for a in reversed(cd):
+       print(a)
+   #+end_src
+
+   #+RESULTS:
+   : reversed
+   : 0
+   : 1
+   : 2
+   : 3
+
+
+   Implemet the iterator protocal by __next__ method is a little complex compared  to by  use the yield statement. The differenc is that then the object is ... 
+
+   #+begin_src python :results output
+   class CountDown():
+       def __init__(self, start):
+           self._start = start
+
+       def __iter__(self):
+           n = self._start
+           while n >=0:
+               yield n
+               n -=1
+
+       def __reversed__(self):
+           n = 0
+           while n <=self._start:
+               yield n
+               n+=1
+
+   cd = CountDown(3)
+   for a in cd:
+       print(a)
+
+   print ("reversed")
+   for a in reversed(cd):
+       print(a)
+   #+end_src
+
+   #+RESULTS:
+   : 3
+   : 2
+   : 1
+   : 0
+   : reversed
+   : 0
+   : 1
+   : 2
+   : 3
+
+
+** 4.6. Defining Generator Functions with Extra State
+*** print the surrounding previous lines if pattern matched, by use a generator, implemented by a class
+    Here previous lines are states.
+    #+begin_src python :results output
+    from collections import deque
+    class HistoryLines():
+        def __init__(self, lines, histlen=3):
+            self.lines = lines
+            self.history = deque(maxlen=histlen)
+
+        def __iter__(self):
+            for line in self.lines:
+                self.history.append(line)
+                yield line
+
+    with open('1.txt') as f:
+        hist_lines = HistoryLines(f)
+        for line in hist_lines:
+            if  'wrap' in line:
+                for hl in hist_lines.history:
+                    print('%s' % hl)
+    #+end_src
+
+    #+RESULTS:
+    : bbbb
+    : 
+    : EEEXXX
+    : 
+    : a wrap  bbb
+    : 
+
+    Good practice: if you need save some states, then don't use a function to create a generator, use a class.
+
+** 4.7. Taking a Slice of an Iterator
+*** by use of the itertools.islice(start, end, step) functon
+    Because we don't know the size of a iterator or a generator, so we can't slice it directly.
+    #+begin_src python :results output
+    from  itertools import islice as slice_iter
+    a = range(8)
+    for b  in slice_iter(iter(a), 2, 5, 1):
+        print(b)
+
+    with open('1.txt') as f:
+        for line in slice_iter(f, 2, 5, 2):
+            print(line.strip())
+    #+end_src
+
+    #+RESULTS:
+    : 2
+    : 3
+    : 4
+    : dd
+    : bbbb
+
+    The result is the  same as my impllemented one.
+
+***   a try by me,  works
+    #+begin_src python :results output
+    def slice_iter(aiter, start, end, step):
+        n = 0
+        idx = range(end)[start:end:step]
+        for i in range(end):
+            v = next(aiter)
+            if i in idx:
+                yield v
+
+    a = range(8)
+    for b  in slice_iter(iter(a), 2, 5, 1):
+        print(b)
+
+    with open('1.txt') as f:
+        for line in slice_iter(f, 2, 5, 2):
+            print(line.strip())
+    #+end_src
+
+    #+RESULTS:
+    : 2
+    : 3
+    : 4
+    : dd
+    : bbbb
+
+** 4.8. Skipping the First Part of an Iterable, by itertools.dropwhile(test_func, iterable)
+   #+begin_src python :results output
+   import itertools
+   with open('1.txt') as f:
+       for line in itertools.dropwhile(lambda x: x.startswith('#'), f):
+           print(line, end='')
+   #+end_src
+
+   #+RESULTS:
+   : aaaa
+   : # bbbb
+   : EEEXXX
+   : a wrap  bbb
+   : dddd
+
+   This is different from filtering
+
+   if the position is known, then we can use itertools.islice(iterable, start, None) to drop the first 'start' items.
+   
+
+** 4.9. Iterating Over All Possible Combinations or Permutations
+   An important aspect  of itertools module: for complex iteration tasks, it is very likely there is an exist solution.
+
+*** create permutations from a iterable collection of items, by itertools.permutations(iterable[, len])
+    The return value is an iterator
+    #+begin_src python :results output
+    from itertools import permutations
+    a = ['a', 'b', 'c']
+    for b in permutations(a, 2):
+        print(b)
+    #+end_src
+
+    #+RESULTS:
+    : ('a', 'b')
+    : ('a', 'c')
+    : ('b', 'a')
+    : ('b', 'c')
+    : ('c', 'a')
+    : ('c', 'b')
+
+*** create combinations from a iterable collection of items, by itertools.combinations(iterable, len)
+    The order of items does not matter
+    #+begin_src python :results output
+    from itertools import combinations
+    a = ['a', 'b', 'c']
+    for b in combinations(a, 2):
+        print(b)
+    #+end_src
+
+    #+RESULTS:
+    : ('a', 'b')
+    : ('a', 'c')
+    : ('b', 'c')
+
+*** create combinations from a iterable collection of items, by itertools.combinations_with_replacement(iterable, len), same item can exist more than one times.
+    The order of items does not matter
+    #+begin_src python :results output
+    from itertools import combinations_with_replacement
+    a = ['a', 'b', 'c']
+    for b in combinations_with_replacement(a, 4):
+        print(b)
+    #+end_src
+
+    #+RESULTS:
+    #+begin_example
+    ('a', 'a', 'a', 'a')
+    ('a', 'a', 'a', 'b')
+    ('a', 'a', 'a', 'c')
+    ('a', 'a', 'b', 'b')
+    ('a', 'a', 'b', 'c')
+    ('a', 'a', 'c', 'c')
+    ('a', 'b', 'b', 'b')
+    ('a', 'b', 'b', 'c')
+    ('a', 'b', 'c', 'c')
+    ('a', 'c', 'c', 'c')
+    ('b', 'b', 'b', 'b')
+    ('b', 'b', 'b', 'c')
+    ('b', 'b', 'c', 'c')
+    ('b', 'c', 'c', 'c')
+    ('c', 'c', 'c', 'c')
+#+end_example
+
+** 4.10. Iterating Over the Index-Value Pairs of a Sequence, by enumerate(iterable[, start_index])
+   #+begin_src python :results output
+   a = ['a', 'b', 'c']
+   for i, v in enumerate(a, 1):
+       print(i, v)
+   #+end_src
+
+   #+RESULTS:
+   : 1 a
+   : 2 b
+   : 3 c
+
+** 4.11. Iterating Over Multiple Sequences Simultaneously, by zip(iterable1, iterable2, ...), shortest
+   The zip function will create an iterator that return tuples: first element from iterable1, second element from iterable2, ...
+   Should the size of all iterables be the same? => No, it can be different. the returned size is the same as the shortest size of all iterables.
+   #+begin_src python :results output
+   a =  [1,  2, 3]
+   b = ['a', 'b', 'c', 'd']
+   for v in zip(a, b):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   : (1, 'a')
+   : (2, 'b')
+   : (3, 'c')
+
+   
+
+** Iterating Over Multiple Sequences Simultaneously, by itertools.zip_longest(iterable1, iterable2, ...), longest
+   If you want the returned iterator take the longest size, then use zip_longest. The element value will be None if that  iterable is exzasted.
+
+   From the two functions: zip and zip_longest, there is a lesson: it better to create different function name, than add a more  parameter.
+   #+begin_src python :results output
+   from itertools import zip_longest
+   a =  [1,  2, 3]
+   b = ['a', 'b', 'c', 'd']
+   for v in zip_longest(a, b):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   : (1, 'a')
+   : (2, 'b')
+   : (3, 'c')
+   : (None, 'd')
+
+** 4.12. Iterating on Items in Separate Containers, by itertools.chain(iterable1, iterable2, ...), concat iterables
+   #+begin_src python :results output
+   from itertools import chain
+   a =  [1,  2, 3]
+   b = ['a', 'b', 'c', 'd']
+   for v in chain(a, b):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   : 1
+   : 2
+   : 3
+   : a
+   : b
+   : c
+   : d
+
+   
+   
+** 4.13. Creating Data Processing Pipelines
+   This section is about divide  a task to many small pipelines(steps), by use of generator
+   Generator is a  producer, for loop is a comsumer.
+
+
+*** example: iterate all matched lines from all files in a directory, recursively
+
+    相当于把多重QIAN TAO循环给扁平化了。但执行的顺序完全相同。generator确实比较好用。
+    #+begin_src python :results output
+    import os
+    def gen_filenames(top):
+        for dirpath, dirs, files in os.walk(top):
+            for f in files:
+                yield os.path.join(dirpath, f)
+
+    def gen_open(filenames):
+        for f in filenames:
+            # print('file names: %s' % f)
+            fh = open(f, encoding='utf-8')
+            yield fh
+            fh.close()
+
+    def gen_lines(files):
+        for f in files:
+            yield from f
+
+    def gen_match(lines, pattern):
+        for v in  lines:
+            if pattern in v:
+                yield v
+
+    filenames = gen_filenames('..')
+    files = gen_open(filenames)
+    lines = gen_lines(files)
+    matched_lines = gen_match(lines, 'slice')
+
+    for v in matched_lines:
+        print(v, end='')
+    #+end_src
+
+    #+RESULTS:
+    #+begin_example
+    *** the slice object
+        create a  slice
+       s = slice(1,2)
+        '1:2' is just a shortcut to 'slice(1,2)'
+        slice attributes
+        s = slice(1,2,2)
+    *** by use of the itertools.islice(start, end, step) functon
+        Because we don't know the size of a iterator or a generator, so we can't slice it directly.
+        from  itertools import islice as slice_iter
+        for b  in slice_iter(iter(a), 2, 5, 1):
+            for line in slice_iter(f, 2, 5, 2):
+        def slice_iter(aiter, start, end, step):
+        for b  in slice_iter(iter(a), 2, 5, 1):
+            for line in slice_iter(f, 2, 5, 2):
+       if the position is known, then we can use itertools.islice(iterable, start, None) to drop the first 'start' items.
+        matched_lines = gen_match(lines, 'slice')
+#+end_example
+
+*** [not work]change two embeded for loop to two seperate one by generator
+    #+begin_src python :results output
+    a = [1, 2, 3]
+    b = ['a', 'b']
+
+    for i in a:
+        for j in b:
+            print(i, j)
+
+    def gen_a(aiter):
+        for v in aiter:
+            yield v
+
+    def gen_b(aiter, biter):
+        for v in aiter:
+    #+end_src
+
+    #+RESULTS:
+
+** 4.14. Flattening a Nested Sequence, by generator, recursively
+   Why this function is not included in itertools module?
+   #+begin_src python :results output
+   from collections import Iterable
+   def  flatten(items, ignored_types=(str, bytes)):
+       for v in items:
+           if isinstance(v, Iterable) and not isinstance(v, ignored_types):
+               yield from flatten(v, ignored_types)
+           else:
+               yield v
+
+   a = [1, 2, [3, 4, [5, 6], 7],  8, 'abc']
+   for v in a:
+       print(v)
+
+   print("the flattened version")
+   for v in flatten(a):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   1
+   2
+   [3, 4, [5, 6], 7]
+   8
+   abc
+   the flattened version
+   1
+   2
+   3
+   4
+   5
+   6
+   7
+   8
+   abc
+#+end_example
+
+   
+** yield from just like a for loop
+   #+begin_src python :results output
+   def gen_a():
+       for v in range(3):
+           yield v
+
+   def gen_b(gena):
+       yield from gena
+
+   def for_b(gena):
+       for v  in gena:
+           yield v
+
+   # the gen_b and for_b works exactly the same, but the yield from is better
+   for v in gen_b(gen_a()):
+       print(v)
+
+   print('the for version')
+   for v in for_b(gen_a()):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   : 0
+   : 1
+   : 2
+   : the for version
+   : 0
+   : 1
+   : 2
+
+** 4.15. Iterating in Sorted Order Over Merged Sorted Iterables, by heapq.merge(iterable1, iterable2, ...)
+   the input iterables should in sorted order. then it will create an new iterable of sorted items from all input.
+   #+begin_src python :results output
+   a = [1, 4, 8]
+   b = [2, 3,  7, 9]
+
+   import heapq
+   for v in heapq.merge(a, b):
+       print(v)
+   #+end_src
+
+   The function will only get the needed items into memory. So it better to merge two sorted files.
+
+   Similar  to ~sorted(itertools.chain(*iterables))~, but will not read all content to memory.
+** 4.16. Replacing Infinite conditional while Loops with an Iterator, by iter(callable, sentinel) function
+   invoke the callable UNTIL it returns the sentinel
+
+   Means: repeated invoke the callable, and return its return value, until the return value equal to the sentinel.
+   #+begin_src python :results output
+   a = [1, 2, 3, 4, 5]
+   idx = -1
+   def foo():
+       global idx
+       idx+=1
+       return a[idx]
+
+   for v in iter(foo, 3):
+       print(v)
+   #+end_src
+
+   #+RESULTS:
+   : 1
+   : 2

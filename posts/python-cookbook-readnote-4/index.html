@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Cookbook 读书笔记（四） | Astropeak</title>
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(../../assets/fonts/libretto-icons.eot);
+            src:url(../../assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(../../assets/fonts/libretto-icons.woff) format("woff"),
+            url(../../assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(../../assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="../../assets/css/libretto_styles.css">
+<link href="../../assets/css/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
+        </div>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="../../archive.html">Archive</a></li>
+                    <li><a href="../../categories/">Tags</a></li>
+                    <li><a href="../../rss.xml">RSS feed</a></li>
+                    <li><a href="http://github.com/astropeak">Github</a></li>
+            </ul></nav></header><!-- Page Header --><div class="title-block post-format-icon-pin">
+        <div class="entry-meta">
+            <span class="posted-on">
+                Posted on <a href="." rel="bookmark">July 25, 2017</a>
+            </span>
+        </div>
+        <h1>Python Cookbook 读书笔记（四）</h1>
+    </div>
+
+        <!-- Page Content -->
+    <div class="site-content" role="main">
+        <article class="format-standard libretto-long-form"><div class="entry-content">
+                <div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">chapter 5: Files and I/O</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">5.1. Reading and Writing Text Data</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">open a file</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+the 't' in mode means text.
+</p>
+<div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">)</span> <span class="c1">#read</span>
+<span class="c1"># f = open('1.txt', 'wt') #write</span>
+<span class="c1"># f = open('1.txt', 'at') #append</span>
+
+<span class="c1"># specify codec</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'latin-1'</span><span class="p">)</span> <span class="c1">#read</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'latin-1'</span><span class="p">)</span> <span class="c1">#write</span>
+
+<span class="c1">#disable newline translation, by use the open(newline='') option</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="c1">#read</span>
+
+<span class="c1"># specify what to do when encountering decoding/encoding errors, by use open(errors='...') option</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'replace'</span><span class="p">)</span> <span class="c1">#replace the char that can't be decoded to a unicode char U+fffd(which is the unicode replacemenet char)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">)</span> <span class="c1">#just ignore the char that can't be decoded</span>
+</pre></div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2">read whole content of a file as a string</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3">read/iterate each line of a file, by just treat the file object as a generator</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4">write str to a file, by file.write(text) method</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'2.txt'</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'abced'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">get system's default encoding</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">5.2. Printing to a File, redirect stdout to a file, by use print(file=…) option</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'2.txt'</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"aaaaa"</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">Question: how to redirect stdout to a file system widely.</h3>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5">5.3. Printing with a Different Separator or Line Ending, by use print(sep=…, end=…) options</h3>
+<div class="outline-text-3" id="text-1-5">
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'##'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="s1">'Hello'</span><span class="p">,</span> <span class="s1">'List'</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6">pass a sequence/list object to a function as N parameters instead of one, by using *list<sub>name</sub>
+</h3>
+<div class="outline-text-3" id="text-1-6">
+<div class="highlight"><pre><span></span><span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="s1">'Hello'</span><span class="p">,</span> <span class="s1">'List'</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7">5.4. Reading and Writing Binary Data(such as image, sound files)</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+By saying binary data, it means that there will no encoding/decoding works during writing/reading process.
+Use mode such as 'rb', 'wb', 'ab'.
+</p>
+
+<p>
+当作为binary data读取时， 与作为text data相比，没有自动的decode, encode过程。
+</p>
+
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'2.txt'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># f.write('aaabbb'.encode('latin-1'))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'aaabbb'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8">what is text string and byte string in python</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Each element in a text string is also a text string, 
+Each element in a byte string is a int
+</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'Hello'</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'Hello'</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9">5.5. Writing to a File That Doesn't Already Exist, by set mode of open(…) function to 'x'</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+If the file already exists, then don't write, and will raise a FileExistsError exception
+</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'2.txt'</span><span class="p">,</span> <span class="s1">'xt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'aaa bbb'</span><span class="p">)</span>
+</pre></div>
+
+<p>
+感觉这个根python的哲学有点类似，不事先做判断，而是用exception的方式。
+具体的用法可能需要将它放在一个try catch里。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10">5.6. Performing I/O Operations on a String, by io.StringIO() or io.BytesIO()</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+a typecal application can be simulate a file when do unit testing.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11">5.7. Reading and Writing Compressed Datafiles, by use gzip.open(…), or bz2.open(…)</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+After open the file, other operations are just the same as normal file.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12">5.8. Iterating Over Fixed-Sized Records, by iter(callable, sentinel)</h3>
+<div class="outline-text-3" id="text-1-12">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="n">RECORD_SIZE</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="n">RECORD_SIZE</span><span class="p">),</span> <span class="s1">''</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'; '</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13">the functools.partial(func, *args, **kwargs) function: create a new callable from a given callable with some(partial) arguments fixed. Currying</h3>
+<div class="outline-text-3" id="text-1-13">
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">:</span> <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">b</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mm</span><span class="p">())</span>
+</pre></div>
+
+<p>
+写一个能够接收很多参数的函数，然后利用partial 来生成简易的使用接口。需要注意参数的顺序。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14">5.9. Reading Binary Data into a Mutable Buffer</h3>
+</div>
+
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15">5.10. Memory Mapping Binary Files, map a binary file to memory(byte array), my mmap.mmap(…) method</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+This is a general method to map file to memory, then you can random access the content of the file, such as by using slicing
+</p>
+
+<p>
+After mapped, by change the value of the array will change the file's content. This is also a way for multiple intepreter comunication.
+Below is a general function that map a file to a byte array.
+</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mmap</span>
+
+<span class="k">def</span> <span class="nf">memory_map</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">mmap</span><span class="o">.</span><span class="n">ACCESS_WRITE</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_RDWR</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">access</span><span class="p">)</span>
+
+<span class="c1"># below is application of the function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">memory_map</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'EEF'</span>
+</pre></div>
+</div>
+</div>
+</div>
+            </div>
+        </article>
+</div>
+
+        <!-- Tag Section -->
+    <div class="site-content navigation-post">
+        <div class="tag-head">Tags</div>
+        <div class="tag-list">
+                <a href="../../categories/python/">python</a>
+        </div>
+    </div>
+
+        <!-- Post Navigation links -->
+<nav class="site-content navigation-post" role="navigation"><div class="previous">
+            <a href="../python-why-not-use-getter-setter/" rel="prev">
+                <span class="meta-nav">Older Post</span>无需为Python类添加 getter 和 setter
+            </a>
+        </div>
+        <div class="next">
+            <a href="../python-object-attribute/" rel="next">
+                <span class="meta-nav">Newer Post</span>Python 对象属性（一）
+            </a>
+        </div>
+</nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
+</div>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
+</div>
+    </footer>
+</body>
+</html>

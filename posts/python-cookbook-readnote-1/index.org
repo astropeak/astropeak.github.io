@@ -1,0 +1,431 @@
+#+BEGIN_COMMENT
+.. title: Python Cookbook 读书笔记（一）
+.. slug: python-cookbook-readnote-1
+.. date: 2017-07-10
+.. tags: python
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+
+#+TITLE:       Python Cookbook 读书笔记
+#+AUTHOR:      Astropeak
+#+EMAIL:       astropeak@gmail.com
+#+DATE:        2017-07-10
+#+URI:         /blog/%y/%m/%d/python-cookbook-readnote
+#+KEYWORDS:    python, cookbook, reading notes
+#+TAGS:        python, reading notes
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: Python coookbook reading notes
+
+《[[http://shop.oreilly.com/product/0636920027072.do][Python Cookbook]]》读书笔记.
+* chapter 1: Data Structures and Algorithms
+** 1.6 Mapping Keys to Multiple Values in a Dictionary, by list value and defaultdict
+   example: create a dictionary with default value, by defaultdict
+   
+   dictionary's property:
+   1. you can add new key to a dictionary
+   2. but when you access a key that not exists, there will be error
+   3. defaultdict is used to fix such problem.
+      
+   #+BEGIN_SRC python
+   from collections import defaultdict
+   `dict` = defaultdict(`func list`)
+   # `dict`['aaa'].append(2)
+   $0
+   #+END_SRC
+   
+** 1.6 example
+   #+BEGIN_SRC python
+   from collections import defaultdict
+   frequency = defaultdict(int)
+   frequency['colorless'] = 4
+   frequency['ideas'] # will be 0
+    
+   frequency = defaultdict(list)
+   # first, frequency['colorless'] will return a empty list, then append one element to this list.
+   frequency['colorless'].append(4)
+   frequency['ideas'] # will be []
+    
+   # Or you can pass a function take no arguments 
+    
+   # the idiom:
+   my_dictionary = defaultdict(function to create default value)
+   for item in sequence:
+   my_dictionary[item_key] is updated with information about item
+   #+END_SRC
+** 1.7 Keeping Dictionaries in Order, OrderedDict
+   #+begin_src python
+   form collections import OrderedDict
+   d = OrderedDict()
+   # the insertion order will be reserved.
+   #+end_src
+   
+   An typical application is when for serilization.
+   
+** 1.8. Calculating with Dictionaries
+*** get max key/value in a dictionary, based on the value, by inverting the dict
+    #+begin_src python
+    max(zip(`dict`.values(), `dict`.keys()))
+    # another solution
+    # max(`dict`, key=lambda k:`dict`[k])
+    #+end_src
+    first convert the dict to list of (value, key) pairs, then max function will first compare value, then compare key.
+*** result of the max value for many  things
+    for tuple and list, it just the element.
+    but for a dict, it returns only the key. Why? Because it accept a iterable as first parameter, and for a dictionary, the iterable value is the key.
+*** understanding of multi value bind
+    --->  (b11, b12) = 1
+    TypeError: 'int' object is not iterable
+    
+    The right hand side should be an iterable, every element in the iterable will be asigned to the left hand side variable, with each variable comsume one element exzactly. If the number of elements and variables not match, then there will be an error.
+    
+    To consume more than one values, use the '*varname' expresstion, then the variable 'varname' will be a list of many elements.
+    
+    Back to the error prints in the example, the 'int' object refers to the right side '1'.
+    
+    PS:
+    I find python much simpler and funny than java.
+** 1.9. Finding Commonalities in Two Dictionaries
+   a dictionary's d.keys() and d.items() support set operations
+   So to find the common part keys/items in two dictionaries, just use the set operation '|' or 'union' function.
+*** get all keys as a iterable in a dictionary, by keys()
+    #+begin_src python
+`dict`.keys()
+    #+end_src
+    
+*** get all values as a iterable in a dictionary, by values()
+    #+begin_src python
+`dict`.values()
+    #+end_src
+    
+*** get all key, value pairs as a iterable in a dictionary, by items()
+    #+begin_src python
+`dict`.items()
+    #+end_src
+    
+*** set operations
+    '|': union
+    '&': intersection
+    '-': difference
+    's1 < s2': check if s1 is a subset of s2
+    
+    Example:
+    In [101]: e.keys(), d.keys()
+    Out[101]: (dict_keys([1, 4, 'a', 9]), dict_keys([1, 3, 5]))
+    
+    In [102]: e.keys() & d.keys()
+    Out[102]: {1}
+    
+    In [103]: e.keys() | d.keys()
+    Out[103]: {1, 3, 4, 5, 'a', 9}
+    
+    In [104]: e.keys() - d.keys()
+    Out[104]: {9, 4, 'a'}
+    
+** 1.10. Removing Duplicates from a Sequence while Maintaining Order
+*** problem: what is hashable(and the link to python glossary)
+    From the python glossary: 
+    https://docs.python.org/3/glossary.html
+    
+    An object is hashable if it has a hash value which never changes during its lifetime (it needs a __hash__() method), and can be compared to other objects (it needs an __eq__() or __cmp__() method). Hashable objects which compare equal must have the same hash value.
+    
+    Hashability makes an object usable as a dictionary key and a set member, because these data structures use the hash value internally.
+    
+    All of Python’s immutable built-in objects are hashable, while no mutable containers (such as lists or dictionaries) are. Objects which are instances of user-defined classes are hashable by default; they all compare unequal, and their hash value is their id().
+*** how yield/generator iterator is implemented
+    From the glossary, it works by suspends the function and  return the value, and save the current status. Then if it was called  next time, it will start execute from the place last time it was suspended. Great!! I understanded this.
+    
+    generator
+    A function which returns a generator iterator. It looks like a normal function except that it contains yield expressions for producing a series of values usable in a for-loop or that can be retrieved one at a time with the next() function.
+    Usually refers to a generator function, but may refer to a generator iterator in some contexts. In cases where the intended meaning isn’t clear, using the full terms avoids ambiguity.
+    
+    generator iterator
+    An object created by a generator function.
+    Each yield temporarily suspends processing, remembering the location execution state (including local variables and pending try-statements). When the generator iterator resumes, it picks-up where it left-off (in contrast to functions which start fresh on every invocation).
+    
+*** file object is also an iterable, the element is a line
+    #+begin_src python
+    with open(somefile,'r') as f:
+        for line in f:
+            print(line)
+    #+end_src
+    
+*** a function that delete all duplicates in a list, with order preserved
+    #+begin_src python
+    def dedupe(items, key=None):
+        seen = set()
+        for item in items:
+            val = item if key is None else key(item)
+            if val not in seen:
+                yield item
+                seen.add(val)
+    #+end_src
+    If the element is hashable, then key function is not needed. Else, provide a fucntion to convert the  element to a hashable element.
+    
+    examples:
+    >>> a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
+    >>> list(dedupe(a, key=lambda d: (d['x'],d['y'])))
+    [{'x': 1, 'y': 2}, {'x': 1, 'y': 3}, {'x': 2, 'y': 4}]
+    >>> list(dedupe(a, key=lambda d: d['x']))
+    [{'x': 1, 'y': 2}, {'x': 2, 'y': 4}]
+    >>>
+    
+*** delete all duplicates in a list, don't preserve order, by set
+    #+begin_src python
+    set(`list`)
+    #+end_src
+    Then all duplicate elements in list will be removed.
+    
+*** the a?b:c expression in python, if else in one line
+    #+begin_src python
+    val = b if a else c
+    #+end_src
+    looks good
+    
+** 1.11. Naming a Slice
+*** the slice object
+    create a  slice
+    #+begin_src python
+   a=[1,2,3,4]
+   s = slice(1,2)
+   print(a[s])
+   print(a[1:2])
+    #+end_src
+    '1:2' is just a shortcut to 'slice(1,2)'
+    
+    slice attributes
+    #+begin_src python
+    s = slice(1,2,2)
+    print(s.start, s.stop, s.step)
+    #+end_src
+    
+    #+RESULTS:
+    
+    
+** 1.12. Determining the Most Frequently Occurring Items in a Sequence
+   A method by me
+   #+begin_src python
+   a = [1, 2, 1, 3, 2,3,3]
+   from collections import defaultdict
+   d = defaultdict(int)
+   # b = [d[k]+=1 for k in a]  # syntax error here
+   for k in a:
+       d[k]+=1
+
+   r = max(zip(d.values(), d.keys()))
+   print(r[1])
+   #+end_src
+   
+   
+*** the collections.Counter class: change a list to a list of tuple of (element, count)
+    #+begin_src python :results output
+    a = [1, 2, 1, 3, 2,3,3]
+    from collections import Counter
+    b = Counter(a)
+    c = b.most_common(1)
+    print(c[0][0])
+
+    # get the count
+    print(b[3]) # 3 is the element in a
+
+
+    # update with more words
+    b.update([4, 2, 5])
+
+    # and a Counter object support the math operations: '+' and '-'
+
+    #+end_src
+    
+    #+RESULTS:
+    : 3
+    : 3
+    
+    When you need to count data, use Counter class. This is a so little class, in practice, I will always write it from scratch before.
+    
+** 1.13. Sorting a List of Dictionaries by a Common Key
+   
+*** the operator.itemgetter function
+    it will return a callable that can be passed to 'sorted':s key  parameter, for list  or dictionary
+    #+begin_src python
+    # return value of
+    import operator
+    operator.itemgetter("name")
+    # is the same as this one
+    lambda r:r["name"]
+    # but the former  is a little faster
+    #+end_src
+    
+    仍然是非常小的功能，为什么搞得这么精细呢？
+    
+** 1.14. Sorting Objects Without Native Comparison Support
+*** the operator.attrgetter function
+    it will return a callable that can be passed to 'sorted':s key  parameter, for user defined class
+    #+begin_src python
+    class User():
+        def __init__(self, name):
+            self.name = name
+
+        def __repr__(self):
+            return 'User({})'.format(self.name)
+
+    # return value of
+    operator.attrgetter("name")
+    # is the same as this one
+    lambda o:o.name
+    # but the former  is a little faster
+    #+end_src
+** 1.15. Grouping Records(a sequence of dictionaries) Together Based on a Field
+*** the itertools.groupby function: group sequencially the list as tuple (key, items)
+    #+begin_src python
+    import itertools
+    rows =  [{1:2}, {1: 4},  {1: 3}]
+    # a should be a generator
+    rows.sort(key=itemgetter(1))
+    a = itertools.groupby(rows, key=itemgetter(1))
+    #+end_src
+    
+    another way is just use a default list dictionary to group, then no sort is needed.
+    
+    
+    
+    
+    
+    
+** 1.16. Filtering Sequence Elements
+   To fitering, just use list comprehension with an if condition
+*** itertools.compress function, a filtering tool
+    it takse two parameters:
+    1. an iterable which to be compressed
+    2. a Boolean sequence, with the same length of first parameter
+       if the element in this sequence  is True, then the element at the same position in the first iterable will be put to the output
+       
+       An example:
+    #+begin_src python
+    addresses = [
+        '5412 N CLARK',
+        '5148 N CLARK',
+        '5800 E 58TH',
+        '2122 N CLARK'
+        '5645 N RAVENSWOOD',
+        '1060 W ADDISON',
+        '4801 N BROADWAY',
+        '1039 W GRANVILLE',
+    ]
+    counts = [ 0, 3, 10, 4, 1, 7, 6, 1]
+
+    import itertools
+    b = [e > 5 for e in counts]
+    a = itertools.compress(addresses, b)
+    # Now a will be all items where count larger than 5
+    print(a)
+    #+end_src
+    
+    
+    
+** 1.17. Extracting a Subset of a Dictionary
+*** dictionary comprehension, just like list comprehension, but use '{' instead of '['
+    #+begin_src python
+    prices = {
+        'ACME': 45.23,
+        'AAPL': 612.78,
+        'IBM': 205.55,
+        'HPQ': 37.20,
+        'FB': 10.75
+    }
+    # Make a dictionary of all prices over 200
+    p1 = { key:value for key, value in prices.items() if value > 200 }
+    # Make a dictionary of tech stocks
+    tech_names = { 'AAPL', 'IBM', 'HPQ', 'MSFT' }
+    p2 = { key:value for key,value in prices.items() if key in tech_names }
+    #+end_src
+** 1.18. Mapping Names to Sequence Elements
+*** the collections.nametuple function, map an index to a name, and access to an element with that name
+    example:
+    #+begin_src python
+    from collections import namedtuple
+    People =  namedtuple('People', ['name', 'age'])
+    p = People(name='Jim', age=12)
+    print(p, p.name, p.age)
+    #+end_src
+    
+    #+RESULTS:
+    
+    A good application:
+    for database selection.
+    
+    The ._replace method:
+    Because a tuple is immutable, so to change an element, you can use _replace to  replace a field and a new one will be returned.
+    A tipical usage is first  create a prototype element with all field value be the default one, then update some fields with the _replace function.
+    Why there is a '_' in the function name?
+    #+begin_src python
+    from collections import namedtuple
+    Stock = namedtuple('Stock', ['name', 'shares', 'price', 'date', 'time'])
+    # Create a prototype instance
+    stock_prototype = Stock('', 0, 0.0, None, None)
+    # Function to convert a dictionary to a Stock
+    def dict_to_stock(s):
+        return stock_prototype._replace(**s)
+
+    a = {'name': 'ACME', 'shares': 100, 'price': 123.45}
+    dict_to_stock(a)
+    # Stock(name='ACME', shares=100, price=123.45, date=None, time=None)
+    #+end_src
+    
+** 1.19. Transforming and Reducing Data at the Same Time
+   use generator-expression argument
+   
+   The reducing function means: given a list, return a value.
+** the any function, check if any of an element is True in a iterable
+*** check if  any .py files exist in a directory
+    #+begin_src python
+   # Determine if any .py files exist in a directory
+   import os
+   files = os.listdir('dirname')
+   if any(name.endswith('.py') for name in files):
+       print('There be python!')
+   else:
+       print('Sorry, no python.')
+    #+end_src
+*** get all files in a directory as a list
+    #+begin_src python
+   import os
+   files = os.listdir('dirname')
+    #+end_src
+*** change a tuple/list/iterable to a csv line
+    This is much better than the string format method
+    #+begin_src python
+    # Output a tuple as CSV
+    s = ('ACME', 50, 123.45)
+    print(','.join(str(x) for x in s))# Output a tuple as CSV
+    #+end_src
+    
+** 1.20. Combining Multiple Mappings into a Single Mapping
+*** the collections.ChainMap
+    combining many maps/dictionaries, then when get an element, it will try to get from the first map, then the second, ...
+    
+    And for operations that mutate the mapping always affect the first map/dictionary.
+    
+    typical application:
+    scoped variable in a programming language.
+    
+    Difference from the dict.update function:
+    ChainMap use a link to the original dictionary, while dict.update create a new one.
+**** check if an element exists in many dictionaries/maps, sequencially
+     #+begin_src python :results output
+     a = {'x': 1, 'z': 3 }
+     b = {'y': 2, 'z': 4 }
+     from collections import ChainMap
+     c = ChainMap(a,b)
+     print(c['x']) # Outputs 1 (from a)
+     print(c['y']) # Outputs 2 (from b)
+     print(c['z']) # Outputs 3 (from a)
+     #+end_src
+     
+     #+RESULTS:
+     : 1
+     : 2
+     : 3
