@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about python)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Sat, 05 May 2018 03:14:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python Cookbook 读书笔记（五）</title><link>https://astropeak.github.io/posts/python-cookbook-readnote-5/</link><dc:creator>Astropeak</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about python)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Sat, 05 May 2018 10:09:00 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Encoding and Decoding</title><link>https://astropeak.github.io/posts/encoding-and-decoding/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+任何文件，想要保存在硬盘中时，首先要转换成某种编码。如UTF8，ASCII。编码的意思是一个字节流，因为硬盘中是以字节为单位来保存数据的。
+刚开始可以简单的认为，在硬盘上保存的数据都是经过编码后的数据。那么这些数据就有一种编码格式。
+&lt;/p&gt;
+
+&lt;p&gt;
+每个操作系统都有默认的文件编码方式。文件被保存时，它首先被转换为这个编码格式的字节流。
+&lt;/p&gt;
+
+&lt;p&gt;
+一个python源文件也不例外，它在硬盘中也是以某种编码的形式保存的。这样，当python的解释器读取源文件时，必须知道这个文件的编码格式，才能读取到文件本身的内容。默认情况下，python解释器认为文件总是以ASCII的编码方式保存。也即每个字节都表示一个字符。每个字节的值总是在0到127之间。如果文件是以其他编码方式保存的，则可以通过加注释的形式，告诉解释器这个文件实际的编码方式。以下行告诉解释器文件的编码方式是UTF8。
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# encoding:utf8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+如果源文件中包含非ASCII字符，则必须包含上述行，否则文件无法加载，因为Python默认文件为ASCII编码的，当读取到一个非ASCII字符时，这个字符无法被读取。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+文件被读取出来后，它在内存的表示是什么样的呢？首先，将文件从硬盘中读取到内存中的过程，有一个解码的过程。对于ASCII，文件在硬盘中保存的格式和内存中的格式是一样的，都是对应的数字。也即解码和编码对应的内容是相同的。
+&lt;/p&gt;
+
+&lt;p&gt;
+对于UTF8，解码后则为Unicode。为什么需要编码？因为编码可以节省保存空间。如果不是这个因素，则编导和解码没有必要存在。UTF8和UTF16分别是编码Unicode的不同的编码方式。Unicode由两个字节组成，所有的字符都要占两个字节。但通过UTF8编码之后，大多数常用的字符都可以用一个字节来编码，达到节省存储空间的目的。同时有些字符需要三个字节才能编码，但由于这些字符相对较少，所以整体来说，存储空间会变小。关于Unicode和UTF8关系可看&lt;a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html"&gt;这里&lt;/a&gt;
+&lt;/p&gt;
+
+
+&lt;p&gt;
+Python中的字符串是用什么格式保存的呢？
+&lt;/p&gt;
+
+&lt;p&gt;
+字符串保存有两种格式：一个是8bit的字符串，这个字符串是编码过后的。另外一种是Unicode字符串，这个字符串是未编码的。 &lt;a href="https://www.pythoncentral.io/python-unicode-encode-decode-strings-python-2x/%0A"&gt;这篇文章&lt;/a&gt;有详细的介绍。
+&lt;/p&gt;
+
+&lt;p&gt;
+对于一个8bit的字符串，其包含的内容就是解码后的内容。具体的编码格式有可能是就ASCII，也有可能 是UTF8。也可以认为字符串就是一个8bit的字节序列。一个容易弄混淆的概念是，尽管这个字符串是已经编码过后的内容，它仍然可以继续被编码。
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'abc'&lt;/span&gt;
+&lt;span class="n"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+这是一种错误的用法，除了Unicode字符串，编码一个8bit字符串是错误的用法。但Python在这里做了一个workaround，即当其发现encode函数被一个8bit字符串调用时，它首先会将这个字符串decode为Unicode字符串，然后在这个Unicode字符串上调用encode函数。以上代码与以下代码等价。
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'abc'&lt;/span&gt;
+&lt;span class="n"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+其中s.decode()的结果是一个Unicode字符串。
+&lt;/p&gt;
+
+&lt;p&gt;
+编码时出现的一个错误是，unicodedecordererror ascii codec can decode …..
+&lt;/p&gt;
+
+
+&lt;p&gt;
+在解析器中输入字符串儿
+&lt;/p&gt;
+
+&lt;p&gt;
+具体的过程是：解析器得到这个字符串时，已经是被编码过后的。相当于是操作系统传递给解析器的。而传输的格式也是编码后的内容。而具体的编码格式是由操作系统决定的。也即解析器默认使用的编码格式。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+Encoding 是将Unicode字符串转化为8bit字符串。有多种编码格式供选择，如UTF8，UTF16，UTF32。但也可以使用ASCII作为编码格式。此时编码规则为：
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;如果Unicode的值小于128，则转化为相应的ASCII字符
+&lt;/li&gt;
+&lt;li&gt;否则，则抛出一个异常。
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+以上编码过程对于latin1也是一样，只不过此时Unicode的值小于256都被认为正常的字符。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+&lt;a href="https://docs.python.org/2/howto/unicode.html"&gt;这篇文章&lt;/a&gt;里讲解了Unicode编码为UTF8的优点。
+&lt;/p&gt;
+
+
+&lt;p&gt;
+Python Unicode的实现应该就是一个数字数组，每个元素是一个数字，这个数字表示Unicode的值。
+&lt;/p&gt;</description><category>python</category><guid>https://astropeak.github.io/posts/encoding-and-decoding/</guid><pubDate>Sat, 05 May 2018 03:27:35 GMT</pubDate></item><item><title>Python Cookbook 读书笔记（五）</title><link>https://astropeak.github.io/posts/python-cookbook-readnote-5/</link><dc:creator>Astropeak</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h2 id="sec-1"&gt;chapter 8: Classes and Objects&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;/div&gt;&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;

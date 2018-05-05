@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encoding and Decoding | Astropeak</title>
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(../../assets/fonts/libretto-icons.eot);
+            src:url(../../assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(../../assets/fonts/libretto-icons.woff) format("woff"),
+            url(../../assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(../../assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="../../assets/css/libretto_styles.css">
+<link href="../../assets/css/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
+        </div>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="../../archive.html">Archive</a></li>
+                    <li><a href="../../categories/">Tags</a></li>
+                    <li><a href="../../rss.xml">RSS feed</a></li>
+                    <li><a href="http://github.com/astropeak">Github</a></li>
+            </ul></nav></header><!-- Page Header --><div class="title-block post-format-icon-pin">
+        <div class="entry-meta">
+            <span class="posted-on">
+                Posted on <a href="." rel="bookmark">May 5, 2018</a>
+            </span>
+        </div>
+        <h1>Encoding and Decoding</h1>
+    </div>
+
+        <!-- Page Content -->
+    <div class="site-content" role="main">
+        <article class="format-standard libretto-long-form"><div class="entry-content">
+                <p>
+任何文件，想要保存在硬盘中时，首先要转换成某种编码。如UTF8，ASCII。编码的意思是一个字节流，因为硬盘中是以字节为单位来保存数据的。
+刚开始可以简单的认为，在硬盘上保存的数据都是经过编码后的数据。那么这些数据就有一种编码格式。
+</p>
+
+<p>
+每个操作系统都有默认的文件编码方式。文件被保存时，它首先被转换为这个编码格式的字节流。
+</p>
+
+<p>
+一个python源文件也不例外，它在硬盘中也是以某种编码的形式保存的。这样，当python的解释器读取源文件时，必须知道这个文件的编码格式，才能读取到文件本身的内容。默认情况下，python解释器认为文件总是以ASCII的编码方式保存。也即每个字节都表示一个字符。每个字节的值总是在0到127之间。如果文件是以其他编码方式保存的，则可以通过加注释的形式，告诉解释器这个文件实际的编码方式。以下行告诉解释器文件的编码方式是UTF8。
+</p>
+<div class="highlight"><pre><span></span><span class="c1"># encoding:utf8</span>
+</pre></div>
+<p>
+如果源文件中包含非ASCII字符，则必须包含上述行，否则文件无法加载，因为Python默认文件为ASCII编码的，当读取到一个非ASCII字符时，这个字符无法被读取。
+</p>
+
+
+<p>
+文件被读取出来后，它在内存的表示是什么样的呢？首先，将文件从硬盘中读取到内存中的过程，有一个解码的过程。对于ASCII，文件在硬盘中保存的格式和内存中的格式是一样的，都是对应的数字。也即解码和编码对应的内容是相同的。
+</p>
+
+<p>
+对于UTF8，解码后则为Unicode。为什么需要编码？因为编码可以节省保存空间。如果不是这个因素，则编导和解码没有必要存在。UTF8和UTF16分别是编码Unicode的不同的编码方式。Unicode由两个字节组成，所有的字符都要占两个字节。但通过UTF8编码之后，大多数常用的字符都可以用一个字节来编码，达到节省存储空间的目的。同时有些字符需要三个字节才能编码，但由于这些字符相对较少，所以整体来说，存储空间会变小。关于Unicode和UTF8关系可看<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">这里</a>
+</p>
+
+
+<p>
+Python中的字符串是用什么格式保存的呢？
+</p>
+
+<p>
+字符串保存有两种格式：一个是8bit的字符串，这个字符串是编码过后的。另外一种是Unicode字符串，这个字符串是未编码的。 <a href="https://www.pythoncentral.io/python-unicode-encode-decode-strings-python-2x/%0A">这篇文章</a>有详细的介绍。
+</p>
+
+<p>
+对于一个8bit的字符串，其包含的内容就是解码后的内容。具体的编码格式有可能是就ASCII，也有可能 是UTF8。也可以认为字符串就是一个8bit的字节序列。一个容易弄混淆的概念是，尽管这个字符串是已经编码过后的内容，它仍然可以继续被编码。
+</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'abc'</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</pre></div>
+
+<p>
+这是一种错误的用法，除了Unicode字符串，编码一个8bit字符串是错误的用法。但Python在这里做了一个workaround，即当其发现encode函数被一个8bit字符串调用时，它首先会将这个字符串decode为Unicode字符串，然后在这个Unicode字符串上调用encode函数。以上代码与以下代码等价。
+</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'abc'</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</pre></div>
+<p>
+其中s.decode()的结果是一个Unicode字符串。
+</p>
+
+<p>
+编码时出现的一个错误是，unicodedecordererror ascii codec can decode …..
+</p>
+
+
+<p>
+在解析器中输入字符串儿
+</p>
+
+<p>
+具体的过程是：解析器得到这个字符串时，已经是被编码过后的。相当于是操作系统传递给解析器的。而传输的格式也是编码后的内容。而具体的编码格式是由操作系统决定的。也即解析器默认使用的编码格式。
+</p>
+
+
+<p>
+Encoding 是将Unicode字符串转化为8bit字符串。有多种编码格式供选择，如UTF8，UTF16，UTF32。但也可以使用ASCII作为编码格式。此时编码规则为：
+</p>
+<ul class="org-ul">
+<li>如果Unicode的值小于128，则转化为相应的ASCII字符
+</li>
+<li>否则，则抛出一个异常。
+</li>
+</ul>
+<p>
+以上编码过程对于latin1也是一样，只不过此时Unicode的值小于256都被认为正常的字符。
+</p>
+
+
+<p>
+<a href="https://docs.python.org/2/howto/unicode.html">这篇文章</a>里讲解了Unicode编码为UTF8的优点。
+</p>
+
+
+<p>
+Python Unicode的实现应该就是一个数字数组，每个元素是一个数字，这个数字表示Unicode的值。
+</p>
+            </div>
+        </article>
+</div>
+
+        <!-- Tag Section -->
+    <div class="site-content navigation-post">
+        <div class="tag-head">Tags</div>
+        <div class="tag-list">
+                <a href="../../categories/python/">python</a>
+        </div>
+    </div>
+
+        <!-- Post Navigation links -->
+<nav class="site-content navigation-post" role="navigation"><div class="previous">
+            <a href="../python-cookbook-readnote-5/" rel="prev">
+                <span class="meta-nav">Older Post</span>Python Cookbook 读书笔记（五）
+            </a>
+        </div>
+</nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
+</div>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
+</div>
+    </footer>
+</body>
+</html>

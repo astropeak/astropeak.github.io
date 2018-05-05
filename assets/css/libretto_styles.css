@@ -459,6 +459,7 @@ hr {
 ul,
 ol {
     margin: 0 0 1.5em;
+    padding-left: 2em;
 }
 
 ul {
@@ -958,7 +959,7 @@ body:not(.libretto-has-header-image) .title-block {
 --------------------------------------------------------------*/
 a {
     color: #932817;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:visited {
