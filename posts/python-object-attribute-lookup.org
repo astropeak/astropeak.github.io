@@ -150,6 +150,29 @@ foo.attr2是一个对象级属性，foo.attr1是一个类级属性。
   
 * 成员函数是非数据描述符
   类成员函数的实现为一个非数据描述符。根据以上规则，对象的属性会覆盖对象的同名成员函数。
+
+  以下为一个例子。
+  #+begin_src python :results output
+  class Foo:
+    def __init__(self, value):
+      self.attr = value
+
+    def attr(self):
+      print('attr method')
+
+    def attr2(self):
+      print('attr2 method')
+
+  foo = Foo('attr value')
+  assert(foo.attr is foo.__dict__['attr'])
+  foo.attr() # 错误，attr不是成员函数，无法调用
+  foo.attr2() # 正确，输出为 attr2 method
+  #+end_src
+
+  #+RESULTS:
+
+  对象foo包含一个属性attr，同时包含一个同名函数attr。assert 语句为True表明foo.attr为属性值，而非那个同名函数。
+
   
 
   
