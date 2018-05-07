@@ -153,6 +153,7 @@ foo.attr2是一个对象级属性，foo.attr1是一个类级属性。
 
   以下为一个例子。
   #+begin_src python :results output
+  # encoding:utf8
   class Foo:
     def __init__(self, value):
       self.attr = value
