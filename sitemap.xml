@@ -27,7 +27,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/archive.html</loc>
-  <lastmod>2018-05-05T03:37:00Z</lastmod>
+  <lastmod>2018-05-07T10:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/</loc>
@@ -71,7 +71,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/index-1.html</loc>
-  <lastmod>2018-05-05T03:37:00Z</lastmod>
+  <lastmod>2018-05-07T10:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/</loc>
@@ -200,6 +200,10 @@
  <url>
   <loc>https://astropeak.github.io/posts/python-descriptor/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/posts/python-object-attribute-lookup/</loc>
+  <lastmod>2018-05-07T10:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/posts/python-object-attribute/</loc>
