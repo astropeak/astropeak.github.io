@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Mon, 07 May 2018 13:29:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python对象属性查询</title><link>https://astropeak.github.io/posts/python-object-attribute-lookup/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Mon, 07 May 2018 13:36:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python对象属性查询</title><link>https://astropeak.github.io/posts/python-object-attribute-lookup/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 对于语句x.y，即获取对象x的y属性，其查询过程为：
 &lt;/p&gt;
 &lt;ol class="org-ol"&gt;
@@ -217,7 +217,7 @@ C.y与x.y的查询机制相同，此时C便是一个当前的对象（事实上P
 
 
 &lt;p&gt;
-逻辑在于，当为属性设置一个新值后（第2步），再获取这个属性的值时（第3步），这个值应该与之前设置的值相同，而不是仍然为之前通过描述符返回的值。
+逻辑在于，当为属性设置一个新值后（第2步），再获取这个属性的值时（第3步），这个值应该与之前设置的值相同，而不是仍然为之前通过描述符返回的值。所以在这种情况下， &lt;code&gt;x.__dict__&lt;/code&gt; 的优先级需要更高。
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -227,7 +227,7 @@ C.y与x.y的查询机制相同，此时C便是一个当前的对象（事实上P
 &lt;h2 id="sec-5"&gt;成员函数是非数据描述符&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
-类成员函数的实现为一个非数据描述符。根据以上规则，对象的属性会覆盖对象的成员函数。
+类成员函数的实现为一个非数据描述符。根据以上规则，对象的属性会覆盖对象的同名成员函数。
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description><category>python</category><guid>https://astropeak.github.io/posts/python-object-attribute-lookup/</guid><pubDate>Mon, 07 May 2018 10:10:38 GMT</pubDate></item><item><title>Encoding and Decoding</title><link>https://astropeak.github.io/posts/encoding-and-decoding/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
