@@ -1,0 +1,162 @@
+#+BEGIN_COMMENT
+.. title: Python对象属性查询
+.. slug: python-object-attribute-lookup
+.. date: 2018-05-07 18:10:38 UTC+08:00
+.. tags: python
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+对于语句x.y，即获取对象x的y属性，其查询过程为：
+1. 查询y是否存在于 ~x.__dict__~ 。 存在则返回
+2. 查询y是否为x的类C（及其父类）的属性。 存在则返回
+3. 查询失败，抛出 AttributeError。
+   
+以上步骤为简化过程，仅包含了对象级别属性及类级别属性的处理，同时也忽略了一些特殊情况及描述符的处理。
+第一条规则处理对象级属性，第二条规则处理类级属性。这两条规则能够覆盖大多数情况。
+
+以下是一个例子：
+#+begin_src python :results output
+class Foo:
+  attr1 = 'value1'
+  def __init__(self, attr2):
+    self.attr2 = attr2
+
+foo = Foo('value2')
+assert(foo.attr2 is foo.__dict__['attr2'])
+assert(foo.attr1 is Foo.attr1)
+#+end_src
+
+#+RESULTS:
+: value1
+: value2
+: (4450589552, 4450589552)
+
+
+foo.attr2是一个对象级属性，foo.attr1是一个类级属性。
+~assert(foo.attr2 is foo.__dict__['attr2'])~ 为True表明foo.attr2与 ~foo.__dict__~ 是相同的，即其通过第一条规则查询得到。
+~assert(foo.attr1 is Foo.attr1)~ 为True表明foo.attr1与 Foo.attr1是相同的，所以其通过第二条规则查询得到。
+
+* 规则2的补充
+  以上第2条规则提到：查询y是否为x的类C（及其父类）的属性。即为了获取x.y，去查询C.y，其中C为x的类型。C.y具体是如何查询的呢？
+  
+  C.y与x.y的查询机制相同，此时C便是一个当前的对象（事实上Python类本身是一个类型为type的对象实例）。 所以查询C.y，将以上步骤中x替换为C，则得到C.y的具体步骤：
+  1. 查询y是否存在于 ~C.__dict__~ 。 存在则返回
+  2. 查询y是否为C的类CC（此时为type）的属性。 存在则返回
+  3. 查询失败，抛出 AttributeError。
+     
+  以下例子可以验证。
+  #+begin_src python :results output
+  class Foo:
+    attr1 = 'value1'
+    def __init__(self, attr2):
+      self.attr2 = attr2
+
+  print(type(Foo)) # <type 'classobj'>
+  assert(Foo.attr1 is Foo.__dict__['attr1'])    # True
+  #+end_src
+  
+  #+RESULTS:
+  : <type 'classobj'>
+  
+  
+  ~type(Foo)~ 的结果为 ~<type 'classobj'>~ 。所以Foo是类型type的一个对象实例。attr1是Foo的一个属性，保存在 ~Foo.__dict__~ 中（这一点，跟其它自定义对象实例一致）。
+  
+  由此可见，Foo（类本身）及foo（Foo的一个对象实例）在属性查询上，并没有什么不同。他们的不同点为Foo由Python解析器自动创建（当其解析class Foo语句时），而foo一般由程序自己创建（foo = Foo('value2'))。
+  
+  
+* 描述符的处理
+  对于x.y，当属性y是一个描述符时， Python2和Python3的处理规则有所不同。对于Python2，查询规则变为：
+  1. 查询y是否存在于 ~x.__dict__~ 。 存在则返回
+  2. 查询y是否为描述符。若是则通过描述符来处理属性获取
+  3. 查询y是否为x的类C（及其父类）的属性。 存在则返回
+  4. 查询失败，抛出 AttributeError。
+     
+  对于Python3，查询规则为：
+  1. 查询y是否为描述符。若是则通过描述符来处理属性获取
+  2. 查询y是否存在于 ~x.__dict__~ 。 存在则返回
+  3. 查询y是否为x的类C（及其父类）的属性。 存在则返回
+  4. 查询失败，抛出 AttributeError。
+     
+  区别在于描述符属性与对象级属性（通过 ~x.__dict__~ 获取的属性）的优先级不同。在Python2中，对象级属性优先级更高，而在Python3中，描述符属性优先级更高。
+  
+  先来看一个例子。
+  #+begin_src python :results output
+  class Foo:
+    attr1 = 'value1'
+    def __init__(self, attr2):
+      self.__dict__['attr2'] = attr2
+
+    @property
+    def attr2(self):
+      return 'value2, descriptor attr'
+
+  foo = Foo('value2, instance attr')
+  # Python2的输出为: value2, instance attr
+  # Python3的输出为: value2, descriptor attr
+  print(foo.attr2) 
+  #+end_src
+  
+  #+RESULTS:
+  : value2, instance attr
+  
+  
+  通过@property修饰后，函数attr2变为一个描述符。当通过foo.attr2获取attr2这个属性时，函数attr2会被调用，其返回值即为这个属性的值。
+  
+  同时在 ~__init__~ 函数中，创建了一个同名的attr2实例级属性。需要注意此时不能使用语句 ~self.attr2 = attr2~ 来创建这个实例级属性，因为此时描述符已发生作用，attr2不会被保存在 ~self.__dict__~ 中，而是直接通过描述符函数处理。
+  
+  
+* 属性y是否为描述符
+  对于语句x.y，记对象x的类型为C， C.y的类型为D。如果
+  1. C.y存在，即hasattr(C, 'y') 为True
+  2. 且 D包含一个 ~__get__~ 属性， 即hasattr(D, '~__get__~' )为True
+     
+  则可判定y为一个描述符。 
+  
+  第1个条件表示y为x的一个类级属性，即y为C的属性。第2个条件表示这个属性的类型包含一个 ~__get__~ 属性。 等价的Python代码如下：
+  #+begin_src python :results output
+  is_descriptor = False
+  C = x.__class__
+  if hasattr(C, 'y'):
+    D = C.y.__class__
+    if hasattr(D, '__get__'):
+      is_descriptor = True
+  #+end_src
+  
+* 数据描述符及非数据描述符
+  如果一个描述符仅包含 ~__get__~ 属性，而没有 ~__set__~ 属性，则它为一个非数据描述符，也即只能获取这个属性的值，而不能修改它的值。
+  
+  如果一个描述符同时包含 ~__get__~ 和 ~__set__~ 属性，则它为一个数据描述符，此时即可获取属性值，也可修改它的值。
+  
+  
+  对于Python3，之前提到的规则只适用于数据描述符。如果一个属性是一个非数据描述符，则实例级属性（ ~x.__dict__['attr']~ ）的优先级高于描述符的优先级，所以查询规则变为：
+  1. 查询y是否为数据描述符。若是则通过描述符来处理属性获取
+  2. 查询y是否存在于 ~x.__dict__~ 。 存在则返回
+  3. 查询y是否为非数据描述符。若是则通过描述符来处理属性获取
+  4. 查询y是否为x的类C（及其父类）的属性。 存在则返回
+  5. 查询失败，抛出 AttributeError。
+     
+     
+  通过以下例子，可以看出这样做的逻辑。假设y是一个非数据描述符，且y不存在于 ~x.__dict__~ 中。
+  1. 执行语句 x.y，第1、2条规则均不满足条件，因此第3条规则发生作用，属性值通过描述符来得到。
+  2. 执行语句 x.y = 'new value'， 由于y为一个非数据描述符，因此无法通过这个描述符修改这个属性的值。因此y会被保存在  ~x.__dict__~ 中。
+  3. 再次执行 x.y，第2条规则满足条件，此时返回 ~x.__dict__~ 中保存的值
+     
+     
+  逻辑在于，当为属性设置一个新值后（第2步），再获取这个属性的值时（第3步），这个值应该与之前设置的值相同，而不是仍然为之前通过描述符返回的值。
+
+  
+* 成员函数是非数据描述符
+  类成员函数的实现为一个非数据描述符。根据以上规则，对象的属性会覆盖对象的成员函数。
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
