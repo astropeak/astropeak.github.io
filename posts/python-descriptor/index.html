@@ -38,7 +38,7 @@
             </ul></nav></header><!-- Page Header --><div class="title-block post-format-icon-pin">
         <div class="entry-meta">
             <span class="posted-on">
-                Posted on <a href="." rel="bookmark">March 6, 2016</a>
+                Posted on <a href="." rel="bookmark">May 9, 2018</a>
             </span>
         </div>
         <h1>Python描述符（Descriptor）</h1>
@@ -288,36 +288,8 @@ AttributeError: 'MyDescriptor' object has no attribute 'data'
 </tr></tbody>
 </table>
 <p>
-<code>__delete__(self, obj)</code> 函数的self和obj参数的意义同 <code>__get__</code> 。
-</p>
+<code>__delete__(self, obj)</code> 函数的self和obj参数的意义同 <code>__get__</code> 。</p>
 </div>
-</div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">数据属性以及数据描述符。</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-默认情况下，数据属性的获取顺序为，第一从对象的字典中获取，第二从类字典中获取
-。
-该如果定义了一个类属性对象，并且这个对象是一个描述符，则获取这个属性是会优先从这个描述符，的各个方法中获取。
-</p>
-</div>
-</div>
-
-
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">非数据属性</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-静态函数，类函数都是通过描述符的方式实现的。在函数定义的时候，函数被保存在类的字典里，以一个普通的函数。函数的调用过程可以分为两个两个步骤。第一个是将函数获取出来，第二个是进行实际的调用。描述符是在第一个步骤中发挥作用。它会将，函数从类的字典中取出来，然后将类对象绑定为，第一个，参数。及成员函数的第一个参数及c f变量，都是在描述符中的钙函数中绑定的。
-如果将函数的获取与调用看作两个不同的过程，则已向过则以上过程会，简化。函数本身就是一个描述符，他会返回一个新的函数，这个函数哪和原来的函数一样，但是，第一个参数会被设置为，会被设置为，对象本身。因此心身的函数，将接受的参数比原来的函数，少一个。因为函数本身也是一个描述符。
-</p>
-</div>
-</div>
-
-
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">一些应用</h2>
 </div>
             </div>
         </article>
@@ -333,13 +305,8 @@ AttributeError: 'MyDescriptor' object has no attribute 'data'
 
         <!-- Post Navigation links -->
 <nav class="site-content navigation-post" role="navigation"><div class="previous">
-            <a href="../emacs-lisp/" rel="prev">
-                <span class="meta-nav">Older Post</span>Emacs Lisp 编程笔记
-            </a>
-        </div>
-        <div class="next">
-            <a href="../recall-precision-fscore/" rel="next">
-                <span class="meta-nav">Newer Post</span>Recall，Precision 和 F-score
+            <a href="../python-object-attribute-lookup/" rel="prev">
+                <span class="meta-nav">Older Post</span>Python对象属性查询
             </a>
         </div>
 </nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
