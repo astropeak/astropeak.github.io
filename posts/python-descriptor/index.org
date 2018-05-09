@@ -1,5 +1,5 @@
 #+BEGIN_COMMENT
-.. title: Python描述符简介
+.. title: Python描述符（Descriptor）
 .. slug: python-descriptor
 .. date: 2016-03-06
 .. tags: python
@@ -10,14 +10,64 @@
 #+END_COMMENT
 
 
-#+TITLE:       Python描述符简介
-#+AUTHOR:      Astropeak
-#+EMAIL:       astropeak@gmail.com
-#+DATE:        2016-03-06
-#+TAGS:        python
-#+LANGUAGE:    en
-#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
-#+DESCRIPTION: 
+
+先看一个例子，@property。被@property修饰的成员函数，将变为一个描述符。这是最简单的创建描述符的方式。
+#+begin_src python :results output
+class Foo:
+  @property
+  def attr(self):
+    print('getting attr')
+    return 'attr value'
+
+  def bar(self): pass
+
+foo = Foo()
+#+end_src
+
+#+RESULTS:
+: (<type 'property'>, <type 'instancemethod'>)
+
+上面这个例子中，attr是类Foo的一个成员函数，可通过语句foo.attr()被调用。
+但当它被@property修饰后，这个成员函数将不再是一个函数，而变为一个描述符。bar是一个未被修饰的成员函数。
+type(Foo.attr)与type(Foo.bar)的结果分别为：
+#+BEGIN_SRC text
+<type 'property'>
+<type 'instancemethod'>
+#+END_SRC
+attr的类型为property（注：一个property类型的对象总是一个描述符），bar的类型为instancemethod，也即一个常规的成员函数。
+
+此时attr将无法再被调用，当尝试调用它时，语句foo.attr()将抛出错误：
+#+BEGIN_SRC text
+TypeError: 'str' object is not callable
+#+END_SRC
+让我们来理解这个错误。
+
+首先来看foo.attr的值：
+#+BEGIN_SRC text
+attr value
+#+END_SRC
+其类型type(foo.attr)：
+#+BEGIN_SRC text
+str
+#+END_SRC
+foo.attr的类型为str，因此便有了以上的错误，一个str对象无法被调用。其值为'attr value'，正好是原始attr函数的返回值。
+因此语句foo.attr实际上触发了原始attr函数的调用，并且将函数的返回值作为其值。实际上语句print(foo.attr)的输出为：
+#+BEGIN_SRC text
+getting attr
+attr value
+#+END_SRC
+进一步验证了执行语句foo.attr时，原始的attr函数被调用。
+
+发生了什么？当执行一个访问对象属性的语句foo.attr时，结果一个函数调用被触发！这便是描述符的作用：将属性访问转变为函数调用，并由这个函数来控制这个属性的值（也即函数的返回值），以及在返回值前做定制化的操作。此时可以给描述符一个简要定义：
+#+BEGIN_QUOTE
+描述符是类的一个属性，控制类实例对象访问这个属性时如何返回值及做哪些额外操作
+#+END_QUOTE
+
+这留给程序员的空间是巨大的。。
+
+
+
+
 
 NOTE: 以下为语音笔记，待整理
 
