@@ -10,7 +10,6 @@
 #+END_COMMENT
 
 
-
 先看一个例子，@property。被@property修饰的成员函数，将变为一个描述符。这是最简单的创建描述符的方式。
 #+begin_src python :results output
 class Foo:
