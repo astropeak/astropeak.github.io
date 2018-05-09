@@ -144,6 +144,7 @@ NAVIGATION_LINKS = {
 
 # Name of the theme to use.
 # bootstrap3
+THEME = 'bootstrap3'
 THEME = "libretto"
 # THEME = "zen"
 

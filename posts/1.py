@@ -1,12 +1,18 @@
+class Descriptor:
+  def __init__(self):
+    self.data = None
+  def __get__(self, obj, type):
+    print('get called')
+    return self.data
+  def __set__(self, obj, value):
+    print('set called')
+    self.data = value
+  def __delete__(self, obj):
+    print('delete called')
+    del self.data
+
 class Foo:
-  attr1 = 'value1'
-  def __init__(self, attr2):
-    self.__dict__['attr2'] = attr2
+  attr = Descriptor()
 
-  @property
-  def attr2(self):
-    return 'value2, descriptor attr'
+foo = Foo()
 
-
-foo = Foo('value2, instance attr')
-print(foo.attr2)

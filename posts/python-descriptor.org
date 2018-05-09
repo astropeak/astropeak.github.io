@@ -66,34 +66,97 @@ attr value
 
 
 
-
-
-NOTE: 以下为语音笔记，待整理
-
-
-使用描述符控制python对象属性的访问。
-
-蟒蛇中定义的所有，数据都可以，称之为，属性。比如函数和变量都是这个类的属性。具体细分一下函数是，非数据属性。而变量是数据属性。描述符用于控制变量的，获取设置和删除。根据属性的不同。描述符也可以进一步细分为数据描述，符合非数据描述符，分别用于控制，数据属性和函数属性。
-
 * 描述符协议
-任何一个对象只要提包含了get，set delete这三个函数，中的任意一个，那么它就是一个描述符.这三个函数分别控制，属性的获取设置和删除。
+  任何实现了描述符协议的类都可以作为描述符类。描述符协议为一组成员函数定义，包括：
+  | 函数                        | 作用         | 是否必须 |
+  |-----------------------------+--------------+----------|
+  | ~__get__(self, obj, type)~  | 获取属性值   | 是       |
+  | ~__set__(self, obj, value)~ | 设置属性的值 | 否       |
+  | ~__delete__(self, obj)~     | 删除属性     | 否       |
 
+先来看一个自定义的描述符的实现。
+#+begin_src python :results output
+class MyDescriptor:
+  def __init__(self):
+    self.data = None
+  def __get__(self, obj, type):
+    print('get called')
+    return self.data
+  def __set__(self, obj, value):
+    print('set called')
+    self.data = value
+  def __delete__(self, obj):
+    print('delete called')
+    del self.data
 
-* 第一数据属性以及数据描述符。
+class Foo:
+  attr = MyDescriptor()
+
+foo = Foo()
+#+end_src
+示例中 MyDescriptor实现了描述符协议（也即实现了 ~__get__, __set__, __delete__~ 函数），因此其为一个描述符类。Foo的attr属性为MyDescriptor类的实例对象，因此它是一个描述符。
+
+print(foo.attr)的输出为：
+#+BEGIN_SRC text
+get called
+None
+#+END_SRC
+可见当访问foo的attr属性时，MyDescriptor的 ~__get__~ 函数被调用。
+
+foo.attr = 'new value'的输出为：
+#+BEGIN_SRC text
+set called
+#+END_SRC
+可见当为attr设置一个新值时，MyDescriptor的 ~__set__~ 函数被调用。
+
+再运行print(foo.attr)，输出为：
+#+BEGIN_SRC text
+get called
+new value
+#+END_SRC
+新值已被设置。
+
+del foo.attr的输出为：
+#+BEGIN_SRC text
+delete called
+#+END_SRC
+可见当为删除属性attr时，MyDescriptor的 __delete__ 函数被调用。
+
+再执行print(foo.attr)，AttributeError被抛出：
+#+BEGIN_SRC text
+get called
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "1.py", line 6, in __get__
+    return self.data
+AttributeError: 'MyDescriptor' object has no attribute 'data'
+#+END_SRC
+属性attr已被删除。
+
+* 参数意义
+  ~__get__(self, obj, type)~ 函数各个参数的意义为：
+  | 参数 | 意义                 | 例子中的对应 |
+  |------+----------------------+--------------|
+  | self | 描述符对象本身       | Foo.attr     |
+  | obj  | 使用描述符的对象实例 | foo          |
+  | type | obj的类型            | Foo          |
+
+  ~__set__(self, obj, value)~ 函数的self和obj参数的意义同 ~__get__~ ，value的意义为：
+  | 参数  | 意义                 | 例子中的对应 |
+  |-------+----------------------+--------------|
+  | value | 属性的新值                 | 'new value'             |
+ 
+  ~__delete__(self, obj)~ 函数的self和obj参数的意义同 ~__get__~ 。
+  
+* 数据属性以及数据描述符。
 默认情况下，数据属性的获取顺序为，第一从对象的字典中获取，第二从类字典中获取
 。
 该如果定义了一个类属性对象，并且这个对象是一个描述符，则获取这个属性是会优先从这个描述符，的各个方法中获取。
 
 
-* 第二非数据属性。
+* 非数据属性
 静态函数，类函数都是通过描述符的方式实现的。在函数定义的时候，函数被保存在类的字典里，以一个普通的函数。函数的调用过程可以分为两个两个步骤。第一个是将函数获取出来，第二个是进行实际的调用。描述符是在第一个步骤中发挥作用。它会将，函数从类的字典中取出来，然后将类对象绑定为，第一个，参数。及成员函数的第一个参数及c f变量，都是在描述符中的钙函数中绑定的。
 如果将函数的获取与调用看作两个不同的过程，则已向过则以上过程会，简化。函数本身就是一个描述符，他会返回一个新的函数，这个函数哪和原来的函数一样，但是，第一个参数会被设置为，会被设置为，对象本身。因此心身的函数，将接受的参数比原来的函数，少一个。因为函数本身也是一个描述符。
 
 
-* 第三描述符的一些应用。
-
-
-* 其他的一些。
-描述服务提供了一个抽象城。这个层次控制性的，访问与设置。
-所有函数是一个描述服。
-累本身应该不是苗舒服。
+* 一些应用
