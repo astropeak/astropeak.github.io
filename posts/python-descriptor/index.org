@@ -26,38 +26,38 @@ foo = Foo()
 #+RESULTS:
 : (<type 'property'>, <type 'instancemethod'>)
 
-上面这个例子中，attr是类Foo的一个成员函数，可通过语句foo.attr()被调用。
-但当它被@property修饰后，这个成员函数将不再是一个函数，而变为一个描述符。bar是一个未被修饰的成员函数。
-type(Foo.attr)与type(Foo.bar)的结果分别为：
+上面这个例子中， ~attr~ 是类 ~Foo~ 的一个成员函数，可通过语句 ~foo.attr()~ 被调用。
+但当它被 ~@property~ 修饰后，这个成员函数将不再是一个函数，而变为一个描述符。 ~bar~ 是一个未被修饰的成员函数。
+ ~type(Foo.attr)~ 与 ~type(Foo.bar)~ 的结果分别为：
 #+BEGIN_SRC text
 <type 'property'>
 <type 'instancemethod'>
 #+END_SRC
-attr的类型为property（注：一个property类型的对象总是一个描述符），bar的类型为instancemethod，也即一个常规的成员函数。
+ ~attr~ 的类型为 ~property~ （注：一个 ~property~ 类型的对象总是一个描述符）， ~bar~ 的类型为 ~instancemethod~ ，也即一个常规的成员函数。
 
-此时attr将无法再被调用，当尝试调用它时，语句foo.attr()将抛出错误：
+此时 ~attr~ 将无法再被调用，当尝试调用它时，语句 ~foo.attr()~ 将抛出错误：
 #+BEGIN_SRC text
 TypeError: 'str' object is not callable
 #+END_SRC
 让我们来理解这个错误。
 
-首先来看foo.attr的值：
+首先来看 ~foo.attr~ 的值：
 #+BEGIN_SRC text
 attr value
 #+END_SRC
-其类型type(foo.attr)：
+其类型 ~type(foo.attr)~ ：
 #+BEGIN_SRC text
 str
 #+END_SRC
-foo.attr的类型为str，因此便有了以上的错误，一个str对象无法被调用。其值为'attr value'，正好是原始attr函数的返回值。
-因此语句foo.attr实际上触发了原始attr函数的调用，并且将函数的返回值作为其值。实际上语句print(foo.attr)的输出为：
+ ~foo.attr~ 的类型为 ~str~ ，因此便有了以上的错误，一个 ~str~ 对象无法被调用。其值为'attr value'，正好是原始 ~attr~ 函数的返回值。
+因此语句 ~foo.attr~ 实际上触发了原始 ~attr~ 函数的调用，并且将函数的返回值作为其值。实际上语句 ~print(foo.attr)~ 的输出为：
 #+BEGIN_SRC text
 getting attr
 attr value
 #+END_SRC
-进一步验证了执行语句foo.attr时，原始的attr函数被调用。
+进一步验证了执行语句 ~foo.attr~ 时，原始的 ~attr~ 函数被调用。
 
-发生了什么？当执行一个访问对象属性的语句foo.attr时，结果一个函数调用被触发！这便是描述符的作用：将属性访问转变为函数调用，并由这个函数来控制这个属性的值（也即函数的返回值），以及在返回值前做定制化的操作。此时可以给描述符一个简要定义：
+发生了什么？当执行一个访问对象属性的语句 ~foo.attr~ 时，结果一个函数调用被触发！这便是描述符的作用：将属性访问转变为函数调用，并由这个函数来控制这个属性的值（也即函数的返回值），以及在返回值前做定制化的操作。此时可以给描述符一个简要定义：
 #+BEGIN_QUOTE
 描述符是类的一个属性，控制类实例对象访问这个属性时如何返回值及做哪些额外操作
 #+END_QUOTE
@@ -94,35 +94,35 @@ class Foo:
 
 foo = Foo()
 #+end_src
-示例中 MyDescriptor实现了描述符协议（也即实现了 ~__get__, __set__, __delete__~ 函数），因此其为一个描述符类。Foo的attr属性为MyDescriptor类的实例对象，因此它是一个描述符。
+示例中  ~MyDescriptor~ 实现了描述符协议（也即实现了 ~__get__, __set__, __delete__~ 函数），因此其为一个描述符类。 ~Foo~ 的 ~attr~ 属性为 ~MyDescriptor~ 类的实例对象，因此它是一个描述符。
 
-print(foo.attr)的输出为：
+ ~print(foo.attr)~ 的输出为：
 #+BEGIN_SRC text
 get called
 None
 #+END_SRC
-可见当访问foo的attr属性时，MyDescriptor的 ~__get__~ 函数被调用。
+可见当访问 ~foo~ 的 ~attr~ 属性时， ~MyDescriptor~ 的 ~__get__~ 函数被调用。
 
-foo.attr = 'new value'的输出为：
+foo.attr = 'new value' 的输出为：
 #+BEGIN_SRC text
 set called
 #+END_SRC
-可见当为attr设置一个新值时，MyDescriptor的 ~__set__~ 函数被调用。
+可见当为 ~attr~ 设置一个新值时， ~MyDescriptor~ 的 ~__set__~ 函数被调用。
 
-再运行print(foo.attr)，输出为：
+再运行 ~print(foo.attr)~ ，输出为：
 #+BEGIN_SRC text
 get called
 new value
 #+END_SRC
 新值已被设置。
 
-del foo.attr的输出为：
+~del foo.attr~ 的输出为：
 #+BEGIN_SRC text
 delete called
 #+END_SRC
-可见当为删除属性attr时，MyDescriptor的 __delete__ 函数被调用。
+可见当为删除属性 ~attr~ 时， ~MyDescriptor~ 的  ~__delete__~  函数被调用。
 
-再执行print(foo.attr)，AttributeError被抛出：
+再执行 ~print(foo.attr)~ ， ~AttributeError~ 被抛出：
 #+BEGIN_SRC text
 get called
 Traceback (most recent call last):
@@ -131,7 +131,7 @@ Traceback (most recent call last):
     return self.data
 AttributeError: 'MyDescriptor' object has no attribute 'data'
 #+END_SRC
-属性attr已被删除。
+属性 ~attr~ 已被删除。
 
 * 参数意义
   ~__get__(self, obj, type)~ 函数各个参数的意义为：

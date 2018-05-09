@@ -62,19 +62,19 @@
 </pre></div>
 
 <p>
-上面这个例子中，attr是类Foo的一个成员函数，可通过语句foo.attr()被调用。
-但当它被@property修饰后，这个成员函数将不再是一个函数，而变为一个描述符。bar是一个未被修饰的成员函数。
-type(Foo.attr)与type(Foo.bar)的结果分别为：
+上面这个例子中， <code>attr</code> 是类 <code>Foo</code> 的一个成员函数，可通过语句 <code>foo.attr()</code> 被调用。
+但当它被 <code>@property</code> 修饰后，这个成员函数将不再是一个函数，而变为一个描述符。 <code>bar</code> 是一个未被修饰的成员函数。
+ <code>type(Foo.attr)</code> 与 <code>type(Foo.bar)</code> 的结果分别为：
 </p>
 <div class="highlight"><pre><span></span>&lt;type 'property'&gt;
 &lt;type 'instancemethod'&gt;
 </pre></div>
 <p>
-attr的类型为property（注：一个property类型的对象总是一个描述符），bar的类型为instancemethod，也即一个常规的成员函数。
+<code>attr</code> 的类型为 <code>property</code> （注：一个 <code>property</code> 类型的对象总是一个描述符）， <code>bar</code> 的类型为 <code>instancemethod</code> ，也即一个常规的成员函数。
 </p>
 
 <p>
-此时attr将无法再被调用，当尝试调用它时，语句foo.attr()将抛出错误：
+此时 <code>attr</code> 将无法再被调用，当尝试调用它时，语句 <code>foo.attr()</code> 将抛出错误：
 </p>
 <div class="highlight"><pre><span></span>TypeError: 'str' object is not callable
 </pre></div>
@@ -83,28 +83,28 @@ attr的类型为property（注：一个property类型的对象总是一个描述
 </p>
 
 <p>
-首先来看foo.attr的值：
+首先来看 <code>foo.attr</code> 的值：
 </p>
 <div class="highlight"><pre><span></span>attr value
 </pre></div>
 <p>
-其类型type(foo.attr)：
+其类型 <code>type(foo.attr)</code> ：
 </p>
 <div class="highlight"><pre><span></span>str
 </pre></div>
 <p>
-foo.attr的类型为str，因此便有了以上的错误，一个str对象无法被调用。其值为'attr value'，正好是原始attr函数的返回值。
-因此语句foo.attr实际上触发了原始attr函数的调用，并且将函数的返回值作为其值。实际上语句print(foo.attr)的输出为：
+ <code>foo.attr</code> 的类型为 <code>str</code> ，因此便有了以上的错误，一个 <code>str</code> 对象无法被调用。其值为'attr value'，正好是原始 <code>attr</code> 函数的返回值。
+因此语句 <code>foo.attr</code> 实际上触发了原始 <code>attr</code> 函数的调用，并且将函数的返回值作为其值。实际上语句 <code>print(foo.attr)</code> 的输出为：
 </p>
 <div class="highlight"><pre><span></span>getting attr
 attr value
 </pre></div>
 <p>
-进一步验证了执行语句foo.attr时，原始的attr函数被调用。
+进一步验证了执行语句 <code>foo.attr</code> 时，原始的 <code>attr</code> 函数被调用。
 </p>
 
 <p>
-发生了什么？当执行一个访问对象属性的语句foo.attr时，结果一个函数调用被触发！这便是描述符的作用：将属性访问转变为函数调用，并由这个函数来控制这个属性的值（也即函数的返回值），以及在返回值前做定制化的操作。此时可以给描述符一个简要定义：
+发生了什么？当执行一个访问对象属性的语句 <code>foo.attr</code> 时，结果一个函数调用被触发！这便是描述符的作用：将属性访问转变为函数调用，并由这个函数来控制这个属性的值（也即函数的返回值），以及在返回值前做定制化的操作。此时可以给描述符一个简要定义：
 </p>
 <blockquote>
 <p>
@@ -175,30 +175,30 @@ attr value
 <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
 </pre></div>
 <p>
-示例中 MyDescriptor实现了描述符协议（也即实现了 <code>__get__, __set__, __delete__</code> 函数），因此其为一个描述符类。Foo的attr属性为MyDescriptor类的实例对象，因此它是一个描述符。
+示例中  <code>MyDescriptor</code> 实现了描述符协议（也即实现了 <code>__get__, __set__, __delete__</code> 函数），因此其为一个描述符类。 <code>Foo</code> 的 <code>attr</code> 属性为 <code>MyDescriptor</code> 类的实例对象，因此它是一个描述符。
 </p>
 
 <p>
-print(foo.attr)的输出为：
+<code>print(foo.attr)</code> 的输出为：
 </p>
 <div class="highlight"><pre><span></span>get called
 None
 </pre></div>
 <p>
-可见当访问foo的attr属性时，MyDescriptor的 <code>__get__</code> 函数被调用。
+可见当访问 <code>foo</code> 的 <code>attr</code> 属性时， <code>MyDescriptor</code> 的 <code>__get__</code> 函数被调用。
 </p>
 
 <p>
-foo.attr = 'new value'的输出为：
+foo.attr = 'new value' 的输出为：
 </p>
 <div class="highlight"><pre><span></span>set called
 </pre></div>
 <p>
-可见当为attr设置一个新值时，MyDescriptor的 <code>__set__</code> 函数被调用。
+可见当为 <code>attr</code> 设置一个新值时， <code>MyDescriptor</code> 的 <code>__set__</code> 函数被调用。
 </p>
 
 <p>
-再运行print(foo.attr)，输出为：
+再运行 <code>print(foo.attr)</code> ，输出为：
 </p>
 <div class="highlight"><pre><span></span>get called
 new value
@@ -208,16 +208,16 @@ new value
 </p>
 
 <p>
-del foo.attr的输出为：
+<code>del foo.attr</code> 的输出为：
 </p>
 <div class="highlight"><pre><span></span>delete called
 </pre></div>
 <p>
-可见当为删除属性attr时，MyDescriptor的 <span class="underline"><span class="underline">delete</span></span> 函数被调用。
+可见当为删除属性 <code>attr</code> 时， <code>MyDescriptor</code> 的  <code>__delete__</code>  函数被调用。
 </p>
 
 <p>
-再执行print(foo.attr)，AttributeError被抛出：
+再执行 <code>print(foo.attr)</code> ， <code>AttributeError</code> 被抛出：
 </p>
 <div class="highlight"><pre><span></span>get called
 Traceback (most recent call last):
@@ -227,7 +227,7 @@ Traceback (most recent call last):
 AttributeError: 'MyDescriptor' object has no attribute 'data'
 </pre></div>
 <p>
-属性attr已被删除。
+属性 <code>attr</code> 已被删除。
 </p>
 </div>
 </div>
