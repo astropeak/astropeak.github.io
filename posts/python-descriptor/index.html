@@ -118,34 +118,184 @@ attr value
 
 
 
-
-
-<p>
-NOTE: 以下为语音笔记，待整理
-</p>
-
-
-<p>
-使用描述符控制python对象属性的访问。
-</p>
-
-<p>
-蟒蛇中定义的所有，数据都可以，称之为，属性。比如函数和变量都是这个类的属性。具体细分一下函数是，非数据属性。而变量是数据属性。描述符用于控制变量的，获取设置和删除。根据属性的不同。描述符也可以进一步细分为数据描述，符合非数据描述符，分别用于控制，数据属性和函数属性。
-</p>
-
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">描述符协议</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-任何一个对象只要提包含了get，set delete这三个函数，中的任意一个，那么它就是一个描述符.这三个函数分别控制，属性的获取设置和删除。
+任何实现了描述符协议的类都可以作为描述符类。描述符协议为一组成员函数定义，包括：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">函数</th>
+<th scope="col" class="left">作用</th>
+<th scope="col" class="left">是否必须</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left"><code>__get__(self, obj, type)</code></td>
+<td class="left">获取属性值</td>
+<td class="left">是</td>
+</tr>
+<tr>
+<td class="left"><code>__set__(self, obj, value)</code></td>
+<td class="left">设置属性的值</td>
+<td class="left">否</td>
+</tr>
+<tr>
+<td class="left"><code>__delete__(self, obj)</code></td>
+<td class="left">删除属性</td>
+<td class="left">否</td>
+</tr>
+</tbody>
+</table>
+<p>
+先来看一个自定义的描述符的实现。
+</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyDescriptor</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
+  <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'get called'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+  <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'set called'</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">value</span>
+  <span class="k">def</span> <span class="fm">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'delete called'</span><span class="p">)</span>
+    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+  <span class="n">attr</span> <span class="o">=</span> <span class="n">MyDescriptor</span><span class="p">()</span>
+
+<span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+</pre></div>
+<p>
+示例中 MyDescriptor实现了描述符协议（也即实现了 <code>__get__, __set__, __delete__</code> 函数），因此其为一个描述符类。Foo的attr属性为MyDescriptor类的实例对象，因此它是一个描述符。
+</p>
+
+<p>
+print(foo.attr)的输出为：
+</p>
+<div class="highlight"><pre><span></span>get called
+None
+</pre></div>
+<p>
+可见当访问foo的attr属性时，MyDescriptor的 <code>__get__</code> 函数被调用。
+</p>
+
+<p>
+foo.attr = 'new value'的输出为：
+</p>
+<div class="highlight"><pre><span></span>set called
+</pre></div>
+<p>
+可见当为attr设置一个新值时，MyDescriptor的 <code>__set__</code> 函数被调用。
+</p>
+
+<p>
+再运行print(foo.attr)，输出为：
+</p>
+<div class="highlight"><pre><span></span>get called
+new value
+</pre></div>
+<p>
+新值已被设置。
+</p>
+
+<p>
+del foo.attr的输出为：
+</p>
+<div class="highlight"><pre><span></span>delete called
+</pre></div>
+<p>
+可见当为删除属性attr时，MyDescriptor的 <span class="underline"><span class="underline">delete</span></span> 函数被调用。
+</p>
+
+<p>
+再执行print(foo.attr)，AttributeError被抛出：
+</p>
+<div class="highlight"><pre><span></span>get called
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "1.py", line 6, in __get__
+    return self.data
+AttributeError: 'MyDescriptor' object has no attribute 'data'
+</pre></div>
+<p>
+属性attr已被删除。
 </p>
 </div>
 </div>
 
-
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">第一数据属性以及数据描述符。</h2>
+<h2 id="sec-2">参数意义</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+<code>__get__(self, obj, type)</code> 函数各个参数的意义为：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">参数</th>
+<th scope="col" class="left">意义</th>
+<th scope="col" class="left">例子中的对应</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left">self</td>
+<td class="left">描述符对象本身</td>
+<td class="left">Foo.attr</td>
+</tr>
+<tr>
+<td class="left">obj</td>
+<td class="left">使用描述符的对象实例</td>
+<td class="left">foo</td>
+</tr>
+<tr>
+<td class="left">type</td>
+<td class="left">obj的类型</td>
+<td class="left">Foo</td>
+</tr>
+</tbody>
+</table>
+<p>
+<code>__set__(self, obj, value)</code> 函数的self和obj参数的意义同 <code>__get__</code> ，value的意义为：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">参数</th>
+<th scope="col" class="left">意义</th>
+<th scope="col" class="left">例子中的对应</th>
+</tr></thead>
+<tbody><tr>
+<td class="left">value</td>
+<td class="left">属性的新值</td>
+<td class="left">'new value'</td>
+</tr></tbody>
+</table>
+<p>
+<code>__delete__(self, obj)</code> 函数的self和obj参数的意义同 <code>__get__</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">数据属性以及数据描述符。</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 默认情况下，数据属性的获取顺序为，第一从对象的字典中获取，第二从类字典中获取
 。
@@ -155,9 +305,9 @@ NOTE: 以下为语音笔记，待整理
 </div>
 
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">第二非数据属性。</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">非数据属性</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 静态函数，类函数都是通过描述符的方式实现的。在函数定义的时候，函数被保存在类的字典里，以一个普通的函数。函数的调用过程可以分为两个两个步骤。第一个是将函数获取出来，第二个是进行实际的调用。描述符是在第一个步骤中发挥作用。它会将，函数从类的字典中取出来，然后将类对象绑定为，第一个，参数。及成员函数的第一个参数及c f变量，都是在描述符中的钙函数中绑定的。
 如果将函数的获取与调用看作两个不同的过程，则已向过则以上过程会，简化。函数本身就是一个描述符，他会返回一个新的函数，这个函数哪和原来的函数一样，但是，第一个参数会被设置为，会被设置为，对象本身。因此心身的函数，将接受的参数比原来的函数，少一个。因为函数本身也是一个描述符。
@@ -166,20 +316,8 @@ NOTE: 以下为语音笔记，待整理
 </div>
 
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">第三描述符的一些应用。</h2>
-</div>
-
-
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">其他的一些。</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-描述服务提供了一个抽象城。这个层次控制性的，访问与设置。
-所有函数是一个描述服。
-累本身应该不是苗舒服。
-</p>
-</div>
+<h2 id="sec-5">一些应用</h2>
 </div>
             </div>
         </article>
