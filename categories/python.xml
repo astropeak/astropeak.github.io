@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about python)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Wed, 09 May 2018 13:09:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python描述符（Descriptor）</title><link>https://astropeak.github.io/posts/python-descriptor/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak (Posts about python)</title><link>https://astropeak.github.io/</link><description></description><atom:link href="https://astropeak.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Wed, 09 May 2018 13:22:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python描述符（Descriptor）</title><link>https://astropeak.github.io/posts/python-descriptor/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 先看一个例子，@property。被@property修饰的成员函数，将变为一个描述符。这是最简单的创建描述符的方式。
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -85,11 +85,14 @@ attr value
 &lt;col class="left"&gt;
 
 &lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th scope="col" class="left"&gt;函数&lt;/th&gt;
 &lt;th scope="col" class="left"&gt;作用&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;返回值&lt;/th&gt;
 &lt;th scope="col" class="left"&gt;是否必须&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
@@ -97,18 +100,21 @@ attr value
 &lt;tr&gt;
 &lt;td class="left"&gt;&lt;code&gt;__get__(self, obj, type)&lt;/code&gt;&lt;/td&gt;
 &lt;td class="left"&gt;获取属性值&lt;/td&gt;
+&lt;td class="left"&gt;属性的值&lt;/td&gt;
 &lt;td class="left"&gt;是&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td class="left"&gt;&lt;code&gt;__set__(self, obj, value)&lt;/code&gt;&lt;/td&gt;
 &lt;td class="left"&gt;设置属性的值&lt;/td&gt;
+&lt;td class="left"&gt;None&lt;/td&gt;
 &lt;td class="left"&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
 &lt;td class="left"&gt;&lt;code&gt;__delete__(self, obj)&lt;/code&gt;&lt;/td&gt;
 &lt;td class="left"&gt;删除属性&lt;/td&gt;
+&lt;td class="left"&gt;None&lt;/td&gt;
 &lt;td class="left"&gt;否&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;

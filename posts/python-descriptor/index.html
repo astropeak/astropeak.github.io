@@ -129,26 +129,31 @@ attr value
 <col class="left">
 <col class="left">
 <col class="left">
+<col class="left">
 </colgroup>
 <thead><tr>
 <th scope="col" class="left">函数</th>
 <th scope="col" class="left">作用</th>
+<th scope="col" class="left">返回值</th>
 <th scope="col" class="left">是否必须</th>
 </tr></thead>
 <tbody>
 <tr>
 <td class="left"><code>__get__(self, obj, type)</code></td>
 <td class="left">获取属性值</td>
+<td class="left">属性的值</td>
 <td class="left">是</td>
 </tr>
 <tr>
 <td class="left"><code>__set__(self, obj, value)</code></td>
 <td class="left">设置属性的值</td>
+<td class="left">None</td>
 <td class="left">否</td>
 </tr>
 <tr>
 <td class="left"><code>__delete__(self, obj)</code></td>
 <td class="left">删除属性</td>
+<td class="left">None</td>
 <td class="left">否</td>
 </tr>
 </tbody>
