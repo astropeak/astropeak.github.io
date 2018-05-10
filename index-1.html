@@ -39,6 +39,692 @@
             <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
                     <div class="entry-meta">
                         <span class="posted-on">
+                            Posted on <a href="posts/python-cookbook-readnote-1/" rel="bookmark">July 10, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/python-cookbook-readnote-1/">Python Cookbook 读书笔记（一）</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
+《<a href="http://shop.oreilly.com/product/0636920027072.do">Python Cookbook</a>》读书笔记.
+</p>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">chapter 1: Data Structures and Algorithms</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">1.6 Mapping Keys to Multiple Values in a Dictionary, by list value and defaultdict</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+example: create a dictionary with default value, by defaultdict
+</p>
+
+<p>
+dictionary's property:
+</p>
+<ol class="org-ol">
+<li>you can add new key to a dictionary
+</li>
+<li>but when you access a key that not exists, there will be error
+</li>
+<li>defaultdict is used to fix such problem.
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="sb">`dict`</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="sb">`func list`</span><span class="p">)</span>
+<span class="c1"># `dict`['aaa'].append(2)</span>
+<span class="err">$</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">1.6 example</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">frequency</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">frequency</span><span class="p">[</span><span class="s1">'colorless'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">frequency</span><span class="p">[</span><span class="s1">'ideas'</span><span class="p">]</span> <span class="c1"># will be 0</span>
+
+<span class="n">frequency</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="c1"># first, frequency['colorless'] will return a empty list, then append one element to this list.</span>
+<span class="n">frequency</span><span class="p">[</span><span class="s1">'colorless'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">frequency</span><span class="p">[</span><span class="s1">'ideas'</span><span class="p">]</span> <span class="c1"># will be []</span>
+
+<span class="c1"># Or you can pass a function take no arguments </span>
+
+<span class="c1"># the idiom:</span>
+<span class="n">my_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">function</span> <span class="n">to</span> <span class="n">create</span> <span class="n">default</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+<span class="n">my_dictionary</span><span class="p">[</span><span class="n">item_key</span><span class="p">]</span> <span class="ow">is</span> <span class="n">updated</span> <span class="k">with</span> <span class="n">information</span> <span class="n">about</span> <span class="n">item</span>
+</pre></div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">1.7 Keeping Dictionaries in Order, OrderedDict</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="highlight"><pre><span></span><span class="n">form</span> <span class="n">collections</span> <span class="kn">import</span> <span class="nn">OrderedDict</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="c1"># the insertion order will be reserved.</span>
+</pre></div>
+
+<p>
+An typical application is when for serilization.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">1.8. Calculating with Dictionaries</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1">get max key/value in a dictionary, based on the value, by inverting the dict</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="sb">`dict`</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="sb">`dict`</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="c1"># another solution</span>
+<span class="c1"># max(`dict`, key=lambda k:`dict`[k])</span>
+</pre></div>
+<p>
+first convert the dict to list of (value, key) pairs, then max function will first compare value, then compare key.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2">result of the max value for many  things</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+for tuple and list, it just the element.
+but for a dict, it returns only the key. Why? Because it accept a iterable as first parameter, and for a dictionary, the iterable value is the key.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3">understanding of multi value bind</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+---&gt;  (b11, b12) = 1
+TypeError: 'int' object is not iterable
+</p>
+
+<p>
+The right hand side should be an iterable, every element in the iterable will be asigned to the left hand side variable, with each variable comsume one element exzactly. If the number of elements and variables not match, then there will be an error.
+</p>
+
+<p>
+To consume more than one values, use the '*varname' expresstion, then the variable 'varname' will be a list of many elements.
+</p>
+
+<p>
+Back to the error prints in the example, the 'int' object refers to the right side '1'.
+</p>
+
+<p>
+PS:
+I find python much simpler and funny than java.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5">1.9. Finding Commonalities in Two Dictionaries</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+a dictionary's d.keys() and d.items() support set operations
+So to find the common part keys/items in two dictionaries, just use the set operation '|' or 'union' function.
+</p>
+</div>
+<div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1">get all keys as a iterable in a dictionary, by keys()</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<div class="highlight"><pre><span></span><span class="sb">`dict`</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2">get all values as a iterable in a dictionary, by values()</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<div class="highlight"><pre><span></span><span class="sb">`dict`</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3">get all key, value pairs as a iterable in a dictionary, by items()</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<div class="highlight"><pre><span></span><span class="sb">`dict`</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4">set operations</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+'|': union
+'&amp;': intersection
+'-': difference
+'s1 &lt; s2': check if s1 is a subset of s2
+</p>
+
+<p>
+Example:
+In <sup><a id="fnr.1" name="fnr.1" class="footref" href="posts/python-cookbook-readnote-1/#fn.1">1</a></sup>: e.keys(), d.keys()
+Out<sup><a id="fnr.1.100" name="fnr.1.100" class="footref" href="posts/python-cookbook-readnote-1/#fn.1">1</a></sup>: (dict_keys([1, 4, 'a', 9]), dict_keys([1, 3, 5]))
+</p>
+
+<p>
+In <sup><a id="fnr.2" name="fnr.2" class="footref" href="posts/python-cookbook-readnote-1/#fn.2">2</a></sup>: e.keys() &amp; d.keys()
+Out<sup><a id="fnr.2.100" name="fnr.2.100" class="footref" href="posts/python-cookbook-readnote-1/#fn.2">2</a></sup>: {1}
+</p>
+
+<p>
+In <sup><a id="fnr.3" name="fnr.3" class="footref" href="posts/python-cookbook-readnote-1/#fn.3">3</a></sup>: e.keys() | d.keys()
+Out<sup><a id="fnr.3.100" name="fnr.3.100" class="footref" href="posts/python-cookbook-readnote-1/#fn.3">3</a></sup>: {1, 3, 4, 5, 'a', 9}
+</p>
+
+<p>
+In <sup><a id="fnr.4" name="fnr.4" class="footref" href="posts/python-cookbook-readnote-1/#fn.4">4</a></sup>: e.keys() - d.keys()
+Out<sup><a id="fnr.4.100" name="fnr.4.100" class="footref" href="posts/python-cookbook-readnote-1/#fn.4">4</a></sup>: {9, 4, 'a'}
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6">1.10. Removing Duplicates from a Sequence while Maintaining Order</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1">problem: what is hashable(and the link to python glossary)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+From the python glossary: 
+<a href="https://docs.python.org/3/glossary.html">https://docs.python.org/3/glossary.html</a>
+</p>
+
+<p>
+An object is hashable if it has a hash value which never changes during its lifetime (it needs a __hash__() method), and can be compared to other objects (it needs an __eq__() or __cmp__() method). Hashable objects which compare equal must have the same hash value.
+</p>
+
+<p>
+Hashability makes an object usable as a dictionary key and a set member, because these data structures use the hash value internally.
+</p>
+
+<p>
+All of Python’s immutable built-in objects are hashable, while no mutable containers (such as lists or dictionaries) are. Objects which are instances of user-defined classes are hashable by default; they all compare unequal, and their hash value is their id().
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2">how yield/generator iterator is implemented</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+From the glossary, it works by suspends the function and  return the value, and save the current status. Then if it was called  next time, it will start execute from the place last time it was suspended. Great!! I understanded this.
+</p>
+
+<p>
+generator
+A function which returns a generator iterator. It looks like a normal function except that it contains yield expressions for producing a series of values usable in a for-loop or that can be retrieved one at a time with the next() function.
+Usually refers to a generator function, but may refer to a generator iterator in some contexts. In cases where the intended meaning isn’t clear, using the full terms avoids ambiguity.
+</p>
+
+<p>
+generator iterator
+An object created by a generator function.
+Each yield temporarily suspends processing, remembering the location execution state (including local variables and pending try-statements). When the generator iterator resumes, it picks-up where it left-off (in contrast to functions which start fresh on every invocation).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3">file object is also an iterable, the element is a line</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">somefile</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-4" class="outline-4">
+<h4 id="sec-1-6-4">a function that delete all duplicates in a list, with order preserved</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dedupe</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+	<span class="n">val</span> <span class="o">=</span> <span class="n">item</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">key</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">item</span>
+	    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+<p>
+If the element is hashable, then key function is not needed. Else, provide a fucntion to convert the  element to a hashable element.
+</p>
+
+<p>
+examples:
+&gt;&gt;&gt; a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
+&gt;&gt;&gt; list(dedupe(a, key=lambda d: (d['x'],d['y'])))
+[{'x': 1, 'y': 2}, {'x': 1, 'y': 3}, {'x': 2, 'y': 4}]
+&gt;&gt;&gt; list(dedupe(a, key=lambda d: d['x']))
+[{'x': 1, 'y': 2}, {'x': 2, 'y': 4}]
+&gt;&gt;&gt;
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-5" class="outline-4">
+<h4 id="sec-1-6-5">delete all duplicates in a list, don't preserve order, by set</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="sb">`list`</span><span class="p">)</span>
+</pre></div>
+<p>
+Then all duplicate elements in list will be removed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-6" class="outline-4">
+<h4 id="sec-1-6-6">the a?b:c expression in python, if else in one line</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">b</span> <span class="k">if</span> <span class="n">a</span> <span class="k">else</span> <span class="n">c</span>
+</pre></div>
+<p>
+looks good
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7">1.11. Naming a Slice</h3>
+<div class="outline-text-3" id="text-1-7">
+</div>
+<div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1">the slice object</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+create a  slice
+</p>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+<p>
+'1:2' is just a shortcut to 'slice(1,2)'
+</p>
+
+<p>
+slice attributes
+</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8">1.12. Determining the Most Frequently Occurring Items in a Sequence</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+A method by me
+</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1"># b = [d[k]+=1 for k in a]  # syntax error here</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1">the collections.Counter class: change a list to a list of tuple of (element, count)</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># get the count</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># 3 is the element in a</span>
+
+
+<span class="c1"># update with more words</span>
+<span class="n">b</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># and a Counter object support the math operations: '+' and '-'</span>
+</pre></div>
+
+<p>
+When you need to count data, use Counter class. This is a so little class, in practice, I will always write it from scratch before.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9">1.13. Sorting a List of Dictionaries by a Common Key</h3>
+<div class="outline-text-3" id="text-1-9">
+</div>
+<div id="outline-container-sec-1-9-1" class="outline-4">
+<h4 id="sec-1-9-1">the operator.itemgetter function</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<p>
+it will return a callable that can be passed to 'sorted':s key  parameter, for list  or dictionary
+</p>
+<div class="highlight"><pre><span></span><span class="c1"># return value of</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+<span class="c1"># is the same as this one</span>
+<span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">r</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+<span class="c1"># but the former  is a little faster</span>
+</pre></div>
+
+<p>
+仍然是非常小的功能，为什么搞得这么精细呢？
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10">1.14. Sorting Objects Without Native Comparison Support</h3>
+<div class="outline-text-3" id="text-1-10">
+</div>
+<div id="outline-container-sec-1-10-1" class="outline-4">
+<h4 id="sec-1-10-1">the operator.attrgetter function</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<p>
+it will return a callable that can be passed to 'sorted':s key  parameter, for user defined class
+</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s1">'User({})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># return value of</span>
+<span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+<span class="c1"># is the same as this one</span>
+<span class="k">lambda</span> <span class="n">o</span><span class="p">:</span><span class="n">o</span><span class="o">.</span><span class="n">name</span>
+<span class="c1"># but the former  is a little faster</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11">1.15. Grouping Records(a sequence of dictionaries) Together Based on a Field</h3>
+<div class="outline-text-3" id="text-1-11">
+</div>
+<div id="outline-container-sec-1-11-1" class="outline-4">
+<h4 id="sec-1-11-1">the itertools.groupby function: group sequencially the list as tuple (key, items)</h4>
+<div class="outline-text-4" id="text-1-11-1">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">rows</span> <span class="o">=</span>  <span class="p">[{</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">}]</span>
+<span class="c1"># a should be a generator</span>
+<span class="n">rows</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+<p>
+another way is just use a default list dictionary to group, then no sort is needed.
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12">1.16. Filtering Sequence Elements</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+To fitering, just use list comprehension with an if condition
+</p>
+</div>
+<div id="outline-container-sec-1-12-1" class="outline-4">
+<h4 id="sec-1-12-1">itertools.compress function, a filtering tool</h4>
+<div class="outline-text-4" id="text-1-12-1">
+<p>
+it takse two parameters:
+</p>
+<ol class="org-ol">
+<li>an iterable which to be compressed
+</li>
+<li>a Boolean sequence, with the same length of first parameter
+if the element in this sequence  is True, then the element at the same position in the first iterable will be put to the output
+
+<p>
+An example:
+</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">addresses</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'5412 N CLARK'</span><span class="p">,</span>
+    <span class="s1">'5148 N CLARK'</span><span class="p">,</span>
+    <span class="s1">'5800 E 58TH'</span><span class="p">,</span>
+    <span class="s1">'2122 N CLARK'</span>
+    <span class="s1">'5645 N RAVENSWOOD'</span><span class="p">,</span>
+    <span class="s1">'1060 W ADDISON'</span><span class="p">,</span>
+    <span class="s1">'4801 N BROADWAY'</span><span class="p">,</span>
+    <span class="s1">'1039 W GRANVILLE'</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="c1"># Now a will be all items where count larger than 5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13">1.17. Extracting a Subset of a Dictionary</h3>
+<div class="outline-text-3" id="text-1-13">
+</div>
+<div id="outline-container-sec-1-13-1" class="outline-4">
+<h4 id="sec-1-13-1">dictionary comprehension, just like list comprehension, but use '{' instead of '['</h4>
+<div class="outline-text-4" id="text-1-13-1">
+<div class="highlight"><pre><span></span><span class="n">prices</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'ACME'</span><span class="p">:</span> <span class="mf">45.23</span><span class="p">,</span>
+    <span class="s1">'AAPL'</span><span class="p">:</span> <span class="mf">612.78</span><span class="p">,</span>
+    <span class="s1">'IBM'</span><span class="p">:</span> <span class="mf">205.55</span><span class="p">,</span>
+    <span class="s1">'HPQ'</span><span class="p">:</span> <span class="mf">37.20</span><span class="p">,</span>
+    <span class="s1">'FB'</span><span class="p">:</span> <span class="mf">10.75</span>
+<span class="p">}</span>
+<span class="c1"># Make a dictionary of all prices over 200</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="p">{</span> <span class="n">key</span><span class="p">:</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">prices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">200</span> <span class="p">}</span>
+<span class="c1"># Make a dictionary of tech stocks</span>
+<span class="n">tech_names</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'AAPL'</span><span class="p">,</span> <span class="s1">'IBM'</span><span class="p">,</span> <span class="s1">'HPQ'</span><span class="p">,</span> <span class="s1">'MSFT'</span> <span class="p">}</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="p">{</span> <span class="n">key</span><span class="p">:</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">prices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">tech_names</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14">1.18. Mapping Names to Sequence Elements</h3>
+<div class="outline-text-3" id="text-1-14">
+</div>
+<div id="outline-container-sec-1-14-1" class="outline-4">
+<h4 id="sec-1-14-1">the collections.nametuple function, map an index to a name, and access to an element with that name</h4>
+<div class="outline-text-4" id="text-1-14-1">
+<p>
+example:
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="n">People</span> <span class="o">=</span>  <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'People'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">People</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jim'</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+</pre></div>
+
+<p>
+A good application:
+for database selection.
+</p>
+
+<p>
+The ._replace method:
+Because a tuple is immutable, so to change an element, you can use _replace to  replace a field and a new one will be returned.
+A tipical usage is first  create a prototype element with all field value be the default one, then update some fields with the _replace function.
+Why there is a '_' in the function name?
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="n">Stock</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Stock'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'shares'</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="s1">'date'</span><span class="p">,</span> <span class="s1">'time'</span><span class="p">])</span>
+<span class="c1"># Create a prototype instance</span>
+<span class="n">stock_prototype</span> <span class="o">=</span> <span class="n">Stock</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="c1"># Function to convert a dictionary to a Stock</span>
+<span class="k">def</span> <span class="nf">dict_to_stock</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">stock_prototype</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="o">**</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ACME'</span><span class="p">,</span> <span class="s1">'shares'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">:</span> <span class="mf">123.45</span><span class="p">}</span>
+<span class="n">dict_to_stock</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="c1"># Stock(name='ACME', shares=100, price=123.45, date=None, time=None)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15">1.19. Transforming and Reducing Data at the Same Time</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+use generator-expression argument
+</p>
+
+<p>
+The reducing function means: given a list, return a value.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16">the any function, check if any of an element is True in a iterable</h3>
+<div class="outline-text-3" id="text-1-16">
+</div>
+<div id="outline-container-sec-1-16-1" class="outline-4">
+<h4 id="sec-1-16-1">check if  any .py files exist in a directory</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<div class="highlight"><pre><span></span><span class="c1"># Determine if any .py files exist in a directory</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">'dirname'</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.py'</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'There be python!'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Sorry, no python.'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="outline-container-sec-1-16-2" class="outline-4">
+<h4 id="sec-1-16-2">get all files in a directory as a list</h4>
+<div class="outline-text-4" id="text-1-16-2">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">'dirname'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div id="outline-container-sec-1-16-3" class="outline-4">
+<h4 id="sec-1-16-3">change a tuple/list/iterable to a csv line</h4>
+<div class="outline-text-4" id="text-1-16-3">
+<p>
+This is much better than the string format method
+</p>
+<div class="highlight"><pre><span></span><span class="c1"># Output a tuple as CSV</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'ACME'</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">123.45</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="p">))</span><span class="c1"># Output a tuple as CSV</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-17" class="outline-3">
+<h3 id="sec-1-17">1.20. Combining Multiple Mappings into a Single Mapping</h3>
+<div class="outline-text-3" id="text-1-17">
+</div>
+<div id="outline-container-sec-1-17-1" class="outline-4">
+<h4 id="sec-1-17-1">the collections.ChainMap</h4>
+<div class="outline-text-4" id="text-1-17-1">
+<p>
+combining many maps/dictionaries, then when get an element, it will try to get from the first map, then the second, ...
+</p>
+
+<p>
+And for operations that mutate the mapping always affect the first map/dictionary.
+</p>
+
+<p>
+typical application:
+scoped variable in a programming language.
+</p>
+
+<p>
+Difference from the dict.update function:
+ChainMap use a link to the original dictionary, while dict.update create a new one.
+</p>
+</div>
+<ul class="org-ul"><li>
+<a id="sec-1-17-1-1" name="sec-1-17-1-1"></a>check if an element exists in many dictionaries/maps, sequencially<br><div class="outline-text-5" id="text-1-17-1-1">
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">:</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">'x'</span><span class="p">])</span> <span class="c1"># Outputs 1 (from a)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">'y'</span><span class="p">])</span> <span class="c1"># Outputs 2 (from b)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">'z'</span><span class="p">])</span> <span class="c1"># Outputs 3 (from a)</span>
+</pre></div>
+</div>
+</li></ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef">
+<sup><a id="fn.1" name="fn.1" class="footnum" href="posts/python-cookbook-readnote-1/#fnr.1">1</a></sup><p>DEFINITION NOT FOUND.</p>
+</div>
+
+<div class="footdef">
+<sup><a id="fn.2" name="fn.2" class="footnum" href="posts/python-cookbook-readnote-1/#fnr.2">2</a></sup><p>DEFINITION NOT FOUND.</p>
+</div>
+
+<div class="footdef">
+<sup><a id="fn.3" name="fn.3" class="footnum" href="posts/python-cookbook-readnote-1/#fnr.3">3</a></sup><p>DEFINITION NOT FOUND.</p>
+</div>
+
+<div class="footdef">
+<sup><a id="fn.4" name="fn.4" class="footnum" href="posts/python-cookbook-readnote-1/#fnr.4">4</a></sup><p>DEFINITION NOT FOUND.</p>
+</div>
+
+
+</div>
+</div>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
                             Posted on <a href="posts/hmm-word-segmentation/" rel="bookmark">May 6, 2017</a>
                         </span>
                     </div>
