@@ -19,16 +19,16 @@ def goodbye():
 
 print('Script end here')
 #+end_src
-atexit.register是一个装饰器，它的作用是将被装饰的函数注册为在程序结束时执行。函数goodbye是被装饰的函数。
+ ~atexit.register~ 是一个装饰器，它的作用是将被装饰的函数注册为在程序结束时执行。函数 ~goodbye~ 是被装饰的函数。
 
 程序的运行结果是：
 #+BEGIN_SRC text
 Script end here
 Goodbye!
 #+END_SRC
-可见函数goodbye在程序结束后被自动调用。
+可见函数 ~goodbye~ 在程序结束后被自动调用。
 
-另一个常见的例子是@property，装饰类的成员函数，将其转换为一个描述符。
+另一个常见的例子是 ~@property~ ，装饰类的成员函数，将其转换为一个描述符。
 #+begin_src python :results output
 class Foo:
   @property
@@ -52,7 +52,7 @@ foo = Foo()
     print('Goodbye!')
   goodbye = atexit.register(goodbye)
   #+end_src
-  以上是使用装饰器的两种语法。第一种语法比较简洁，第二种语法更加直观，二者在作用上完全等价。
+  以上是使用装饰器的两种写法。第一种写法比较简洁，第二种写法更加直观，二者在作用上完全等价。
   
   从中也可看出，装饰器实际上是一个函数（或callable），其输入、返回值为：
   
@@ -61,7 +61,7 @@ foo = Foo()
   | 输入   | 被装饰的函数           | goodbye      |
   | 返回值 | 变换后的函数或任意对象 |              |
 
-  返回值会被赋值给原来指向输入函数的变量，如示例中的goodbye。此时变量goodbye将指向装饰器的返回值，而不是原来的函数定义。返回值一般为一个函数，这个函数是在输入参数函数添加了一些额外操作的版本。
+  返回值会被赋值给原来指向输入函数的变量，如示例中的 ~goodbye~ 。此时变量 ~goodbye~ 将指向装饰器的返回值，而不是原来的函数定义。返回值一般为一个函数，这个函数是在输入参数函数添加了一些额外操作的版本。
 
   如下面这个装饰器对原始函数添加了一个操作：每次调用这个函数时，打印函数的输入参数及返回值。
   #+begin_src python :results output
@@ -82,6 +82,11 @@ foo = Foo()
   area(2, 3)
   #+end_src
 
+  #+RESULTS:
+  : Enter. Args: (2, 3), kwargs: {}
+  : area called
+  : Exit. Return value: 6
+
   程序的运行结果为：
   #+BEGIN_SRC text
   Enter. Args: (2, 3), kwargs: {}
@@ -89,7 +94,7 @@ foo = Foo()
   Exit. Return value: 6
   #+END_SRC
 
-  也可以将以上打印输入参数及返回值的语句直接写在area函数里，如：
+  也可以将以上打印输入参数及返回值的语句直接写在 ~area~ 函数里，如：
   #+begin_src python :results output
   def area(height, width):
     print('Enter. Args: %s, %s' % (height, width))
@@ -104,24 +109,128 @@ foo = Foo()
   程序的运行结果与使用装饰器时相同。但使用装饰器的好处为：
   1. 打印输入参数及返回值这个操作可被重用
 
-     如对于一个新的函数foo，装饰器trace可以直接拿来使用，而无须在函数内部重复写两条print语句。
+     如对于一个新的函数 ~foo~ ，装饰器 ~trace~ 可以直接拿来使用，而无须在函数内部重复写两条 ~print~ 语句。
      #+begin_src python :results output
      @trace
      def foo(val):
        return 'return value'
      #+end_src
+     
+     #+BEGIN_QUOTE
      一个装饰器实际上定义了一种可重复使用的操作。
+     #+END_QUOTE
+
+
 
   2. 函数的功能更单纯
      
-     area函数的功能是计算面积，而调试语句与其功能无关。使用装饰器可以将与函数功能无关的语句提取出来。
+      ~area~ 函数的功能是计算面积，而调试语句与其功能无关。使用装饰器可以将与函数功能无关的语句提取出来。
      因此函数可以写地更小。
 
+     #+BEGIN_QUOTE
      使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数。
+     #+END_QUOTE
 
 
-  
-  
+* 修正名称
+  以上例子中有一个缺陷，函数 ~area~ 被 ~trace~ 装饰后，其名称变为 ~wrapper~ ，而非 ~area~ 。 ~print(area)~ 的结果为：
+  #+BEGIN_SRC text
+  <function wrapper at 0x10df45668>
+  #+END_SRC
+   ~wrapper~ 这个名称来源于 ~trace~ 中定义的 ~wrapper~ 函数。
 
+  可以通过 ~functools.wraps~ 来修正这个问题。
+  #+begin_src python :results output
+  from functools import wraps
 
+  def trace(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+      print('Enter. Args: %s, kwargs: %s' % (args, kwargs))
+      rv = func(*args, **kwargs)
+      print('Exit. Return value: %s' % (rv))
+      return rv
+
+    return wrapper
+
+  @trace
+  def area(height, width):
+    print('area called')
+    return height * width
+  #+end_src
+
+  #+RESULTS:
+  : <function area at 0x10e8371b8>
+
+  即使用 ~functools.wraps~ 来装饰 ~wrapper~ 。此时 ~print(area)~ 的结果为：
+  #+BEGIN_SRC text
+  <function area at 0x10e8371b8>
+  #+END_SRC
+  函数的名称能够正确显示。
+
+* 接收参数
+  以上例子中 ~trace~ 这个装饰器在使用时不接受参数。如果想传入参数，如传入被装饰函数的名称，可以这么做：
+  #+begin_src python :results output
+  from functools import wraps
+
+  def trace(name):
+    def wrapper(func):
+      @wraps(func)
+      def wrapped(*args, **kwargs):
+        print('Enter %s. Args: %s, kwargs: %s' % (name, args, kwargs))
+        rv = func(*args, **kwargs)
+        print('Exit %s. Return value: %s' % (name, rv))
+        return rv
+
+      return wrapped
+    return wrapper
+
+  @trace('area')
+  def area(height, width):
+    print('area called')
+    return height * width
+
+  area(2, 3)
+  #+end_src
+
+  #+RESULTS:
+  : Enter area. Args: (2, 3), kwargs: {}
+  : area called
+  : Exit area. Return value: 6
+
+  程序的运行结果为：
+  #+BEGIN_SRC text
+  Enter area. Args: (2, 3), kwargs: {}
+  area called
+  Exit area. Return value: 6
+
+  #+END_SRC
+  将函数名称传入后，在日志同时打印出函数名，日志更加清晰。
+
+  ~@trace('area')~ 是如何工作的？
+
+  这里其实包含了两个步骤。 ~@trace('area')~ 等价于：
+  #+begin_src python :results output
+  dec = trace('area')
+  @dec
+  def area(height, width): ...
+  #+end_src
+  即先触发函数调用 ~trace('area')~ ，得到一个返回值，这个返回值为 ~wrapper~ 函数。
+  而这个函数才是真正的装饰器，然后使用这个装饰器装饰函数。
+
+* 多重装饰器
+  装饰器可以叠加使用，如：
+  #+begin_src python :results output
+  @dec1
+  @dec2
+  def foo():pass
+  #+end_src
+  等价的代码为：
+  #+begin_src python :results output
+  def foo():pass
+  foo = dec2(foo)
+  foo = dec1(foo)
+  #+end_src
+
+  即装饰器依次装饰函数，靠近函数定义的装饰器优先。相当于串联起来。
 
