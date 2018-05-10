@@ -1,0 +1,127 @@
+#+BEGIN_COMMENT
+.. title: Python 装饰器（Decorator）
+.. slug: python-decorator
+.. date: 2018-05-10 09:52:53 UTC+08:00
+.. tags: python
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+装饰器的语法为 ~@dec_name~ ，置于函数定义之前。如：
+#+begin_src python :results output
+import atexit
+
+@atexit.register
+def goodbye():
+  print('Goodbye!')
+
+print('Script end here')
+#+end_src
+atexit.register是一个装饰器，它的作用是将被装饰的函数注册为在程序结束时执行。函数goodbye是被装饰的函数。
+
+程序的运行结果是：
+#+BEGIN_SRC text
+Script end here
+Goodbye!
+#+END_SRC
+可见函数goodbye在程序结束后被自动调用。
+
+另一个常见的例子是@property，装饰类的成员函数，将其转换为一个描述符。
+#+begin_src python :results output
+class Foo:
+  @property
+  def attr(self):
+    print('attr called')
+    return 'attr value'
+
+foo = Foo()
+#+end_src
+
+* 等价语法
+  语句块
+  #+begin_src python :results output
+  @atexit.register
+  def goodbye():
+    print('Goodbye!')
+  #+end_src
+  等价于
+  #+begin_src python :results output
+  def goodbye():
+    print('Goodbye!')
+  goodbye = atexit.register(goodbye)
+  #+end_src
+  以上是使用装饰器的两种语法。第一种语法比较简洁，第二种语法更加直观，二者在作用上完全等价。
+  
+  从中也可看出，装饰器实际上是一个函数（或callable），其输入、返回值为：
+  
+  |        | 说明                   | 示例中的对应 |
+  |--------+------------------------+--------------|
+  | 输入   | 被装饰的函数           | goodbye      |
+  | 返回值 | 变换后的函数或任意对象 |              |
+
+  返回值会被赋值给原来指向输入函数的变量，如示例中的goodbye。此时变量goodbye将指向装饰器的返回值，而不是原来的函数定义。返回值一般为一个函数，这个函数是在输入参数函数添加了一些额外操作的版本。
+
+  如下面这个装饰器对原始函数添加了一个操作：每次调用这个函数时，打印函数的输入参数及返回值。
+  #+begin_src python :results output
+  def trace(func):
+    def wrapper(*args, **kwargs):
+      print('Enter. Args: %s, kwargs: %s' % (args, kwargs))
+      rv = func(*args, **kwargs)
+      print('Exit. Return value: %s' % (rv))
+      return rv
+
+    return wrapper
+
+  @trace
+  def area(height, width):
+    print('area called')
+    return height * width
+
+  area(2, 3)
+  #+end_src
+
+  程序的运行结果为：
+  #+BEGIN_SRC text
+  Enter. Args: (2, 3), kwargs: {}
+  area called
+  Exit. Return value: 6
+  #+END_SRC
+
+  也可以将以上打印输入参数及返回值的语句直接写在area函数里，如：
+  #+begin_src python :results output
+  def area(height, width):
+    print('Enter. Args: %s, %s' % (height, width))
+    print('area called')
+    rv = height * width
+    print('Exit. Return value: %s' % (rv))
+    return rv
+
+  area(2, 3)
+  #+end_src
+
+  程序的运行结果与使用装饰器时相同。但使用装饰器的好处为：
+  1. 打印输入参数及返回值这个操作可被重用
+
+     如对于一个新的函数foo，装饰器trace可以直接拿来使用，而无须在函数内部重复写两条print语句。
+     #+begin_src python :results output
+     @trace
+     def foo(val):
+       return 'return value'
+     #+end_src
+     一个装饰器实际上定义了一种可重复使用的操作。
+
+  2. 函数的功能更单纯
+     
+     area函数的功能是计算面积，而调试语句与其功能无关。使用装饰器可以将与函数功能无关的语句提取出来。
+     因此函数可以写地更小。
+
+     使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数。
+
+
+  
+  
+
+
+
