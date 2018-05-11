@@ -147,10 +147,10 @@ Goodbye!
 </p>
 <div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"></span>  <span class="numberCircle">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, kwargs: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle">2</span>
-    <span class="n">rv</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle">3</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">'Exit. Return value: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">rv</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle">4</span>
+  <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, kwargs: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Exit. Return value: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">rv</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle unselectable">4</span>
     <span class="k">return</span> <span class="n">rv</span>
 
   <span class="k">return</span> <span class="n">wrapper</span>
@@ -160,14 +160,14 @@ Goodbye!
   <span class="k">print</span><span class="p">(</span><span class="s1">'area called'</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
 
-<span class="n">area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle">5</span>
+<span class="n">area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">5</span>
 </pre></div>
 <ol class="org-ol">
 <li>
-<b>1</b> ：新函数，这个函数将作为装饰器的返回值
+<b>1</b> ：定义一个新函数，这个函数将作为装饰器的返回值，来替换原函数
 </li>
 <li>
-<b>2</b>, <b>4</b> ： 打印输入参数、返回值
+<b>2</b>, <b>4</b> ： 打印输入参数、返回值。这是这个装饰器所定义的操作
 </li>
 <li>
 <b>3</b> ：调用原函数
