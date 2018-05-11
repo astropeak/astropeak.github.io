@@ -95,6 +95,13 @@ lang is downcased before assoc, so use lowercase to describe language available.
 See: http://orgmode.org/worg/org-contrib/babel/languages.html and
 http://pygments.org/docs/lexers/ for adding new languages to the mapping.")
 
+(defun mylog (msg)
+  (with-current-buffer (find-file-literally "e.log")
+    (goto-char (point-max))
+    (insert msg)
+    (insert "\n")
+    (save-buffer)))
+
 ;; Override the html export function to use pygments
 (defun org-html-src-block (src-block contents info)
   "Transcode a SRC-BLOCK element from Org to HTML.
@@ -104,10 +111,59 @@ contextual information."
       (org-html--textarea-block src-block)
     (let ((lang (org-element-property :language src-block))
           (code (org-element-property :value src-block))
-          (code-html (org-html-format-code src-block info)))
+          (code-html (org-html-format-code src-block info))
+          (show-linenr-p (equal (org-element-property :switches src-block) "-n"))
+          (start-linenr (string-to-int (or (org-element-property :parameters src-block) "0")))
+          (tmp nil))
+
+      ;; (mylog (format "%s" (org-export-read-attribute :attr_html src-block :results)))
+      ;; (mylog (format "%s" (org-export-read-attribute :results src-block)))
+      ;; (mylog (format "options: %s" (org-element-property :options src-block)))
+      (mylog (format "parameters: %s" (org-element-property :parameters src-block)))
+      (mylog (format "switches: %s" (org-element-property :switches src-block)))
+
       (if nikola-use-pygments
-          (pygmentize (downcase lang) (org-html-decode-plain-text code))
+          (progn
+            (setq tmp (pygmentize (downcase lang) (org-html-decode-plain-text code)))
+            (mylog "here")
+            (setq tmp (aspk-add-line-number tmp show-linenr-p start-linenr))
+
+            (mylog "here 2")
+            tmp)
         code-html))))
+
+(defun aspk-add-line-number (code show-linenr-p start-linenr)
+  (mylog (format "%S, %S" show-linenr-p start-linenr))
+  (setq code (string-trim code))
+  (setq code (string-remove-prefix "<div class=\"highlight\"><pre>" code))
+  (setq code (string-remove-suffix "\n</pre></div>" code))
+  (let ((idx (- start-linenr 1))
+        (number-idx 1))
+    (format "%s\n%s\n%s"
+            (if show-linenr-p
+                "<div class=\"highlight show-linenr\"><pre>"
+              "<div class=\"highlight\"><pre>")
+            (mapconcat (lambda (x)
+                         (incf idx)
+                         (let ((rst x))
+                           (when show-linenr-p
+                             (setq rst (format "<span class=\"linenr unselectable\">%d </span>%s" idx rst)))
+
+                           (when (string-match-p "#H#" rst)
+                             (setq rst (replace-regexp-in-string "#H#" "" rst))
+                             (setq rst (format "<span class=\"codeH\">%s</span>" rst))
+                             )
+
+                           (when (string-match-p "#N#" rst)
+                             (setq rst (replace-regexp-in-string "#N#" "" rst))
+                             (setq rst (format "%s  <span class=\"numberCircle\">%s</span>" rst number-idx))
+                             (incf number-idx)
+                             )
+                           rst))
+                       (split-string code "\n")
+                       "\n")
+            "</pre></div>"
+            )))
 
 ;; Export images with custom link type
 (defun org-custom-link-img-url-export (path desc format)
