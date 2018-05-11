@@ -153,7 +153,7 @@ contextual information."
 
                            (when (string-match-p "#N#" rst)
                              (setq rst (replace-regexp-in-string "#N#" "" rst))
-                             (setq rst (format "%s  <span class=\"numberCircle\">%s</span>" rst number-idx))
+                             (setq rst (format "%s  <span class=\"numberCircle unselectable\">%s</span>" rst number-idx))
                              (incf number-idx)
                              )
                            rst))
