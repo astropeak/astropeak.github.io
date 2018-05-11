@@ -79,11 +79,13 @@ foo = Foo()
     print('area called')
     return height * width
 
-  area(2, 3)
+  area(2, 3) #N#
   #+end_src
-  1. *1* ：新函数
-  2. *2*, *4* ： 打印输入参数，打印返回值
+  1. *1* ：新函数，这个函数将作为装饰器的返回值
+  2. *2*, *4* ： 打印输入参数、返回值
   3. *3* ：调用原函数
+  4. *5* ：此时 ~area~ 实际上是 *1* 处定义的 ~wrapper~ 函数
+
 
   程序的运行结果为：
   #+BEGIN_SRC text

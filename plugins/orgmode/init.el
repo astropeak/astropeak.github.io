@@ -119,21 +119,18 @@ contextual information."
       ;; (mylog (format "%s" (org-export-read-attribute :attr_html src-block :results)))
       ;; (mylog (format "%s" (org-export-read-attribute :results src-block)))
       ;; (mylog (format "options: %s" (org-element-property :options src-block)))
-      (mylog (format "parameters: %s" (org-element-property :parameters src-block)))
-      (mylog (format "switches: %s" (org-element-property :switches src-block)))
+      ;; (mylog (format "parameters: %s" (org-element-property :parameters src-block)))
+      ;; (mylog (format "switches: %s" (org-element-property :switches src-block)))
 
       (if nikola-use-pygments
           (progn
             (setq tmp (pygmentize (downcase lang) (org-html-decode-plain-text code)))
-            (mylog "here")
             (setq tmp (aspk-add-line-number tmp show-linenr-p start-linenr))
 
-            (mylog "here 2")
             tmp)
         code-html))))
 
 (defun aspk-add-line-number (code show-linenr-p start-linenr)
-  (mylog (format "%S, %S" show-linenr-p start-linenr))
   (setq code (string-trim code))
   (setq code (string-remove-prefix "<div class=\"highlight\"><pre>" code))
   (setq code (string-remove-suffix "\n</pre></div>" code))
