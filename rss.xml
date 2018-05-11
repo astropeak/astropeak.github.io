@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Thu, 10 May 2018 10:22:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python 装饰器（Decorator）</title><link>https://astropeak.github.io/posts/python-decorator/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 11 May 2018 06:59:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python 装饰器（Decorator）</title><link>https://astropeak.github.io/posts/python-decorator/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 装饰器的语法为 &lt;code&gt;@dec_name&lt;/code&gt; ，置于函数定义之前。如：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;atexit&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;atexit&lt;/span&gt;
 
 &lt;span class="nd"&gt;@atexit.register&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goodbye&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -17,7 +18,8 @@
 &lt;p&gt;
 程序的运行结果是：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Script end here
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;Script end here
 Goodbye!
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
@@ -27,7 +29,8 @@ Goodbye!
 &lt;p&gt;
 另一个常见的例子是 &lt;code&gt;@property&lt;/code&gt; ，装饰类的成员函数，将其转换为一个描述符。
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
   &lt;span class="nd"&gt;@property&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'attr called'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -42,23 +45,25 @@ Goodbye!
 &lt;p&gt;
 语句块
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@atexit.register&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@atexit.register&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goodbye&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
   &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Goodbye!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 等价于
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goodbye&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goodbye&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
   &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Goodbye!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;goodbye&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;atexit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;goodbye&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
-以上是使用装饰器的两种写法。第一种写法比较简洁，第二种写法更加直观，二者在作用上完全等价。
+这两种写法在作用上完全等价。
 &lt;/p&gt;
 
 &lt;p&gt;
-从中也可看出，装饰器实际上是一个函数（或callable），其输入、返回值为：
+从第二种写法，更容易看出装饰器的原理。装饰器实际上是一个函数（或callable），其输入、返回值为：
 &lt;/p&gt;
 
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
@@ -100,11 +105,12 @@ Goodbye!
 &lt;p&gt;
 如下面这个装饰器对原始函数添加了一个操作：每次调用这个函数时，打印函数的输入参数及返回值。
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter. Args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;, kwargs: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="n"&gt;rv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Exit. Return value: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rv&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;  &lt;span class="numberCircle"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter. Args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;, kwargs: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;  &lt;span class="numberCircle"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;rv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;  &lt;span class="numberCircle"&gt;3&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Exit. Return value: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rv&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;  &lt;span class="numberCircle"&gt;4&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;rv&lt;/span&gt;
 
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
@@ -116,19 +122,28 @@ Goodbye!
 
 &lt;span class="n"&gt;area&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;&lt;b&gt;1&lt;/b&gt; ：新函数
+&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;2&lt;/b&gt;, &lt;b&gt;4&lt;/b&gt; ： 打印输入参数，打印返回值
+&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;3&lt;/b&gt; ：调用原函数
+&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;
 程序的运行结果为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Enter. Args: (2, 3), kwargs: {}
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;Enter. Args: (2, 3), kwargs: {}
 area called
 Exit. Return value: 6
 &lt;/pre&gt;&lt;/div&gt;
-
 &lt;p&gt;
-也可以将以上打印输入参数及返回值的语句直接写在 &lt;code&gt;area&lt;/code&gt; 函数里，如：
+如果不使用装饰器，则必须将以上打印输入参数及返回值的语句直接写在 &lt;code&gt;area&lt;/code&gt; 函数里，如：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;area&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;area&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
   &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter. Args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;, &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
   &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'area called'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;rv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;
@@ -147,14 +162,15 @@ Exit. Return value: 6
 &lt;p&gt;
 如对于一个新的函数 &lt;code&gt;foo&lt;/code&gt; ，装饰器 &lt;code&gt;trace&lt;/code&gt; 可以直接拿来使用，而无须在函数内部重复写两条 &lt;code&gt;print&lt;/code&gt; 语句。
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@trace&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@trace&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'return value'&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;
-一个装饰器实际上定义了一种可重复使用的操作。
+一个装饰器实际上定义了一种可重复使用的操作
 &lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
@@ -167,7 +183,7 @@ Exit. Return value: 6
 
 &lt;blockquote&gt;
 &lt;p&gt;
-使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数。
+使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数
 &lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
@@ -182,7 +198,8 @@ Exit. Return value: 6
 &lt;p&gt;
 以上例子中有一个缺陷，函数 &lt;code&gt;area&lt;/code&gt; 被 &lt;code&gt;trace&lt;/code&gt; 装饰后，其名称变为 &lt;code&gt;wrapper&lt;/code&gt; ，而非 &lt;code&gt;area&lt;/code&gt; 。 &lt;code&gt;print(area)&lt;/code&gt; 的结果为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;function wrapper at 0x10df45668&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&amp;lt;function wrapper at 0x10df45668&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 &lt;code&gt;wrapper&lt;/code&gt; 这个名称来源于 &lt;code&gt;trace&lt;/code&gt; 中定义的 &lt;code&gt;wrapper&lt;/code&gt; 函数。
@@ -191,10 +208,11 @@ Exit. Return value: 6
 &lt;p&gt;
 可以通过 &lt;code&gt;functools.wraps&lt;/code&gt; 来修正这个问题。
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span class="codeH"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="codeH"&gt;  &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter. Args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;, kwargs: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="n"&gt;rv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -212,7 +230,8 @@ Exit. Return value: 6
 &lt;p&gt;
 即使用 &lt;code&gt;functools.wraps&lt;/code&gt; 来装饰 &lt;code&gt;wrapper&lt;/code&gt; 。此时 &lt;code&gt;print(area)&lt;/code&gt; 的结果为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;function area at 0x10e8371b8&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&amp;lt;function area at 0x10e8371b8&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 函数的名称能够正确显示。
@@ -226,7 +245,8 @@ Exit. Return value: 6
 &lt;p&gt;
 以上例子中 &lt;code&gt;trace&lt;/code&gt; 这个装饰器在使用时不接受参数。如果想传入参数，如传入被装饰函数的名称，可以这么做：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -251,7 +271,8 @@ Exit. Return value: 6
 &lt;p&gt;
 程序的运行结果为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Enter area. Args: (2, 3), kwargs: {}
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;Enter area. Args: (2, 3), kwargs: {}
 area called
 Exit area. Return value: 6
 &lt;/pre&gt;&lt;/div&gt;
@@ -266,7 +287,8 @@ Exit area. Return value: 6
 &lt;p&gt;
 这里其实包含了两个步骤。 &lt;code&gt;@trace('area')&lt;/code&gt; 等价于：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'area'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'area'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="nd"&gt;@dec&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;area&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -283,14 +305,16 @@ Exit area. Return value: 6
 &lt;p&gt;
 装饰器可以叠加使用，如：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@dec1&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@dec1&lt;/span&gt;
 &lt;span class="nd"&gt;@dec2&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;&lt;span class="k"&gt;pass&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 等价的代码为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;&lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;&lt;span class="k"&gt;pass&lt;/span&gt;
 &lt;span class="n"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dec2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dec1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;

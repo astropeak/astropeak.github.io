@@ -10,7 +10,7 @@
 #+END_COMMENT
 
 装饰器的语法为 ~@dec_name~ ，置于函数定义之前。如：
-#+begin_src python :results output
+#+begin_src python :results output 
 import atexit
 
 @atexit.register
@@ -52,9 +52,9 @@ foo = Foo()
     print('Goodbye!')
   goodbye = atexit.register(goodbye)
   #+end_src
-  以上是使用装饰器的两种写法。第一种写法比较简洁，第二种写法更加直观，二者在作用上完全等价。
+  这两种写法在作用上完全等价。
   
-  从中也可看出，装饰器实际上是一个函数（或callable），其输入、返回值为：
+  从第二种写法，更容易看出装饰器的原理。装饰器实际上是一个函数（或callable），其输入、返回值为：
   
   |        | 说明                   | 示例中的对应 |
   |--------+------------------------+--------------|
@@ -64,12 +64,12 @@ foo = Foo()
   返回值会被赋值给原来指向输入函数的变量，如示例中的 ~goodbye~ 。此时变量 ~goodbye~ 将指向装饰器的返回值，而不是原来的函数定义。返回值一般为一个函数，这个函数是在输入参数函数添加了一些额外操作的版本。
 
   如下面这个装饰器对原始函数添加了一个操作：每次调用这个函数时，打印函数的输入参数及返回值。
-  #+begin_src python :results output
+  #+begin_src python  :results output
   def trace(func):
-    def wrapper(*args, **kwargs):
-      print('Enter. Args: %s, kwargs: %s' % (args, kwargs))
-      rv = func(*args, **kwargs)
-      print('Exit. Return value: %s' % (rv))
+    def wrapper(*args, **kwargs): #N#
+      print('Enter. Args: %s, kwargs: %s' % (args, kwargs)) #N#
+      rv = func(*args, **kwargs) #N#
+      print('Exit. Return value: %s' % (rv)) #N#
       return rv
 
     return wrapper
@@ -81,11 +81,9 @@ foo = Foo()
 
   area(2, 3)
   #+end_src
-
-  #+RESULTS:
-  : Enter. Args: (2, 3), kwargs: {}
-  : area called
-  : Exit. Return value: 6
+  1. *1* ：新函数
+  2. *2*, *4* ： 打印输入参数，打印返回值
+  3. *3* ：调用原函数
 
   程序的运行结果为：
   #+BEGIN_SRC text
@@ -93,8 +91,7 @@ foo = Foo()
   area called
   Exit. Return value: 6
   #+END_SRC
-
-  也可以将以上打印输入参数及返回值的语句直接写在 ~area~ 函数里，如：
+  如果不使用装饰器，则必须将以上打印输入参数及返回值的语句直接写在 ~area~ 函数里，如：
   #+begin_src python :results output
   def area(height, width):
     print('Enter. Args: %s, %s' % (height, width))
@@ -117,7 +114,7 @@ foo = Foo()
      #+end_src
      
      #+BEGIN_QUOTE
-     一个装饰器实际上定义了一种可重复使用的操作。
+     一个装饰器实际上定义了一种可重复使用的操作
      #+END_QUOTE
   2. 函数的功能更单纯
      
@@ -125,7 +122,7 @@ foo = Foo()
      因此函数可以写地更小。
 
      #+BEGIN_QUOTE
-     使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数。
+     使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数
      #+END_QUOTE
 
 
@@ -138,10 +135,10 @@ foo = Foo()
 
   可以通过 ~functools.wraps~ 来修正这个问题。
   #+begin_src python :results output
-  from functools import wraps
+  from functools import wraps #H#
 
   def trace(func):
-    @wraps(func)
+    @wraps(func) #H#
     def wrapper(*args, **kwargs):
       print('Enter. Args: %s, kwargs: %s' % (args, kwargs))
       rv = func(*args, **kwargs)

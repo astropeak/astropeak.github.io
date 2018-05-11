@@ -68,7 +68,79 @@
 .highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
 .highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */
 
+.linenr {
+    display:none;
+}
 
+.highlight.show-linenr .linenr {
+    color: #c0bab2;
+    /* font-style:italic; */
+    font-size:0.8em;
+    display:inline;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.numberCircle {
+  border-radius: 40%;
+  behavior: url(PIE.htc);
+  /* remove if you don't care about IE8 */
+  /* width: 36px; */
+  /* height: 36px; */
+  padding: 0 0.3em;
+  background: #712012;
+  /* background: #fff; */
+  border: 1px solid #712012;
+  color: #e9e6e0;
+  text-align: center;
+  font-size: 0.4em;
+
+  position:relative;
+  top:-0.3em;
+}
+
+.highlight .codeH {
+    background-color:#c9c6c0;
+    width:100%;
+    display:inline;
+}
 pre {
     background: #e9e6e0;
+}
+
+.highlight.show-linenr pre{
+    padding-left: 0.2em;
+}
+
+.highlight+.org-ol {
+    list-style: none;
+    padding-left:0;
+    /* background-color:red; */
+    font-size:0.95em
+}
+
+.highlight+.org-ol b{
+  border-radius: 40%;
+  behavior: url(PIE.htc);
+  /* remove if you don't care about IE8 */
+  /* width: 36px; */
+  /* height: 36px; */
+  padding: 0 0.3em;
+  background: #712012;
+  /* background: #fff; */
+  border: 1px solid #712012;
+  color: #e9e6e0;
+  text-align: center;
+  font-size: 0.4em;
+
+  position:relative;
+  top:-0.3em;
+
 }

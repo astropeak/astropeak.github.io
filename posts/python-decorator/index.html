@@ -50,7 +50,8 @@
                 <p>
 装饰器的语法为 <code>@dec_name</code> ，置于函数定义之前。如：
 </p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">atexit</span>
+<div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">atexit</span>
 
 <span class="nd">@atexit.register</span>
 <span class="k">def</span> <span class="nf">goodbye</span><span class="p">():</span>
@@ -65,7 +66,8 @@
 <p>
 程序的运行结果是：
 </p>
-<div class="highlight"><pre><span></span>Script end here
+<div class="highlight"><pre>
+<span></span>Script end here
 Goodbye!
 </pre></div>
 <p>
@@ -75,7 +77,8 @@ Goodbye!
 <p>
 另一个常见的例子是 <code>@property</code> ，装饰类的成员函数，将其转换为一个描述符。
 </p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+<div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
   <span class="nd">@property</span>
   <span class="k">def</span> <span class="nf">attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">'attr called'</span><span class="p">)</span>
@@ -90,23 +93,25 @@ Goodbye!
 <p>
 语句块
 </p>
-<div class="highlight"><pre><span></span><span class="nd">@atexit.register</span>
+<div class="highlight"><pre>
+<span></span><span class="nd">@atexit.register</span>
 <span class="k">def</span> <span class="nf">goodbye</span><span class="p">():</span>
   <span class="k">print</span><span class="p">(</span><span class="s1">'Goodbye!'</span><span class="p">)</span>
 </pre></div>
 <p>
 等价于
 </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">goodbye</span><span class="p">():</span>
+<div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">goodbye</span><span class="p">():</span>
   <span class="k">print</span><span class="p">(</span><span class="s1">'Goodbye!'</span><span class="p">)</span>
 <span class="n">goodbye</span> <span class="o">=</span> <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">goodbye</span><span class="p">)</span>
 </pre></div>
 <p>
-以上是使用装饰器的两种写法。第一种写法比较简洁，第二种写法更加直观，二者在作用上完全等价。
+这两种写法在作用上完全等价。
 </p>
 
 <p>
-从中也可看出，装饰器实际上是一个函数（或callable），其输入、返回值为：
+从第二种写法，更容易看出装饰器的原理。装饰器实际上是一个函数（或callable），其输入、返回值为：
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -140,11 +145,12 @@ Goodbye!
 <p>
 如下面这个装饰器对原始函数添加了一个操作：每次调用这个函数时，打印函数的输入参数及返回值。
 </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, kwargs: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
-    <span class="n">rv</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">'Exit. Return value: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">rv</span><span class="p">))</span>
+<div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"></span>  <span class="numberCircle">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, kwargs: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle">2</span>
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle">3</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Exit. Return value: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">rv</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle">4</span>
     <span class="k">return</span> <span class="n">rv</span>
 
   <span class="k">return</span> <span class="n">wrapper</span>
@@ -156,19 +162,30 @@ Goodbye!
 
 <span class="n">area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
-
+<ol class="org-ol">
+<li>
+<b>1</b> ：新函数
+</li>
+<li>
+<b>2</b>, <b>4</b> ： 打印输入参数，打印返回值
+</li>
+<li>
+<b>3</b> ：调用原函数
+</li>
+</ol>
 <p>
 程序的运行结果为：
 </p>
-<div class="highlight"><pre><span></span>Enter. Args: (2, 3), kwargs: {}
+<div class="highlight"><pre>
+<span></span>Enter. Args: (2, 3), kwargs: {}
 area called
 Exit. Return value: 6
 </pre></div>
-
 <p>
-也可以将以上打印输入参数及返回值的语句直接写在 <code>area</code> 函数里，如：
+如果不使用装饰器，则必须将以上打印输入参数及返回值的语句直接写在 <code>area</code> 函数里，如：
 </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+<div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
   <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
   <span class="k">print</span><span class="p">(</span><span class="s1">'area called'</span><span class="p">)</span>
   <span class="n">rv</span> <span class="o">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
@@ -187,14 +204,15 @@ Exit. Return value: 6
 <p>
 如对于一个新的函数 <code>foo</code> ，装饰器 <code>trace</code> 可以直接拿来使用，而无须在函数内部重复写两条 <code>print</code> 语句。
 </p>
-<div class="highlight"><pre><span></span><span class="nd">@trace</span>
+<div class="highlight"><pre>
+<span></span><span class="nd">@trace</span>
 <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
   <span class="k">return</span> <span class="s1">'return value'</span>
 </pre></div>
 
 <blockquote>
 <p>
-一个装饰器实际上定义了一种可重复使用的操作。
+一个装饰器实际上定义了一种可重复使用的操作
 </p>
 </blockquote>
 </li>
@@ -207,7 +225,7 @@ Exit. Return value: 6
 
 <blockquote>
 <p>
-使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数。
+使用装饰器，相当于将两个小函数组合起来，组成功能更强大的函数
 </p>
 </blockquote>
 </li>
@@ -222,7 +240,8 @@ Exit. Return value: 6
 <p>
 以上例子中有一个缺陷，函数 <code>area</code> 被 <code>trace</code> 装饰后，其名称变为 <code>wrapper</code> ，而非 <code>area</code> 。 <code>print(area)</code> 的结果为：
 </p>
-<div class="highlight"><pre><span></span>&lt;function wrapper at 0x10df45668&gt;
+<div class="highlight"><pre>
+<span></span>&lt;function wrapper at 0x10df45668&gt;
 </pre></div>
 <p>
 <code>wrapper</code> 这个名称来源于 <code>trace</code> 中定义的 <code>wrapper</code> 函数。
@@ -231,10 +250,11 @@ Exit. Return value: 6
 <p>
 可以通过 <code>functools.wraps</code> 来修正这个问题。
 </p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<div class="highlight"><pre>
+<span class="codeH"><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span> <span class="c1"></span></span>
 
 <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-  <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="codeH">  <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="c1"></span></span>
   <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">'Enter. Args: </span><span class="si">%s</span><span class="s1">, kwargs: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -252,7 +272,8 @@ Exit. Return value: 6
 <p>
 即使用 <code>functools.wraps</code> 来装饰 <code>wrapper</code> 。此时 <code>print(area)</code> 的结果为：
 </p>
-<div class="highlight"><pre><span></span>&lt;function area at 0x10e8371b8&gt;
+<div class="highlight"><pre>
+<span></span>&lt;function area at 0x10e8371b8&gt;
 </pre></div>
 <p>
 函数的名称能够正确显示。
@@ -266,7 +287,8 @@ Exit. Return value: 6
 <p>
 以上例子中 <code>trace</code> 这个装饰器在使用时不接受参数。如果想传入参数，如传入被装饰函数的名称，可以这么做：
 </p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 
 <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
   <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -291,7 +313,8 @@ Exit. Return value: 6
 <p>
 程序的运行结果为：
 </p>
-<div class="highlight"><pre><span></span>Enter area. Args: (2, 3), kwargs: {}
+<div class="highlight"><pre>
+<span></span>Enter area. Args: (2, 3), kwargs: {}
 area called
 Exit area. Return value: 6
 </pre></div>
@@ -306,7 +329,8 @@ Exit area. Return value: 6
 <p>
 这里其实包含了两个步骤。 <code>@trace('area')</code> 等价于：
 </p>
-<div class="highlight"><pre><span></span><span class="n">dec</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s1">'area'</span><span class="p">)</span>
+<div class="highlight"><pre>
+<span></span><span class="n">dec</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s1">'area'</span><span class="p">)</span>
 <span class="nd">@dec</span>
 <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
@@ -323,14 +347,16 @@ Exit area. Return value: 6
 <p>
 装饰器可以叠加使用，如：
 </p>
-<div class="highlight"><pre><span></span><span class="nd">@dec1</span>
+<div class="highlight"><pre>
+<span></span><span class="nd">@dec1</span>
 <span class="nd">@dec2</span>
 <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span><span class="k">pass</span>
 </pre></div>
 <p>
 等价的代码为：
 </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span><span class="k">pass</span>
+<div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span><span class="k">pass</span>
 <span class="n">foo</span> <span class="o">=</span> <span class="n">dec2</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
 <span class="n">foo</span> <span class="o">=</span> <span class="n">dec1</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
 </pre></div>
