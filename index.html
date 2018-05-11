@@ -158,17 +158,20 @@ Goodbye!
   <span class="k">print</span><span class="p">(</span><span class="s1">'area called'</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
 
-<span class="n">area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle">5</span>
 </pre></div>
 <ol class="org-ol">
 <li>
-<b>1</b> ：新函数
+<b>1</b> ：新函数，这个函数将作为装饰器的返回值
 </li>
 <li>
-<b>2</b>, <b>4</b> ： 打印输入参数，打印返回值
+<b>2</b>, <b>4</b> ： 打印输入参数、返回值
 </li>
 <li>
 <b>3</b> ：调用原函数
+</li>
+<li>
+<b>5</b> ：此时 <code>area</code> 实际上是 <b>1</b> 处定义的 <code>wrapper</code> 函数
 </li>
 </ol>
 <p>
