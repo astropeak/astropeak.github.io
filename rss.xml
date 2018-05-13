@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Fri, 11 May 2018 10:06:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python 装饰器（Decorator）</title><link>https://astropeak.github.io/posts/python-decorator/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Astropeak</title><link>https://astropeak.github.io/</link><description>Astropeak's blogs.</description><atom:link href="https://astropeak.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:astropeak@gmail.com"&gt;Astropeak&lt;/a&gt; </copyright><lastBuildDate>Sun, 13 May 2018 08:16:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python 装饰器（Decorator）</title><link>https://astropeak.github.io/posts/python-decorator/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 装饰器的语法为 &lt;code&gt;@dec_name&lt;/code&gt; ，置于函数定义之前。如：
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;
@@ -127,6 +127,7 @@ Goodbye!
 &lt;/li&gt;
 &lt;li&gt;&lt;b&gt;2&lt;/b&gt;, &lt;b&gt;4&lt;/b&gt; ： 打印输入参数、返回值。这是这个装饰器所定义的操作
 &lt;/li&gt;
+
 &lt;li&gt;&lt;b&gt;3&lt;/b&gt; ：调用原函数
 &lt;/li&gt;
 &lt;li&gt;&lt;b&gt;5&lt;/b&gt; ：此时 &lt;code&gt;area&lt;/code&gt; 实际上是 &lt;b&gt;1&lt;/b&gt; 处定义的 &lt;code&gt;wrapper&lt;/code&gt; 函数
@@ -329,7 +330,8 @@ Exit area. Return value: 6
 &lt;/div&gt;</description><category>python</category><guid>https://astropeak.github.io/posts/python-decorator/</guid><pubDate>Thu, 10 May 2018 01:52:53 GMT</pubDate></item><item><title>Python描述符（Descriptor）</title><link>https://astropeak.github.io/posts/python-descriptor/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 先看一个例子，@property。被@property修饰的成员函数，将变为一个描述符。这是最简单的创建描述符的方式。
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Foo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
   &lt;span class="nd"&gt;@property&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'getting attr'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -345,7 +347,8 @@ Exit area. Return value: 6
 但当它被 &lt;code&gt;@property&lt;/code&gt; 修饰后，这个成员函数将不再是一个函数，而变为一个描述符。 &lt;code&gt;bar&lt;/code&gt; 是一个未被修饰的成员函数。
  &lt;code&gt;type(Foo.attr)&lt;/code&gt; 与 &lt;code&gt;type(Foo.bar)&lt;/code&gt; 的结果分别为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;type 'property'&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&amp;lt;type 'property'&amp;gt;
 &amp;lt;type 'instancemethod'&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
@@ -355,7 +358,8 @@ Exit area. Return value: 6
 &lt;p&gt;
 此时 &lt;code&gt;attr&lt;/code&gt; 将无法再被调用，当尝试调用它时，语句 &lt;code&gt;foo.attr()&lt;/code&gt; 将抛出错误：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;TypeError: 'str' object is not callable
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;TypeError: 'str' object is not callable
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 让我们来理解这个错误。
@@ -364,18 +368,21 @@ Exit area. Return value: 6
 &lt;p&gt;
 首先来看 &lt;code&gt;foo.attr&lt;/code&gt; 的值：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;attr value
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;attr value
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 其类型 &lt;code&gt;type(foo.attr)&lt;/code&gt; ：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;str
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
  &lt;code&gt;foo.attr&lt;/code&gt; 的类型为 &lt;code&gt;str&lt;/code&gt; ，因此便有了以上的错误，一个 &lt;code&gt;str&lt;/code&gt; 对象无法被调用。其值为'attr value'，正好是原始 &lt;code&gt;attr&lt;/code&gt; 函数的返回值。
 因此语句 &lt;code&gt;foo.attr&lt;/code&gt; 实际上触发了原始 &lt;code&gt;attr&lt;/code&gt; 函数的调用，并且将函数的返回值作为其值。实际上语句 &lt;code&gt;print(foo.attr)&lt;/code&gt; 的输出为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;getting attr
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;getting attr
 attr value
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
@@ -447,10 +454,18 @@ attr value
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;
-先来看一个自定义的描述符的实现。
+如果一个类实现了以上成员函数，则它便是一个描述符类，其实例对象便是一个描述符
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyDescriptor&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/blockquote&gt;
+
+
+&lt;p&gt;
+下面是一个自定义的描述符的实现。
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyDescriptor&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__get__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -475,7 +490,8 @@ attr value
 &lt;p&gt;
 &lt;code&gt;print(foo.attr)&lt;/code&gt; 的输出为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;get called
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;get called
 None
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
@@ -485,7 +501,8 @@ None
 &lt;p&gt;
 foo.attr = 'new value' 的输出为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set called
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;set called
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 可见当为 &lt;code&gt;attr&lt;/code&gt; 设置一个新值时， &lt;code&gt;MyDescriptor&lt;/code&gt; 的 &lt;code&gt;__set__&lt;/code&gt; 函数被调用。
@@ -494,17 +511,19 @@ foo.attr = 'new value' 的输出为：
 &lt;p&gt;
 再运行 &lt;code&gt;print(foo.attr)&lt;/code&gt; ，输出为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;get called
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;get called
 new value
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
-新值已被设置。
+可见新值已被设置。
 &lt;/p&gt;
 
 &lt;p&gt;
 &lt;code&gt;del foo.attr&lt;/code&gt; 的输出为：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;delete called
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;delete called
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
 可见当为删除属性 &lt;code&gt;attr&lt;/code&gt; 时， &lt;code&gt;MyDescriptor&lt;/code&gt; 的  &lt;code&gt;__delete__&lt;/code&gt;  函数被调用。
@@ -513,7 +532,8 @@ new value
 &lt;p&gt;
 再执行 &lt;code&gt;print(foo.attr)&lt;/code&gt; ， &lt;code&gt;AttributeError&lt;/code&gt; 被抛出：
 &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;get called
+&lt;div class="highlight"&gt;&lt;pre&gt;
+&lt;span&gt;&lt;/span&gt;get called
 Traceback (most recent call last):
   File "&amp;lt;stdin&amp;gt;", line 1, in &amp;lt;module&amp;gt;
   File "1.py", line 6, in __get__
@@ -521,7 +541,7 @@ Traceback (most recent call last):
 AttributeError: 'MyDescriptor' object has no attribute 'data'
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;
-属性 &lt;code&gt;attr&lt;/code&gt; 已被删除。
+可见属性 &lt;code&gt;attr&lt;/code&gt; 已被删除。
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -600,7 +620,12 @@ AttributeError: 'MyDescriptor' object has no attribute 'data'
 &lt;/table&gt;
 
 &lt;p&gt;
-&lt;code&gt;__delete__(self, obj)&lt;/code&gt; 函数的self和obj参数的意义同 &lt;code&gt;__get__&lt;/code&gt; 。&lt;/p&gt;
+&lt;code&gt;__delete__(self, obj)&lt;/code&gt; 函数的self和obj参数的意义同 &lt;code&gt;__get__&lt;/code&gt; 。
+&lt;/p&gt;
+
+&lt;p&gt;
+（全文完）
+&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description><category>python</category><guid>https://astropeak.github.io/posts/python-descriptor/</guid><pubDate>Wed, 09 May 2018 10:10:38 GMT</pubDate></item><item><title>Python对象属性查询</title><link>https://astropeak.github.io/posts/python-object-attribute-lookup/</link><dc:creator>Astropeak</dc:creator><description>&lt;p&gt;
 对于语句x.y，即获取对象x的y属性，其查询过程为：

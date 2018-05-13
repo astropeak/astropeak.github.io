@@ -74,7 +74,12 @@ attr value
   | ~__set__(self, obj, value)~ | 设置属性的值 | None     | 否       |
   | ~__delete__(self, obj)~     | 删除属性     | None     | 否        |
 
-先来看一个自定义的描述符的实现。
+#+BEGIN_QUOTE
+如果一个类实现了以上成员函数，则它便是一个描述符类，其实例对象便是一个描述符
+#+END_QUOTE
+
+
+下面是一个自定义的描述符的实现。
 #+begin_src python :results output
 class MyDescriptor:
   def __init__(self):
@@ -114,7 +119,7 @@ set called
 get called
 new value
 #+END_SRC
-新值已被设置。
+可见新值已被设置。
 
 ~del foo.attr~ 的输出为：
 #+BEGIN_SRC text
@@ -131,7 +136,7 @@ Traceback (most recent call last):
     return self.data
 AttributeError: 'MyDescriptor' object has no attribute 'data'
 #+END_SRC
-属性 ~attr~ 已被删除。
+可见属性 ~attr~ 已被删除。
 
 * 参数意义
   ~__get__(self, obj, type)~ 函数各个参数的意义为：
@@ -147,3 +152,5 @@ AttributeError: 'MyDescriptor' object has no attribute 'data'
   | value | 属性的新值                 | 'new value'             |
  
   ~__delete__(self, obj)~ 函数的self和obj参数的意义同 ~__get__~ 。
+
+  （全文完）

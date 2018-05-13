@@ -167,6 +167,7 @@ Goodbye!
 <li>
 <b>2</b>, <b>4</b> ： 打印输入参数、返回值。这是这个装饰器所定义的操作
 </li>
+
 <li>
 <b>3</b> ：调用原函数
 </li>
@@ -383,7 +384,8 @@ Exit area. Return value: 6
                         <p>
 先看一个例子，@property。被@property修饰的成员函数，将变为一个描述符。这是最简单的创建描述符的方式。
 </p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+<div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
   <span class="nd">@property</span>
   <span class="k">def</span> <span class="nf">attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">'getting attr'</span><span class="p">)</span>
@@ -399,7 +401,8 @@ Exit area. Return value: 6
 但当它被 <code>@property</code> 修饰后，这个成员函数将不再是一个函数，而变为一个描述符。 <code>bar</code> 是一个未被修饰的成员函数。
  <code>type(Foo.attr)</code> 与 <code>type(Foo.bar)</code> 的结果分别为：
 </p>
-<div class="highlight"><pre><span></span>&lt;type 'property'&gt;
+<div class="highlight"><pre>
+<span></span>&lt;type 'property'&gt;
 &lt;type 'instancemethod'&gt;
 </pre></div>
 <p>
@@ -409,7 +412,8 @@ Exit area. Return value: 6
 <p>
 此时 <code>attr</code> 将无法再被调用，当尝试调用它时，语句 <code>foo.attr()</code> 将抛出错误：
 </p>
-<div class="highlight"><pre><span></span>TypeError: 'str' object is not callable
+<div class="highlight"><pre>
+<span></span>TypeError: 'str' object is not callable
 </pre></div>
 <p>
 让我们来理解这个错误。
@@ -418,18 +422,21 @@ Exit area. Return value: 6
 <p>
 首先来看 <code>foo.attr</code> 的值：
 </p>
-<div class="highlight"><pre><span></span>attr value
+<div class="highlight"><pre>
+<span></span>attr value
 </pre></div>
 <p>
 其类型 <code>type(foo.attr)</code> ：
 </p>
-<div class="highlight"><pre><span></span>str
+<div class="highlight"><pre>
+<span></span>str
 </pre></div>
 <p>
  <code>foo.attr</code> 的类型为 <code>str</code> ，因此便有了以上的错误，一个 <code>str</code> 对象无法被调用。其值为'attr value'，正好是原始 <code>attr</code> 函数的返回值。
 因此语句 <code>foo.attr</code> 实际上触发了原始 <code>attr</code> 函数的调用，并且将函数的返回值作为其值。实际上语句 <code>print(foo.attr)</code> 的输出为：
 </p>
-<div class="highlight"><pre><span></span>getting attr
+<div class="highlight"><pre>
+<span></span>getting attr
 attr value
 </pre></div>
 <p>
@@ -491,10 +498,18 @@ attr value
 </tr>
 </tbody>
 </table>
+<blockquote>
 <p>
-先来看一个自定义的描述符的实现。
+如果一个类实现了以上成员函数，则它便是一个描述符类，其实例对象便是一个描述符
 </p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyDescriptor</span><span class="p">:</span>
+</blockquote>
+
+
+<p>
+下面是一个自定义的描述符的实现。
+</p>
+<div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">MyDescriptor</span><span class="p">:</span>
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
   <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
@@ -519,7 +534,8 @@ attr value
 <p>
 <code>print(foo.attr)</code> 的输出为：
 </p>
-<div class="highlight"><pre><span></span>get called
+<div class="highlight"><pre>
+<span></span>get called
 None
 </pre></div>
 <p>
@@ -529,7 +545,8 @@ None
 <p>
 foo.attr = 'new value' 的输出为：
 </p>
-<div class="highlight"><pre><span></span>set called
+<div class="highlight"><pre>
+<span></span>set called
 </pre></div>
 <p>
 可见当为 <code>attr</code> 设置一个新值时， <code>MyDescriptor</code> 的 <code>__set__</code> 函数被调用。
@@ -538,17 +555,19 @@ foo.attr = 'new value' 的输出为：
 <p>
 再运行 <code>print(foo.attr)</code> ，输出为：
 </p>
-<div class="highlight"><pre><span></span>get called
+<div class="highlight"><pre>
+<span></span>get called
 new value
 </pre></div>
 <p>
-新值已被设置。
+可见新值已被设置。
 </p>
 
 <p>
 <code>del foo.attr</code> 的输出为：
 </p>
-<div class="highlight"><pre><span></span>delete called
+<div class="highlight"><pre>
+<span></span>delete called
 </pre></div>
 <p>
 可见当为删除属性 <code>attr</code> 时， <code>MyDescriptor</code> 的  <code>__delete__</code>  函数被调用。
@@ -557,7 +576,8 @@ new value
 <p>
 再执行 <code>print(foo.attr)</code> ， <code>AttributeError</code> 被抛出：
 </p>
-<div class="highlight"><pre><span></span>get called
+<div class="highlight"><pre>
+<span></span>get called
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
   File "1.py", line 6, in __get__
@@ -565,7 +585,7 @@ Traceback (most recent call last):
 AttributeError: 'MyDescriptor' object has no attribute 'data'
 </pre></div>
 <p>
-属性 <code>attr</code> 已被删除。
+可见属性 <code>attr</code> 已被删除。
 </p>
 </div>
 </div>
@@ -626,7 +646,12 @@ AttributeError: 'MyDescriptor' object has no attribute 'data'
 </tr></tbody>
 </table>
 <p>
-<code>__delete__(self, obj)</code> 函数的self和obj参数的意义同 <code>__get__</code> 。</p>
+<code>__delete__(self, obj)</code> 函数的self和obj参数的意义同 <code>__get__</code> 。
+</p>
+
+<p>
+（全文完）
+</p>
 </div>
 </div>
                 </div>
