@@ -740,12 +740,15 @@ body {
 }
 
 #mainContent {
-    margin: 4rem auto !important;
-    max-width: 680px !important;
-    padding: 0  !important;
+    margin: 0 auto !important;
+    max-width: 710px !important;
+    padding: 0 15px  !important;
     width: auto !important;
-    position:relative !important;
-    left:15px !important;
+    /* position:relative !important; */
+    /* left:15px !important; */
+    background: #faf9f5 !important;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05) !important;
+
 
 }
 
@@ -760,20 +763,20 @@ body {
 /*--------------------------------------------------------------
   5.1 Header
 --------------------------------------------------------------*/
-.nav-bar {
+.nav-bar , #header{
     background: #fAf9f5 !important;
     border-bottom: 1px solid #d9d6d0 !important;
     position: relative !important;
     width: 100% !important;
 }
 
-.nav-bar:after {
+.nav-bar:after , #header:after{
     clear: both !important;
     content: "" !important;
     display: block !important;
 }
 
-.site-branding h1 {
+.site-branding h1,  #blogTitle h1{
     color: #a09a92 !important;
     font-family: "Playfair Display" !important;
     font-size: 36px !important;
@@ -992,21 +995,21 @@ a:active {
   6.2 Menus
 --------------------------------------------------------------*/
 /* Main site navigation (most code is within media queries) */
-.site-navigation {
+.site-navigation, #navigator{
     border-top: none !important;
 }
 
-.site-navigation ul {
+.site-navigation ul,  #navigator ul{
     list-style: none !important;
     margin: 0 !important;
     padding: 0 5px 0 0 !important;
 }
 
-.site-navigation .menu li {
+.site-navigation .menu li,  #navigator .menu li{
     margin: 0 !important;
 }
 
-.site-navigation a {
+.site-navigation a, #navigator a{
     display: block !important;
     padding: 1.5rem 1.5rem !important;
     text-decoration: none !important;
@@ -1362,23 +1365,25 @@ article .title-block h1 a {
         max-width: none !important;
         min-width: 320px !important;
         /* padding: 0 15px !important; */
-        position:relative !important;
-        left:15px !important;
+        /* position:relative !important; */
+        /* left:15px !important; */
 
+        background: #faf9f5 !important;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05) !important;
 
     }
 
-    .site-branding {
-        display: none !important;
+    .site-branding,  #blogTitle{
+        /* display: none !important; */
     }
 
     /* Use a condensed mobile menu */
-    .site-navigation {
+    .site-navigation,  #navigator{
         background: #26231e !important;
         width: 100% !important;
     }
 
-    .site-navigation a {
+    .site-navigation a, #navigator a{
         color: #cacabc !important;
     }
 
@@ -1400,7 +1405,7 @@ article .title-block h1 a {
     }
 
     /* Style menu items a bit differently */
-    .site-navigation .menu li {
+    .site-navigation .menu li,  #navigator .menu li{
         border-top: 1px solid #787065 !important;
         display: block !important;
         text-align: left !important;
@@ -1487,7 +1492,7 @@ article .title-block h1 a {
 --------------------------------------------------------------*/
 @media only screen and (min-width: 641px) {
 
-    .site-branding {
+    .site-branding ,#blogTitle {
         float: left !important;
         margin: 0.75rem 1rem 1rem 1.5rem !important;
     }
@@ -1497,7 +1502,7 @@ article .title-block h1 a {
         display: none !important;
     }
 
-    .site-navigation {
+    .site-navigation, #navigator {
         display: block !important;
         float: right !important;
         font-size: 16px !important;
@@ -1506,20 +1511,20 @@ article .title-block h1 a {
         position: relative !important;
     }
 
-    .site-navigation .menu > li {
+    .site-navigation .menu > li,  #navigator .menu>li{
         display: inline-block !important;
         line-height: 1 !important;
         margin: 0.25rem 0 !important;
         position: relative !important;
     }
 
-    .site-navigation li a {
+    .site-navigation li a,  #navigator li a{
         border-bottom: 2px solid transparent !important;
         color: #787065 !important;
         padding: 1rem 1rem 0.8rem !important;
     }
 
-    .site-navigation a:hover {
+    .site-navigation a:hover,  #navigator a:hover{
         border-bottom: 2px solid #999 !important;
         color: #363431 !important;
     }
@@ -1583,7 +1588,7 @@ article .title-block h1 a {
 --------------------------------------------------------------*/
 @media only screen and (min-width: 860px) {
 
-    .site-branding {
+    .site-branding,  #blogTitle{
         margin-left: 4rem !important;
     }
 
@@ -1757,7 +1762,12 @@ pre {
 
 /* adapt for cnblogs */
 #sideBar {
-    display:none;
+    /* display:none; */
+    max-width:240px !important;
+    padding:10px !important;
+    margin: 4rem auto !important;
+    background: #faf9f5 !important;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05) !important;
 }
 
 #home {
@@ -1767,8 +1777,115 @@ pre {
 
 #main {
     clear:none !important;
-    margin: 4rem auto !important;
-    max-width: 710px !important;
+    margin: 0 auto !important;
+    max-width: 1060px !important;
     min-width:unset !important;
+    background: #f2f1ed !important;
+}
 
+/* sidebars blocks */
+#sideBar .newsItem, #sideBar #blog-calendar, #sideBar #sidebar_postcategory, #sideBar #sidebar_search {
+    display:none !important;
+}
+
+/* block below comment form */
+#ad_t2, .c_ad_block{
+    display:none !important;
+}
+
+div.commentform textarea.comment_textarea,  div.commentform input {
+    border: 2px solid #f2f1ed !important;
+    font-size: 1em !important;
+    border-radius:5px;
+    color:black !important;
+    padding:2px 5px !important;
+}
+
+
+div.commentform input {
+    width:unset !important;
+}
+
+.comment_btn {
+    height: unset !important;
+    background: #ebe7e1 !important;
+}
+
+.postTitle {
+    /* font-style: normal !important; */
+    /* font-size: 130% !important; */
+
+    clear: both !important;
+    line-height: 1.6 !important;
+
+    color: #a09a92 !important;
+    font-family: "Playfair Display", Georgia, serif !important;
+    font-size: 160% !important;
+    /* font-size: 4.4rem !important; */
+    font-style: normal !important;
+    margin: 1em 0 0.5em !important;
+}
+
+#navigator {
+    /* background: #ebe7e1 !important; */
+    /* border:none !important; */
+
+}
+#navigator li {
+    /* margin: 0.5em 0.5em !important; */
+}
+
+#blogTitle h2{
+    display:none !important;
+}
+
+#blogTitle h1 a, #blogTitle h2 {
+    text-shadow:none !important;
+    font-style:normal !important;
+    margin-left:1em !important;
+}
+
+#navList a:link, #navList a:visited, #navList a:active {
+    text-shadow:none !important;
+}
+
+#navList{
+    margin: 0 !important;
+}
+
+#navigator {
+    /* height:50px !important; */
+}
+.postCon {
+    width:100% !important;
+    word-break: keep-all !important;
+}
+
+.dayTitle {
+    display:none !important;
+}
+
+#blogTitle{
+    /* float:left !important; */
+    /* margin: 0.75rem 1rem 1rem 1.5rem !important; */
+    height:unset !important;
+    clear:none !important;
+}
+
+#navigator{
+    /* float:right !important; */
+    /* margin: 0.75rem 1rem 0.5rem 1.0rem !important; */
+    /* display:block !important; */
+    /* position:relative !important; */
+    /* border-top:none !important; */
+    background:none !important;
+    clear:none !important;
+
+
+}
+
+#navigator ul{
+    /* position: relative !important; */
+    /* top:-1.5em !important; */
+    font-size: 1.1em !important;
 }
