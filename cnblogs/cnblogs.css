@@ -741,8 +741,8 @@ body {
 
 #mainContent {
     margin: 0 auto !important;
-    max-width: 710px !important;
-    padding: 0 15px  !important;
+    max-width: 780px !important;
+    padding: 0 50px  !important;
     width: auto !important;
     /* position:relative !important; */
     /* left:15px !important; */
@@ -1364,7 +1364,7 @@ article .title-block h1 a {
         margin: 0 !important;
         max-width: none !important;
         min-width: 320px !important;
-        /* padding: 0 15px !important; */
+        padding: 0 15px !important;
         /* position:relative !important; */
         /* left:15px !important; */
 

@@ -1,0 +1,18 @@
+* Nikola command to convert org file to html file
+  'emacs', '--batch', '-l', '/Users/astropeak/Dropbox/project/astropeak.github.io/plugins/orgmode/init.el', '--eval', '(nikola-html-export "/Users/astropeak/Dropbox/project/astropeak.github.io/posts/python-decorator.org" "/Users/astropeak/Dropbox/project/astropeak.github.io/cache/posts/python-decorator.html"
+
+  - 'nikola-html-export' is the function to convert an org file to a html file
+  - the html file is saved in the 'cache' directory.
+
+* how to post blog to cnblogs
+  Just copy the content of 'cache/posts/xxx.html' to cnblogs site.
+  Then add title and description, tags in the cnblogs web interface.
+
+  Latter may be a function can be used to do this automatically.
+
+  The css file for cnblogs is 'cnblogs/cnblogs.css'. After this css file is set to the cnblogs system, the display is just like my github page. Quite well!
+
+  
+* 得想一种能够显示补充知识的构造
+  显示在方框里。
+  这样用于显示与文章有关，但又与主题无关的话题。

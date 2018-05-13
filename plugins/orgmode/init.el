@@ -96,7 +96,7 @@ See: http://orgmode.org/worg/org-contrib/babel/languages.html and
 http://pygments.org/docs/lexers/ for adding new languages to the mapping.")
 
 (defun mylog (msg)
-  (with-current-buffer (find-file-literally "e.log")
+  (with-current-buffer (find-file-literally "../e.log")
     (goto-char (point-max))
     (insert msg)
     (insert "\n")
