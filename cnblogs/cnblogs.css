@@ -1729,7 +1729,7 @@ pre {
 .highlight.show-linenr pre{
     padding-left: 0.2em !important;
 }
-.highlight+.org-ol {
+.highlight+.org-ol, .highlight+.org-ul{
     list-style: none !important;
     padding-left:0 !important;
     /* background-color:red; */
@@ -1737,13 +1737,13 @@ pre {
     color:#706a62 !important;
 
 }
-.highlight+.org-ol li {
+.highlight+.org-ol li, .highlight+.org-ul li {
     list-style: none !important;
 
 
 }
 
-.highlight+.org-ol strong{
+.highlight+.org-ol strong, .highlight+.org-ul strong{
   border-radius: 40% !important;
   behavior: url(PIE.htc) !important;
   /* remove if you don't care about IE8 */

@@ -1,18 +1,39 @@
-class Descriptor:
-  def __init__(self):
-    self.data = None
-  def __get__(self, obj, type):
-    print('get called')
-    return self.data
-  def __set__(self, obj, value):
-    print('set called')
-    self.data = value
-  def __delete__(self, obj):
-    print('delete called')
-    del self.data
+from threading import Thread
+from time import sleep
+import Queue
 
-class Foo:
-  attr = Descriptor()
+def T(dir, pattern):
+  "This is just a stub that simulate a dir operation"
+  sleep(1)
+  print('searching pattern %s in dir %s' % (pattern, dir))
 
-foo = Foo()
+dirs = ['a/b/c', 'a/b/d', 'b/c', 'd/f']
+pattern = 'hello'
 
+def wrapper():
+  while True:
+    try:
+      dir = taskQueue.get(True, 0.1) #N#
+      if dir is None:
+        taskQueue.put(dir)
+        break
+
+      T(dir, pattern)
+    except Queue.Empty:
+        continue
+
+taskQueue = Queue.Queue()
+threadsPool = [Thread(target=wrapper) for i in range(2)] #N#
+
+for thread in threadsPool: #N#
+  thread.start()
+
+for dir in dirs:
+  taskQueue.put(dir) #N#
+
+taskQueue.put(None)
+
+
+for thread in threadsPool:
+  thread.join()
+print('Main thread end here')
