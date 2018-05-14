@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python：怎样用线程将任务并行化？ | Astropeak</title>
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(../../assets/fonts/libretto-icons.eot);
+            src:url(../../assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(../../assets/fonts/libretto-icons.woff) format("woff"),
+            url(../../assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(../../assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="../../assets/css/libretto_styles.css">
+<link href="../../assets/css/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
+        </div>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="../../archive.html">Archive</a></li>
+                    <li><a href="../../categories/">Tags</a></li>
+                    <li><a href="../../rss.xml">RSS feed</a></li>
+                    <li><a href="http://github.com/astropeak">Github</a></li>
+            </ul></nav></header><!-- Page Header --><div class="title-block post-format-icon-pin">
+        <div class="entry-meta">
+            <span class="posted-on">
+                Posted on <a href="." rel="bookmark">May 13, 2018</a>
+            </span>
+        </div>
+        <h1>Python：怎样用线程将任务并行化？</h1>
+    </div>
+
+        <!-- Page Content -->
+    <div class="site-content" role="main">
+        <article class="format-standard libretto-long-form"><div class="entry-content">
+                <p>
+如果待处理任务满足：
+</p>
+<ol class="org-ol">
+<li>可拆分，即任务可以被拆分为多个子任务，或任务是多个相同的任务的集合；
+</li>
+<li>任务不是CPU密集型的，如任务涉及到较多IO操作（如文件读取和网络数据处理）
+</li>
+</ol>
+<p>
+则使用多线程将任务并行运行，能够提高运行效率。
+</p>
+
+<p>
+假设待处理的任务为：有很多文件目录，对于每个文件目录，搜索匹配一个给定字符串的文件的所有行（相当于是实现grep的功能）。
+则此处子任务为：给定一个目录，搜索匹配一个给定字符串的文件的所有行。总的任务为处理所有目录。
+</p>
+
+<p>
+将子任务表示为一个函数T，如下所示：
+</p>
+<div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+  <span class="o">...</span>
+</pre></div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">为每个子任务创建一个线程</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+要实现并行化，最简单的方法是为每一个子任务创建一个thread，thread处理完后退出。
+</p>
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="s2">"This is just a stub that simulate a dir operation"</span>
+  <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a/b/c'</span><span class="p">,</span> <span class="s1">'a/b/d'</span><span class="p">,</span> <span class="s1">'b/c'</span><span class="p">,</span> <span class="s1">'d/f'</span><span class="p">]</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s1">'hello'</span>
+
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+  <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">))</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+  <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'Main thread end here'</span><span class="p">)</span>
+</pre></div>
+
+<ul class="org-ul">
+<li>
+<b>1</b> ：创建一个Thread对象，target参数指定这个thread待执行的函数，args参数指定target函数的输入参数
+</li>
+<li>
+<b>2</b> ：启动这个thread。 T(dir, pattern)将被调用
+</li>
+<li>
+<b>3</b> ：等待，直到这个thread结束。整个for循环表示主进程会等待所有子线程结束后再退出
+</li>
+</ul>
+<p>
+程序的运行结果为：
+</p>
+<div class="highlight"><pre>
+<span></span>searching pattern hello in dir a/b/csearching pattern hello in dir d/f
+searching pattern hello in dir b/c
+ searching pattern hello in dir a/b/d
+
+Main thread end here
+</pre></div>
+<p>
+可以看出由于线程是并行运行的，部分输出会交叠。但主进程的打印总在最后。
+</p>
+
+
+
+<p>
+以上例子中对于每个dir都需要创建一个thread。如果dir的数目较多，则会创建太多的thread，影响运行效率。
+较好的方式是限制总线程的数目。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">限制线程数目</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+可以使用信号量（semaphore）来限制同时运行的最大线程数目。如下所示：
+</p>
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">BoundedSemaphore</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="s2">"This is just a stub that simulate a dir operation"</span>
+  <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+
+<span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a/b/c'</span><span class="p">,</span> <span class="s1">'a/b/d'</span><span class="p">,</span> <span class="s1">'b/c'</span><span class="p">,</span> <span class="s1">'d/f'</span><span class="p">]</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s1">'hello'</span>
+
+<span class="n">maxjobs</span> <span class="o">=</span> <span class="n">BoundedSemaphore</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+<span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="n">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+  <span class="n">maxjobs</span><span class="o">.</span><span class="n">release</span><span class="p">()</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+  <span class="n">maxjobs</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+  <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">))</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+  <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> 
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'Main thread end here'</span><span class="p">)</span>
+</pre></div>
+
+<ul class="org-ul">
+<li>
+<b>1</b> ：创建一个有2个资源的信号量。一个信号量代表总的可用的资源数目，这里表示同时运行的最大线程数目为2。
+</li>
+<li>
+<b>2</b> ：在线程结束时释放资源。运行在子线程中。
+</li>
+<li>
+<b>3</b> ：在启动一个线程前，先获取一个资源。如果当前已经有2个线程在运行，则会阻塞，直到其中一个线程结束。
+运行在主线程中。
+</li>
+</ul>
+<p>
+当限制了最大运行线程数为2后，由于只有2个线程同时运行，程序的输出更加有序，几乎总是为：
+</p>
+<div class="highlight"><pre>
+<span></span>searching pattern hello in dir a/b/c
+searching pattern hello in dir a/b/d
+searching pattern hello in dir b/c
+searching pattern hello in dir d/f
+Main thread end here
+</pre></div>
+
+
+<p>
+以上实现中为每个子任务创建一个线程进行处理，然后通过信号量限制同时运行的线程的数目。如果子任务很多，这种方法会创建太多的线程。更好的方法 是使用线程池。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">使用线程池（Thread Pool）</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+即预先创建一定数目的线程，形成一个线程池。每个线程持续处理多个子任务（而不是处理一个就退出）。这样做的好处是：创建的线程数目会比较固定。
+</p>
+
+<p>
+那么，每个线程处理哪些子任务呢？一种方法为：预先将所有子任务均分给每个线程。如下所示：
+</p>
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="s2">"This is just a stub that simulate a dir operation"</span>
+  <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a/b/c'</span><span class="p">,</span> <span class="s1">'a/b/d'</span><span class="p">,</span> <span class="s1">'b/c'</span><span class="p">,</span> <span class="s1">'d/f'</span><span class="p">]</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s1">'hello'</span>
+
+<span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">dirs</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+  <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+    <span class="n">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+
+<span class="n">threadsPool</span> <span class="o">=</span> <span class="p">[</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+  <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">dirs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">pattern</span><span class="p">)),</span>
+  <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">dirs</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">pattern</span><span class="p">)),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'Main thread end here'</span><span class="p">)</span>
+</pre></div>
+<ul class="org-ul">
+<li>
+<b>1</b> ：这个函数能够处理多个dir，将作为线程的target函数
+</li>
+<li>
+<b>2</b> ：创建一个有2个线程的线程池。并事先分配子任务给每个线程。线程1处理前两个dir，线程2处理后两个dir
+</li>
+<li>
+<b>3</b> ：启动线程池中所有线程
+</li>
+</ul>
+<p>
+程序的输出结果为：
+</p>
+<div class="highlight"><pre>
+<span></span>searching pattern hello in dir a/b/csearching pattern hello in dir b/c
+
+searching pattern hello in dir d/f
+ searching pattern hello in dir a/b/d
+Main thread end here
+</pre></div>
+
+
+<p>
+这种方法存在以下问题：
+</p>
+<ol class="org-ol">
+<li>子任务分配可能不均。导致每个线程运行时间差别可能较大，则整体运行时长可能被拖长
+</li>
+<li>只能处理所有子任务都预先知道的情况，无法处理子任务实时出现的情况
+</li>
+</ol>
+<p>
+如果有一种方法，能够让线程知道当前所有的待处理子任务，线程一旦空闲，便可以从中获取一个任务进行处理，则以上问题都可以解决。任务队列便是解决方案。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">使用消息队列</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+可以使用Queue实现一个任务队列，用于在线程间传递子任务。主线程将所有待处理子任务放置在队列中，子线程从队列中获取子任务去处理。
+如下所有（注：以下代码只运行于Python 2，因为Queue只存在于Python 2） ：
+</p>
+
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">Queue</span>
+
+<span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="s2">"This is just a stub that simulate a dir operation"</span>
+  <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a/b/c'</span><span class="p">,</span> <span class="s1">'a/b/d'</span><span class="p">,</span> <span class="s1">'b/c'</span><span class="p">,</span> <span class="s1">'d/f'</span><span class="p">]</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s1">'hello'</span>
+
+<span class="n">taskQueue</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+
+<span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="nb">dir</span> <span class="o">=</span> <span class="n">taskQueue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+      <span class="n">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+	<span class="k">continue</span>
+
+<span class="n">threadsPool</span> <span class="o">=</span> <span class="p">[</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wrapper</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span> 
+  <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>  <span class="c1"></span>  <span class="numberCircle unselectable">4</span>
+
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+  <span class="n">taskQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">5</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Main thread end here'</span><span class="p">)</span>
+</pre></div>
+<ul class="org-ul">
+<li>
+<b>1</b> ：创建一个任务队列
+</li>
+<li>
+<b>2</b> ：子线程从任务队列中获取一个任务。第一个参数为True，表示如果没有任务，会等待。第二个参数表示最长等待0.1秒
+如果在0.1秒后仍然没有任务，则会抛出一个Queue.Empty的异常
+</li>
+<li>
+<b>3</b> ：创建有2个线程的线程池。注意target函数wrapper没有任何参数
+</li>
+<li>
+<b>4</b> ：启动所有线程
+</li>
+<li>
+<b>5</b> ：主线程将所有子任务放置在任务队列中，以供子线程获取处理。由于子线程已经被启动，则子线程会立即获取到任务并处理
+</li>
+</ul>
+<p>
+程序的输出为：
+</p>
+<div class="highlight"><pre>
+<span></span>searching pattern hello in dir a/b/c
+searching pattern hello in dir a/b/d
+searching pattern hello in dir b/c
+ searching pattern hello in dir d/f
+</pre></div>
+
+<p>
+从中可以看出主进程的打印结果并没有出来，程序会一直运行，而不退出。这个问题的原因是：目前的实现中，子线程为一个无限循环，
+因此其永远不会终止。因此，必须有一种机制来结束子进程。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">终止子进程</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+一种简单方法为，可以在任务队列中放置一个特殊元素，作为终止符。当子线程从任务队列中获取这个终止符后，便自行退出。如下所示，使用None作为终止符。
+</p>
+<div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">Queue</span>
+
+<span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+  <span class="s2">"This is just a stub that simulate a dir operation"</span>
+  <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s1">'searching pattern </span><span class="si">%s</span><span class="s1"> in dir </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">dir</span><span class="p">))</span>
+
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a/b/c'</span><span class="p">,</span> <span class="s1">'a/b/d'</span><span class="p">,</span> <span class="s1">'b/c'</span><span class="p">,</span> <span class="s1">'d/f'</span><span class="p">]</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="s1">'hello'</span>
+
+<span class="n">taskQueue</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="nb">dir</span> <span class="o">=</span> <span class="n">taskQueue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nb">dir</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"></span>  <span class="numberCircle unselectable">1</span>
+	<span class="n">taskQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">2</span>
+	<span class="k">break</span>
+
+      <span class="n">T</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+	<span class="k">continue</span>
+
+<span class="n">threadsPool</span> <span class="o">=</span> <span class="p">[</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wrapper</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+  <span class="n">taskQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+
+<span class="n">taskQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span> <span class="c1"></span>  <span class="numberCircle unselectable">3</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threadsPool</span><span class="p">:</span>
+  <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Main thread end here'</span><span class="p">)</span>
+</pre></div>
+<ul class="org-ul">
+<li>
+<b>1</b> ：如果任务为终止符（此处为None），则退出
+</li>
+<li>
+<b>2</b> ：将这个终止符重新放回任务队列。因为只有一个终止符，如果不放回，则其它子线程获取不到，也就无法终止
+</li>
+<li>
+<b>3</b> ：将终止符放在任务队列。注意必须放置在末尾，否则终止符后的任务无法得到处理
+</li>
+</ul>
+<p>
+修改过后，程序能够正常运行，主进程能够正常退出了。
+</p>
+<div class="highlight"><pre>
+<span></span>searching pattern hello in dir a/b/csearching pattern hello in dir a/b/d
+
+searching pattern hello in dir b/c
+ searching pattern hello in dir d/f
+Main thread end here
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">总结</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+要并行化处理子任务，最简单的方法是为每个子任务创建一个线程去处理。这种方法的缺点是：如果子任务非常多，则需要创建的线程数目会非常多。
+并且同时运行的线程数目也会较多。通过使用信号量来限制同时运行的线程数目，通过线程池来避免创建过多的线程。
+</p>
+
+<p>
+与每个线程处理一个任务不同，线程池中每个线程会处理多个子任务。这带来一个问题：每个子线程如何知道要处理哪些子任务。
+一种方法是预先将所有子任务均分给每个线程，而更灵活的方法则是通过任务队列，由子线程自行决定要处理哪些任务。
+</p>
+
+<p>
+使用线程池时，线程主函数通常实现为一个无限循环，因此需要考虑如何终止线程。可以在任务队列中放置一个终止符来告诉线程没有更多任务，
+因此其可以终止。
+</p>
+</div>
+</div>
+            </div>
+        </article>
+</div>
+
+        <!-- Tag Section -->
+    <div class="site-content navigation-post">
+        <div class="tag-head">Tags</div>
+        <div class="tag-list">
+                <a href="../../categories/python/">python</a>
+        </div>
+    </div>
+
+        <!-- Post Navigation links -->
+<nav class="site-content navigation-post" role="navigation"><div class="previous">
+            <a href="../python-decorator/" rel="prev">
+                <span class="meta-nav">Older Post</span>Python 装饰器（Decorator）
+            </a>
+        </div>
+</nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
+</div>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
+</div>
+    </footer>
+</body>
+</html>

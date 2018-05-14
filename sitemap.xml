@@ -23,7 +23,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/archive.html</loc>
-  <lastmod>2018-05-10T01:52:00Z</lastmod>
+  <lastmod>2018-05-13T11:37:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/</loc>
@@ -67,7 +67,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/index-1.html</loc>
-  <lastmod>2018-05-10T01:52:00Z</lastmod>
+  <lastmod>2018-05-13T11:37:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/</loc>
@@ -208,6 +208,10 @@
  <url>
   <loc>https://astropeak.github.io/posts/python-object-attribute/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/posts/python-threading-makes-tasks-parallel/</loc>
+  <lastmod>2018-05-13T11:37:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/posts/python-why-not-use-getter-setter/</loc>
