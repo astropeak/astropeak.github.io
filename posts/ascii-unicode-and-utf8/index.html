@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII、 Unicode 和 UTF8 | Astropeak</title>
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(../../assets/fonts/libretto-icons.eot);
+            src:url(../../assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(../../assets/fonts/libretto-icons.woff) format("woff"),
+            url(../../assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(../../assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="../../assets/css/libretto_styles.css">
+<link href="../../assets/css/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
+        </div>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="../../archive.html">Archive</a></li>
+                    <li><a href="../../categories/">Tags</a></li>
+                    <li><a href="../../rss.xml">RSS feed</a></li>
+                    <li><a href="http://github.com/astropeak">Github</a></li>
+            </ul></nav></header><!-- Page Header --><div class="title-block post-format-icon-pin">
+        <div class="entry-meta">
+            <span class="posted-on">
+                Posted on <a href="." rel="bookmark">May 15, 2018</a>
+            </span>
+        </div>
+        <h1>ASCII、 Unicode 和 UTF8</h1>
+    </div>
+
+        <!-- Page Content -->
+    <div class="site-content" role="main">
+        <article class="format-standard libretto-long-form"><div class="entry-content">
+                <ul class="org-ul">
+<li>ASCII： 英文字母与数字编号的一一对应。每个英文字母对应一个编号。范围0~127
+</li>
+
+<li>Unicode： 全世界所有语言中字符与数字编号的一一对应。也即为存在的每个字符指定一个唯一的编号。范围为0~0x10FFFF。
+</li>
+</ul>
+<p>
+所以，
+</p>
+<blockquote>
+<p>
+ASCII与Unicode是类似的东西，都是为一个字符指定一个唯一的数字编号
+</p>
+</blockquote>
+<p>
+只不过Unicode的范围更大，能够表示更多的字符。
+</p>
+
+<p>
+在计算机的世界里，只有数字，而不会有什么字符。一个字符在计算机看来就是一个数字。ASCII与Unicode就是将字符与数字一一对应起来的映射。比如对于字符'A'，在计算机看来，它就是一个数字65。
+</p>
+
+<p>
+当字符串被写入文件时，也是将字符串中每个字符对应的数字编号保存在文件。
+</p>
+
+<p>
+以上是ASCII和Unicode的相同点。那么，二者有什么区别？
+</p>
+
+<p>
+一个显著的区别是，对于同一段文本，二者保存到文件后占用的字节数不同。对于ASCII，每个数字编号占用一个字节。
+而对于Unicode，每个编号则需要占用3个字节。因此对于同一段文本：'abcd'，采用ASCII格式保存时，文件的大小为4个字节。
+采用Unicode保存时，文件的大小则为12个字节。
+</p>
+
+<p>
+由此也可看出，当待保存文本为纯英文字母时，
+</p>
+<blockquote>
+<p>
+采用Unicode的存储效率太低了
+</p>
+</blockquote>
+
+<p>
+UTF8便是为了解决Unicode存储效率低下而产生的。具体的规则就不讲了，先来看一下UTF8能够达到的效果。
+</p>
+
+<p>
+对于相同的文本：'abcd'，Unicode需要12个字节，而UTF8只需要4个字节（和ASCII一样，达到最优）。
+</p>
+
+<p>
+UTF8之所以可以用一个字节存储英文字母，是因此它使用了变长的编码方式。也即，对于英文字母，它采用一个字节保存这个字符。对于英文字母之后的字符，它采用两个字节保存这个字符。对于再之后的字符，采用三个字节保存。最多采用四个字节保存一个字符。
+</p>
+
+<p>
+所以UTF8对于存储英文字母的高效率来源于对之后字符保存效率的牺牲。这里的合理性在于：如果待保存的文本中字符大多数为英文字母，则存储效率能够提高，因为大多数字符都是采用一个字节保存。
+</p>
+
+<p>
+总结来说，
+</p>
+<blockquote>
+<p>
+UTF8是对Unicode在存储效率上的优化
+</p>
+</blockquote>
+
+
+<p>
+以上便是三者的关系。
+</p>
+
+<p>
+ASCII和Unicode都是为一个字符指定一个唯一的数字编号，Unicode能够表达更多的字符，相当于是ASCII的扩展。Unicode存在存储效率低下的问题，UTF8是在这个方面对Unicode的优化。
+</p>
+            </div>
+        </article>
+</div>
+
+        <!-- Tag Section -->
+    <div class="site-content navigation-post">
+        <div class="tag-head">Tags</div>
+        <div class="tag-list">
+                <a href="../../categories/misc/">misc</a>
+        </div>
+    </div>
+
+        <!-- Post Navigation links -->
+<nav class="site-content navigation-post" role="navigation"><div class="previous">
+            <a href="../python-threading-makes-tasks-parallel/" rel="prev">
+                <span class="meta-nav">Older Post</span>Python：怎样用线程将任务并行化？
+            </a>
+        </div>
+</nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
+</div>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
+</div>
+    </footer>
+</body>
+</html>

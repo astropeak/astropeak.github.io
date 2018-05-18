@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astropeak (old posts, page 2)</title>
+<style>
+        @font-face {
+            font-family: "libretto-icons";
+            src:url(assets/fonts/libretto-icons.eot);
+            src:url(assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
+            url(assets/fonts/libretto-icons.woff) format("woff"),
+            url(assets/fonts/libretto-icons.ttf) format("truetype"),
+            url(assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
+<link rel="stylesheet" href="assets/css/libretto_styles.css">
+<link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header class="nav-bar"><div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://astropeak.github.io/" title="Astropeak" rel="home">Astropeak</a>
+            </h1>
+        </div>
+        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
+                <span class="mobile-site-title">Astropeak</span>
+            </div>
+            <ul class="menu">
+<li><a href="archive.html">Archive</a></li>
+                    <li><a href="categories/">Tags</a></li>
+                    <li><a href="rss.xml">RSS feed</a></li>
+                    <li><a href="http://github.com/astropeak">Github</a></li>
+            </ul></nav></header><div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            Posted on <a href="posts/python-cookbook-readnote-3/" rel="bookmark">July 20, 2017</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/python-cookbook-readnote-3/">Python Cookbook 读书笔记（三）</a></h1>
+                </div>
+                <div class="entry-content">
+                        <div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">chapter 4: Iterators and Generators</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">4.1. Manually Consuming an Iterator, by next(iterator[, default]) function</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'python-cookbook-3rd.org'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">open(filename, …) function will return a iterator of lines in that file</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2">a list object is not an iterator</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3">use the iter(iterable) function to create an iterator given an iterable</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4">the for x in X syntax works both for iterator and list object</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">iterator and iterable</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+An object is said to be iterable if it has the <span class="underline"><span class="underline">iter</span></span> method defined.
+The _<sub>iter</sub>_<sub>()</sub> will reutrn the iterator object.
+</p>
+
+<p>
+An object is said to be a iterator if it has following method defined:
+</p>
+<ol class="org-ol">
+<li>
+<span class="underline"><span class="underline">iter</span></span>: which return itself
+Can be tested the it._<sub>iter</sub>_<sub>()</sub> == it is true
+</li>
+<li>
+<span class="underline"><span class="underline">next</span></span>: return the next value every time it is invoked. 
+</li>
+</ol>
+<p>
+So an iterator is an iterable,  call iter(iterable) to get an iterator.
+</p>
+
+
+<p>
+The iter(iterable) function: 
+it will return 'iterable._<sub>iter</sub>_<sub>()</sub>'
+</p>
+
+
+<p>
+So if obja is an iterable, then iter(obja) equal obja._<sub>iter</sub>() 
+</p>
+<div class="highlight"><pre><span></span><span class="n">obja</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">ia</span> <span class="o">=</span> <span class="n">obja</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+<span class="n">ib</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">obja</span><span class="p">)</span>
+<span class="n">ic</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">ib</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ia</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ib</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ib</span> <span class="ow">is</span> <span class="n">ic</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">ia</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">ib</span><span class="p">))</span>
+</pre></div>
+
+<p>
+if obja is iterator, then iter(obja) and obja is the same object.
+</p>
+
+
+<p>
+A good ref: <a href="http://www.shutupandship.com/2012/01/understanding-python-iterables-and.html">http://www.shutupandship.com/2012/01/understanding-python-iterables-and.html</a>
+</p>
+</div>
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">a example of create a iterable class</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">MyListIter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyListIter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">""" A sample implementation of a list iterator. NOTE: This is just a </span>
+<span class="sd">    demonstration of concept!!! YOU SHOULD NEVER IMPLEMENT SOMETHING LIKE THIS!</span>
+<span class="sd">    Even if you have to (for any reason), there are many better ways to </span>
+<span class="sd">    implement this."""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lst</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+	    <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>         
+	    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lst</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">]</span>
+	<span class="k">else</span><span class="p">:</span>
+	    <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">MyList</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">ia</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'type(a): </span><span class="si">%r</span><span class="s1">, type(ia): </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">ia</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span> 
+	<span class="k">print</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">how does the for in loop works</h3>
+<div class="outline-text-3" id="text-1-3">
+<ol class="org-ol">
+<li>it first get the iterable's iterator object, by calling its _<sub>iter</sub>_<sub>()</sub> method
+</li>
+<li>get the element by invoke the iterator's _<sub>next</sub>_<sub>()</sub> method, and bind the value to the variable.
+</li>
+<li>stop when an 'StopIteration' exception happens.
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">the next(iterator) function</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+it just return iterator._<sub>next</sub>_<sub>()</sub></p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5">the iter(iterable) function</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+it just return iterable._<sub>iter</sub>_<sub>()</sub></p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6">the len(obj) function</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+it just return obj._<sub>len</sub>_<sub>()</sub></p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7">4.2. Delegating Iteration</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+When create a class the with a underline container, just define an _<sub>iter</sub>_<sub>()</sub> method that forward the request to the underlineing container object.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8">4.3. Creating New Iteration Patterns with Generators</h3>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9">what is a generator?</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+a generator is a function that contains at lease one 'yeild' statement.
+</p>
+
+<p>
+Unlike normal function, it's boyd will not be executed when it is be called, instead, it will return a generator object.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10">4.4. Implementing the Iterator Protocol</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+use the generator instead of the <span class="underline"><span class="underline">next</span></span> method, which will be much simple.
+</p>
+
+<p>
+使用yeild 创建一个Tree Node,比使用_<sub>next</sub>_<sub>函数简单多了。</sub></p>
+
+<p>
+yeild from syntax.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11">4.5. Iterating in Reverse, by the reversed(obj) function</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+reversed only  works if the obj
+</p>
+<ul class="org-ul">
+<li>the obj defined a _<sub>reversed</sub>_<sub>()</sub> method. or
+</li>
+<li>the obj's size can be determined.
+</li>
+</ul>
+<p>
+It returns an iterator.
+</p>
+
+<p>
+For example, a file handler returned by the 'open()' function can't be used with the reversed function. to use it, first convert it to a list, then pass it to the reversed() function.
+</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"1.txt"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12">defined a customized  reversed iterator, by define the _<sub>reversed</sub>_<sub>()</sub> method</h3>
+<div class="outline-text-3" id="text-1-12">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CountDown</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span>
+	    <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start</span>
+	    <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">-=</span> <span class="mi">1</span>
+	    <span class="k">return</span> <span class="n">n</span>
+	<span class="k">else</span><span class="p">:</span>
+	    <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+    <span class="k">def</span> <span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">ReversedCountDown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ReversedCountDown</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orig</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">_orig</span> <span class="o">=</span> <span class="n">orig</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">_n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">def</span>  <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orig</span><span class="o">.</span><span class="n">_start</span><span class="p">:</span>
+	    <span class="bp">self</span><span class="o">.</span><span class="n">_n</span> <span class="o">+=</span> <span class="mi">1</span>
+	    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n</span>
+	<span class="k">else</span><span class="p">:</span>
+	    <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+<span class="c1"># if __name__ == '__main__':</span>
+<span class="n">cd</span> <span class="o">=</span> <span class="n">CountDown</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># for a in cd:</span>
+<span class="c1">#     print(a)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">"reversed"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">cd</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+
+<p>
+Implemet the iterator protocal by <span class="underline"><span class="underline">next</span></span> method is a little complex compared  to by  use the yield statement. The differenc is that then the object is … 
+</p>
+
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CountDown</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start</span>
+	<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">n</span>
+	    <span class="n">n</span> <span class="o">-=</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">n</span> <span class="o">&lt;=</span><span class="bp">self</span><span class="o">.</span><span class="n">_start</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">n</span>
+	    <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="n">cd</span> <span class="o">=</span> <span class="n">CountDown</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">cd</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s2">"reversed"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">cd</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13">4.6. Defining Generator Functions with Extra State</h3>
+<div class="outline-text-3" id="text-1-13">
+</div>
+<div id="outline-container-sec-1-13-1" class="outline-4">
+<h4 id="sec-1-13-1">print the surrounding previous lines if pattern matched, by use a generator, implemented by a class</h4>
+<div class="outline-text-4" id="text-1-13-1">
+<p>
+Here previous lines are states.
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">class</span> <span class="nc">HistoryLines</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">histlen</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span>
+	<span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">histlen</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">:</span>
+	    <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+	    <span class="k">yield</span> <span class="n">line</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">hist_lines</span> <span class="o">=</span> <span class="n">HistoryLines</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">hist_lines</span><span class="p">:</span>
+	<span class="k">if</span>  <span class="s1">'wrap'</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+	    <span class="k">for</span> <span class="n">hl</span> <span class="ow">in</span> <span class="n">hist_lines</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
+		<span class="k">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">hl</span><span class="p">)</span>
+</pre></div>
+
+<p>
+Good practice: if you need save some states, then don't use a function to create a generator, use a class.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14">4.7. Taking a Slice of an Iterator</h3>
+<div class="outline-text-3" id="text-1-14">
+</div>
+<div id="outline-container-sec-1-14-1" class="outline-4">
+<h4 id="sec-1-14-1">by use of the itertools.islice(start, end, step) functon</h4>
+<div class="outline-text-4" id="text-1-14-1">
+<p>
+Because we don't know the size of a iterator or a generator, so we can't slice it directly.
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span>  <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span> <span class="k">as</span> <span class="n">slice_iter</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">b</span>  <span class="ow">in</span> <span class="n">slice_iter</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">slice_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+
+<p>
+The result is the  same as my impllemented one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-14-2" class="outline-4">
+<h4 id="sec-1-14-2">a try by me,  works</h4>
+<div class="outline-text-4" id="text-1-14-2">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">slice_iter</span><span class="p">(</span><span class="n">aiter</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">:</span><span class="n">step</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
+	<span class="n">v</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">aiter</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">v</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">b</span>  <span class="ow">in</span> <span class="n">slice_iter</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">slice_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15">4.8. Skipping the First Part of an Iterable, by itertools.dropwhile(test<sub>func</sub>, iterable)</h3>
+<div class="outline-text-3" id="text-1-15">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'#'</span><span class="p">),</span> <span class="n">f</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+
+<p>
+This is different from filtering
+</p>
+
+<p>
+if the position is known, then we can use itertools.islice(iterable, start, None) to drop the first 'start' items.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16">4.9. Iterating Over All Possible Combinations or Permutations</h3>
+<div class="outline-text-3" id="text-1-16">
+<p>
+An important aspect  of itertools module: for complex iteration tasks, it is very likely there is an exist solution.
+</p>
+</div>
+
+<div id="outline-container-sec-1-16-1" class="outline-4">
+<h4 id="sec-1-16-1">create permutations from a iterable collection of items, by itertools.permutations(iterable[, len])</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<p>
+The return value is an iterator
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-16-2" class="outline-4">
+<h4 id="sec-1-16-2">create combinations from a iterable collection of items, by itertools.combinations(iterable, len)</h4>
+<div class="outline-text-4" id="text-1-16-2">
+<p>
+The order of items does not matter
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-16-3" class="outline-4">
+<h4 id="sec-1-16-3">create combinations from a iterable collection of items, by itertools.combinations<sub>with</sub><sub>replacement</sub>(iterable, len), same item can exist more than one times.</h4>
+<div class="outline-text-4" id="text-1-16-3">
+<p>
+The order of items does not matter
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations_with_replacement</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">combinations_with_replacement</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-17" class="outline-3">
+<h3 id="sec-1-17">4.10. Iterating Over the Index-Value Pairs of a Sequence, by enumerate(iterable[, start<sub>index]</sub>)</h3>
+<div class="outline-text-3" id="text-1-17">
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-18" class="outline-3">
+<h3 id="sec-1-18">4.11. Iterating Over Multiple Sequences Simultaneously, by zip(iterable1, iterable2, …), shortest</h3>
+<div class="outline-text-3" id="text-1-18">
+<p>
+The zip function will create an iterator that return tuples: first element from iterable1, second element from iterable2, …
+Should the size of all iterables be the same? =&gt; No, it can be different. the returned size is the same as the shortest size of all iterables.
+</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-19" class="outline-3">
+<h3 id="sec-1-19">Iterating Over Multiple Sequences Simultaneously, by itertools.zip<sub>longest</sub>(iterable1, iterable2, …), longest</h3>
+<div class="outline-text-3" id="text-1-19">
+<p>
+If you want the returned iterator take the longest size, then use zip<sub>longest</sub>. The element value will be None if that  iterable is exzasted.
+</p>
+
+<p>
+From the two functions: zip and zip<sub>longest</sub>, there is a lesson: it better to create different function name, than add a more  parameter.
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+<span class="n">a</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-20" class="outline-3">
+<h3 id="sec-1-20">4.12. Iterating on Items in Separate Containers, by itertools.chain(iterable1, iterable2, …), concat iterables</h3>
+<div class="outline-text-3" id="text-1-20">
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="n">a</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-21" class="outline-3">
+<h3 id="sec-1-21">4.13. Creating Data Processing Pipelines</h3>
+<div class="outline-text-3" id="text-1-21">
+<p>
+This section is about divide  a task to many small pipelines(steps), by use of generator
+Generator is a  producer, for loop is a comsumer.
+</p>
+</div>
+
+
+<div id="outline-container-sec-1-21-1" class="outline-4">
+<h4 id="sec-1-21-1">example: iterate all matched lines from all files in a directory, recursively</h4>
+<div class="outline-text-4" id="text-1-21-1">
+<p>
+相当于把多重QIAN TAO循环给扁平化了。但执行的顺序完全相同。generator确实比较好用。
+</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span> <span class="nf">gen_filenames</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gen_open</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+	<span class="c1"># print('file names: %s' % f)</span>
+	<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+	<span class="k">yield</span> <span class="n">fh</span>
+	<span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">gen_lines</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+	<span class="k">yield from</span> <span class="n">f</span>
+
+<span class="k">def</span> <span class="nf">gen_match</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>  <span class="n">lines</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">v</span>
+
+<span class="n">filenames</span> <span class="o">=</span> <span class="n">gen_filenames</span><span class="p">(</span><span class="s1">'..'</span><span class="p">)</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">gen_open</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">gen_lines</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+<span class="n">matched_lines</span> <span class="o">=</span> <span class="n">gen_match</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s1">'slice'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">matched_lines</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-21-2" class="outline-4">
+<h4 id="sec-1-21-2">[not work]change two embeded for loop to two seperate one by generator</h4>
+<div class="outline-text-4" id="text-1-21-2">
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gen_a</span><span class="p">(</span><span class="n">aiter</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">:</span>
+	<span class="k">yield</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">gen_b</span><span class="p">(</span><span class="n">aiter</span><span class="p">,</span> <span class="n">biter</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-22" class="outline-3">
+<h3 id="sec-1-22">4.14. Flattening a Nested Sequence, by generator, recursively</h3>
+<div class="outline-text-3" id="text-1-22">
+<p>
+Why this function is not included in itertools module?
+</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="k">def</span>  <span class="nf">flatten</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">ignored_types</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+	<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ignored_types</span><span class="p">):</span>
+	    <span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ignored_types</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+	    <span class="k">yield</span> <span class="n">v</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">7</span><span class="p">],</span>  <span class="mi">8</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">"the flattened version"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-23" class="outline-3">
+<h3 id="sec-1-23">yield from just like a for loop</h3>
+<div class="outline-text-3" id="text-1-23">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_a</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+	<span class="k">yield</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">gen_b</span><span class="p">(</span><span class="n">gena</span><span class="p">):</span>
+    <span class="k">yield from</span> <span class="n">gena</span>
+
+<span class="k">def</span> <span class="nf">for_b</span><span class="p">(</span><span class="n">gena</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span>  <span class="ow">in</span> <span class="n">gena</span><span class="p">:</span>
+	<span class="k">yield</span> <span class="n">v</span>
+
+<span class="c1"># the gen_b and for_b works exactly the same, but the yield from is better</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">gen_b</span><span class="p">(</span><span class="n">gen_a</span><span class="p">()):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'the for version'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">for_b</span><span class="p">(</span><span class="n">gen_a</span><span class="p">()):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-24" class="outline-3">
+<h3 id="sec-1-24">4.15. Iterating in Sorted Order Over Merged Sorted Iterables, by heapq.merge(iterable1, iterable2, …)</h3>
+<div class="outline-text-3" id="text-1-24">
+<p>
+the input iterables should in sorted order. then it will create an new iterable of sorted items from all input.
+</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">heapq</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">heapq</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+
+<p>
+The function will only get the needed items into memory. So it better to merge two sorted files.
+</p>
+
+<p>
+Similar  to <code>sorted(itertools.chain(*iterables))</code>, but will not read all content to memory.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-25" class="outline-3">
+<h3 id="sec-1-25">4.16. Replacing Infinite conditional while Loops with an Iterator, by iter(callable, sentinel) function</h3>
+<div class="outline-text-3" id="text-1-25">
+<p>
+invoke the callable UNTIL it returns the sentinel
+</p>
+
+<p>
+Means: repeated invoke the callable, and return its return value, until the return value equal to the sentinel.
+</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">idx</span>
+    <span class="n">idx</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+                </div>
+            </article>
+</div>
+    <!-- Lower Navigation links -->
+    <nav class="site-content navigation-post" role="navigation"><div class="previous">
+                <a href="index-1.html" rel="prev">
+                    <span class="meta-nav">Older Entries</span>                </a>
+            </div>
+            <div class="next">
+                <a href="." rel="next">
+                    <span class="meta-nav">Newer Entries</span>                </a>
+            </div>
+    </nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
+            <aside class="widget"><h2 class="widget-title">Astropeak</h2>
+                <div class="widget-text">Astropeak's blogs.</div>
+            </aside>
+</div>
+    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
+            <p>Contents © 2018         <a href="mailto:astropeak@gmail.com">Astropeak</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </div>
+        <div class="social">
+            <ul class="menu"></ul>
+</div>
+    </footer>
+</body>
+</html>

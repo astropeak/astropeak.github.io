@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://astropeak.github.io/</loc>
-  <lastmod>2018-05-04T12:15:00Z</lastmod>
+  <lastmod>2018-05-15T10:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/2015/</loc>
@@ -23,11 +23,11 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/archive.html</loc>
-  <lastmod>2018-05-13T11:37:00Z</lastmod>
+  <lastmod>2018-05-15T10:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/</loc>
-  <lastmod>2018-05-04T12:15:00Z</lastmod>
+  <lastmod>2018-05-15T10:15:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/emacs/</loc>
@@ -50,6 +50,10 @@
   <lastmod>2018-05-04T12:15:00Z</lastmod>
  </url>
  <url>
+  <loc>https://astropeak.github.io/categories/misc/</loc>
+  <lastmod>2018-05-15T10:15:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://astropeak.github.io/categories/nlp/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
  </url>
@@ -67,7 +71,11 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/index-1.html</loc>
-  <lastmod>2018-05-13T11:37:00Z</lastmod>
+  <lastmod>2018-05-15T10:12:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/index-2.html</loc>
+  <lastmod>2018-05-15T10:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/</loc>
@@ -140,6 +148,10 @@
  <url>
   <loc>https://astropeak.github.io/pages/theming/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/posts/ascii-unicode-and-utf8/</loc>
+  <lastmod>2018-05-15T10:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/posts/bag-of-words-and-ngram-model/</loc>
