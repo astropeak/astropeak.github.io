@@ -1,0 +1,117 @@
+#+BEGIN_COMMENT
+.. title: 使用 Tensorflow 建模，你需要理解的三个概念
+.. slug: tensorflow-key-concepts
+.. date: 2018-05-18 10:24:58 UTC+08:00
+.. tags: tensorflow
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+#+END_COMMENT
+
+使用Tensorflow的基本套路是，先建立一个问题的模型，然后求解模型的参数。
+建立模型要涉及到占位符（Placeholder）和变量（Variable），求解模型参数涉及优化器。
+因此，只要理解了这三个概念，我们便可以使用Tensorflow构建自己的模型并求解模型的参数。
+
+* 占位符（Placeholder）
+  使用 tf.placeholder 来创建一个占位符，创建时需要指定它的类型。
+  比如我们要建立一个数学公式 2x^2 + 3x + 1，此时就需要将x定义为一个占位符。这样我们才能在求解公式的值时，动态地指定x的值。
+ 
+  #+begin_src python :results output
+  import tensorflow as tf
+
+  x = tf.placeholder(tf.int32) #N# #H#
+  y = 2*x*x + 3*x + 1 #N##H#
+
+  sess = tf.Session()
+  r = sess.run(y, feed_dict={x:2}) #N##H#
+  #+end_src
+  - *1* ：创建一个占位符，其类型为int32
+  - *2* ：定义数学公式。其中自变量为x，函数值为y
+  - *3* ：求解给定自变量x为2时，函数值y的值。通过 ~feed_dict~ 参数指定一个占位符的值。
+    运行过后，r的值为15（2*2^2 + 3*2 + 1）
+
+  占位符有点像编程语言中变量的概念，但关键不同为：占位符不会保存值，当指定一个值给它后，它并不会将这个值保存起来，以便下次使用。而是你每次使用它时，都必须为它指定一个新值。而变量则会将上次的值一直保存，下次使用时你不必再指定新值，它会直接使用上次保存的值。
+
+  一个数学公式中的自变量正好需要这样：它本身没有状态（即不会保存上次的值），你每次求解公式的值时，都必须指定自变量的值。所以，占位符的作用为：
+  
+  #+begin_quote
+  占位符提供了一种给模型指定自变量值的机制
+  #+end_quote
+
+  一个基本规则为，在使用Tensorflow建模时，将模型的自变量和因变量定义为占位符，这就对了。
+
+  如果一个模型中包含了占位符，则在求解这个模型值时，Tensorflow会强制必须指定所有占位符的值，通过 ~feed_dict~ 。如上面例子所示，在求解y时，必须指定x的值。
+
+  如果没有指定x的值，如下所示：
+  #+begin_src python :results output
+  r = sess.run(y)
+  #+end_src
+  则会报一个错误：
+  #+BEGIN_SRC text
+  You must feed a value for placeholder tensor \'Placeholder\' with dtype
+  #+END_SRC
+
+** 关于 ~feed_dict~ 参数
+   这个参数指定所有占位符的值。为一个dict。每个key指定的一个占位符的值。key值为占位符本身，如例子中的x，对应的值为占位符的值。
+
+   当模型中包含占位符时，则在求解模型值时，必须使用 ~feed_dict~ 来指定所有占位符的值。
+
+** 关于 sess.run
+   这个函数用于求解一个结点的值。
+    
+
+
+* 变量（Variable）
+  使用tf.Variable创建一个变量。变量跟编程语言中的变量的概念非常相似，表示一个存储空间，能够保存一个值。变量在使用必须有一个初始值，你可以改变一个变量的值。
+
+  使用Tensoflow创建机器学习模型时，变量被用于表示模型的参数。一般来说，训练机器学习模型的过程，就是寻找模型参数的过程。在训练开始前，都会给参数一个初始值，然后逐渐修改变量的值，使得模型能够逼近训练数据。
+
+  以下是使用变量的一个例子。
+  #+begin_src python :results output
+  a = tf.Variable(3, name='my_a')
+  b = tf.constant(3)
+  c = a*b
+
+  # a variable must be initilized
+  init = tf.global_variables_initializer()
+  self.sess.run(init)
+  r = self.sess.run(c) # r=9
+  #+end_src
+
+  变量在使用必须被初始化，通过调用 tf.global_variables_initializer()
+  来实现。如果没有初始化，则会报下面的错误。
+
+  #+BEGIN_SRC text
+  Attempting to use uninitialized value my_a
+  #+END_SRC
+
+** 修改变量的值
+   通过变量的 assign
+   函数来修改它的值。如下所示。
+   #+begin_src python :results output
+   a = tf.Variable(3, name='my_a')
+   init = tf.global_variables_initializer()
+   sess.run(init)
+   assert(sess.run(a) == 3)
+
+   assign_to_4 = a.assign(4)
+   # Before run the operation, a is still 3. This is a little hard to understand
+   assert(sess.run(a) == 3)
+   r = sess.run(assign_to_4)
+   assert(sess.run(a) == 4)
+   #+end_src
+
+   但在训练机器学习模型时，并不需要自己修改变量的值，优化器会自动修改。
+
+
+* 优化器（Optimizer）
+  当使用占位符和变量构造好模型及目标函数后，便可使用优化来求解模型的参数。使用占位符表示模型的自变量和因变量（即模型的X，Y），使用变量表示模型的参数。
+
+
+* 总结
+  使用Tenforflow建模时，将模型的自变量和因变量定义为占位符（Placeholder），这样我们可以动态地指定自变量和因变量的值。
+
+  将模型的参数指定为变量（Variable），并给定一个初值，这样Tensorflow在求解模型参数过程中，其可以不断修改参数的值，直到模型能够和数据点吻合。
+
+  优化器是Tensorflow求解模型的工具，梯度下降是一种常用的优化器。
