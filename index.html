@@ -39,6 +39,203 @@
             <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
                     <div class="entry-meta">
                         <span class="posted-on">
+                            Posted on <a href="posts/tensorflow-key-concepts/" rel="bookmark">May 18, 2018</a>
+                        </span>
+                    </div>
+                    <h1><a href="posts/tensorflow-key-concepts/">使用 Tensorflow 建模，你需要理解的三个概念</a></h1>
+                </div>
+                <div class="entry-content">
+                        <p>
+使用Tensorflow的基本套路是，先建立一个问题的模型，然后求解模型的参数。
+建立模型要涉及到占位符（Placeholder）和变量（Variable），求解模型参数涉及优化器。
+因此，只要理解了这三个概念，我们便可以使用Tensorflow构建自己的模型并求解模型的参数。
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">占位符（Placeholder）</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+使用 tf.placeholder 来创建一个占位符，创建时需要指定它的类型。
+比如我们要建立一个数学公式 2x<sup>2</sup> + 3x + 1，此时就需要将x定义为一个占位符。这样我们才能在求解公式的值时，动态地指定x的值。
+</p>
+
+<div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+
+<span class="codeH"><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> <span class="c1"> </span></span>  <span class="numberCircle unselectable">1</span>
+<span class="codeH"><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"></span></span>  <span class="numberCircle unselectable">2</span>
+
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="codeH"><span class="n">r</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span> <span class="c1"></span></span>  <span class="numberCircle unselectable">3</span>
+</pre></div>
+<ul class="org-ul">
+<li>
+<b>1</b> ：创建一个占位符，其类型为int32
+</li>
+<li>
+<b>2</b> ：定义数学公式。其中自变量为x，函数值为y
+</li>
+<li>
+<b>3</b> ：求解给定自变量x为2时，函数值y的值。通过 <code>feed_dict</code> 参数指定一个占位符的值。
+运行过后，r的值为15（2*2<sup>2</sup> + 3*2 + 1）
+</li>
+</ul>
+<p>
+占位符有点像编程语言中变量的概念，但关键不同为：占位符不会保存值，当指定一个值给它后，它并不会将这个值保存起来，以便下次使用。而是你每次使用它时，都必须为它指定一个新值。而变量则会将上次的值一直保存，下次使用时你不必再指定新值，它会直接使用上次保存的值。
+</p>
+
+<p>
+一个数学公式中的自变量正好需要这样：它本身没有状态（即不会保存上次的值），你每次求解公式的值时，都必须指定自变量的值。所以，占位符的作用为：
+</p>
+
+<blockquote>
+<p>
+占位符提供了一种给模型指定自变量值的机制
+</p>
+</blockquote>
+
+<p>
+一个基本规则为，在使用Tensorflow建模时，将模型的自变量和因变量定义为占位符，这就对了。
+</p>
+
+<p>
+如果一个模型中包含了占位符，则在求解这个模型值时，Tensorflow会强制必须指定所有占位符的值，通过 <code>feed_dict</code> 。如上面例子所示，在求解y时，必须指定x的值。
+</p>
+
+<p>
+如果没有指定x的值，如下所示：
+</p>
+<div class="highlight"><pre>
+<span></span><span class="n">r</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+<p>
+则会报一个错误：
+</p>
+<div class="highlight"><pre>
+<span></span>You must feed a value for placeholder tensor \'Placeholder\' with dtype
+</pre></div>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">关于 <code>feed_dict</code> 参数</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+这个参数指定所有占位符的值。为一个dict。每个key指定的一个占位符的值。key值为占位符本身，如例子中的x，对应的值为占位符的值。
+</p>
+
+<p>
+当模型中包含占位符时，则在求解模型值时，必须使用 <code>feed_dict</code> 来指定所有占位符的值。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">关于 sess.run</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+这个函数用于求解一个结点的值。
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">变量（Variable）</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+使用tf.Variable创建一个变量。变量跟编程语言中的变量的概念非常相似，表示一个存储空间，能够保存一个值。变量在使用必须有一个初始值，你可以改变一个变量的值。
+</p>
+
+<p>
+使用Tensoflow创建机器学习模型时，变量被用于表示模型的参数。一般来说，训练机器学习模型的过程，就是寻找模型参数的过程。在训练开始前，都会给参数一个初始值，然后逐渐修改变量的值，使得模型能够逼近训练数据。
+</p>
+
+<p>
+以下是使用变量的一个例子。
+</p>
+<div class="highlight"><pre>
+<span></span><span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'my_a'</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span>
+
+<span class="c1"># a variable must be initilized</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># r=9</span>
+</pre></div>
+
+<p>
+变量在使用必须被初始化，通过调用 tf.global<sub>variables</sub><sub>initializer</sub>()
+来实现。如果没有初始化，则会报下面的错误。
+</p>
+
+<div class="highlight"><pre>
+<span></span>Attempting to use uninitialized value my_a
+</pre></div>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">修改变量的值</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+通过变量的 assign
+函数来修改它的值。如下所示。
+</p>
+<div class="highlight"><pre>
+<span></span><span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'my_a'</span><span class="p">)</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">assign_to_4</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Before run the operation, a is still 3. This is a little hard to understand</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">assign_to_4</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+<p>
+但在训练机器学习模型时，并不需要自己修改变量的值，优化器会自动修改。
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">优化器（Optimizer）</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+当使用占位符和变量构造好模型及目标函数后，便可使用优化来求解模型的参数。使用占位符表示模型的自变量和因变量（即模型的X，Y），使用变量表示模型的参数。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">总结</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+使用Tenforflow建模时，将模型的自变量和因变量定义为占位符（Placeholder），这样我们可以动态地指定自变量和因变量的值。
+</p>
+
+<p>
+将模型的参数指定为变量（Variable），并给定一个初值，这样Tensorflow在求解模型参数过程中，其可以不断修改参数的值，直到模型能够和数据点吻合。
+</p>
+
+<p>
+优化器是Tensorflow求解模型的工具，梯度下降是一种常用的优化器。</p>
+</div>
+</div>
+                </div>
+            </article>
+</div>
+        <div class="site-content">
+            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
+                    <div class="entry-meta">
+                        <span class="posted-on">
                             Posted on <a href="posts/ascii-unicode-and-utf8/" rel="bookmark">May 15, 2018</a>
                         </span>
                     </div>
@@ -2867,111 +3064,6 @@ Below is a general function that map a file to a byte array.
 <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'EEF'</span>
 </pre></div>
 </div>
-</div>
-</div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/python-why-not-use-getter-setter/" rel="bookmark">July 24, 2017</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/python-why-not-use-getter-setter/">无需为Python类添加 getter 和 setter</a></h1>
-                </div>
-                <div class="entry-content">
-                        <p>
-Getter 和 setter在java中被广泛使用。一个好的java编程准则为：将所有属性设置为私有的，同时为属性写getter和setter函数以供外部使用。 这样做的好处是属性的具体实现被隐藏，当未来需要修改时，只需要修改getter 和 setter即可，而不用修改代码中所有引用这个属性的地方。可能做的修改为：
-</p>
-<ul class="org-ul">
-<li>在获取或设置属性时打一条日志
-</li>
-<li>设置属性时，对值对进检查
-</li>
-<li>设置发生时， 修改设置的值
-</li>
-<li>获取属性时，动态地计算值
-</li>
-</ul>
-<p>
-可谓是好处多多，getter和setter为变量访问提供了灵活的方式。
-</p>
-
-<p>
-但python中情况却不同，因为对象属性访问的机制不同。java中需要为变量写getter和setter的原因为：当我们写这样的表达式 <code>person.name</code> 来获取一个 <code>person</code> 对象的 <code>name</code> 属性时，这个表达式的意义是固定的，它就是获取这个属性，而不可能触发一个函数的调用。但对于python, 这个表达式即可能是直接获取一个属性，也可能会调用一个函数。这取决 <code>Person</code> 类的实现方式。也就是说，python的对象属性访问的语法，天然就提供了getter和setter的功能。
-</p>
-
-<p>
-由于这个区别，我们没有必要在python中为每个对象的属性写getter和setter。最开始时，我们总是将属性作为一个直接可访问的属性。当后续需要对这个属性的访问进行一些控制时，我们可以将其修改为函数触发式属性。在修改前后，调用这个对象属性的代码不用修改，因为还是使用相同的语法来访问这个属性。
-</p>
-
-<p>
-可以使用@property 装饰器将一个直接访问的属性转变为函数触发式属性。如下所示，使用@property前的代码为
-</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-	<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-
-<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Tom"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</pre></div>
-
-<p>
-代码的输出为：
-</p>
-<div class="highlight"><pre><span></span><span class="n">Tom</span>
-</pre></div>
-
-<p>
-此时为直接访问 <code>name</code> 这个属性。当我们需要确保 <code>name</code> 是一个字符串时，可以使用 @property 装饰器将属性转变为一个函数调用，如下所示。
-</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-	<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-	<span class="k">print</span><span class="p">(</span><span class="s2">"get name called"</span><span class="p">)</span>
-	<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-
-    <span class="nd">@name.setter</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-	<span class="k">print</span><span class="p">(</span><span class="s2">"set name called"</span><span class="p">)</span>
-	<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-	    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Expected a string"</span><span class="p">)</span>
-	<span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
-
-<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Tom"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</pre></div>
-
-<p>
-代码的输出为：
-</p>
-<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">name</span> <span class="n">called</span>
-<span class="n">get</span> <span class="n">name</span> <span class="n">called</span>
-<span class="n">Tom</span>
-</pre></div>
-
-<p>
-可以看出
-</p>
-<ul class="org-ul">
-<li>在创建Person对象时(代码的倒数第二行)， 用于set name的函数被调用。这个函数会检查输入是否为一个字符串，如不是则raise一个TypeError
-</li>
-<li>在获取属性时（代码的最后一行），用于get name的函数被调用
-</li>
-<li>在修改前后，使用Person类的代码完全相同
-</li>
-</ul>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">总结</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-Python中对象访问的语法即可能是直接访问这个属性，也可能是调用一个函数，这取决于类的实现方式。我们可以在不修改调用者代码的前提下，轻松切换这两种方式。可见python原生就提供了添加额外getter和setter所带来的好处。因此没有必要一开始就为对象属性编写getter和setter函数，而是在需要时切换到函数调用式属性。
-</p>
 </div>
 </div>
                 </div>

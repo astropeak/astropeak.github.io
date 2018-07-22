@@ -23,11 +23,11 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/archive.html</loc>
-  <lastmod>2018-05-15T10:12:00Z</lastmod>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/</loc>
-  <lastmod>2018-05-15T10:15:00Z</lastmod>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/categories/emacs/</loc>
@@ -62,6 +62,10 @@
   <lastmod>2018-05-04T12:15:00Z</lastmod>
  </url>
  <url>
+  <loc>https://astropeak.github.io/categories/tensorflow/</loc>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://astropeak.github.io/galleries/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
  </url>
@@ -75,7 +79,7 @@
  </url>
  <url>
   <loc>https://astropeak.github.io/index-2.html</loc>
-  <lastmod>2018-05-15T10:12:00Z</lastmod>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://astropeak.github.io/listings/</loc>
@@ -232,5 +236,9 @@
  <url>
   <loc>https://astropeak.github.io/posts/recall-precision-fscore/</loc>
   <lastmod>2018-05-04T12:15:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://astropeak.github.io/posts/tensorflow-key-concepts/</loc>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </url>
 </urlset>

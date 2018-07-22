@@ -27,7 +27,7 @@
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/categories/misc.xml</loc>
-  <lastmod>2018-05-15T10:15:00Z</lastmod>
+  <lastmod>2018-05-15T12:58:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/categories/nlp.xml</loc>
@@ -36,6 +36,10 @@
  <sitemap>
   <loc>https://astropeak.github.io/categories/python.xml</loc>
   <lastmod>2018-05-14T03:30:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://astropeak.github.io/categories/tensorflow.xml</loc>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/galleries/demo/rss.xml</loc>
@@ -47,10 +51,10 @@
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/rss.xml</loc>
-  <lastmod>2018-05-15T10:15:00Z</lastmod>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://astropeak.github.io/sitemap.xml</loc>
-  <lastmod>2018-05-15T10:15:00Z</lastmod>
+  <lastmod>2018-05-18T02:40:00Z</lastmod>
  </sitemap>
 </sitemapindex>
